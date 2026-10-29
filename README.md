@@ -1,19 +1,19 @@
-# Sonic Companion v1.0 — Auto Mock Guide Rendering
+# Sonic Companion v1.2 — Live Cues
 
-This build fixes the missing-content flow from v0.9. Choosing a Spotify search result automatically sends a request to the research Worker with `mode=mock`, so it does not make any OpenAI API call or live web search. The returned guide is rendered in the main **Listening guides** section and replaces the unrelated curated Rachmaninoff display until you tap **Return to curated guides**.
+This is the complete root-level GitHub Pages package.
 
-## Mock-covered recordings
-- Bach / Glenn Gould — Goldberg Variations (1981 recording)
-- John Coltrane — Coltrane Plays the Blues
-- Miles Davis — Kind of Blue
-- John Coltrane — Giant Steps
-- Keith Jarrett — The Köln Concert
-- Claude Debussy — Clair de lune
+## Install
+1. Extract this ZIP on your phone.
+2. In the existing GitHub repository, upload all files and folders in this ZIP to the repository root, replacing files with matching names. Do not put them inside a new folder.
+3. Commit to `main`.
+4. Open the version-check URL in `README_DEPLOY_PHONE.md`. Verify the v1.2 banner before testing Spotify.
 
-## Files to deploy
-- Upload the files from this ZIP to the GitHub Pages repository root (including `index.html`, `guide-data.js`, `sw.js`, icons and manifest).
-- Deploy `index.js` to the existing Cloudflare Worker.
-- The UI defaults the Worker URL to `https://sonic-companion-research.4bbth7bg45.workers.dev/api/guide?mode=mock`. If an older base URL is already saved, the app normalizes it and forces `mode=mock` for safety.
+## Behavior
+- Follows the currently playing Spotify track, whether started through Sonic Companion or directly in Spotify. Polling checks current playback about every 4.2 seconds.
+- Search result selection only loads/selects a guide; it does not start, pause, or switch Spotify playback. Use the separate Play button if you want to start the selected result.
+- Focus mode shows the player and a large live cue; Full guide restores the broader app and all guide material.
+- Mock content is local and free. No OpenAI or Cloudflare Worker request is made.
+- Cue positions are estimates mapped to Spotify-reported playback progress. This build does not listen to audio or recognize exact musical events, and positions can differ by recording/edit.
 
-## Verification
-`MOCK_API_TEST_CASES.json` lists 21 sample fixture requests. Mock output contains no invented citations. `MOCK_MODE_PHONE_STEPS.md` has phone-specific deploy guidance.
+## Tests
+Run `node tests/run-build-tests.mjs` and `node tests/run-integration-tests.mjs` on a computer with Node.js to rerun the automated checks. The included test results were produced against this ZIP's `index.html`.

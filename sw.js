@@ -1,5 +1,9 @@
-const CACHE = 'sonic-companion-shell-v10-auto-mock-guide';
-const FILES = ['./','./index.html','./guide-data.js','./manifest.webmanifest','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
-self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('sonic-companion-shell-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(u.origin!==self.location.origin)return;e.respondWith(caches.match(e.request).then(c=>c||fetch(e.request).then(r=>{if(r&&r.ok){const cp=r.clone();caches.open(CACHE).then(cache=>cache.put(e.request,cp));}return r;}).catch(()=>caches.match('./index.html'))));});
+/* Sonic Companion v1.2 cache clean-up worker. Network only; never serves stale app HTML. */
+const CACHE_PREFIX = 'sonic-companion-shell-';
+self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
+self.addEventListener('activate', event => event.waitUntil((async () => {
+  const keys = await caches.keys();
+  await Promise.all(keys.filter(key => key.startsWith(CACHE_PREFIX)).map(key => caches.delete(key)));
+  await self.clients.claim();
+})()));
+// Deliberately no fetch handler: requests go to the network. The v1.2 page unregisters this cleanup worker after removing old workers/caches.

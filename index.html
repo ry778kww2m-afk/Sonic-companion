@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="sonic-companion-build" content="v1.1-root-local-mock-no-autoplay" />
+<meta charset="utf-8"><meta name="sonic-companion-build" content="v1.2-live-cues-focus-full-playback-follow" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111318"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Sonic Companion">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./apple-touch-icon.png">
@@ -15,27 +15,63 @@
 
 
 .track-result{display:grid;grid-template-columns:54px minmax(0,1fr);gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:12px;background:#191c23;color:var(--text);text-align:left;font:inherit;width:100%;cursor:pointer;appearance:none;-webkit-appearance:none}.track-result:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.track-result:active{transform:scale(.995)}.track-result.selected{border-color:var(--accent);background:#2b2923}.track-result img{width:54px;height:54px;border-radius:7px;object-fit:cover;background:#292d36}.track-result h3{font-size:.93rem;margin:0 0 3px;overflow-wrap:anywhere}.track-result p{font-size:.78rem;color:var(--muted);margin:0;overflow-wrap:anywhere}.track-result .track-hint{display:block;font-size:.72rem;color:var(--accent);margin-top:4px}.dynamic-guide h3{font-size:1.02rem;margin:14px 0 5px}.dynamic-guide p{margin:6px 0}.dynamic-cue{border:1px solid var(--line);padding:12px;border-radius:11px;margin:8px 0;background:#191c23}.dynamic-cue.active{border-color:var(--accent);background:#2b2923}.dynamic-cue h4{font-size:.93rem;margin:0 0 6px}.dynamic-cue .fine{margin-bottom:6px}.dynamic-sources a{display:block;color:var(--accent);overflow-wrap:anywhere;margin:6px 0}@media(max-width:500px){.track-result{grid-template-columns:48px minmax(0,1fr)}.track-result img{width:48px;height:48px}}
+
+/* v1.2: playback-led cue hierarchy */
+.active-cue-hero{margin:14px 0 16px;padding:clamp(18px,4vw,28px);border:2px solid var(--accent,#b68a44);border-radius:18px;background:linear-gradient(145deg,rgba(182,138,68,.13),rgba(120,110,90,.06));box-shadow:0 8px 26px rgba(0,0,0,.07)}
+.active-cue-top{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:10px}
+.active-cue-kicker{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;opacity:.8}
+.active-cue-clock{font-variant-numeric:tabular-nums;font-size:.9rem;font-weight:700}
+.active-cue-title{font-size:clamp(1.45rem,5vw,2.2rem);line-height:1.12;margin:8px 0 12px;letter-spacing:-.025em}
+.active-cue-focus{font-size:clamp(1.05rem,3.5vw,1.28rem);font-weight:650;line-height:1.45;margin:0 0 12px}
+.active-cue-listen{font-size:1rem;line-height:1.65;margin:0 0 10px}
+.active-cue-why{font-size:.92rem;line-height:1.55;opacity:.82;margin:0}
+.cue-progress-track{height:7px;background:rgba(127,127,127,.22);border-radius:999px;overflow:hidden;margin:14px 0 6px}
+.cue-progress-fill{height:100%;width:0;background:var(--accent,#b68a44);border-radius:999px;transition:width .8s linear}
+.cue-progress-caption{display:flex;justify-content:space-between;font-size:.78rem;opacity:.75;font-variant-numeric:tabular-nums;gap:12px}
+.guide-view-toggle{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0}
+.guide-view-toggle button[aria-pressed="true"]{outline:2px solid var(--accent,#b68a44);font-weight:800}
+.guide-sync-label{font-size:.82rem;font-weight:700;opacity:.78}
+.dynamic-cue{transition:transform .18s ease,border-color .18s ease,background .18s ease}
+.dynamic-cue.active{border:2px solid var(--accent,#b68a44);background:rgba(182,138,68,.12);transform:scale(1.005);box-shadow:0 5px 18px rgba(0,0,0,.07)}
+.dynamic-cue.active::before{content:'NOW';display:inline-block;font-size:.68rem;letter-spacing:.1em;font-weight:900;border-radius:999px;padding:3px 8px;margin:0 0 6px;background:var(--accent,#b68a44);color:#111}
+#dynamicListeningGuide{scroll-margin-top:16px}
+#playSelectedBtn{white-space:normal}
+@media(max-width:480px){.active-cue-hero{padding:17px}.active-cue-title{font-size:1.55rem}.active-cue-focus{font-size:1.08rem}.guide-view-toggle button{flex:1}}
+
+
+/* Focus view is an app-level simplification: keep only the now-playing controls and current live cue. */
+body.focus-mode main > :not(#playerCard):not(#listeningGuidesCard){display:none!important}
+body.focus-mode #playerCard > :not(.now){display:none!important}
+body.focus-mode #playerCard{margin-top:0}
+body.focus-mode #listeningGuidesCard > :not(#dynamicListeningGuide){display:none!important}
+body.focus-mode #dynamicListeningGuide > :not(.row):not(.guide-view-toggle):not(#activeCueHero):not(#returnCuratedGuides):not(#dynamicListeningContent){display:none!important}
+body.focus-mode #dynamicListeningContent{display:none!important}
+body.focus-mode #returnCuratedGuides{display:none!important}
+body.focus-mode #dynamicListeningGuide{display:grid!important}
+body.focus-mode #activeCueHero{margin-top:8px}
 </style>
 </head>
 <body><main>
-<div class="build-banner" id="buildBanner">SONIC COMPANION v1.1 · LOCAL MOCK · PLAYBACK SAFE · BUILD 2026-10-29</div>
-<section class="hero"><div class="hero-copy"><div class="eyebrow" id="eyebrow">Listening companion</div><h1>Sonic Companion</h1><p id="tagline">Use the companion as a musical field guide while you listen. When a supported track is playing, its guide follows playback automatically.</p><div class="pill"><span class="dot"></span><span id="syncStatus">Not connected to Spotify</span></div></div><div class="language"><label for="languageSelect" id="languageLabel">Feedback language</label><select id="languageSelect"><option value="en">English</option><option value="pt">Português (Brasil)</option></select></div></section>
-<section class="card">
-<h2 id="connectHeading">1 · Connect Spotify</h2><p class="muted small" id="connectCopy">Connect Spotify for remote playback controls and basic now-playing information. The musical guide is separate and does not follow the playback clock.</p>
+<div class="build-banner" id="buildBanner">SONIC COMPANION v1.2 · LIVE CUES · FOCUS / FULL · BUILD 2026-10-29</div>
+<section class="hero"><div class="hero-copy"><div class="eyebrow" id="eyebrow">Listening companion</div><h1>Sonic Companion</h1><p id="tagline">Your current Spotify track drives the guide, whether started here or directly in Spotify. The highlighted cue follows playback approximately.</p><div class="pill"><span class="dot"></span><span id="syncStatus">Not connected to Spotify</span></div></div><div class="language"><label for="languageSelect" id="languageLabel">Feedback language</label><select id="languageSelect"><option value="en">English</option><option value="pt">Português (Brasil)</option></select></div></section>
+<section class="card" id="playerCard">
+<div id="connectionSetup">
+<h2 id="connectHeading">1 · Connect Spotify</h2><p class="muted small" id="connectCopy">Connect Spotify to show the current track and follow a highlighted listening cue, whether playback starts here or directly in Spotify.</p>
 <label for="clientId" id="clientLabel">Spotify Client ID</label><input id="clientId" class="field" inputmode="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Paste your Spotify Client ID">
 <div class="row" style="margin-top:10px"><button class="btn secondary" id="saveClientBtn">Save Client ID</button><button class="btn primary" id="connectBtn">Connect / authorize controls</button></div>
 <div class="row" style="margin-top:8px"><button class="btn secondary" id="refreshBtn" disabled>Refresh status</button><button class="btn secondary" id="disconnectBtn" disabled>Disconnect</button><a class="btn secondary" id="openSpotify" href="https://open.spotify.com/" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center">Open Spotify</a></div>
 <p class="note" id="redirectNote">Add this exact Redirect URI to your Spotify Developer app:<br><code id="redirectUriText"></code></p>
 <p id="connectionMessage" class="note" aria-live="polite">Connect using your Spotify Developer Client ID. Playback controls require permission to modify playback.</p>
+</div>
 <div class="now" style="margin-top:14px"><div class="kicker" id="nowPlayingLabel">Spotify now playing</div><div class="track-layout"><img id="trackArt" class="track-art" alt="Album artwork" src="./icon-192.png"><div class="track-meta"><h3 id="trackTitle">Nothing playing yet</h3><p id="trackArtist">Connect Spotify, then start music in Spotify.</p><p id="trackAlbum" style="margin-top:4px"></p></div></div>
 <div class="controls"><button class="btn secondary" id="previousBtn" disabled aria-label="Previous track">⏮<br><span id="previousText">Previous</span></button><button class="btn playbutton" id="playPauseBtn" disabled>▶<br><span id="playPauseText">Play</span></button><button class="btn secondary" id="nextBtn" disabled aria-label="Next track">⏭<br><span id="nextText">Next</span></button><button class="btn secondary" id="volumeDownBtn" disabled>−<br><span id="volumeDownText">Vol −</span></button><button class="btn secondary" id="volumeUpBtn" disabled>+<br><span id="volumeUpText">Vol +</span></button></div>
 <div class="row spread" style="margin-top:8px"><span id="deviceText" class="fine">Active Spotify device: not detected</span><span id="volumeText" class="fine">Volume: —</span></div>
 <p class="fine" id="playbackMessage" aria-live="polite">Waiting for Spotify status.</p></div>
-<div class="callout" id="scopeNote" style="margin-top:12px">New permission required: after replacing this version, tap Disconnect, then Connect / authorize controls and approve playback-control access. Spotify Premium is required for these playback-control endpoints.</div>
+<div class="callout" id="scopeNote" style="margin-top:12px">Playback-control buttons require Spotify authorization and a supported active device. You can also start music directly in Spotify; the guide will follow the track Spotify reports.</div>
 </section>
 <section class="card" id="trackPickerCard">
 <h2 data-en="Select a track and load its guide" data-pt="Selecione uma faixa e carregue o guia">Select a track and load its guide</h2>
-<p class="muted small" data-en="Search Spotify by track, artist or album. Tapping a result loads the local sample guide and requests playback only on a device Spotify confirms as active. If no active device is confirmed, playback is left unchanged." data-pt="Pesquise no Spotify por faixa, artista ou álbum. Tocar em um resultado carrega o guia local demonstrativo e só solicita reprodução em dispositivo que o Spotify confirme como ativo. Sem essa confirmação, a reprodução não muda.">Search Spotify by track, artist or album. Tapping a result loads the local sample guide and requests playback only on a device Spotify confirms as active. If no active device is confirmed, playback is left unchanged.</p>
+<p class="muted small" data-en="Search Spotify by track, artist or album. Tapping a result loads the guide without changing playback. Use the separate Play selected track button to start it; tracks started directly in Spotify are detected automatically." data-pt="Pesquise por faixa, artista ou álbum. Tocar em um resultado não muda a reprodução. Use o botão separado para tocar a faixa; faixas iniciadas diretamente no Spotify são detectadas automaticamente.">Search Spotify by track, artist or album. Tapping a result loads the guide without changing playback. Use the separate Play selected track button to start it; tracks started directly in Spotify are detected automatically.</p>
 <div class="row"><input id="trackSearch" class="field" style="flex:1;min-width:170px" placeholder="Start typing a track, artist or album…" autocomplete="off" aria-describedby="trackSearchStatus"></div>
 <div id="trackSearchStatus" class="note" aria-live="polite">Connect Spotify first. Results update as you type.</div>
 <button id="trackResultsToggle" class="btn secondary hidden" type="button" aria-expanded="true" style="margin-top:8px"></button>
@@ -47,13 +83,27 @@
 <label for="researchEndpoint" data-en="Mock research mode" data-pt="Modo de pesquisa simulada">Mock research mode</label>
 <input id="researchEndpoint" class="field" placeholder="Local mock mode — no server required" autocomplete="off" disabled>
 <p class="note" data-en="Local mock only: responses are generated inside this page from sample fixtures. No Cloudflare Worker, OpenAI API, web search, or API credits are used. This does not test real research." data-pt="Somente simulação local: as respostas são geradas nesta página a partir de exemplos. Não usa Cloudflare Worker, API OpenAI, busca na web nem créditos de API. Isso não testa pesquisa real.">Local mock only: responses are generated inside this page from sample fixtures. No Cloudflare Worker, OpenAI API, web search, or API credits are used. This does not test real research.</p>
-<div class="row"><button class="btn primary" id="researchGuideBtn" type="button" disabled>Research selected track</button><span id="researchStatus" class="note" aria-live="polite">Choose a Spotify search result first.</span></div>
+<div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn primary" id="playSelectedBtn" type="button" disabled data-en="Play selected track in Spotify" data-pt="Tocar faixa selecionada no Spotify">Play selected track in Spotify</button><button class="btn secondary" id="researchGuideBtn" type="button" disabled data-en="Reload sample guide" data-pt="Recarregar guia simulado">Reload sample guide</button><span id="researchStatus" class="note" aria-live="polite">Choose a track, or start one in Spotify. The guide follows Spotify playback.</span></div>
 <div id="dynamicGuideOutput" class="hidden" aria-live="polite"></div>
 </section>
 <section class="card" id="listeningGuidesCard"><div class="row spread"><h2 id="guideHeading" style="margin:0">2 · Listening guides</h2><span class="tag" id="guideModeTag">Independent guide</span><span class="tag" id="cueCounter">Topic 01 / 25</span></div>
 <div id="dynamicListeningGuide" class="hidden" aria-live="polite">
   <div class="row spread"><h3 id="dynamicListeningTitle" style="margin:0">Selected-track guide</h3><span class="tag" id="dynamicListeningBadge">MOCK MODE</span></div>
   <p id="dynamicListeningMeta" class="note"></p>
+  <div class="guide-view-toggle" role="group" aria-label="Listening guide detail level">
+    <button type="button" class="btn secondary" id="summaryModeBtn" aria-pressed="true">Focus · live cue</button>
+    <button type="button" class="btn secondary" id="fullModeBtn" aria-pressed="false">Full guide</button>
+    <span id="guideSyncLabel" class="guide-sync-label">Waiting for Spotify position</span>
+  </div>
+  <article id="activeCueHero" class="active-cue-hero" aria-live="polite" aria-atomic="true">
+    <div class="active-cue-top"><span id="activeCueKicker" class="active-cue-kicker">LIVE LISTENING CUE</span><span id="activeCueClock" class="active-cue-clock">— / —</span></div>
+    <h3 id="activeCueTitle" class="active-cue-title">Start a track in Spotify</h3>
+    <p id="activeCueFocus" class="active-cue-focus">The main listening point will appear here and follow the current playback position.</p>
+    <p id="activeCueListen" class="active-cue-listen"></p>
+    <p id="activeCueWhy" class="active-cue-why"></p>
+    <div class="cue-progress-track" aria-hidden="true"><div id="cueProgressFill" class="cue-progress-fill"></div></div>
+    <div class="cue-progress-caption"><span id="cueProgressStart">0:00</span><span id="cueProgressEnd">0:00</span></div>
+  </article>
   <div id="dynamicListeningContent" class="dynamic-guide"></div>
   <button type="button" class="btn secondary" id="returnCuratedGuides" style="margin-top:12px">Return to curated guides</button>
 </div>
@@ -85,7 +135,7 @@
 </div>
 </div></section>
 <section class="card" id="exploreCard"><h2 data-en="Explore another album" data-pt="Explore outro álbum">Explore another album</h2><p class="muted small" data-en="Enter the artist and album yourself to search independent metadata and listener discussions. This prototype opens source searches; it does not pretend to generate a verified guide when source retrieval is not configured." data-pt="Digite você mesmo o artista e o álbum para pesquisar metadados independentes e conversas de ouvintes. Este protótipo abre pesquisas nas fontes; não finge gerar um guia verificado sem ter a recuperação de fontes configurada.">Enter the artist and album yourself to search independent metadata and listener discussions. This prototype opens source searches; it does not pretend to generate a verified guide when source retrieval is not configured.</p><label for="albumSearch" data-en="Artist and album / piece" data-pt="Artista e álbum / obra">Artist and album / piece</label><input class="field" id="albumSearch" placeholder="e.g. Bill Evans — Waltz for Debby" autocomplete="off"><div class="research-actions"><a id="mbSearch" href="https://musicbrainz.org/" target="_blank" rel="noopener">MusicBrainz metadata</a><a id="aotySearch" href="https://www.albumoftheyear.org/" target="_blank" rel="noopener">Community ratings</a><a id="redditSearch" href="https://www.reddit.com/" target="_blank" rel="noopener">Listener discussions</a></div><p class="source-disclaimer" data-en="For future dynamic guides, the app should send your typed query—not Spotify's live playback metadata—to a small serverless resolver. See ARCHITECTURE.md in the download for the cache-first design." data-pt="Para futuros guias dinâmicos, o app deve enviar a consulta que você digitou — e não os metadados da reprodução ao vivo do Spotify — a um resolvedor serverless. Veja ARCHITECTURE.md no pacote para o desenho com cache.">For future dynamic guides, the app should send your typed query—not Spotify's live playback metadata—to a small serverless resolver. See ARCHITECTURE.md in the download for the cache-first design.</p></section>
-<div class="footer" id="footerText">Personal prototype · v1.1 local mock build. Search selection loads a sample guide and never changes playback. The mock includes no live research or verified citations. Match coverage is limited to curated guides. Check Spotify’s published developer policy and permissions before distributing synchronization features.</div>
+<div class="footer" id="footerText">Personal prototype · v1.2 local mock build. The guide follows Spotify-reported current playback, whether started here or in Spotify. Cue boundaries are approximate progress-based estimates, not audio recognition or verified event timestamps. Mock content only; no live research or source verification.</div>
 </main>
 <script id="sonic-guide-data-inline">
 // Curated musical guide content. English and Brazilian Portuguese are authored as musical adaptations, not literal translations.
@@ -344,16 +394,20 @@ function normalizeMockText(value){
  return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 }
 function localizedPair(value){return {en:value.en,pt:value.pt};}
-function mockCue(raw){return {title:localizedPair({en:raw[0],pt:raw[1]}),focus:localizedPair({en:raw[2],pt:raw[3]}),listenFor:localizedPair({en:raw[4],pt:raw[5]}),whyItMatters:localizedPair({en:raw[6]||'This detail helps connect a local musical gesture to the structure and character of the whole passage.',pt:raw[7]||'Este detalhe ajuda a conectar um gesto musical local à estrutura e ao caráter da passagem como um todo.'})};}
+function mockCue(raw,index,total){const defaults=total===4?[0.03,0.29,0.62,0.86]:total===5?[0.03,0.22,0.46,0.70,0.88]:Array.from({length:total},(_,i)=>Math.min(.92,i/Math.max(1,total)));const at=Number.isFinite(Number(raw[8]))?Math.max(0,Math.min(.98,Number(raw[8]))):(defaults[index]??index/Math.max(1,total));return {at,title:localizedPair({en:raw[0],pt:raw[1]}),focus:localizedPair({en:raw[2],pt:raw[3]}),listenFor:localizedPair({en:raw[4],pt:raw[5]}),whyItMatters:localizedPair({en:raw[6]||'This detail helps connect a local musical gesture to the structure and character of the whole passage.',pt:raw[7]||'Este detalhe ajuda a conectar um gesto musical local à estrutura e ao caráter da passagem como um todo.'})};}
 function buildMockGuide(body){
  const tr=body?.track||{};
  const title=String(tr.title||'').slice(0,180);
  const artist=Array.isArray(tr.artists)?tr.artists.map(String).join(', '):String(tr.artist||'');
  const album=String(tr.album||'');
  const query=String(body?.query||'');
- const haystack=normalizeMockText([title,artist,album,query].join(' '));
- // First match the album identity, then choose the most specific matching track fixture.
- let profile=MOCK_ALBUMS.find(p=>p.keywords.some(k=>haystack.includes(normalizeMockText(k))));
+ const titleNorm=normalizeMockText(title).replace(/\bvariatio\b/g,'variation').replace(/\bvariazione\b/g,'variation');
+ const albumNorm=normalizeMockText(album+' '+query);
+ const artistNorm=normalizeMockText(artist);
+ // Strongly prefer track-title and album evidence. Artist-only matches are deliberately not enough
+ // to claim a track-specific fixture (e.g. not every Debussy track is Clair de lune).
+ const ranked=MOCK_ALBUMS.map(p=>{let score=0;for(const keyword of p.keywords){const k=normalizeMockText(keyword);if(!k)continue;if(titleNorm.includes(k))score=Math.max(score,100+k.length);if(albumNorm.includes(k))score=Math.max(score,70+k.length);if(artistNorm.includes(k))score=Math.max(score,15+k.length);}return {profile:p,score};}).sort((a,b)=>b.score-a.score);
+ let profile=ranked[0]?.score>=70?ranked[0].profile:null;
  if(!profile){
   profile={...MOCK_ALBUMS[5], id:'generic', album:album||'Unmatched selection',
    context:{en:'GENERIC MOCK FALLBACK: no album-specific fixture matched this selection. This sample exists only to test the API response and screen rendering; it is not a researched guide.',pt:'RESPOSTA SIMULADA GENÉRICA: nenhuma ficha específica de álbum correspondeu a esta seleção. Este exemplo serve apenas para testar a resposta da API e a renderização da tela; não é um guia pesquisado.'},
@@ -361,10 +415,10 @@ function buildMockGuide(body){
    form:{en:'No recording-specific form details are configured for this selection. The generic sample cue sequence is illustrative only.',pt:'Não há detalhes de forma específicos desta gravação configurados para esta seleção. A sequência genérica de momentos é apenas ilustrativa.'},
    reception:{en:'MOCK DATA: no listener reviews or ratings were retrieved.',pt:'DADOS SIMULADOS: nenhuma avaliação ou nota de ouvintes foi consultada.'},
    balanced:{en:'No album-specific fixture matched. No live research or source verification was performed.',pt:'Nenhuma ficha específica de álbum correspondeu. Não foi feita pesquisa ao vivo nem verificação de fontes.'},
-   cues:[['Overall shape','Forma geral','Listen for changes in density, energy and register.','Observe mudanças de densidade, energia e registro.','Notice how the piece moves between continuity and contrast.','Perceba como a peça transita entre continuidade e contraste.'],['Main voice','Voz principal','Follow the most prominent melodic line or musical gesture.','Acompanhe a linha melódica ou o gesto musical mais destacado.','This gives the ear a starting point without assuming exact instrumentation.','Isso dá ao ouvido um ponto de partida sem presumir a instrumentação exata.'],['Accompaniment','Acompanhamento','Notice what supports, answers or contrasts with the main line.','Observe o que sustenta, responde ou contrasta com a linha principal.','Relationships between layers create musical direction.','As relações entre camadas criam direção musical.'],['Contrast and return','Contraste e retorno','Listen for material that returns with a changed texture or intensity.','Procure material que retorna com textura ou intensidade alterada.','Recognition helps reveal form.','O reconhecimento ajuda a perceber a forma.']]
+   cues:[['Start with the foreground','Comece pelo primeiro plano','For this track, identify the musical layer that naturally draws your attention first; do not assume a specific instrument.','Nesta faixa, identifique a camada musical que primeiro chama sua atenção; não presuma um instrumento específico.','A stable point of attention makes the rest of the texture easier to hear.','Um ponto estável de atenção facilita ouvir o restante da textura.'],['Find the pulse','Encontre a pulsação','Notice whether the music suggests a strong beat, a flexible pulse, or a deliberately ambiguous flow.','Perceba se a música sugere um pulso forte, flexível ou deliberadamente ambíguo.','Pulse shapes how phrases seem to lean forward, settle, or float.','A pulsação molda como as frases avançam, repousam ou flutuam.'],['Hear the layers interact','Ouça a interação entre camadas','Listen for what supports, answers, doubles, or contrasts with the foreground.','Escute o que sustenta, responde, duplica ou contrasta com o primeiro plano.','Musical meaning often appears in the relationship between parts.','O sentido musical muitas vezes aparece na relação entre as partes.'],['Notice the change in energy','Perceba a mudança de energia','Compare the current density, register, loudness, and activity with the opening.','Compare a densidade, o registro, o volume e a atividade atuais com o início.','A shift in energy can create a turning point even without a new section.','Uma mudança de energia pode criar um ponto de virada mesmo sem uma nova seção.'],['Look for return or release','Procure retorno ou relaxamento','Listen for a gesture returning, the texture thinning, or the music moving toward a cadence or open ending.','Procure um gesto que retorna, a textura que se rarefaz ou a música que caminha para uma cadência ou final aberto.','Recognizing change and return helps you hear a shape rather than isolated sounds.','Reconhecer mudança e retorno ajuda a ouvir uma forma, não apenas sons isolados.']]
   };
  }
- const normalizedTitle=normalizeMockText(title);
+ const normalizedTitle=normalizeMockText(title).replace(/\bvariatio\b/g,'variation').replace(/\bvariazione\b/g,'variation');
  let trackEntry=null;
  if(profile.tracks){
   const entries=Object.entries(profile.tracks).sort((a,b)=>b[0].length-a[0].length);
@@ -377,10 +431,10 @@ function buildMockGuide(body){
   else if(profile.id==='kind-of-blue') overview={en:`${title||'This track'} offers a distinctive balance of space, groove and melodic improvisation. Listen to the relationship between the bass foundation, piano voicings and the contrasting voices of trumpet and saxophone.`,pt:`${title||'Esta faixa'} oferece um equilíbrio particular entre espaço, groove e improvisação melódica. Perceba a relação entre o fundamento do baixo, as disposições dos acordes no piano e as vozes contrastantes do trompete e dos saxofones.`};
   else if(profile.id==='giant-steps') overview={en:`${title||'This track'} places Coltrane’s tenor within a tightly shaped composition and an active rhythm section. Listen first for the theme, then for how improvisation stretches or compresses its rhythmic and harmonic ideas.`,pt:`${title||'Esta faixa'} coloca o saxofone tenor de Coltrane dentro de uma composição bem delineada e de uma seção rítmica ativa. Ouça primeiro o tema e depois como a improvisação amplia ou comprime suas ideias rítmicas e harmônicas.`};
   else if(profile.id==='koln') overview={en:`${title||'This section'} is part of Jarrett’s long-form solo piano improvisation. Follow repeating patterns, the separation of roles between the hands, and the changes of register that shape its larger arc.`,pt:`${title||'Esta parte'} integra a improvisação longa para piano solo de Jarrett. Acompanhe padrões repetidos, a divisão de funções entre as mãos e as mudanças de registro que moldam o arco maior.`};
-  else overview={en:`${title||'This piece'} is presented here as a piano-listening fixture. Listen for the balance between melody, accompaniment, inner voices, dynamics and resonance; this is a sample guide rather than a source-verified recording analysis.`,pt:`${title||'Esta peça'} é apresentada aqui como exemplo de escuta para piano. Perceba o equilíbrio entre melodia, acompanhamento, vozes internas, dinâmica e ressonância; trata-se de um guia de demonstração, não de uma análise verificada da gravação.`};
+  else overview={en:`This is a live-playback-linked sample for “${title||'the current track'}” by ${artist||'the detected artist'}. No recording-specific research is available for this track in the offline test build. Use the active cue to listen for foreground, pulse, interacting layers and changes in energy; these are listening prompts, not claims that a specific event occurs at this exact moment.`,pt:`Este é um exemplo vinculado à reprodução de “${title||'a faixa atual'}”, de ${artist||'artista detectado'}. A versão de teste offline não tem pesquisa específica desta gravação. Use o momento destacado para ouvir primeiro plano, pulsação, interação entre camadas e mudanças de energia; são sugestões de escuta, não afirmações de que um evento específico ocorre exatamente neste instante.`};
  }
  const rawCues=(trackEntry?.cues||profile.cues||MOCK_ALBUMS[2].cues).slice(0,5);
- const cues=rawCues.map(mockCue);
+ const cues=rawCues.map((raw,i)=>mockCue(raw,i,rawCues.length));
  const name=title||profile.album;
  const guide={
   title:{en:`Mock listening guide: ${name}`,pt:`Guia musical simulado: ${name}`},
@@ -401,15 +455,33 @@ window.buildSonicMockGuide = buildMockGuide;
 
 })();
 </script>
+<script id="sonic-live-core">
+(function(root){'use strict';
+ function cueIndex(cues,progressMs,durationMs){
+  if(!Array.isArray(cues)||!cues.length)return -1;
+  const duration=Math.max(0,Number(durationMs)||0),progress=Math.max(0,Number(progressMs)||0);
+  const ratio=duration?Math.min(.999999,progress/duration):0;
+  let active=0;
+  for(let i=0;i<cues.length;i++){
+   const at=Number.isFinite(Number(cues[i]?.at))?Math.max(0,Math.min(.999,Number(cues[i].at))):i/Math.max(1,cues.length);
+   if(ratio>=at)active=i;else break;
+  }
+  return active;
+ }
+ function trackChanged(previousId,item){return !!item?.id && item.id!==previousId;}
+ function progressAt(snapshot,now){if(!snapshot)return 0;const duration=Math.max(0,Number(snapshot.durationMs)||0);const extra=snapshot.isPlaying?Math.max(0,(Number(now)||Date.now())-(Number(snapshot.sampledAt)||Date.now())):0;return Math.min(duration,Math.max(0,(Number(snapshot.progressMs)||0)+extra));}
+ root.SonicLiveCore={cueIndex,trackChanged,progressAt};
+})(window);
+</script>
 <script>
 (function(){'use strict';
 const $=id=>document.getElementById(id);
 const REDIRECT_URI=window.location.origin+window.location.pathname;
 const SCOPES='user-read-playback-state user-read-currently-playing user-modify-playback-state';
 const STORAGE={client:'sc_spotify_client_id',token:'sc_spotify_access_token',refresh:'sc_spotify_refresh_token',expiry:'sc_spotify_token_expiry',verifier:'sc_spotify_code_verifier',state:'sc_spotify_oauth_state',language:'sc_language_v1'};
-let timer=null,latestItem=null,latestDevice=null,playing=false,volumePercent=null,playbackProgressMs=null,selectedSearchTrack=null,dynamicGuide=null,dynamicGuideTrackId=null,dynamicCueIndex=-1,lang=localStorage.getItem(STORAGE.language)||'en',currentGuideKey='rhapsody',currentItemIndex=0,lastAutoTrackKey='',lastAutoLandmark=-1;
+let timer=null,cueClockTimer=null,pollInFlight=false,lastPlaybackSnapshot=null,activePlaybackTrack=null,latestItem=null,latestDevice=null,playing=false,volumePercent=null,playbackProgressMs=null,selectedSearchTrack=null,dynamicGuide=null,dynamicGuideTrackId=null,dynamicCueIndex=-1,guideViewMode='focus',guideFromPlayback=false,lang=localStorage.getItem(STORAGE.language)||'en',currentGuideKey='rhapsody',currentItemIndex=0,lastAutoTrackKey='',lastAutoLandmark=-1;
 let searchDebounceTimer=null,searchAbortController=null,searchSequence=0,lastSearchCount=0,selectedSearchTrackId=null;
-const I18N={en:{eyebrow:'Listening companion',tagline:'Use the companion as a musical field guide while you listen. When a supported track is playing, its guide follows playback automatically.',connectHeading:'1 · Connect Spotify',connectCopy:'Connect Spotify for remote playback controls and playback-position updates. Supported recordings automatically select their guide and approximate listening landmark.',clientLabel:'Spotify Client ID',save:'Save Client ID',connect:'Connect / authorize controls',refresh:'Refresh status',disconnect:'Disconnect',openSpotify:'Open Spotify',redirect:'Add this exact Redirect URI to your Spotify Developer app:',nowPlaying:'Spotify now playing',previous:'Previous',play:'Play',pause:'Pause',next:'Next',volumeDown:'Vol −',volumeUp:'Vol +',notDetected:'Active Spotify device: not detected',guideHeading:'2 · Listening guides',guideMode:'Independent guide',guideIntro:'Choose a work or album here. A matching Spotify track selects its guide automatically; listening landmarks follow the playback position.',guideSelect:'Choose a guide',currentTopic:'Selected listening topic',footer:'Early personal prototype. Playback controls use Spotify’s Web API. Supported curated tracks automatically select the corresponding guide and approximate landmark from playback progress. Unknown recordings remain unmatched. Expansion should use independent metadata and properly licensed commentary sources.',notConnected:'Not connected to Spotify',connectPrompt:'Connect using your Spotify Developer Client ID. Playback controls require permission to modify playback.',nothingPlaying:'Nothing playing yet',trackPrompt:'Connect Spotify, then start music in Spotify.',waiting:'Waiting for Spotify status.',scope:'New permission required: after replacing this version, tap Disconnect, then Connect / authorize controls and approve playback-control access. Spotify Premium is required for these playback-control endpoints.',playing:'Playing',paused:'Paused',volume:'Volume',noDevice:'No active Spotify playback device was reported. Start music in Spotify and refresh.',statusError:'Spotify status needs attention',controlError:'Spotify control failed',controlsGranted:'Spotify connected. Remote controls are ready.',playbackUpdate:'Spotify status refreshed.',langEnglish:'English',langPortuguese:'Português (Brasil)',selectTopic:'Choose a topic from the list.',section:'SECTION',track:'TRACK'},pt:{eyebrow:'Companheiro de escuta',tagline:'Use este guia musical enquanto escuta. Faixas compatíveis do Spotify avançam o guia automaticamente conforme a reprodução.',connectHeading:'1 · Conectar ao Spotify',connectCopy:'Conecte o Spotify para controlar a reprodução à distância e ler a posição da faixa. Gravações compatíveis selecionam automaticamente o guia e um momento musical aproximado.',clientLabel:'Client ID do Spotify',save:'Salvar Client ID',connect:'Conectar / autorizar controles',refresh:'Atualizar status',disconnect:'Desconectar',openSpotify:'Abrir Spotify',redirect:'Adicione exatamente este URI de redirecionamento ao seu app no Spotify Developer:',nowPlaying:'Tocando no Spotify',previous:'Anterior',play:'Tocar',pause:'Pausar',next:'Próxima',volumeDown:'Vol −',volumeUp:'Vol +',notDetected:'Dispositivo ativo do Spotify: não detectado',guideHeading:'2 · Guias de escuta',guideMode:'Guia independente',guideIntro:'Escolha uma obra ou álbum. Uma faixa correspondente no Spotify seleciona o guia automaticamente; os momentos musicais acompanham a posição da reprodução.',guideSelect:'Escolha um guia',currentTopic:'Tópico de escuta selecionado',footer:'Protótipo pessoal. Faixas selecionadas acompanham automaticamente a posição de reprodução do Spotify e destacam momentos musicais aproximados. A cobertura é limitada aos guias incluídos. Verifique as políticas e permissões do Spotify antes de distribuir o recurso de sincronização.',notConnected:'Não conectado ao Spotify',connectPrompt:'Conecte usando o Client ID do Spotify Developer. Os controles exigem permissão para modificar a reprodução.',nothingPlaying:'Nada tocando no momento',trackPrompt:'Conecte o Spotify e inicie a música no próprio Spotify.',waiting:'Aguardando status do Spotify.',scope:'Nova permissão necessária: depois de publicar esta versão, toque em Desconectar e depois em Conectar / autorizar controles; aprove o acesso de controle. Esses comandos exigem Spotify Premium.',playing:'Tocando',paused:'Pausado',volume:'Volume',noDevice:'Nenhum dispositivo ativo do Spotify foi detectado. Inicie uma música no Spotify e atualize o status.',statusError:'O status do Spotify precisa de atenção',controlError:'O controle do Spotify falhou',controlsGranted:'Spotify conectado. Os controles estão prontos.',playbackUpdate:'Status do Spotify atualizado.',langEnglish:'English',langPortuguese:'Português (Brasil)',selectTopic:'Escolha um tópico na lista.',section:'SEÇÃO',track:'FAIXA',guideIntro:'Escolha uma obra ou álbum. Uma faixa correspondente no Spotify seleciona o guia automaticamente; os momentos musicais acompanham a posição da reprodução.'}};
+const I18N={en:{eyebrow:'Listening companion',tagline:'Your current Spotify track drives the guide, whether you started it here or directly in Spotify. The highlighted cue follows playback approximately.',connectHeading:'1 · Connect Spotify',connectCopy:'Connect Spotify to detect the current track and playback position. The guide follows tracks started here or directly in Spotify; timing is approximate and does not analyze the audio.',clientLabel:'Spotify Client ID',save:'Save Client ID',connect:'Connect / authorize controls',refresh:'Refresh status',disconnect:'Disconnect',openSpotify:'Open Spotify',redirect:'Add this exact Redirect URI to your Spotify Developer app:',nowPlaying:'Spotify now playing',previous:'Previous',play:'Play',pause:'Pause',next:'Next',volumeDown:'Vol −',volumeUp:'Vol +',notDetected:'Active Spotify device: not detected',guideHeading:'2 · Listening guides',guideMode:'Independent guide',guideIntro:'Your current Spotify track drives this guide. It updates when the track changes, including tracks started outside this app.',guideSelect:'Choose a guide',currentTopic:'Selected listening topic',footer:'Early personal prototype. Playback controls use Spotify’s Web API. Supported curated tracks automatically select the corresponding guide and approximate landmark from playback progress. Unknown recordings remain unmatched. Expansion should use independent metadata and properly licensed commentary sources.',notConnected:'Not connected to Spotify',connectPrompt:'Connect using your Spotify Developer Client ID. Playback controls require permission to modify playback.',nothingPlaying:'Nothing playing yet',trackPrompt:'Connect Spotify, then start music in Spotify.',waiting:'Waiting for Spotify status.',scope:'Playback-control buttons require Spotify authorization and a supported active device. You can also start music directly in Spotify; the guide will follow the track Spotify reports.',playing:'Playing',paused:'Paused',volume:'Volume',noDevice:'No active Spotify playback device was reported. Start music in Spotify and refresh.',statusError:'Spotify status needs attention',controlError:'Spotify control failed',controlsGranted:'Spotify connected. Remote controls are ready.',playbackUpdate:'Spotify status refreshed.',langEnglish:'English',langPortuguese:'Português (Brasil)',selectTopic:'Choose a topic from the list.',section:'SECTION',track:'TRACK'},pt:{eyebrow:'Companheiro de escuta',tagline:'Use este guia musical enquanto escuta. Faixas compatíveis do Spotify avançam o guia automaticamente conforme a reprodução.',connectHeading:'1 · Conectar ao Spotify',connectCopy:'Conecte o Spotify para controlar a reprodução à distância e ler a posição da faixa. Gravações compatíveis selecionam automaticamente o guia e um momento musical aproximado.',clientLabel:'Client ID do Spotify',save:'Salvar Client ID',connect:'Conectar / autorizar controles',refresh:'Atualizar status',disconnect:'Desconectar',openSpotify:'Abrir Spotify',redirect:'Adicione exatamente este URI de redirecionamento ao seu app no Spotify Developer:',nowPlaying:'Tocando no Spotify',previous:'Anterior',play:'Tocar',pause:'Pausar',next:'Próxima',volumeDown:'Vol −',volumeUp:'Vol +',notDetected:'Dispositivo ativo do Spotify: não detectado',guideHeading:'2 · Guias de escuta',guideMode:'Guia independente',guideIntro:'Escolha uma obra ou álbum. Uma faixa correspondente no Spotify seleciona o guia automaticamente; os momentos musicais acompanham a posição da reprodução.',guideSelect:'Escolha um guia',currentTopic:'Tópico de escuta selecionado',footer:'Protótipo pessoal. Faixas selecionadas acompanham automaticamente a posição de reprodução do Spotify e destacam momentos musicais aproximados. A cobertura é limitada aos guias incluídos. Verifique as políticas e permissões do Spotify antes de distribuir o recurso de sincronização.',notConnected:'Não conectado ao Spotify',connectPrompt:'Conecte usando o Client ID do Spotify Developer. Os controles exigem permissão para modificar a reprodução.',nothingPlaying:'Nada tocando no momento',trackPrompt:'Conecte o Spotify e inicie a música no próprio Spotify.',waiting:'Aguardando status do Spotify.',scope:'Nova permissão necessária: depois de publicar esta versão, toque em Desconectar e depois em Conectar / autorizar controles; aprove o acesso de controle. Esses comandos exigem Spotify Premium.',playing:'Tocando',paused:'Pausado',volume:'Volume',noDevice:'Nenhum dispositivo ativo do Spotify foi detectado. Inicie uma música no Spotify e atualize o status.',statusError:'O status do Spotify precisa de atenção',controlError:'O controle do Spotify falhou',controlsGranted:'Spotify conectado. Os controles estão prontos.',playbackUpdate:'Status do Spotify atualizado.',langEnglish:'English',langPortuguese:'Português (Brasil)',selectTopic:'Escolha um tópico na lista.',section:'SEÇÃO',track:'FAIXA',guideIntro:'Escolha uma obra ou álbum. Uma faixa correspondente no Spotify seleciona o guia automaticamente; os momentos musicais acompanham a posição da reprodução.'}};
 function tr(k){return (I18N[lang]||I18N.en)[k]||I18N.en[k]||k}
 function setMessage(text,cls=''){const e=$('connectionMessage');e.className='note '+cls;e.textContent=text;}
 function randomString(bytes=64){const arr=new Uint8Array(bytes);crypto.getRandomValues(arr);return Array.from(arr,b=>b.toString(16).padStart(2,'0')).join('')}
@@ -421,7 +493,7 @@ async function connectSpotify(){if(!saveClient())return;try{const verifier=rando
 function storeTokens(data){if(data.access_token)localStorage.setItem(STORAGE.token,data.access_token);if(data.refresh_token)localStorage.setItem(STORAGE.refresh,data.refresh_token);if(data.expires_in)localStorage.setItem(STORAGE.expiry,String(Date.now()+data.expires_in*1000));if(data.scope)localStorage.setItem('sc_spotify_granted_scopes',data.scope)}
 async function accessToken(){let token=localStorage.getItem(STORAGE.token),expiry=Number(localStorage.getItem(STORAGE.expiry)||0);if(token&&Date.now()<expiry-60000)return token;const refresh=localStorage.getItem(STORAGE.refresh);if(!refresh)return token;const body=new URLSearchParams({client_id:clientId(),grant_type:'refresh_token',refresh_token:refresh});const res=await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});const data=await res.json();if(!res.ok)throw new Error(data.error_description||data.error||'token refresh failed');storeTokens(data);return data.access_token;}
 async function api(path,method='GET',body=null){const token=await accessToken();if(!token)throw new Error(lang==='pt'?'Conecte-se ao Spotify primeiro.':'Connect to Spotify first.');let url='https://api.spotify.com/v1/me/player'+path;const opts={method,headers:{Authorization:'Bearer '+token}};if(body){opts.headers['Content-Type']='application/json';opts.body=JSON.stringify(body)}let res=await fetch(url,opts);if(res.status===401){localStorage.removeItem(STORAGE.token);localStorage.removeItem(STORAGE.expiry);throw new Error(lang==='pt'?'A autorização expirou. Desconecte e conecte novamente.':'Authorization expired. Disconnect and connect again.')}if(res.status===403){throw new Error(lang==='pt'?'O Spotify negou o controle. Desconecte e conecte novamente para conceder user-modify-playback-state; confirme também que sua conta tem Premium.':'Spotify denied playback control. Disconnect and reconnect to grant user-modify-playback-state; also confirm your account has Premium.')}if(res.status===404){throw new Error(lang==='pt'?'Nenhum dispositivo ativo do Spotify foi encontrado. Inicie a reprodução no Spotify e tente de novo.':'No active Spotify device was found. Start playback in Spotify and try again.')}if(res.status===429){throw new Error(lang==='pt'?'Limite temporário de solicitações do Spotify. Aguarde um pouco e tente novamente.':'Spotify rate limit reached. Wait briefly and try again.')}if(!res.ok){let message='Spotify API error ('+res.status+')';try{const data=await res.json();message=data.error?.message||message}catch{}throw new Error(message)}return res;}
-async function exchangeCode(){const url=new URL(window.location.href),code=url.searchParams.get('code'),state=url.searchParams.get('state'),error=url.searchParams.get('error');if(error){history.replaceState({},document.title,REDIRECT_URI);setMessage((lang==='pt'?'Autorização não concluída: ':'Spotify authorization was not completed: ')+error,'error');return;}if(!code)return;const expected=localStorage.getItem(STORAGE.state),verifier=localStorage.getItem(STORAGE.verifier);history.replaceState({},document.title,REDIRECT_URI);if(!expected||state!==expected||!verifier){setMessage(lang==='pt'?'Não foi possível verificar a autenticação. Toque em Conectar novamente.':'Sign-in could not be verified. Tap Connect again.','error');return;}try{const body=new URLSearchParams({client_id:clientId(),grant_type:'authorization_code',code,redirect_uri:REDIRECT_URI,code_verifier:verifier});const res=await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});const data=await res.json();if(!res.ok)throw new Error(data.error_description||data.error||'token exchange failed');storeTokens(data);localStorage.removeItem(STORAGE.verifier);localStorage.removeItem(STORAGE.state);setMessage(tr('controlsGranted'),'success');$('disconnectBtn').disabled=false;$('refreshBtn').disabled=false;await pollPlayback();}catch(e){setMessage((lang==='pt'?'Falha na conexão: ':'Spotify connection failed: ')+(e.message||e),'error')}}
+async function exchangeCode(){const url=new URL(window.location.href),code=url.searchParams.get('code'),state=url.searchParams.get('state'),error=url.searchParams.get('error');if(error){history.replaceState({},document.title,REDIRECT_URI);setMessage((lang==='pt'?'Autorização não concluída: ':'Spotify authorization was not completed: ')+error,'error');return;}if(!code)return;const expected=localStorage.getItem(STORAGE.state),verifier=localStorage.getItem(STORAGE.verifier);history.replaceState({},document.title,REDIRECT_URI);if(!expected||state!==expected||!verifier){setMessage(lang==='pt'?'Não foi possível verificar a autenticação. Toque em Conectar novamente.':'Sign-in could not be verified. Tap Connect again.','error');return;}try{const body=new URLSearchParams({client_id:clientId(),grant_type:'authorization_code',code,redirect_uri:REDIRECT_URI,code_verifier:verifier});const res=await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});const data=await res.json();if(!res.ok)throw new Error(data.error_description||data.error||'token exchange failed');storeTokens(data);localStorage.removeItem(STORAGE.verifier);localStorage.removeItem(STORAGE.state);setMessage(tr('controlsGranted'),'success');$('disconnectBtn').disabled=false;$('refreshBtn').disabled=false;startPolling();}catch(e){setMessage((lang==='pt'?'Falha na conexão: ':'Spotify connection failed: ')+(e.message||e),'error')}}
 function enableControls(enabled){['previousBtn','playPauseBtn','nextBtn','volumeDownBtn','volumeUpBtn'].forEach(id=>$(id).disabled=!enabled)}
 function renderStatus(){const connected=!!(localStorage.getItem(STORAGE.token)||localStorage.getItem(STORAGE.refresh));$('playPauseText').textContent=playing?tr('pause'):tr('play');$('playPauseBtn').innerHTML=(playing?'⏸':'▶')+'<br><span id="playPauseText">'+(playing?tr('pause'):tr('play'))+'</span>';$('syncStatus').textContent=connected?(latestItem?(playing?tr('playing'):tr('paused')):tr('controlsGranted')):tr('notConnected');$('deviceText').textContent=latestDevice?.name?((lang==='pt'?'Dispositivo ativo: ':'Active device: ')+latestDevice.name):tr('notDetected');$('volumeText').textContent=volumePercent==null?tr('volume')+': —':tr('volume')+': '+volumePercent+'%';}
 function renderPlayback(){if(!latestItem){$('trackTitle').textContent=tr('nothingPlaying');$('trackArtist').textContent=tr('trackPrompt');$('trackAlbum').textContent='';$('trackArt').src='./icon-192.png';renderStatus();return;}const item=latestItem;const album=item.album||{};$('trackTitle').textContent=item.name||'Unknown track';$('trackArtist').textContent=(item.artists||[]).map(a=>a.name).join(', ');$('trackAlbum').textContent=album.name||'';const images=album.images||[];$('trackArt').src=images.length?(images[images.length-1].url||'./icon-192.png'):'./icon-192.png';renderStatus();}
@@ -456,33 +528,29 @@ function findCuratedTrack(item){
  }
  candidates.sort((a,b)=>b.score-a.score);return candidates[0]||null;
 }
-function autoFollowPlayback(data){
- if(!data?.item)return;
- if(dynamicGuide && dynamicGuideTrackId===data.item.id){followDynamicGuide(data);return;}
- const match=findCuratedTrack(data.item);if(!match)return;
- const entries=(window.SONIC_GUIDES[match.key].sections||window.SONIC_GUIDES[match.key].tracks||[]);
- const trackKey=match.key+':'+match.index;
- const progress=Number(data.progress_ms||0), duration=Number(data.item.duration_ms||0);
- let landmark=-1;
- const seq=(window.SONIC_LANDMARKS?.[match.key]||{})[match.index]||[];
- if(seq.length){const ratio=duration>0?Math.max(0,Math.min(.9999,progress/duration)):0;landmark=Math.min(seq.length-1,Math.floor(ratio*seq.length));}
- const changedGuide=currentGuideKey!==match.key, changedTrack=currentItemIndex!==match.index;
- currentGuideKey=match.key;currentItemIndex=match.index;
- if(changedGuide||changedTrack){renderGuide();renderEditorial();renderLandmarks();}
- if(landmark>=0){const area=$('landmarkArea');if(area.dataset.trackIndex!==String(match.index)||Number(area.dataset.landmarkIndex)!==landmark){area.dataset.trackIndex=String(match.index);area.dataset.landmarkIndex=String(landmark);renderLandmarks();}}
- lastAutoTrackKey=trackKey;lastAutoLandmark=landmark;
- const msg=lang==='pt'?'Guia acompanhando a reprodução':'Guide following playback';
- $('playbackMessage').textContent=msg+(duration>0?' · '+Math.floor(progress/1000)+'s / '+Math.floor(duration/1000)+'s':'');
+async function pollPlayback(){
+ if(pollInFlight)return;pollInFlight=true;
+ try{
+  const token=await accessToken();
+  if(!token){$('syncStatus').textContent=tr('notConnected');$('playbackMessage').textContent=tr('waiting');enableControls(false);return;}
+  const res=await fetch('https://api.spotify.com/v1/me/player',{headers:{Authorization:'Bearer '+token}});
+  if(res.status===204){latestItem=null;latestDevice=null;playbackProgressMs=null;volumePercent=null;playing=false;lastPlaybackSnapshot=null;activePlaybackTrack=null;renderPlayback();$('playbackMessage').textContent=tr('noDevice');$('disconnectBtn').disabled=false;$('refreshBtn').disabled=false;enableControls(false);$('guideSyncLabel').textContent=lang==='pt'?'Nenhuma faixa ativa informada pelo Spotify':'Spotify reports no active track';if(guideFromPlayback){guideFromPlayback=false;dynamicGuide=null;dynamicGuideTrackId=null;dynamicCueIndex=-1;selectedSearchTrack=null;selectedSearchTrackId=null;$('dynamicListeningGuide').classList.add('hidden');$('curatedGuideInterface').classList.remove('hidden');$('guideModeTag').textContent=tr('guideMode');$('playSelectedBtn').disabled=true;$('researchGuideBtn').disabled=true;}return;}
+  if(res.status===401){localStorage.removeItem(STORAGE.token);localStorage.removeItem(STORAGE.expiry);throw new Error(lang==='pt'?'Token expirado; desconecte e conecte novamente.':'Token expired; disconnect and reconnect.');}
+  if(!res.ok){let message='Spotify API error ('+res.status+')';try{const data=await res.json();message=data.error?.message||message}catch{}throw new Error(message);}
+  const data=await res.json();latestItem=data.item||null;latestDevice=data.device||null;playbackProgressMs=Number.isFinite(data.progress_ms)?data.progress_ms:null;volumePercent=latestDevice?.volume_percent??null;playing=!!data.is_playing;
+  renderPlayback();$('playbackMessage').textContent=latestItem?tr('playbackUpdate'):tr('noDevice');$('playbackMessage').className='fine';
+  if(latestItem)autoFollowPlayback(data);else $('guideSyncLabel').textContent=lang==='pt'?'Spotify não informou a faixa atual':'Spotify did not report the current track';
+  $('disconnectBtn').disabled=false;$('refreshBtn').disabled=false;enableControls(true);
+ }catch(e){$('syncStatus').textContent=tr('statusError');$('playbackMessage').textContent=e.message||tr('statusError');$('playbackMessage').className='fine error';$('disconnectBtn').disabled=false;}finally{pollInFlight=false;}
 }
-async function pollPlayback(){try{const token=await accessToken();if(!token){$('syncStatus').textContent=tr('notConnected');$('playbackMessage').textContent=tr('waiting');enableControls(false);return;}const res=await fetch('https://api.spotify.com/v1/me/player',{headers:{Authorization:'Bearer '+token}});if(res.status===204){latestItem=null;latestDevice=null;playbackProgressMs=null;volumePercent=null;playing=false;renderPlayback();$('playbackMessage').textContent=tr('noDevice');$('disconnectBtn').disabled=false;$('refreshBtn').disabled=false;enableControls(false);return;}if(res.status===401){localStorage.removeItem(STORAGE.token);localStorage.removeItem(STORAGE.expiry);throw new Error(lang==='pt'?'Token expirado; desconecte e conecte novamente.':'Token expired; disconnect and reconnect.')}if(!res.ok){let message='Spotify API error ('+res.status+')';try{const data=await res.json();message=data.error?.message||message}catch{}throw new Error(message)}const data=await res.json();latestItem=data.item||null;latestDevice=data.device||null;playbackProgressMs=Number.isFinite(data.progress_ms)?data.progress_ms:null;volumePercent=latestDevice?.volume_percent??null;playing=!!data.is_playing;renderPlayback();$('playbackMessage').textContent=latestItem?tr('playbackUpdate'):tr('noDevice');$('playbackMessage').className='fine';if(playing)autoFollowPlayback(data);$('disconnectBtn').disabled=false;$('refreshBtn').disabled=false;enableControls(true);}catch(e){$('syncStatus').textContent=tr('statusError');$('playbackMessage').textContent=e.message||tr('statusError');$('playbackMessage').className='fine error';$('disconnectBtn').disabled=false;}}
 async function control(action){try{$('playbackMessage').className='fine';if(action==='toggle'){const token=await accessToken();if(!token)throw new Error(lang==='pt'?'Conecte-se ao Spotify primeiro.':'Connect to Spotify first.');const status=await fetch('https://api.spotify.com/v1/me/player',{headers:{Authorization:'Bearer '+token}});if(status.status===204)throw new Error(lang==='pt'?'O Spotify não informa uma reprodução ativa. Inicie a faixa no Spotify primeiro.':'Spotify reports no active playback. Start a track in Spotify first.');if(!status.ok)throw new Error('Could not verify the current Spotify playback state ('+status.status+').');const actual=await status.json();await api(actual.is_playing?'/pause':'/play','PUT');}else if(action==='next'){await api('/next','POST');}else if(action==='previous'){await api('/previous','POST');}else if(action==='volDown'||action==='volUp'){if(volumePercent==null)await pollPlayback();let n=volumePercent==null?50:Number(volumePercent);if(!Number.isFinite(n))n=50;n=Math.max(0,Math.min(100,n+(action==='volUp'?10:-10)));await api('/volume?volume_percent='+n,'PUT');volumePercent=n;$('volumeText').textContent=tr('volume')+': '+n+'%';}$('playbackMessage').textContent=lang==='pt'?'Comando enviado ao Spotify.':'Command sent to Spotify.';setTimeout(pollPlayback,700);}catch(e){$('playbackMessage').textContent=e.message||tr('controlError');$('playbackMessage').className='fine error';}}
-function disconnect(){if(timer)clearInterval(timer);timer=null;[STORAGE.token,STORAGE.refresh,STORAGE.expiry,STORAGE.verifier,STORAGE.state,'sc_spotify_granted_scopes'].forEach(k=>localStorage.removeItem(k));latestItem=null;latestDevice=null;playing=false;volumePercent=null;enableControls(false);renderPlayback();$('syncStatus').textContent=tr('notConnected');$('disconnectBtn').disabled=true;$('refreshBtn').disabled=true;setMessage(lang==='pt'?'Desconectado. O Client ID continua salvo neste dispositivo.':'Disconnected. The Client ID remains saved on this device.');}
+function disconnect(){if(timer)clearInterval(timer);if(cueClockTimer)clearInterval(cueClockTimer);timer=null;cueClockTimer=null;lastPlaybackSnapshot=null;activePlaybackTrack=null;guideFromPlayback=false;dynamicGuide=null;dynamicGuideTrackId=null;dynamicCueIndex=-1;document.body.classList.remove('focus-mode');$('dynamicListeningGuide').classList.add('hidden');$('curatedGuideInterface').classList.remove('hidden');[STORAGE.token,STORAGE.refresh,STORAGE.expiry,STORAGE.verifier,STORAGE.state,'sc_spotify_granted_scopes'].forEach(k=>localStorage.removeItem(k));latestItem=null;latestDevice=null;playing=false;volumePercent=null;enableControls(false);renderPlayback();$('syncStatus').textContent=tr('notConnected');$('disconnectBtn').disabled=true;$('refreshBtn').disabled=true;setMessage(lang==='pt'?'Desconectado. O Client ID continua salvo neste dispositivo.':'Disconnected. The Client ID remains saved on this device.');}
 function renderGuide(){const guide=window.SONIC_GUIDES[currentGuideKey];if(!guide)return;$('guideIntroTop').textContent=tr('guideIntro');$('albumIntro').textContent=guide.intro[lang]||guide.intro.en;$('guideSelect').value=currentGuideKey;const entries=guide.sections||guide.tracks||[];const root=$('guideList');root.textContent='';entries.forEach((entry,i)=>{const b=document.createElement('button');b.type='button';b.className='cue'+(i===currentItemIndex?' active':'');b.dataset.i=String(i);const title=(entry.title&&typeof entry.title==='object'?entry.title[lang]:entry.title)||'';const tempo=entry.tempo?(entry.tempo[lang]||entry.tempo.en):'';b.innerHTML='<span class="num">'+String(i+1).padStart(2,'0')+'</span><span><span class="cue-title"></span><small></small></span>';b.querySelector('.cue-title').textContent=title;b.querySelector('small').textContent=tempo||(lang==='pt'?'Tópico de escuta':'Listening topic');b.addEventListener('click',()=>{currentItemIndex=i;renderGuide()});root.appendChild(b)});const item=entries[currentItemIndex]||entries[0];if(item)renderGuideItem(item,currentItemIndex);const src=$('guideSources');src.textContent='';(guide.sources||[]).forEach(s=>{const a=document.createElement('a');a.href=s.url;a.target='_blank';a.rel='noopener';a.textContent=s.label;src.appendChild(a)});}
 function renderGuideItem(s,index){const title=s.title&&typeof s.title==='object'?s.title[lang]:s.title;const roles=s.roles?(s.roles[lang]||s.roles.en):[];$('cueCounter').textContent=(currentGuideKey==='rhapsody'?tr('section'):tr('track'))+' '+String(index+1).padStart(2,'0')+' / '+String((window.SONIC_GUIDES[currentGuideKey].sections||window.SONIC_GUIDES[currentGuideKey].tracks).length);$('currentTopicLabel').textContent=tr('currentTopic');$('guideNoteTitle').textContent=title||tr('selectTopic');$('roleTags').textContent='';(roles||[]).forEach(r=>{const sp=document.createElement('span');sp.className='tag';sp.textContent=r;$('roleTags').appendChild(sp)});$('nowListen').textContent=s.listen?.[lang]||s.listen?.en||'';$('nowWhy').textContent=s.why?.[lang]||s.why?.en||'';$('nowDeep').textContent=s.deep?.[lang]||s.deep?.en||'';}
 function chooseGuide(){currentGuideKey=$('guideSelect').value;currentItemIndex=0;lastAutoTrackKey='';lastAutoLandmark=-1;renderGuide()}
 function applyLanguage(){document.documentElement.lang=lang==='pt'?'pt-BR':'en';const ids={eyebrow:'eyebrow',tagline:'tagline',connectHeading:'connectHeading',connectCopy:'connectCopy',clientLabel:'clientLabel',saveClientBtn:'save',connectBtn:'connect',refreshBtn:'refresh',disconnectBtn:'disconnect',openSpotify:'openSpotify',nowPlayingLabel:'nowPlaying',previousText:'previous',nextText:'next',volumeDownText:'volumeDown',volumeUpText:'volumeUp',guideHeading:'guideHeading',guideModeTag:'guideMode',guideSelectLabel:'guideSelect',currentTopicLabel:'currentTopic',footerText:'footer'};Object.entries(ids).forEach(([id,k])=>{if($(id))$(id).textContent=tr(k)});$('redirectNote').firstChild.textContent=tr('redirect')+' ';$('playPauseText').textContent=playing?tr('pause'):tr('play');$('previousBtn').setAttribute('aria-label',tr('previous'));$('nextBtn').setAttribute('aria-label',tr('next'));if(!latestItem)$('trackArtist').textContent=tr('trackPrompt');if(!localStorage.getItem(STORAGE.token))$('connectionMessage').textContent=tr('connectPrompt');if(!$('playbackMessage').classList.contains('error'))$('playbackMessage').textContent=tr('waiting');renderStatus();renderGuide();if(dynamicGuide)renderDynamicGuide();if(typeof renderEditorial==='function'){renderEditorial();renderLandmarks();document.querySelectorAll('[data-en][data-pt]').forEach(el=>{if(el.closest('#guideList'))return;const v=el.getAttribute(lang==='pt'?'data-pt':'data-en');if(v!==null)el.textContent=v;});}}
 $('redirectUriText').textContent=REDIRECT_URI;$('clientId').value=localStorage.getItem(STORAGE.client)||'';$('languageSelect').value=lang;
-$('saveClientBtn').addEventListener('click',saveClient);$('connectBtn').addEventListener('click',connectSpotify);$('refreshBtn').addEventListener('click',()=>pollPlayback());$('disconnectBtn').addEventListener('click',disconnect);$('previousBtn').addEventListener('click',()=>control('previous'));$('playPauseBtn').addEventListener('click',()=>control('toggle'));$('nextBtn').addEventListener('click',()=>control('next'));$('volumeDownBtn').addEventListener('click',()=>control('volDown'));$('volumeUpBtn').addEventListener('click',()=>control('volUp'));$('guideSelect').addEventListener('change',chooseGuide);$('languageSelect').addEventListener('change',()=>{lang=$('languageSelect').value;localStorage.setItem(STORAGE.language,lang);applyLanguage()});$('clientId').addEventListener('change',()=>{if($('clientId').value.trim())localStorage.setItem(STORAGE.client,$('clientId').value.trim())});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&localStorage.getItem(STORAGE.token))pollPlayback()});
+$('saveClientBtn').addEventListener('click',saveClient);$('connectBtn').addEventListener('click',connectSpotify);$('refreshBtn').addEventListener('click',()=>pollPlayback());$('disconnectBtn').addEventListener('click',disconnect);$('previousBtn').addEventListener('click',()=>control('previous'));$('playPauseBtn').addEventListener('click',()=>control('toggle'));$('nextBtn').addEventListener('click',()=>control('next'));$('volumeDownBtn').addEventListener('click',()=>control('volDown'));$('volumeUpBtn').addEventListener('click',()=>control('volUp'));$('guideSelect').addEventListener('change',chooseGuide);$('languageSelect').addEventListener('change',()=>{lang=$('languageSelect').value;localStorage.setItem(STORAGE.language,lang);applyLanguage();if(dynamicGuide)renderDynamicGuide()});$('clientId').addEventListener('change',()=>{if($('clientId').value.trim())localStorage.setItem(STORAGE.client,$('clientId').value.trim())});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&localStorage.getItem(STORAGE.token))pollPlayback()});
 
 const EDITORIAL=window.SONIC_EDITORIAL||{};
 const LANDMARKS=window.SONIC_LANDMARKS||{};
@@ -507,34 +575,39 @@ function prettyMs(ms){const n=Math.max(0,Math.floor((ms||0)/1000));return Math.f
 function setTrackResultsExpanded(expanded){const results=$('trackSearchResults'),toggle=$('trackResultsToggle');results.classList.toggle('hidden',!expanded);toggle.setAttribute('aria-expanded',expanded?'true':'false');toggle.textContent=expanded?(lang==='pt'?'Ocultar resultados ('+lastSearchCount+')':'Hide results ('+lastSearchCount+')'):(lang==='pt'?'Mostrar resultados ('+lastSearchCount+')':'Show results ('+lastSearchCount+')');}
 function renderTrackResults(items,sequence){if(sequence!==searchSequence)return;const root=$('trackSearchResults');root.textContent='';lastSearchCount=items.length;const toggle=$('trackResultsToggle');if(!items.length){toggle.classList.add('hidden');root.classList.add('hidden');return;}toggle.classList.remove('hidden');root.classList.remove('hidden');setTrackResultsExpanded(true);items.forEach(track=>{const row=document.createElement('button');row.type='button';row.className='track-result'+(selectedSearchTrackId===track.id?' selected':'');row.dataset.trackId=track.id;row.setAttribute('aria-label',(lang==='pt'?'Selecionar para guia, sem alterar reprodução: ':'Select for guide, playback unchanged: ')+track.name+' — '+(track.artists||[]).map(a=>a.name).join(', '));const img=document.createElement('img');img.alt='';img.loading='lazy';img.src=track.album?.images?.slice(-1)[0]?.url||'./icon-192.png';const meta=document.createElement('div');meta.className='track-meta';const h=document.createElement('h3');h.textContent=track.name;const p=document.createElement('p');p.textContent=(track.artists||[]).map(a=>a.name).join(', ')+' · '+(track.album?.name||'')+' · '+prettyMs(track.duration_ms);const hint=document.createElement('span');hint.className='track-hint';hint.textContent=selectedSearchTrackId===track.id?(lang==='pt'?'Selecionada':'Selected'):(lang==='pt'?'Toque para selecionar e carregar o guia':'Tap to select & load guide');meta.append(h,p,hint);row.append(img,meta);row.addEventListener('click',()=>selectAndPlayTrack(track));root.append(row);});}
 async function searchSpotifyTracks(){const q=$('trackSearch').value.trim();const sequence=++searchSequence;if(searchAbortController){searchAbortController.abort();searchAbortController=null;}if(q.length<2){lastSearchCount=0;$('trackSearchResults').textContent='';$('trackSearchResults').classList.add('hidden');$('trackResultsToggle').classList.add('hidden');if(q.length===0){$('trackSearchStatus').textContent=lang==='pt'?'Conecte-se ao Spotify e digite para pesquisar.':'Connect Spotify and start typing to search.';}else{$('trackSearchStatus').textContent=lang==='pt'?'Digite mais um caractere para pesquisar.':'Type one more character to search.';}return;}const token=await spotifyTokenForSearch();if(sequence!==searchSequence)return;if(!token){$('trackSearchStatus').textContent=lang==='pt'?'Conecte-se ao Spotify antes de pesquisar.':'Connect Spotify before searching.';return;}const controller=new AbortController();searchAbortController=controller;$('trackSearchStatus').textContent=lang==='pt'?'Pesquisando…':'Searching as you type…';try{const url='https://api.spotify.com/v1/search?type=track&limit=10&q='+encodeURIComponent(q);const res=await fetch(url,{headers:{Authorization:'Bearer '+token},signal:controller.signal});if(sequence!==searchSequence)return;if(!res.ok){let msg='Spotify search failed ('+res.status+')';try{msg=(await res.json()).error?.message||msg}catch{}throw new Error(msg)}const data=await res.json();if(sequence!==searchSequence)return;const items=data.tracks?.items||[];if(!items.length){lastSearchCount=0;$('trackSearchResults').textContent='';$('trackSearchResults').classList.add('hidden');$('trackResultsToggle').classList.add('hidden');$('trackSearchStatus').textContent=lang==='pt'?'Nenhuma faixa encontrada.':'No tracks found.';return;}renderTrackResults(items,sequence);$('trackSearchStatus').textContent=lang==='pt'?items.length+' resultados · toque em uma faixa para carregar o guia; a reprodução só inicia em dispositivo ativo confirmado.':items.length+' results · tap a track to load its guide; playback starts only on a confirmed active device.';}catch(e){if(e.name==='AbortError')return;if(sequence===searchSequence)$('trackSearchStatus').textContent=e.message||'Search failed.';}finally{if(sequence===searchSequence)searchAbortController=null;}}
-async function selectAndPlayTrack(track){
+function selectAndPlayTrack(track){
+ // Result selection is intentionally playback-safe: it never sends play or pause to Spotify.
  selectedSearchTrack=track;selectedSearchTrackId=track.id;
- $('researchGuideBtn').disabled=false;
+ $('researchGuideBtn').disabled=false;$('playSelectedBtn').disabled=false;
  $('albumSearch').value=[track.artists?.map(a=>a.name).join(', '),track.name,track.album?.name].filter(Boolean).join(' — ');
- configureResearchLinks();
- $('researchStatus').textContent=lang==='pt'?'Faixa selecionada. Preparando guia simulado local…':'Track selected. Preparing local mock guide…';
- setTrackResultsExpanded(false);
+ configureResearchLinks();setTrackResultsExpanded(false);
  document.querySelectorAll('.track-result').forEach(row=>row.classList.toggle('selected',row.dataset.trackId===track.id));
- $('trackSearchStatus').textContent=lang==='pt'
-  ?'Selecionada: '+track.name+'. Carregando o guia e verificando o dispositivo ativo do Spotify…'
-  :'Selected: '+track.name+'. Loading the guide and checking Spotify’s active device…';
- // The guide does not depend on playback; load it even if Spotify playback control is unavailable.
- researchSelectedTrack({automatic:true});
- // Never transfer playback to an arbitrary inactive device. Only issue play to an explicitly confirmed active device.
+ const currentIsDifferent=!!(latestItem?.id&&latestItem.id!==track.id&&dynamicGuideTrackId===latestItem.id&&guideFromPlayback);
+ if(currentIsDifferent){
+  guideFromPlayback=true;
+  $('trackSearchStatus').textContent=lang==='pt'?'A faixa atual continua tocando e seu guia permanece em foco. Toque em “Tocar faixa selecionada” para mudar a reprodução.':'The current track keeps playing and its guide stays in focus. Tap “Play selected track” to switch playback.';
+  $('researchStatus').textContent=lang==='pt'?'O guia continua ligado à faixa que o Spotify informa como atual.':'The guide remains attached to the track Spotify currently reports.';
+ }else{
+  guideFromPlayback=false;
+  $('trackSearchStatus').textContent=(lang==='pt'?'Guia preparado para ':'Guide prepared for ')+track.name+(lang==='pt'?'. A reprodução não foi alterada.':'. Playback was not changed.');
+  researchSelectedTrack({automatic:true});
+ }
+}
+async function playSelectedTrackInSpotify(){
+ const track=selectedSearchTrack;if(!track){$('trackSearchStatus').textContent=lang==='pt'?'Selecione uma faixa primeiro.':'Select a track first.';return;}
  try{
-  const token=await accessToken();
-  if(!token)throw new Error(lang==='pt'?'Conecte-se ao Spotify para iniciar a faixa.':'Connect Spotify to start the track.');
-  if(latestItem?.uri===track.uri&&playing){$('trackSearchStatus').textContent=lang==='pt'?'Esta faixa já está tocando; o guia foi selecionado.':'This track is already playing; the guide is selected.';return;}
+  const token=await accessToken();if(!token)throw new Error(lang==='pt'?'Conecte-se ao Spotify primeiro.':'Connect Spotify first.');
   const devicesRes=await fetch('https://api.spotify.com/v1/me/player/devices',{headers:{Authorization:'Bearer '+token}});
-  if(!devicesRes.ok)throw new Error('Spotify did not confirm the active playback device ('+devicesRes.status+').');
+  if(!devicesRes.ok)throw new Error('Spotify could not confirm available devices ('+devicesRes.status+').');
   const deviceData=await devicesRes.json();
   const active=(deviceData.devices||[]).find(d=>d.is_active&&!d.is_restricted);
-  if(!active)throw new Error(lang==='pt'?'O Spotify não confirmou um dispositivo ativo. O guia foi carregado, mas a reprodução não foi alterada.':'Spotify did not confirm an active device. The guide was loaded; playback was left unchanged.');
-  const res=await fetch('https://api.spotify.com/v1/me/player/play?device_id='+encodeURIComponent(active.id),{method:'PUT',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({uris:[track.uri]})});
-  if(!res.ok){let msg='Spotify could not start the selected track ('+res.status+').';try{msg=(await res.json()).error?.message||msg}catch{}throw new Error(msg);}
-  $('trackSearchStatus').textContent=lang==='pt'?'Reprodução solicitada no dispositivo ativo '+active.name+'.':'Playback requested on confirmed active device '+active.name+'.';
-  setTimeout(pollPlayback,1000);
- }catch(e){$('trackSearchStatus').textContent=(e.message||'Playback was not changed.')+' '+(lang==='pt'?'A seleção e o guia continuam disponíveis.':'The selected track and guide remain available.');}
+  if(!active)throw new Error(lang==='pt'?'Nenhum dispositivo ativo foi confirmado. Abra o Spotify e inicie a reprodução nele; o guia continuará acompanhando.':'No active Spotify device was confirmed. Start playback in Spotify; the guide will still follow it.');
+  if(latestItem?.id===track.id&&playing){$('trackSearchStatus').textContent=lang==='pt'?'Esta faixa já está tocando.':'This track is already playing.';return;}
+  window.__sonicPlayRequests=(window.__sonicPlayRequests||0)+1;const res=await fetch('https://api.spotify.com/v1/me/player/play?device_id='+encodeURIComponent(active.id),{method:'PUT',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({uris:[track.uri]})});
+  if(!res.ok){let msg='Spotify could not start this track ('+res.status+').';try{msg=(await res.json()).error?.message||msg}catch{}throw new Error(msg);}
+  $('trackSearchStatus').textContent=(lang==='pt'?'Solicitação de reprodução enviada. O guia acompanhará o status do Spotify.':'Playback request sent. The guide will follow Spotify’s reported status.');
+  setTimeout(pollPlayback,700);
+ }catch(e){$('trackSearchStatus').textContent=(e.message||'Playback was not changed.')+' '+(lang==='pt'?'O guia continua disponível.':'The guide remains available.');}
 }
 function resolveMockEndpoint(raw){
  const entered=String(raw||'').trim();
@@ -564,15 +637,16 @@ async function researchSelectedTrack(options={}){
  const automatic=options===true||options.automatic===true;
  const track=selectedSearchTrack;
  if(!track){if(!automatic)$('researchStatus').textContent=lang==='pt'?'Escolha uma faixa nos resultados primeiro.':'Choose a Spotify search result first.';return;}
+ if(guideFromPlayback&&latestItem?.id&&dynamicGuideTrackId===latestItem.id&&track.id!==latestItem.id){$('researchStatus').textContent=lang==='pt'?'O guia permanece ligado à faixa atual. Toque a faixa selecionada para mudar a reprodução.':'The guide remains attached to the current track. Play the selected track to switch the guide.';return;}
  const requestId=++researchRequestSequence;
- $('researchGuideBtn').disabled=true;
+ $('researchGuideBtn').disabled=true;$('playSelectedBtn').disabled=true;
  $('researchStatus').textContent=lang==='pt'?'Simulando chamada de API localmente — sem rede ou custo…':'Simulating the API request locally — no network or cost…';
  showDynamicLoading(track);
  try{
   // Produce the same response contract as the mock Worker, locally. This intentionally cannot call a paid API.
   const body={query:$('albumSearch').value.trim()||[track.artists?.map(a=>a.name).join(', '),track.name,track.album?.name].filter(Boolean).join(' — '),track:{title:track.name,artists:(track.artists||[]).map(a=>a.name),album:track.album?.name,duration_ms:track.duration_ms},language:lang};
   await new Promise(resolve=>setTimeout(resolve,140));
-  if(typeof window.buildSonicMockGuide!=='function')throw new Error('Local mock fixture was not loaded. Please ensure the root index.html was replaced with build v1.1.');
+  if(typeof window.buildSonicMockGuide!=='function')throw new Error('Local mock fixture was not loaded. Please ensure the root index.html was replaced with build v1.2.');
   const data=window.buildSonicMockGuide(body);
   if(requestId!==researchRequestSequence)return;
   if(!data?.guide||!Array.isArray(data.guide.cues)||!data.guide.cues.length)throw new Error('The local mock returned no listening cues.');
@@ -598,52 +672,125 @@ async function researchSelectedTrack(options={}){
   $('researchStatus').textContent=lang==='pt'?'Falha no guia simulado.':'Mock guide failed.';
  }finally{if(requestId===researchRequestSequence)$('researchGuideBtn').disabled=false;}
 }
+function currentPlaybackPosition(){
+ if(!lastPlaybackSnapshot)return Math.max(0,Number(playbackProgressMs||0));
+ return window.SonicLiveCore.progressAt(lastPlaybackSnapshot,Date.now());
+}
+function liveCueIndex(cues,progress,duration){return window.SonicLiveCore.cueIndex(cues,progress,duration);}
+function renderActiveCue(){
+ const cues=dynamicGuide?.cues||[];if(!cues.length)return;
+ const duration=Math.max(0,Number(lastPlaybackSnapshot?.durationMs||selectedSearchTrack?.duration_ms||0));
+ const progress=Math.max(0,Math.min(duration,currentPlaybackPosition()));
+ const index=liveCueIndex(cues,progress,duration);dynamicCueIndex=index;
+ const cue=cues[index]||cues[0],pick=v=>typeof v==='object'?(v?.[lang]||v?.en||''):String(v||'');
+ $('activeCueKicker').textContent=lang==='pt'?'OUÇA AGORA · MOMENTO APROXIMADO':'LISTEN NOW · APPROXIMATE MOMENT';
+ $('activeCueClock').textContent=prettyMs(progress)+' / '+prettyMs(duration);
+ $('activeCueTitle').textContent=pick(cue.title)||'Listening cue';
+ $('activeCueFocus').textContent=pick(cue.focus)||'';
+ $('activeCueListen').textContent=pick(cue.listenFor)||'';
+ $('activeCueWhy').textContent=pick(cue.whyItMatters)||'';
+ $('cueProgressFill').style.width=(duration?Math.min(100,progress/duration*100):0)+'%';
+ $('cueProgressStart').textContent=prettyMs(progress);$('cueProgressEnd').textContent=prettyMs(duration);
+ $('guideSyncLabel').textContent=lastPlaybackSnapshot?(lastPlaybackSnapshot.isPlaying?(lang==='pt'?'Sincronizado com o Spotify · atualiza a cada ~4 s':'Following Spotify · checked every ~4 s'):(lang==='pt'?'Spotify pausado · momento congelado':'Spotify paused · cue held at position')):(lang==='pt'?'Aguardando posição do Spotify':'Waiting for Spotify position');
+ const list=$('dynamicCueList');if(list){list.querySelectorAll('.dynamic-cue').forEach((el,i)=>{const active=i===index;el.classList.toggle('active',active);el.setAttribute('aria-pressed',active?'true':'false');});}
+}
 function renderDynamicGuide(){
  if(!dynamicGuide)return;
- const root=$('dynamicListeningContent');
- root.textContent='';
- $('dynamicListeningGuide').classList.remove('hidden');
- $('curatedGuideInterface').classList.add('hidden');
- const trackName=selectedSearchTrack?.name||dynamicGuide.mockTrack||'';
- $('dynamicListeningTitle').textContent=dynamicGuide.title?.[lang]||dynamicGuide.title||trackName||'Listening guide';
- $('dynamicListeningBadge').textContent='MOCK MODE · FREE';
- $('dynamicListeningMeta').textContent=[selectedSearchTrack?.artists?.map(a=>a.name).join(', '),selectedSearchTrack?.album?.name].filter(Boolean).join(' · ')||(lang==='pt'?'Conteúdo demonstrativo':'Sample content');
- const banner=document.createElement('p');banner.className='pill-note';banner.textContent=lang==='pt'?'MODO DE TESTE: conteúdo de exemplo para testar a interface. Não houve chamada OpenAI, busca ao vivo nem verificação de fontes.':'MOCK MODE: sample content for testing the interface. No OpenAI call, live search or source verification was performed.';root.append(banner);
+ document.body.classList.toggle('focus-mode',guideViewMode==='focus');
+ $('dynamicListeningGuide').classList.remove('hidden');$('curatedGuideInterface').classList.add('hidden');
+ const track=activePlaybackTrack||selectedSearchTrack||{};
+ const pick=v=>typeof v==='object'?(v?.[lang]||v?.en||''):String(v||'');
+ $('dynamicListeningTitle').textContent=pick(dynamicGuide.title)||track.name||'Listening guide';
+ $('dynamicListeningBadge').textContent='LOCAL MOCK · FREE';
+ $('dynamicListeningMeta').textContent=[track.artists?.map(a=>a.name).join(', '),track.album?.name].filter(Boolean).join(' · ')||(lang==='pt'?'Conteúdo simulado':'Simulated content');
+ const root=$('dynamicListeningContent');root.textContent='';
+ if(guideViewMode==='focus'){
+  root.classList.add('hidden');$('summaryModeBtn').setAttribute('aria-pressed','true');$('fullModeBtn').setAttribute('aria-pressed','false');
+  $('summaryModeBtn').textContent=lang==='pt'?'Foco · momento atual':'Focus · live cue';$('fullModeBtn').textContent=lang==='pt'?'Guia completo':'Full guide';
+  renderActiveCue();return;
+ }
+ root.classList.remove('hidden');$('summaryModeBtn').setAttribute('aria-pressed','false');$('fullModeBtn').setAttribute('aria-pressed','true');
+ $('summaryModeBtn').textContent=lang==='pt'?'Foco · momento atual':'Focus · live cue';$('fullModeBtn').textContent=lang==='pt'?'Guia completo':'Full guide';
+ const banner=document.createElement('p');banner.className='pill-note';banner.textContent=lang==='pt'?'MODO LOCAL DE TESTE: conteúdo demonstrativo, sem pesquisa ao vivo, sem citações verificadas e sem cobrança de API.':'LOCAL TEST MODE: sample content, no live research, no verified citations and no API charges.';root.append(banner);
  const labels={overview:lang==='pt'?'Visão geral':'Overview',context:lang==='pt'?'Contexto histórico':'Historical context',form:lang==='pt'?'Forma e arranjo':'Form and arrangement',personnelAndRoles:lang==='pt'?'Instrumentistas e funções':'Personnel and musical roles',emotionalReading:lang==='pt'?'Por que isso pode tocar':'Why it can move us',listenerReception:lang==='pt'?'Recepção dos ouvintes':'Listener reception',balancedNote:lang==='pt'?'Uma ressalva':'A balanced caveat'};
  for(const field of ['overview','context','personnelAndRoles','form','emotionalReading','listenerReception','balancedNote']){
-  const v=dynamicGuide[field];const txt=typeof v==='object'?(v?.[lang]||v?.en||''):v;if(!txt)continue;
-  const section=document.createElement('section');section.className='editorial-block';
-  const h=document.createElement('h3');h.textContent=labels[field];
-  const p=document.createElement('p');p.textContent=txt;section.append(h,p);root.append(section);
+  const txt=pick(dynamicGuide[field]);if(!txt)continue;
+  const section=document.createElement('section');section.className='editorial-block';const h=document.createElement('h3');h.textContent=labels[field];const p=document.createElement('p');p.textContent=txt;section.append(h,p);root.append(section);
  }
  const cues=dynamicGuide.cues||[];
- if(cues.length){const cueHeading=document.createElement('h3');cueHeading.textContent=lang==='pt'?'Momentos para ouvir':'Listening cues';root.append(cueHeading);const cueRoot=document.createElement('div');cueRoot.id='dynamicCueList';cueRoot.className='dynamic-cue-list';
+ if(cues.length){const cueHeading=document.createElement('h3');cueHeading.textContent=lang==='pt'?'Todos os momentos de escuta':'All listening moments';root.append(cueHeading);const cueRoot=document.createElement('div');cueRoot.id='dynamicCueList';cueRoot.className='dynamic-cue-list';
   cues.forEach((c,i)=>{const box=document.createElement('article');box.className='dynamic-cue'+(i===dynamicCueIndex?' active':'');box.dataset.cueIndex=String(i);box.tabIndex=0;box.setAttribute('role','button');box.setAttribute('aria-pressed',i===dynamicCueIndex?'true':'false');
-   const h=document.createElement('h4');h.textContent=(i+1)+'. '+(typeof c.title==='object'?(c.title[lang]||c.title.en):c.title||'Listening cue');
-   const focus=document.createElement('p');focus.className='fine';focus.textContent=localized(c.focus||'');
-   const listen=document.createElement('p');listen.textContent=localized(c.listenFor||c.listen||'');
-   const why=document.createElement('p');why.className='muted';why.textContent=localized(c.whyItMatters||c.why||'');
-   box.append(h,focus,listen,why);
-   const choose=()=>{dynamicCueIndex=i;renderDynamicGuide();};box.addEventListener('click',choose);box.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}});cueRoot.append(box);
+   const h=document.createElement('h4');h.textContent=(i+1)+'. '+pick(c.title);
+   const range=document.createElement('p');range.className='fine';const fraction=Number.isFinite(Number(c.at))?Number(c.at):i/Math.max(cues.length,1);range.textContent=Math.round(fraction*100)+'% '+(lang==='pt'?'da faixa · aproximado':'of track · approximate');
+   const focus=document.createElement('p');focus.className='fine';focus.textContent=pick(c.focus);
+   const listen=document.createElement('p');listen.textContent=pick(c.listenFor);
+   const why=document.createElement('p');why.className='muted';why.textContent=pick(c.whyItMatters);
+   box.append(h,range,focus,listen,why);cueRoot.append(box);
   });root.append(cueRoot);
  }
- const sources=dynamicGuide.sources||[];
- if(sources.some(s=>s.url)){const h=document.createElement('h3');h.textContent=lang==='pt'?'Fontes consultadas':'Sources consulted';root.append(h);const src=document.createElement('div');src.className='dynamic-sources';sources.forEach(s=>{if(!s.url)return;const a=document.createElement('a');a.href=s.url;a.target='_blank';a.rel='noopener';a.textContent=s.title||s.label||s.url;src.append(a)});root.append(src);}
- const note=document.createElement('p');note.className='source-disclaimer';note.textContent=lang==='pt'?'Os momentos são divisões aproximadas para escuta, não marcações exatas da gravação.':'These are approximate listening divisions, not exact timestamps for the recording.';root.append(note);
+ const disclaimer=document.createElement('p');disclaimer.className='source-disclaimer';disclaimer.textContent=lang==='pt'?'A posição é estimada a partir do progresso informado pelo Spotify; não há análise de áudio nem reconhecimento de eventos sonoros. Os momentos são aproximados e podem variar conforme a gravação.':'Position is estimated from Spotify-reported progress; there is no audio analysis or sound-event recognition. Moments are approximate and may differ by recording.';root.append(disclaimer);
+ renderActiveCue();
 }
-
-function followDynamicGuide(data){const cues=dynamicGuide?.cues||[];const duration=Number(data.item?.duration_ms||selectedSearchTrack?.duration_ms||0),progress=Number(data.progress_ms||0);if(!cues.length||!duration)return;const ix=Math.min(cues.length-1,Math.floor(Math.max(0,Math.min(.99999,progress/duration))*cues.length));if(ix!==dynamicCueIndex){dynamicCueIndex=ix;renderDynamicGuide();}const status=lang==='pt'?'Guia pesquisado acompanhando a faixa (momentos aproximados)':'Researched guide following track (approximate cues)';$('playbackMessage').textContent=status+' · '+prettyMs(progress)+' / '+prettyMs(duration);}
+function autoFollowPlayback(data){
+ if(!data?.item)return;
+ const item=data.item;
+ // This is the authoritative identity: whatever Spotify reports as playing wins,
+ // whether started here or in the Spotify app. A search target is not playback.
+ activePlaybackTrack=item;
+ guideFromPlayback=true;
+ const changed=dynamicGuideTrackId!==item.id||!dynamicGuide;
+ if(changed){
+  // Cancel an in-flight guide request for a searched target before attaching the
+  // guide to the track Spotify actually reports as current.
+  researchRequestSequence++;
+  selectedSearchTrack=item;selectedSearchTrackId=item.id;
+  $('playSelectedBtn').disabled=false;$('researchGuideBtn').disabled=false;
+  const body={query:[(item.artists||[]).map(a=>a.name).join(', '),item.name,item.album?.name].filter(Boolean).join(' — '),track:{title:item.name,artists:(item.artists||[]).map(a=>a.name),album:item.album?.name,duration_ms:item.duration_ms},language:lang};
+  const result=window.buildSonicMockGuide(body);
+  dynamicGuide=result.guide;dynamicGuideTrackId=item.id;dynamicCueIndex=0;
+  $('albumSearch').value=body.query;configureResearchLinks();
+  $('researchStatus').textContent=lang==='pt'?'Guia local associado à faixa que o Spotify está tocando.':'Local guide attached to the track currently reported by Spotify.';
+  $('dynamicListeningGuide').classList.remove('hidden');
+  $('curatedGuideInterface').classList.add('hidden');
+  renderDynamicGuide();
+  $('guideModeTag').textContent=lang==='pt'?'Reprodução atual · simulado':'Live playback · mock';
+ }
+ followDynamicGuide(data);
+}
+function followDynamicGuide(data){
+ const cues=dynamicGuide?.cues||[];const item=data?.item;if(!cues.length||!item)return;
+ const duration=Number(item.duration_ms||selectedSearchTrack?.duration_ms||0),progress=Number(data.progress_ms||0);
+ lastPlaybackSnapshot={trackId:item.id,progressMs:Math.max(0,progress),durationMs:Math.max(0,duration),sampledAt:Date.now(),isPlaying:!!data.is_playing};
+ playbackProgressMs=progress;renderActiveCue();
+ const status=lang==='pt'?'Guia acompanha a reprodução do Spotify':'Guide follows Spotify playback';
+ $('playbackMessage').textContent=status+' · '+prettyMs(progress)+' / '+prettyMs(duration);
+}
 function configureResearchLinks(){const q=$('albumSearch').value.trim();if(!q)return;const enc=encodeURIComponent(q);$('mbSearch').href='https://musicbrainz.org/search?query='+enc+'&type=release_group&method=indexed';$('aotySearch').href='https://www.albumoftheyear.org/search/?q='+enc;$('redditSearch').href='https://www.reddit.com/search/?q='+enc;}
-$('trackSearch').addEventListener('input',()=>{clearTimeout(searchDebounceTimer);researchRequestSequence++;const query=$('trackSearch').value.trim();selectedSearchTrack=null;selectedSearchTrackId=null;$('researchGuideBtn').disabled=true;if(searchAbortController){searchAbortController.abort();searchAbortController=null;}searchSequence++;if(query.length<2){lastSearchCount=0;$('trackSearchResults').textContent='';$('trackSearchResults').classList.add('hidden');$('trackResultsToggle').classList.add('hidden');$('trackSearchStatus').textContent=query.length?(lang==='pt'?'Digite mais um caractere para pesquisar.':'Type one more character to search.'):(lang==='pt'?'Conecte-se ao Spotify e digite para pesquisar.':'Connect Spotify and start typing to search.');return;}$('trackSearchStatus').textContent=lang==='pt'?'Aguardando você terminar de digitar…':'Waiting for you to finish typing…';searchDebounceTimer=setTimeout(searchSpotifyTracks,500);});$('trackSearch').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();clearTimeout(searchDebounceTimer);searchSpotifyTracks();}});$('trackResultsToggle').addEventListener('click',()=>setTrackResultsExpanded($('trackSearchResults').classList.contains('hidden')));$('researchGuideBtn').addEventListener('click',()=>researchSelectedTrack({automatic:false}));$('returnCuratedGuides').addEventListener('click',()=>{$('dynamicListeningGuide').classList.add('hidden');$('curatedGuideInterface').classList.remove('hidden');$('guideModeTag').textContent=tr('guideMode');});$('researchEndpoint').value='LOCAL MOCK · no Worker required';$('researchEndpoint').disabled=true;
+$('trackSearch').addEventListener('input',()=>{clearTimeout(searchDebounceTimer);researchRequestSequence++;const query=$('trackSearch').value.trim();selectedSearchTrack=null;selectedSearchTrackId=null;$('researchGuideBtn').disabled=true;$('playSelectedBtn').disabled=true;if(searchAbortController){searchAbortController.abort();searchAbortController=null;}searchSequence++;if(query.length<2){lastSearchCount=0;$('trackSearchResults').textContent='';$('trackSearchResults').classList.add('hidden');$('trackResultsToggle').classList.add('hidden');$('trackSearchStatus').textContent=query.length?(lang==='pt'?'Digite mais um caractere para pesquisar.':'Type one more character to search.'):(lang==='pt'?'Conecte-se ao Spotify e digite para pesquisar.':'Connect Spotify and start typing to search.');return;}$('trackSearchStatus').textContent=lang==='pt'?'Aguardando você terminar de digitar…':'Waiting for you to finish typing…';searchDebounceTimer=setTimeout(searchSpotifyTracks,500);});$('trackSearch').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();clearTimeout(searchDebounceTimer);searchSpotifyTracks();}});$('trackResultsToggle').addEventListener('click',()=>setTrackResultsExpanded($('trackSearchResults').classList.contains('hidden')));$('researchGuideBtn').addEventListener('click',()=>researchSelectedTrack({automatic:false}));$('playSelectedBtn').addEventListener('click',playSelectedTrackInSpotify);$('summaryModeBtn').addEventListener('click',()=>{guideViewMode='focus';renderDynamicGuide();});$('fullModeBtn').addEventListener('click',()=>{guideViewMode='full';renderDynamicGuide();});$('returnCuratedGuides').addEventListener('click',()=>{document.body.classList.remove('focus-mode');$('dynamicListeningGuide').classList.add('hidden');$('curatedGuideInterface').classList.remove('hidden');$('guideModeTag').textContent=tr('guideMode');});$('researchEndpoint').value='LOCAL MOCK · no Worker required';$('researchEndpoint').disabled=true;
 $('albumSearch').addEventListener('input',configureResearchLinks);$('albumSearch').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();configureResearchLinks();if($('albumSearch').value.trim())window.open($('mbSearch').href,'_blank','noopener');}});['mbSearch','aotySearch','redditSearch'].forEach(id=>$(id).addEventListener('click',e=>{if(!$('albumSearch').value.trim()){e.preventDefault();$('albumSearch').focus();}}));
 renderEditorial();renderLandmarks();
 
-function startPolling(){if(timer)clearInterval(timer);pollPlayback();timer=setInterval(()=>{if(document.visibilityState==='visible')pollPlayback()},6000);$('disconnectBtn').disabled=false;$('refreshBtn').disabled=false;}
+// Test hooks are present only when an explicit ?sonicTest=1 flag is supplied; normal visitors never receive them.
+if(new URLSearchParams(window.location.search).has('sonicTest'))window.__SONIC_TEST_HOOKS__={
+ followPlayback:(data)=>{latestItem=data.item;playing=!!data.is_playing;autoFollowPlayback(data);},
+ selectTrack:(track)=>selectAndPlayTrack(track),
+ pollPlayback:()=>pollPlayback(),
+ getState:()=>({trackId:dynamicGuideTrackId,trackName:selectedSearchTrack?.name||null,latestItemId:latestItem?.id||null,activePlaybackId:activePlaybackTrack?.id||null,guideTitle:dynamicGuide?.title?.en||null,cueIndex:dynamicCueIndex,view:guideViewMode,playing,guideFromPlayback}),
+ getCueIndex:()=>dynamicCueIndex,
+ playSelected:()=>playSelectedTrackInSpotify(),getPlayRequests:()=>window.__sonicPlayRequests||0
+};
+
+function startPolling(){
+ if(timer)clearInterval(timer);if(cueClockTimer)clearInterval(cueClockTimer);
+ pollPlayback();timer=setInterval(()=>{if(document.visibilityState==='visible')pollPlayback()},4200);
+ cueClockTimer=setInterval(()=>{if(document.visibilityState==='visible'&&dynamicGuide&&lastPlaybackSnapshot){renderActiveCue();}},1000);
+ $('disconnectBtn').disabled=false;$('refreshBtn').disabled=false;
+}
 const params=new URLSearchParams(window.location.search);applyLanguage();if(params.has('code')||params.has('error')){exchangeCode();}else if(localStorage.getItem(STORAGE.token)||localStorage.getItem(STORAGE.refresh)){setMessage(lang==='pt'?'Conexão salva. Verificando o Spotify…':'Spotify connection saved. Checking status…','success');startPolling();}else if(localStorage.getItem(STORAGE.client)){setMessage(tr('connectPrompt'));}
 })();
 </script>
 <script>
-// v1.1 root-build recovery: do not register the old shell cache again. Remove previous app workers/caches so stale guide HTML cannot persist.
+// v1.2 live-cue build: do not register the old shell cache again. Remove previous app workers/caches so stale guide HTML cannot persist.
 window.addEventListener('load',()=>{(async()=>{try{if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(r=>r.unregister()));}if('caches' in window){const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('sonic-companion-shell-')).map(k=>caches.delete(k)));}}catch(e){console.warn('Cache cleanup did not complete',e);}})();});
 </script>
 </body></html>
