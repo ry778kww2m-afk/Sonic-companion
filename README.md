@@ -33,3 +33,10 @@ The app now searches Spotify tracks (up to 10 per query), lets the user choose a
 
 ## Update the existing GitHub repository from an iPhone
 At the repository root, replace `index.html`, `guide-data.js`, `sw.js`, and `manifest.webmanifest` with the same-named files in this package. Keep the existing icons. Also update the root `index.js` and `wrangler.toml` from this package so the Cloudflare Worker deployment includes the safer health status field. The Cloudflare Git build is configured to use the root `wrangler.toml`, whose `main` entry is `index.js`. Commit these replacements to `main`. Keep `OPENAI_API_KEY` only as a Cloudflare Worker Secret; it must never appear in GitHub.
+
+
+## v0.9 — Free mock research mode
+- Add `?mode=mock` to the Cloudflare Worker guide endpoint to return a sample response without OpenAI credits or live web search.
+- Fixture coverage: Goldberg Variations (Glenn Gould 1981), Coltrane Plays the Blues, Kind of Blue, Giant Steps, The Köln Concert and Clair de lune.
+- The UI labels mock output prominently and states that sources were not verified.
+- Deploy the updated repository-root `index.js` to Cloudflare as well as the updated PWA files to GitHub Pages. In the app, use `https://YOUR-WORKER.workers.dev/api/guide?mode=mock` in the Research service URL field.

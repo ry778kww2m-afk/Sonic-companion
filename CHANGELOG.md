@@ -39,3 +39,10 @@
 - Avoids sending a second playback request if the chosen track is already playing; available-device targeting improved.
 - Health endpoint safely reports whether the API key binding is present, without revealing it.
 - Service worker cache bumped to v8.
+
+
+## v0.9 — Free mock research mode
+- Added a `?mode=mock` route to simulate the live guide request/response contract without OpenAI or web-search calls.
+- Added bilingual fixture profiles for the six albums/works shown in the provided screenshots, including visible track-specific examples.
+- Mock responses carry an explicit no-live-research marker and no source links; generic fallback responses are clearly labeled.
+- Frontend shows a mock-only banner and status; service-worker cache is bumped to v9.

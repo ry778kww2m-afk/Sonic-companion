@@ -1,0 +1,299 @@
+{
+  "note": "POST each request object to /api/guide?mode=mock. These fixtures test UI/request wiring; they do not trigger OpenAI, web search or source verification.",
+  "cases": [
+    {
+      "group": "Goldberg Variations (Glenn Gould 1981)",
+      "request": {
+        "query": "Johann Sebastian Bach — Goldberg Variations, BWV 988: Aria — Bach: The Goldberg Variations, BWV 988 (1981 Gould Remaster)",
+        "track": {
+          "title": "Goldberg Variations, BWV 988: Aria",
+          "artists": [
+            "Johann Sebastian Bach"
+          ],
+          "album": "Bach: The Goldberg Variations, BWV 988 (1981 Gould Remaster)",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Goldberg Variations (Glenn Gould 1981)",
+      "request": {
+        "query": "Johann Sebastian Bach — Goldberg Variations, BWV 988: Variation 1 a 1 — Bach: The Goldberg Variations, BWV 988 (1981 Gould Remaster)",
+        "track": {
+          "title": "Goldberg Variations, BWV 988: Variation 1 a 1",
+          "artists": [
+            "Johann Sebastian Bach"
+          ],
+          "album": "Bach: The Goldberg Variations, BWV 988 (1981 Gould Remaster)",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Goldberg Variations (Glenn Gould 1981)",
+      "request": {
+        "query": "Johann Sebastian Bach — Goldberg Variations, BWV 988: Variation 2 a 1 — Bach: The Goldberg Variations, BWV 988 (1981 Gould Remaster)",
+        "track": {
+          "title": "Goldberg Variations, BWV 988: Variation 2 a 1",
+          "artists": [
+            "Johann Sebastian Bach"
+          ],
+          "album": "Bach: The Goldberg Variations, BWV 988 (1981 Gould Remaster)",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Goldberg Variations (Glenn Gould 1981)",
+      "request": {
+        "query": "Johann Sebastian Bach — Goldberg Variations, BWV 988: Variation 3 a 1 — Bach: The Goldberg Variations, BWV 988 (1981 Gould Remaster)",
+        "track": {
+          "title": "Goldberg Variations, BWV 988: Variation 3 a 1",
+          "artists": [
+            "Johann Sebastian Bach"
+          ],
+          "album": "Bach: The Goldberg Variations, BWV 988 (1981 Gould Remaster)",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Coltrane Plays the Blues",
+      "request": {
+        "query": "John Coltrane — Blues to Elvin — Coltrane Plays the Blues",
+        "track": {
+          "title": "Blues to Elvin",
+          "artists": [
+            "John Coltrane"
+          ],
+          "album": "Coltrane Plays the Blues",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Coltrane Plays the Blues",
+      "request": {
+        "query": "John Coltrane — Blues to Bechet — Coltrane Plays the Blues",
+        "track": {
+          "title": "Blues to Bechet",
+          "artists": [
+            "John Coltrane"
+          ],
+          "album": "Coltrane Plays the Blues",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Coltrane Plays the Blues",
+      "request": {
+        "query": "John Coltrane — Blues to You — Coltrane Plays the Blues",
+        "track": {
+          "title": "Blues to You",
+          "artists": [
+            "John Coltrane"
+          ],
+          "album": "Coltrane Plays the Blues",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Coltrane Plays the Blues",
+      "request": {
+        "query": "John Coltrane — Mr. Day — Coltrane Plays the Blues",
+        "track": {
+          "title": "Mr. Day",
+          "artists": [
+            "John Coltrane"
+          ],
+          "album": "Coltrane Plays the Blues",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Kind of Blue",
+      "request": {
+        "query": "Miles Davis — So What (feat. John Coltrane, Cannonball Adderley) — Kind of Blue",
+        "track": {
+          "title": "So What (feat. John Coltrane, Cannonball Adderley)",
+          "artists": [
+            "Miles Davis"
+          ],
+          "album": "Kind of Blue",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Kind of Blue",
+      "request": {
+        "query": "Miles Davis — Freddie Freeloader (feat. John Coltrane, Cannonball Adderley) — Kind of Blue",
+        "track": {
+          "title": "Freddie Freeloader (feat. John Coltrane, Cannonball Adderley)",
+          "artists": [
+            "Miles Davis"
+          ],
+          "album": "Kind of Blue",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Kind of Blue",
+      "request": {
+        "query": "Miles Davis — Blue in Green (feat. John Coltrane & Bill Evans) — Kind of Blue",
+        "track": {
+          "title": "Blue in Green (feat. John Coltrane & Bill Evans)",
+          "artists": [
+            "Miles Davis"
+          ],
+          "album": "Kind of Blue",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Kind of Blue",
+      "request": {
+        "query": "Miles Davis — All Blues (feat. John Coltrane, Cannonball Adderley) — Kind of Blue",
+        "track": {
+          "title": "All Blues (feat. John Coltrane, Cannonball Adderley)",
+          "artists": [
+            "Miles Davis"
+          ],
+          "album": "Kind of Blue",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Giant Steps",
+      "request": {
+        "query": "John Coltrane — Giant Steps - 2020 Remaster — Giant Steps (2020 Remaster)",
+        "track": {
+          "title": "Giant Steps - 2020 Remaster",
+          "artists": [
+            "John Coltrane"
+          ],
+          "album": "Giant Steps (2020 Remaster)",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Giant Steps",
+      "request": {
+        "query": "John Coltrane — Cousin Mary - 2020 Remaster — Giant Steps (2020 Remaster)",
+        "track": {
+          "title": "Cousin Mary - 2020 Remaster",
+          "artists": [
+            "John Coltrane"
+          ],
+          "album": "Giant Steps (2020 Remaster)",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Giant Steps",
+      "request": {
+        "query": "John Coltrane — Countdown - 2020 Remaster — Giant Steps (2020 Remaster)",
+        "track": {
+          "title": "Countdown - 2020 Remaster",
+          "artists": [
+            "John Coltrane"
+          ],
+          "album": "Giant Steps (2020 Remaster)",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Giant Steps",
+      "request": {
+        "query": "John Coltrane — Spiral - 2020 Remaster — Giant Steps (2020 Remaster)",
+        "track": {
+          "title": "Spiral - 2020 Remaster",
+          "artists": [
+            "John Coltrane"
+          ],
+          "album": "Giant Steps (2020 Remaster)",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "The Köln Concert",
+      "request": {
+        "query": "Keith Jarrett — Köln, January 24, 1975, Part I - Live — The Köln Concert",
+        "track": {
+          "title": "Köln, January 24, 1975, Part I - Live",
+          "artists": [
+            "Keith Jarrett"
+          ],
+          "album": "The Köln Concert",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "The Köln Concert",
+      "request": {
+        "query": "Keith Jarrett — Köln, January 24, 1975, Part II a - Live — The Köln Concert",
+        "track": {
+          "title": "Köln, January 24, 1975, Part II a - Live",
+          "artists": [
+            "Keith Jarrett"
+          ],
+          "album": "The Köln Concert",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "The Köln Concert",
+      "request": {
+        "query": "Keith Jarrett — Köln, January 24, 1975, Part II b - Live — The Köln Concert",
+        "track": {
+          "title": "Köln, January 24, 1975, Part II b - Live",
+          "artists": [
+            "Keith Jarrett"
+          ],
+          "album": "The Köln Concert",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "The Köln Concert",
+      "request": {
+        "query": "Keith Jarrett — Köln, January 24, 1975, Part II c - Live — The Köln Concert",
+        "track": {
+          "title": "Köln, January 24, 1975, Part II c - Live",
+          "artists": [
+            "Keith Jarrett"
+          ],
+          "album": "The Köln Concert",
+          "duration_ms": 0
+        }
+      }
+    },
+    {
+      "group": "Clair de lune",
+      "request": {
+        "query": "Claude Debussy — Clair de Lune — Clair de Lune",
+        "track": {
+          "title": "Clair de Lune",
+          "artists": [
+            "Claude Debussy"
+          ],
+          "album": "Clair de Lune",
+          "duration_ms": 0
+        }
+      }
+    }
+  ]
+}

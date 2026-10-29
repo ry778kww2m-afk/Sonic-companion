@@ -1,9 +1,13 @@
 name = "sonic-companion-research"
 main = "index.js"
 compatibility_date = "2026-10-29"
+keep_vars = true
 
 [vars]
 # Set to the deployed GitHub Pages origin; omit https trailing slash.
 ALLOWED_ORIGIN = "https://ry778kww2m-afk.github.io"
 # Optional. Default is gpt-5.5; override only with a model available to your API project.
 OPENAI_MODEL = "gpt-5.5"
+
+[secrets]
+required = ["OPENAI_API_KEY"]
