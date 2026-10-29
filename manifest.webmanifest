@@ -1,7 +1,7 @@
 {
-  "name": "Sonic Companion — Rachmaninoff Listening Guide",
+  "name": "Sonic Companion — Spotify Sync",
   "short_name": "Sonic Companion",
-  "description": "A synchronized sonic listening guide for Rachmaninoff's Paganini Rhapsody.",
+  "description": "A Spotify playback-synchronized listening guide for Rachmaninoff's Paganini Rhapsody.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
