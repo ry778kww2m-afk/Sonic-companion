@@ -1,6 +1,6 @@
 {
-  "name": "Sonic Companion — Listening Companion",
-  "short_name": "Sonic Companion",
+  "name": "Sonic Companion v1.0 — Listening Companion",
+  "short_name": "Sonic Companion v1.0",
   "description": "A bilingual musical listening guide with remote Spotify playback controls and independently selected album notes.",
   "start_url": "./",
   "scope": "./",

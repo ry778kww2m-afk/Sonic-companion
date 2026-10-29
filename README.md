@@ -1,42 +1,19 @@
-# Sonic Companion v0.8 — responsive track search and playback selection
+# Sonic Companion v1.0 — Auto Mock Guide Rendering
 
-## What's included
-- Spotify play/pause, previous/next, volume down/up, status and album artwork via official Web API.
-- Language selector: English / Português (Brasil), with sonically adapted authoring for both languages.
-- Listen & landmarks, History & meaning, and Listener voices views.
-- Automatic playback-follow for supported curated tracks: the app matches the current Spotify track to the relevant guide and uses `progress_ms` / track duration to highlight an estimated landmark without manual selection. The Rachmaninoff segmented variation guide switches sections by track title; *Kind of Blue* and *Giant Steps* move through curated landmark cues as playback progresses.
-- Explore another album via source searches based on text you type.
+This build fixes the missing-content flow from v0.9. Choosing a Spotify search result automatically sends a request to the research Worker with `mode=mock`, so it does not make any OpenAI API call or live web search. The returned guide is rendered in the main **Listening guides** section and replaces the unrelated curated Rachmaninoff display until you tap **Return to curated guides**.
 
-## Publish on GitHub Pages
-Replace these repository-root files from this folder: `index.html`, `guide-data.js`, `sw.js`, and `manifest.webmanifest`. Keep the existing icons. Commit all four changes. If an older service worker persists on iPhone, reload the page and allow the service worker to update; if needed, open the URL in a private tab once to validate the new version.
+## Mock-covered recordings
+- Bach / Glenn Gould — Goldberg Variations (1981 recording)
+- John Coltrane — Coltrane Plays the Blues
+- Miles Davis — Kind of Blue
+- John Coltrane — Giant Steps
+- Keith Jarrett — The Köln Concert
+- Claude Debussy — Clair de lune
 
-## After deployment
-The app remembers the selected language on the device. If the scope request changes, tap Disconnect and Connect again to reauthorize.
+## Files to deploy
+- Upload the files from this ZIP to the GitHub Pages repository root (including `index.html`, `guide-data.js`, `sw.js`, icons and manifest).
+- Deploy `index.js` to the existing Cloudflare Worker.
+- The UI defaults the Worker URL to `https://sonic-companion-research.4bbth7bg45.workers.dev/api/guide?mode=mock`. If an older base URL is already saved, the app normalizes it and forces `mode=mock` for safety.
 
-## Important limits
-- Auto-follow only works for tracks that can be matched to the three curated guides. Its jazz landmark boundaries are evenly spaced estimates, not verified timing annotations, and may differ by recording, remaster, intro or live performance. Unknown tracks remain unmatched.
-- Spotify’s published Developer Policy expressly restricts synchronization of Spotify recordings with visual media. Other apps may have different authorizations or rights. This prototype implements the playback-position mechanics but does not establish that this use is approved for your app. Confirm permissions with Spotify before distributing the feature publicly. Read `ARCHITECTURE.md` before extending the integration.
-- The “Explore another album” area opens independent metadata/community searches. It is not a server-side AI guide generator yet. Full dynamic authoring needs a serverless endpoint and secured backend model/search credentials; do not place API keys in this PWA.
-- Listener scores are snapshots from linked community sources and may change. Critic reviews are excluded from the headline score; the interface paraphrases user-reaction themes and provides links rather than copying long reviews.
-
-
-## v0.7: track search and on-demand research
-The app now searches Spotify tracks (up to 10 per query), lets the user choose a result and requests playback on an active Spotify device. The selected work can be sent to a separately deployed Cloudflare Worker to produce an on-demand bilingual guide with web-search sourcing. See `research-worker/README.md`. The backend is deliberately separate from GitHub Pages so model credentials remain server-side.
-
-
-## v0.8 interaction improvements
-- Spotify track search now runs automatically after a short typing pause (500 ms); queries shorter than two characters are ignored to reduce unnecessary requests.
-- Search results open when a query returns matches and collapse immediately after a track is chosen; a Show/Hide results control lets the user reopen them.
-- Each result is a single accessible tap target (artwork or title/metadata), removing the separate Play & select button and reducing mobile UI clutter.
-- Search requests are cancelled/ignored when newer input arrives, preventing stale results from replacing the latest query.
-- Selecting a track targets the active Spotify device, or a usable available device when none is marked active, and reports playback errors without clearing the selected track.
-
-## Update the existing GitHub repository from an iPhone
-At the repository root, replace `index.html`, `guide-data.js`, `sw.js`, and `manifest.webmanifest` with the same-named files in this package. Keep the existing icons. Also update the root `index.js` and `wrangler.toml` from this package so the Cloudflare Worker deployment includes the safer health status field. The Cloudflare Git build is configured to use the root `wrangler.toml`, whose `main` entry is `index.js`. Commit these replacements to `main`. Keep `OPENAI_API_KEY` only as a Cloudflare Worker Secret; it must never appear in GitHub.
-
-
-## v0.9 — Free mock research mode
-- Add `?mode=mock` to the Cloudflare Worker guide endpoint to return a sample response without OpenAI credits or live web search.
-- Fixture coverage: Goldberg Variations (Glenn Gould 1981), Coltrane Plays the Blues, Kind of Blue, Giant Steps, The Köln Concert and Clair de lune.
-- The UI labels mock output prominently and states that sources were not verified.
-- Deploy the updated repository-root `index.js` to Cloudflare as well as the updated PWA files to GitHub Pages. In the app, use `https://YOUR-WORKER.workers.dev/api/guide?mode=mock` in the Research service URL field.
+## Verification
+`MOCK_API_TEST_CASES.json` lists 21 sample fixture requests. Mock output contains no invented citations. `MOCK_MODE_PHONE_STEPS.md` has phone-specific deploy guidance.

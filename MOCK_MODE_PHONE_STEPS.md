@@ -1,14 +1,10 @@
-# Sonic Companion v0.9 — mock mode on iPhone
+# Deploying v1.0 mock guide fix from an iPhone
 
-This is a free simulation of the research endpoint. It makes no OpenAI API call.
+This patch is a new website + Worker version. It cannot change a live GitHub Pages site or Worker until its files are committed and deployed.
 
-1. Deploy the updated PWA files from this package to the GitHub Pages repository as usual.
-2. Deploy the updated Worker code: replace the repository-root `index.js` with the included `index.js` and commit it so Cloudflare's connected build can deploy it. Keep `OPENAI_API_KEY` as a Cloudflare secret; do not place it in GitHub.
-3. Open Sonic Companion and set Research service URL to `https://sonic-companion-research.4bbth7bg45.workers.dev/api/guide?mode=mock` (or append `/api/guide?mode=mock` to your own Worker host).
-4. Select any of the album tracks in Spotify search, then tap **Research selected track**. The response should show a visible **MOCK GUIDE** banner.
-5. The visible guide is fixture content. It is not live researched, sources will be empty, and the mock is not evidence that live API research works.
+1. In the GitHub repository `ry778kww2m-afk/Sonic-companion`, replace the existing root `index.html`, `guide-data.js`, `sw.js`, manifest and icon files with those in this ZIP and commit the changes. Keep unrelated repository files unless they conflict with a same-named file in this package.
+2. Update the Cloudflare Worker `sonic-companion-research` using the included root `index.js` (the worker entrypoint), then deploy. `research-worker/index.js` is also included as a project copy.
+3. Open GitHub Pages and refresh the page. If the old static guide still appears, close the tab and reopen the site so the new `index.html` and service worker can be fetched. The HTML includes build marker `v1.0-auto-mock-guide-render`.
+4. Search for a track and tap its result once. A mock guide request now runs automatically; there should be a status under the Research card and the full returned guide in the Listening guides card.
 
-To run real research later, remove `?mode=mock` from the endpoint. Real mode requires an available OpenAI API credit balance and the Worker secret.
-
-
-The package also includes `MOCK_API_TEST_CASES.json`, containing the request payloads corresponding to the tracks visible in your screenshots. The app itself does not need that file; it documents the fixture coverage for repeatable testing.
+The app forces `mode=mock`, even if a saved endpoint was previously only a base URL. No OpenAI key/credits are used. The contents are prewritten fixtures and are not live-researched or source-verified.
