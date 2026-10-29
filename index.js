@@ -5,7 +5,7 @@ export default {
   const cors={'Access-Control-Allow-Origin':allowed==='*'?'*':(origin===allowed?allowed:allowed),'Access-Control-Allow-Methods':'POST, OPTIONS, GET','Access-Control-Allow-Headers':'Content-Type','Vary':'Origin'};
   if(request.method==='OPTIONS') return new Response(null,{status:204,headers:cors});
   const url=new URL(request.url);
-  if(request.method==='GET'&&url.pathname.endsWith('/health'))return new Response(JSON.stringify({ok:true,service:'Sonic Companion Research'}),{headers:{...cors,'Content-Type':'application/json'}});
+  if(request.method==='GET'&&url.pathname.endsWith('/health'))return new Response(JSON.stringify({ok:true,service:'Sonic Companion Research',openaiKeyConfigured:Boolean(env.OPENAI_API_KEY)}),{headers:{...cors,'Content-Type':'application/json','Cache-Control':'no-store'}});
   if(request.method!=='POST')return new Response(JSON.stringify({error:'Use POST /api/guide'}),{status:405,headers:{...cors,'Content-Type':'application/json'}});
   if(env.ALLOWED_ORIGIN&&origin&&origin!==env.ALLOWED_ORIGIN)return new Response(JSON.stringify({error:'Origin not allowed'}),{status:403,headers:{...cors,'Content-Type':'application/json'}});
   if(!env.OPENAI_API_KEY)return new Response(JSON.stringify({error:'OPENAI_API_KEY Worker secret is not configured.'}),{status:503,headers:{...cors,'Content-Type':'application/json'}});

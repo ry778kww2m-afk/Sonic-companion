@@ -1,4 +1,4 @@
-# Sonic Companion v0.6 — automatic playback-follow guide
+# Sonic Companion v0.8 — responsive track search and playback selection
 
 ## What's included
 - Spotify play/pause, previous/next, volume down/up, status and album artwork via official Web API.
@@ -23,4 +23,13 @@ The app remembers the selected language on the device. If the scope request chan
 ## v0.7: track search and on-demand research
 The app now searches Spotify tracks (up to 10 per query), lets the user choose a result and requests playback on an active Spotify device. The selected work can be sent to a separately deployed Cloudflare Worker to produce an on-demand bilingual guide with web-search sourcing. See `research-worker/README.md`. The backend is deliberately separate from GitHub Pages so model credentials remain server-side.
 
-connecting to cloudfare for research again
+
+## v0.8 interaction improvements
+- Spotify track search now runs automatically after a short typing pause (500 ms); queries shorter than two characters are ignored to reduce unnecessary requests.
+- Search results open when a query returns matches and collapse immediately after a track is chosen; a Show/Hide results control lets the user reopen them.
+- Each result is a single accessible tap target (artwork or title/metadata), removing the separate Play & select button and reducing mobile UI clutter.
+- Search requests are cancelled/ignored when newer input arrives, preventing stale results from replacing the latest query.
+- Selecting a track targets the active Spotify device, or a usable available device when none is marked active, and reports playback errors without clearing the selected track.
+
+## Update the existing GitHub repository from an iPhone
+At the repository root, replace `index.html`, `guide-data.js`, `sw.js`, and `manifest.webmanifest` with the same-named files in this package. Keep the existing icons. Also update the root `index.js` and `wrangler.toml` from this package so the Cloudflare Worker deployment includes the safer health status field. The Cloudflare Git build is configured to use the root `wrangler.toml`, whose `main` entry is `index.js`. Commit these replacements to `main`. Keep `OPENAI_API_KEY` only as a Cloudflare Worker Secret; it must never appear in GitHub.
