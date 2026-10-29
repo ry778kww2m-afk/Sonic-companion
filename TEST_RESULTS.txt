@@ -1,26 +1,29 @@
-SONIC COMPANION v1.2 — AUTOMATED TEST RESULTS
-Build marker: SONIC COMPANION v1.2 · LIVE CUES · FOCUS / FULL · BUILD 2026-10-29
+SONIC COMPANION v1.3 — BUILD AND CONTROLLER TEST RESULTS
+Build marker: SONIC COMPANION v1.3 · NOW PLAYING · FOCUS / FULL · BUILD 2026-10-29
 
-BUILD TESTS: PASS
+PASS — BUILD TESTS
 - All 5 embedded JavaScript scripts parse.
-- Cue indexing and progress interpolation work at tested boundaries.
-- Search selection code contains no Spotify Play request.
-- Required focus/full controls and live cue elements are present.
-- Seven track-specific mock fixtures return matching track titles and cues, with monotonically increasing cue positions.
-- Unknown tracks return a generic guide tied to the current track title, rather than stale cues.
-- The previous hard-coded stale artist label (Yuja Wang) is absent.
+- Required current-cue, Focus/Full, player and test elements exist.
+- Focus mode hides unrelated cards and brings the live cue panel into the player card.
+- Focus/Full controls persist the selected mode.
+- Spotify authorization includes playback-status and playback-control scopes and forces the consent dialog.
+- All 7 screenshot-track fixtures return their matching mock guide and 4+ ordered cues.
+- Unknown track fallback is tied to the actual track title and is explicitly generic.
+- Old stale artist text (Yuja Wang) is absent.
 
-CONTROLLER INTEGRATION TESTS: PASS
-- Playback started directly in Spotify for Clair de lune loads its matching guide.
-- Cue highlighting advances when reported Spotify progress crosses a cue boundary.
-- Goldberg Aria loads its calm, singing-line cue.
-- Goldberg Variation 1 replaces Aria with its more active, dance-like cue.
-- Focus mode reduces the app to player + live cue; Full mode restores the full page.
-- Unknown external tracks replace the previous track guide with an honest generic fallback.
-- Selecting another search result does not change Spotify playback and does not replace the guide for the song that is still playing.
-- After Spotify reports the new track, its matching guide replaces the previous one.
-- A no-current-track response clears the stale live guide.
-- Explicit Play sends exactly one Play request and does not issue a Pause request.
+PASS — CONTROLLER INTEGRATION TESTS
+- External Spotify playback for Clair de lune produces its track-specific guide.
+- Cue highlighting advances when reported playback progress crosses a boundary.
+- Goldberg Aria gets the calm, singing-line cue; Variation 1 gets the more animated cue.
+- Switching songs changes the guide only when Spotify reports the selected track.
+- Focus hides the long content and other app panels; Full restores them.
+- Tapping a search result sends exactly one Play request and no Pause request to an explicitly active device.
+- An inactive-only device list does not cause automatic transfer, Play or Pause.
+- An empty device list produces a clear error and no playback-control request.
+- A no-current-track response clears the stale live guide, exits Focus mode and restores search controls instead of trapping the user in a blank Focus view.
+- A Spotify 403 for playback-status permission gives explicit Disconnect/reconnect instructions.
 
-LIMITS OF THESE TESTS
-These are automated JavaScript/controller tests with mocked Spotify responses and a simulated DOM. They do not constitute a live deployment test against the user's Spotify account, and cannot verify Spotify's actual active device, network timing, or third-party permission state. Cue boundaries are approximate percentages of Spotify-reported track duration, not audio-event recognition or score-verified timestamps. The bundled guide content is mock data; no paid API or live web research is used.
+LIMITS
+- Tests run against mock Spotify responses and a simulated DOM; they do not verify live OAuth grants, Premium entitlement, device availability, live network timing or the published site.
+- Cue timings are approximate fractions of reported track duration, not audio-waveform analysis, score verification or exact phrase/instrument entrances.
+- This is a no-cost mock build: guide text is fixture content, not live research, source verification or listener-review retrieval.
