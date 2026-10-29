@@ -22,3 +22,5 @@ The app remembers the selected language on the device. If the scope request chan
 
 ## v0.7: track search and on-demand research
 The app now searches Spotify tracks (up to 10 per query), lets the user choose a result and requests playback on an active Spotify device. The selected work can be sent to a separately deployed Cloudflare Worker to produce an on-demand bilingual guide with web-search sourcing. See `research-worker/README.md`. The backend is deliberately separate from GitHub Pages so model credentials remain server-side.
+
+connecting to cloudfare for research
