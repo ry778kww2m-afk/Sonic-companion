@@ -1,9 +1,10 @@
-# Architecture — v1.3
+# Sonic Companion v1.5 architecture and guardrails
 
-- `index.html` contains the UI, Spotify OAuth PKCE flow, polling loop, guide fixtures, cue timing logic and test hooks.
-- `buildSonicMockGuide()` returns local bilingual fixtures for screenshot albums and a labelled generic fallback for unknown tracks. It does not make network research or AI calls.
-- `SonicLiveCore` maps Spotify-reported progress to approximate cue boundaries and interpolates the progress between polling updates.
-- Actual Spotify playback identity is the source of truth: a selected search result does not replace a playing track's guide until Spotify reports the selected track. Result taps call the explicit Play path, never Pause.
-- Playback requests require a Spotify-reported active, non-restricted device. Inactive devices are never transferred automatically. If no active target exists, the operation fails visibly without play/pause commands.
-- `Focus` keeps player + one cue in the foreground. `Full` restores the complete app and guide. Mode preference is local to the browser.
-- The page unregisters older service workers and clears the prior shell cache on load to avoid stale HTML.
+- `index.html` contains the UI, Spotify Authorization Code with PKCE flow, track search, playback polling, guide fixtures and pure progress/cue logic.
+- Search/result selection requests playback only through the explicit play path; live guide identity changes only after Spotify's current-playback endpoint reports that track.
+- Local mock fixture matching requires both a recognized profile and a recognized track-title entry. An album/artist-only match is insufficient, preventing other movements/tracks from inheriting the wrong cue timeline.
+- Unknown tracks use a no-guide state with no musical claims, no cue time, and no cue progress bar.
+- Known fixture cues use percentage-of-track progress thresholds for interface testing. They are NOT recording-specific event timestamps, score alignment, or audio recognition. Exact recording-specific synchronization requires validated cue timings for that exact Spotify recording or an audio-analysis pipeline.
+- This build does not call OpenAI, Cloudflare, or external research endpoints.
+- `sw.js` exists only to unregister/clear stale shell caches; it intentionally does not cache page responses.
+- Tests: `tests/run-build-tests.mjs` and `tests/run-integration-tests.mjs`.

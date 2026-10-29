@@ -1,7 +1,7 @@
 {
   "name": "Sonic Companion v1.3 \u2014 Now Playing",
   "short_name": "Sonic Companion",
-  "description": "A bilingual Spotify playback-following mock listening guide with a focused live-cue window and full guide mode.",
+  "description": "Bilingual Spotify playback-linked guide with strict track matching, no fabricated cues for unknown tracks, and Focus/Full views.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

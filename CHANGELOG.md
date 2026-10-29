@@ -1,10 +1,9 @@
-# Changelog
+# Sonic Companion v1.5 — Track-truth guardrails
 
-## v1.3 — 2026-10-29
-- Made the current cue a dedicated panel beside the player, keeping it visible in Focus mode.
-- Added Focus/Full state persistence; Full mode restores the long-form guide.
-- Search-result taps now request playback, but only the current track reported by Spotify is shown as the live guide.
-- Required an explicitly active Spotify device for play requests; inactive devices are never taken over automatically.
-- Force Spotify consent display on reconnect so updated playback scopes can be approved.
-- Improved the no-current-track and missing-permission messages, and cache cleanup.
-- Validated inline-script syntax, all seven embedded track fixtures, cue progression, track changes, mode toggles, playback command count, safe device selection, and no-device safety.
+- Corrected a critical false-positive: a matching album/artist alone can no longer activate another track's timed cue sequence. A known track-title fixture is also required.
+- For unsupported tracks (including Pianovus — Interstellar (Piano Version)) the live card identifies the Spotify track but refuses to invent instrument claims, musical events or time-aligned cues. The cue clock and progress bar are hidden for unverified selections.
+- Supported mock fixtures retain approximate educational cue phases, explicitly labelled as progress-based estimates rather than audio/event detection or recording-verified timestamps.
+- Corrected labels so the UI says Spotify progress is linked and cue timing is estimated; removed misleading “synchronized moment” language.
+- Retained Focus/Full mode, playback-confirmation guard, no-pause-on-result behavior and no-active-device safety behavior.
+- Automated build and controller integration tests cover all fixtures, unknown tracks, album-only false positives, progress updates, focus/full, external playback, track changes, no device, failed scope and no fabricated cue clocks.
+- Offline mock only; no OpenAI call, external search or audio analysis.
