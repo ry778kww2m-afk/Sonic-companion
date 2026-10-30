@@ -1,42 +1,50 @@
-# Sonic Companion v2.0 — music and metadata sources
+# MIE 1.3 source references
 
-The listening prompts are educational interpretations of the compositions and recordings. These sources support work identity, release track lists, credited personnel, recording sessions and selected formal descriptions. They do not validate every approximate progress anchor against audio.
+These references ground recording identity, performer credits, track sequence and selected historical/arrangement notes. They are not proof of exact cue seconds. Cue anchors remain approximate playback-progress positions unless explicitly verified against a specific recording.
 
-## Johann Sebastian Bach — Goldberg Variations, BWV 988 (Glenn Gould 1981)
+## Coltrane Plays the Blues
 
-- Glenn Gould official discography — exact 1981 digital recording, complete 32-track sequence (Aria, Variations 1–30, Aria da capo): https://glenngould.com/music/bach-goldberg-variations-1981-digital-recording-3/
-- MusicWeb International — survey discussing the Aria/bass framework, canon sequence and interpretive history: https://www.musicweb-international.com/classrev/2020/May/Bach_Goldberg_survey.pdf
-- ZGMTH — scholarly discussion of cyclic form and the Gould 1981 Aria-da-capo tempo choice: https://www.gmth.de/zeitschrift/artikel/1119.aspx
-- Program notes by Ruta Bloomfield — movement-by-movement descriptions of the variation characters: https://rutabloomfield.com/site/wp-content/uploads/2016/01/Goldberg_Variations_Program_Notes_Bloomfield.pdf
+- John Coltrane discography and personnel/session listings: https://www.jazzdisco.org/john-coltrane/discography/
+- Track sequence and recording personnel reference used by the mock profile: https://www.jazzdisco.org/john-coltrane/discography/
 
-## Miles Davis — Kind of Blue
+## Kind of Blue
 
-- Miles Davis official site — original five-track sequence and session detail: https://www.milesdavis.com/albums/kind-of-blue/
-- Miles Davis official site — Legacy Edition session and personnel detail, including Wynton Kelly on Freddie Freeloader: https://www.milesdavis.com/albums/kind-of-blue-legacy-edition/
-- Oxford University Press — modal framework, five-scale design of Flamenco Sketches and discussion of Blue in Green's arch form: https://blog.oup.com/2014/08/miles-davis-kind-of-blue-classic-jazz-album/
-- John Coltrane Discography — personnel and session-specific credits: https://johncoltranediscography.org/release/kind-of-blue/
-- AllSolos — recorded soloist references for selected tracks: https://www.allsolos.com/album/5/kind-of-blue
+- Track-specific session personnel; distinguishes Wynton Kelly on “Freddie Freeloader” from Bill Evans on the other tracks: https://www.jazzdisco.org/miles-davis/discography/
+- Album context and modal-jazz significance: https://www.milesdavis.com/albums/kind-of-blue/
 
-## John Coltrane — Giant Steps
+## Giant Steps
 
-- Original album liner notes archive — seven original LP tracks, recording sessions, personnel and alternate-take details: https://albumlinernotes.com/Giant_Steps.html
-- Seacoast Jazz Society — album track list and contextual notes on Naima, Syeeda's Song Flute and the main/alternate session personnel: https://www.seacoastjazz.org/john-coltranersquos-giant-steps.html
-- Jazz Codex — original seven-track LP and session personnel summary: https://jazzcodex.com/albums/john-coltrane-giant-steps/
+- John Coltrane discography and 1959 session personnel: https://www.jazzdisco.org/john-coltrane/discography/
+- National Recording Registry listing/context: https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/complete-national-recording-registry-listing/
 
-## Keith Jarrett — The Köln Concert
+## The Köln Concert
 
-- HHV — review describing Part I's motif development, Part IIa's bluesy ostinato, and the later sections' more minimal/reflective character: https://www.hhv-mag.com/feature/records-revisited-keith-jarrett-the-koln-concert-1975/?lang=en
-- OndaRock — review of the long-form solo-piano arc, opening motif and Part I development: https://ondarock.com/reviews/1975-keith-jarrett/
+- ECM official album page, part sequence, running times and piano-only personnel: https://www.ecmrecords.com/albums/1430387513/the-koln-concert
+- Keith Jarrett's account of the improvised concert and preface context: https://www.ecmrecords.com/artists/1430387532/keith-jarrett
 
-## John Coltrane — Coltrane Plays the Blues
+## Goldberg Variations — Glenn Gould 1981 recording
 
-- Joe Goldberg original liner notes archive — six original tracks, instrument roles and track-level descriptions: https://albumlinernotes.com/Coltrane_Plays_The_Blues.html
-- John Coltrane Discography — release and personnel: https://johncoltranediscography.org/release/coltrane-plays-the-blues/
+- Glenn Gould official discography page and 32-track sequence: https://glenngould.com/music/bach-goldberg-variations-1981-digital-recording-3/
+- Performance survey and variation-level context: https://www.musicweb-international.com/classrev/2020/May/Bach_Goldberg_survey.pdf
 
-## Spotify playback and timing limitations
+## The Dark Side of the Moon
 
-- Start/Resume Playback: https://developer.spotify.com/documentation/web-api/reference/start-a-users-playback
-- Get Information About the User's Current Playback: https://developer.spotify.com/documentation/web-api/reference/get-information-about-the-users-current-playback
-- Spotify playback position is used for interpolation; the player API does not detect acoustic events. Cue anchors are approximate listening prompts rather than verified musical event timestamps.
+- Pink Floyd official album history, track sequence and the album's continuous concept: https://www.pinkfloyd.com/albums/the-dark-side-of-the-moon/
+- MusicBrainz release-level credits for Dick Parry's tenor saxophone on “Money” and “Us and Them”, Clare Torry's vocal on “The Great Gig in the Sky”, and the Abbey Road recording: https://musicbrainz.org/release/fc941a7d-eb66-4f5d-aa14-01857f997168
+- AllMusic album credits and track context: https://www.allmusic.com/album/the-dark-side-of-the-moon-mw0000191308
 
-Last source review: 2026-10-29.
+## The Epic — Kamasi Washington
+
+- Official Bandcamp release page and album personnel/credits: https://kamasiwashington.bandcamp.com/album/the-epic-1
+- AllMusic track-by-track overview, selected solo and arrangement descriptions, and album credits: https://www.allmusic.com/album/the-epic-mw0002838338
+- All About Jazz album personnel listing: https://www.allaboutjazz.com/album/index_new.php?url=the-epic-kamasi-washington
+- London Jazz News review, including the string/choir opening and bass/percussion-led groove in “The Message”, and the vocal/ensemble treatment in “Henrietta Our Hero”: https://londonjazznews.com/2015/06/01/cd-review-kamasi-washington-the-epic/
+- Additional track-level critical description for “Malcolm's Theme”: https://londonjazznews.com/2015/06/01/cd-review-kamasi-washington-the-epic/
+
+## Thick as a Brick
+
+- Jethro Tull official album page describing the work as a continuous piece split into two sides for LP format, plus band members: https://jethrotull.com/discography-item/thick-as-a-brick/
+
+## Caveat
+
+Sources above support the musical context and recording-level credits used in authored notes. They do not verify that each event occurs at the exact fraction of the Spotify duration currently assigned in the demo. Do not represent those fractions as score alignment, waveform analysis or acoustic event detection.

@@ -1,0 +1,8 @@
+name = "sonic-companion-musical-translation"
+main = "translation-worker/index.mjs"
+compatibility_date = "2026-10-30"
+
+# Optional shared cache. Create a namespace and replace the placeholder ID before enabling.
+# [[kv_namespaces]]
+# binding = "MIE_TRANSLATIONS"
+# id = "YOUR_KV_NAMESPACE_ID"

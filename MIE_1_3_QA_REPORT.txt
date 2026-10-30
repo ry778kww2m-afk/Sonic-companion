@@ -1,0 +1,49 @@
+SONIC COMPANION v2.5 — MIE 1.3 QA REPORT
+Build date: 2026-10-30
+Scope: clean static source, fixture-based catalogue traversal, mocked translation Worker, pure playback-clock/countdown functions.
+
+PASS — STATIC / STRUCTURAL
+- All six inline JavaScript blocks parse.
+- Build marker and MIE model version 1.3 present.
+- Focus countdown UI resides inside the live cue panel used by Focus mode.
+- Countdown reading-window label is localized in English and Brazilian Portuguese.
+- Main title and build marker updated to v2.5.
+- Root HTML contains no OpenAI API secret.
+
+PASS — CATALOGUE / MUSICAL ANNOTATION
+- 96 exact album/track fixtures resolve across 10 catalogue/profile families.
+- All 96 tracks contain at least one selected technical musician or arrangement note.
+- 127 selected cues contain a musicianMoment field.
+- 49 selected cues contain a historicalNote field.
+- 513 selected cues are traversed by the translation catalogue QA.
+- Every selected cue sequence respects the calculated minimum reading interval in the MIE 1.3 catalogue test.
+- All 32 Goldberg 1981 movements use movement-specific musician annotations and recording-specific duration fallbacks; cue counts vary with movement duration and density.
+- Coltrane, Kind of Blue, Giant Steps, Köln, Rachmaninoff, Pink Floyd, The Epic, Thick as a Brick and Clair de Lune tracks each expose technical musician/arrangement notes.
+- Explicit solo handoffs, performer withdrawals, keyboard roles and ensemble layer changes are represented where supported by the source fixture.
+- Historical notes are carried as attributed/qualified prose and only influence event selection weight; they cannot invent new musical events.
+
+PASS — TRANSLATION
+- English remains canonical and unchanged.
+- Reviewed Portuguese is preserved.
+- Translation overlay preserves cue IDs, order, at values and event types.
+- Missing, duplicate and unexpected translation IDs are rejected.
+- Worker prompt revision MIE-MUSICAL-PTBR-5 preserves performer-role chronology and avoids unsupported named-player inference.
+- The 96-track traversal confirms English-only source fields are queued for translation.
+- Maximum single-track translation request remains below the 48 KB and 150-field Worker limits.
+
+PASS — COUNTDOWN CLOCK
+- Countdown function derives from the same interpolated Spotify position used for cue activation.
+- Countdown begins at 100% for the current cue, decreases with playback progress, freezes while paused, and follows seek re-anchors.
+- At a cue boundary, the next active cue receives a fresh countdown interval.
+- Countdown hides after the final cue and in invalid/stale-guide states.
+
+NOT TESTED
+- No real Spotify account/device or iPhone browser session used.
+- No live Cloudflare Worker deployment or paid OpenAI API request used.
+- No audio waveform analysis, score alignment or exact event timestamp verification.
+- Historical/performer annotations have not received a complete independent musician/editor sign-off.
+
+RELEASE STATUS
+- Offline automated QA: PASS.
+- Deploy root index.html to GitHub Pages and translation-worker/index.mjs to Cloudflare separately.
+- Conduct real-device smoke tests and native musician review before describing this as production-validated.
