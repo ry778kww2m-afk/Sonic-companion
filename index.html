@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="sonic-companion-build" content="v2.0-spotify-metadata-matching" />
+<meta charset="utf-8"><meta name="sonic-companion-build" content="v2.1-mie-adaptive-moment-engine" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111318"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Sonic Companion">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Sonic Companion v2.0 — Spotify metadata matching</title>
+<title>Sonic Companion v2.1 — Music Immersion</title>
 <style>
 :root{color-scheme:dark;--bg:#111318;--panel:#1a1d24;--panel2:#20242d;--text:#f4f2ec;--muted:#b4bac6;--line:#333946;--accent:#d8c18c;--accent2:#8fbea8;--warn:#dca76f}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#242832 0,#111318 54%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.48}main{max-width:920px;margin:auto;padding:18px 13px 50px}.build-banner{display:block;padding:9px 12px;margin:0 0 12px;border:1px solid #4d806b;border-radius:9px;background:#14231d;color:#c6ead8;font-size:.76rem;font-weight:800;letter-spacing:.035em;text-align:center}.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.13em;font-size:.73rem;font-weight:750}.hero{padding:10px 0 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.hero-copy{min-width:0}.hero h1{font-size:clamp(2rem,7vw,3.2rem);letter-spacing:-.045em;line-height:1.04;margin:.4rem 0 .8rem}.hero p{color:var(--muted);max-width:680px;margin:0;font-size:.95rem}.language{flex:0 0 auto;min-width:126px}.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid #3b574b;background:#1a2a24;color:#bde2ce;border-radius:999px;font-size:.78rem;padding:5px 10px;margin-top:12px}.dot{width:7px;height:7px;background:var(--accent2);border-radius:50%}.card{background:linear-gradient(150deg,rgba(32,36,45,.98),rgba(24,27,34,.98));border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 12px 30px #0002}.card h2{font-size:1.05rem;margin:0 0 10px;letter-spacing:-.01em}.muted{color:var(--muted)}.small{font-size:.84rem}.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.spread{justify-content:space-between}.btn{border:1px solid #515968;color:var(--text);background:#2a303b;border-radius:11px;padding:10px 12px;font:inherit;font-weight:650;cursor:pointer;min-height:44px}.btn.primary{background:var(--accent);border-color:var(--accent);color:#191915}.btn:disabled{opacity:.4;cursor:not-allowed}.btn.secondary{background:transparent}.btn:active{transform:scale(.99)}select,.field{display:block;width:100%;background:#151820;color:var(--text);border:1px solid #515968;border-radius:10px;padding:11px;font:inherit;min-height:44px;max-width:100%}label{font-weight:650;font-size:.9rem;display:block;margin:10px 0 7px}.note{font-size:.82rem;color:var(--muted);margin-top:9px}.error{color:#ffd2bd}.success{color:#bde2ce}.fine{color:var(--muted);font-size:.8rem}.now{padding:16px;border-radius:15px;background:linear-gradient(135deg,#2e302f,#24242b);border:1px solid #514c40}.now .kicker{font-size:.73rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent)}.now h2{font-size:clamp(1.25rem,5vw,1.8rem);line-height:1.18;margin:8px 0 10px}.now p{margin:9px 0;color:#e5e2da}.tag{display:inline-block;border:1px solid #555b65;border-radius:6px;padding:3px 7px;font-size:.75rem;color:#dadde4;margin:3px 5px 3px 0}.track-layout{display:grid;grid-template-columns:74px minmax(0,1fr);gap:12px;align-items:center;margin-top:12px}.track-art{width:74px;height:74px;object-fit:cover;border-radius:10px;background:#292d36;border:1px solid var(--line)}.track-meta{min-width:0}.track-meta h3{font-size:1.03rem;margin:0 0 3px;line-height:1.25;overflow-wrap:anywhere}.track-meta p{margin:0;color:var(--muted);font-size:.84rem;overflow-wrap:anywhere}.controls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:14px}.controls .btn{padding:9px 4px;font-size:.83rem;min-width:0}.playbutton{background:var(--accent)!important;color:#171815!important;border-color:var(--accent)!important}.vol-label{font-size:.8rem;color:var(--muted);align-self:center;margin-left:auto}.guide-selector{margin-top:12px}.guide-intro{color:var(--muted);font-size:.92rem;margin:6px 0 12px}.guide-list{display:grid;gap:7px;margin-top:12px}.cue{display:grid;grid-template-columns:52px minmax(0,1fr);gap:9px;align-items:start;border:1px solid var(--line);background:#191c23;border-radius:11px;padding:10px 11px;color:var(--text);text-align:left;cursor:pointer;font:inherit;width:100%}.cue.active{border-color:var(--accent);background:#2b2923}.cue .num{font-size:.72rem;color:var(--accent);font-weight:750}.cue .cue-title{font-size:.9rem;font-weight:650}.cue small{display:block;font-size:.77rem;color:var(--muted);font-weight:400;margin-top:2px}.source-row{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--line);padding-top:12px;margin-top:16px}.source-row a{color:var(--accent);font-size:.8rem}.callout{border-left:3px solid var(--warn);padding:10px 12px;background:#30271f;border-radius:0 10px 10px 0;color:#edd3b2;font-size:.85rem}.footer{font-size:.8rem;color:var(--muted);padding:10px 2px}.dynamic-guide{display:grid;gap:12px}.dynamic-guide h3{margin:16px 0 4px;font-size:1.02rem}.dynamic-guide h4{margin:0 0 6px}.dynamic-guide p{margin:7px 0;line-height:1.5}.dynamic-guide .dynamic-cue{border:1px solid var(--line);border-radius:12px;padding:13px;background:#191c23}.dynamic-guide .dynamic-cue.active{border-color:var(--accent);background:#2b2923}.dynamic-guide .dynamic-sources{display:grid;gap:8px}.dynamic-guide .dynamic-sources a{color:var(--accent);overflow-wrap:anywhere}.hidden{display:none!important}@media(max-width:500px){.hero{display:block}.language{margin-top:12px;max-width:190px}.controls{grid-template-columns:repeat(5,minmax(0,1fr))}.controls .btn{font-size:.75rem;padding:8px 2px}.card{padding:14px}}
@@ -65,7 +65,7 @@ body.focus-mode #liveCuePanel .guide-view-toggle{position:sticky;top:0;z-index:3
 </style>
 </head>
 <body><main>
-<div class="build-banner" id="buildBanner">SONIC COMPANION v2.0 · MUSIC IMMERSION ENGINE PREVIEW · BUILD 2026-10-29</div>
+<div class="build-banner" id="buildBanner">SONIC COMPANION v2.1 · MIE 1.1 ADAPTIVE MOMENT ENGINE · BUILD 2026-10-30</div>
 <section class="hero"><div class="hero-copy"><div class="eyebrow" id="eyebrow">Listening companion</div><h1>Sonic Companion</h1><p id="tagline">Your current Spotify track drives the guide, whether started here or directly in Spotify. The highlighted listening phase follows playback progress approximately; the app does not analyze audio or detect musical events.</p><div class="pill"><span class="dot"></span><span id="syncStatus">Not connected to Spotify</span></div></div><div class="language"><label for="languageSelect" id="languageLabel">Feedback language</label><select id="languageSelect"><option value="en">English</option><option value="pt">Português (Brasil)</option></select></div></section>
 <section class="card" id="playerCard">
 <div id="connectionSetup">
@@ -1439,21 +1439,100 @@ function normalizeFixtureTrackTitle(value,profileId){
 function normalizeMockText(value){
  return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 }
-function localizedPair(value){return {en:value.en,pt:value.pt};}
+function localizedPair(value){return {en:value.en,pt:value.pt||value.en};}
+const MIE_EVENT_WEIGHTS={
+ 'formal-boundary':1.00,'major-transition':.99,'reprise-or-return':.97,
+ 'solo-or-voice-entry':.95,'new-instrumental-voice':.93,'meter-or-groove-shift':.92,
+ 'harmonic-turn':.86,'accent-pattern-change':.90,'texture-or-dynamic-shift':.78,'motif-development':.74,
+ 'ensemble-response':.70,'relationship-focus':.58,'continuity':.42
+};
+function inferMomentEventType(raw){
+ const text=[raw?.title,raw?.focus,raw?.listen,raw?.why,raw?.[0],raw?.[2],raw?.[4],raw?.[6]].filter(Boolean).join(' ').toLowerCase();
+ if(/reprise|return|reappear|recap|coda|cadence|closing|ending|transition|handoff|hand-off|final chord|final statement/.test(text))return 'reprise-or-return';
+ if(/meter|metre|7\/4|6\/8|12\/8|4\/4|tempo|groove shifts|beat changes|rhythmic shift|switches into|changes into/.test(text))return 'meter-or-groove-shift';
+ if(/solo|soloist|improvis|voice enters|vocal enters|choir enters|saxophone enters|trumpet enters|piano enters|flute enters|bass solo|drum solo/.test(text))return 'solo-or-voice-entry';
+ if(/enters|entry|joins|join the|new instrument|instrument takes|takes the foreground|foreground voice|choir|saxophone|trumpet|flute|organ|piano/.test(text))return 'new-instrumental-voice';
+ if(/section|verse|chorus|bridge|instrumental passage|middle section|formal|theme returns|theme reappears/.test(text))return 'formal-boundary';
+ if(/harmony|harmonic|key centre|key center|modulat|tonic|mode changes|cadential/.test(text))return 'harmonic-turn';
+ if(/accent pattern|accented figure|syncopated accent|staccato attacks|accent shifts|rhythmic accent/.test(text))return 'accent-pattern-change';
+ if(/texture|layers|thickens|thins|register|dynamic|accent|staccato|silence|sound vs silence/.test(text))return 'texture-or-dynamic-shift';
+ if(/motif|theme|figure|ostinato|riff|phrase returns|transformed/.test(text))return 'motif-development';
+ if(/answer|response|punctuation|call and response|ensemble replies/.test(text))return 'ensemble-response';
+ if(/relationship|against|beneath|interplay|dialogue|compare/.test(text))return 'relationship-focus';
+ return 'continuity';
+}
 function mockCue(raw,index,total){
  const defaults=total===4?[0.03,0.29,0.62,0.86]:total===5?[0.03,0.22,0.46,0.70,0.88]:Array.from({length:total},(_,i)=>Math.min(.92,i/Math.max(1,total)));
+ let cue;
  if(!Array.isArray(raw)){
   const title=localizedPair({en:raw.title,pt:raw.titlePt});
   const focus=localizedPair({en:raw.focus,pt:raw.focusPt});
   const listenFor=localizedPair({en:raw.listen,pt:raw.listenPt});
   const whyItMatters=localizedPair({en:raw.why,pt:raw.whyPt});
   const question=localizedPair({en:raw.question||('What changes in your hearing when you keep “'+raw.title+'” in focus?'),pt:raw.questionPt||('O que muda na sua escuta quando você mantém “'+raw.title+'” em foco?')});
-  return {at:Math.max(0,Math.min(.98,Number(raw.at)||0)),title,focus,listenFor,whyItMatters,question};
+  cue={at:Math.max(0,Math.min(.98,Number(raw.at)||0)),title,focus,listenFor,whyItMatters,question,eventType:raw.eventType||raw.type||inferMomentEventType(raw),eventWeight:Number(raw.eventWeight??raw.weight)||0};
+ }else{
+  const at=Number.isFinite(Number(raw[8]))?Math.max(0,Math.min(.98,Number(raw[8]))):(defaults[index]??index/Math.max(1,total));
+  const title=localizedPair({en:raw[0],pt:raw[1]});
+  const question=localizedPair({en:raw[9]||('What changes in your hearing when you keep “'+raw[0]+'” in focus?'),pt:raw[10]||('O que muda na sua escuta quando você mantém “'+(raw[1]||raw[0])+'” em foco?')});
+  cue={at,title,focus:localizedPair({en:raw[2],pt:raw[3]}),listenFor:localizedPair({en:raw[4],pt:raw[5]}),whyItMatters:localizedPair({en:raw[6]||'This detail helps connect a local musical gesture to the structure and character of the whole passage.',pt:raw[7]||'Este detalhe ajuda a conectar um gesto musical local ao caráter e à estrutura da passagem como um todo.'}),question,eventType:inferMomentEventType(raw),eventWeight:0};
  }
- const at=Number.isFinite(Number(raw[8]))?Math.max(0,Math.min(.98,Number(raw[8]))):(defaults[index]??index/Math.max(1,total));
- const title=localizedPair({en:raw[0],pt:raw[1]});
- const question=localizedPair({en:raw[9]||('What changes in your hearing when you keep “'+raw[0]+'” in focus?'),pt:raw[10]||('O que muda na sua escuta quando você mantém “'+(raw[1]||raw[0])+'” em foco?')});
- return {at,title,focus:localizedPair({en:raw[2],pt:raw[3]}),listenFor:localizedPair({en:raw[4],pt:raw[5]}),whyItMatters:localizedPair({en:raw[6]||'This detail helps connect a local musical gesture to the structure and character of the whole passage.',pt:raw[7]||'Este detalhe ajuda a conectar um gesto musical local à estrutura e ao caráter da passagem como um todo.'}),question};
+ cue.eventWeight=cue.eventWeight||MIE_EVENT_WEIGHTS[cue.eventType]||.5;
+ return cue;
+}
+function momentWordCount(cue){
+ // The listener-facing instruction is the focus + concrete listening target.
+ // The explanation and reflective question remain available, but are not
+ // treated as mandatory reading before the next moment can arrive.
+ return [cue.title?.en,cue.focus?.en,cue.listenFor?.en].filter(Boolean).join(' ').trim().split(/\s+/).filter(Boolean).length;
+}
+function calibrateMomentDensity(cues,durationMs){
+ const durationSeconds=Math.max(1,Number(durationMs)>0?Number(durationMs)/1000:300);
+ const ordered=(cues||[]).filter(c=>Number.isFinite(c.at)).map(c=>({...c,at:Math.max(.005,Math.min(.985,c.at))})).sort((a,b)=>a.at-b.at);
+ const weights=ordered.map(c=>Math.max(.25,Math.min(1.2,Number(c.eventWeight)||MIE_EVENT_WEIGHTS[c.eventType]||.5)));
+ if(ordered.length<=1)return {cues:ordered,version:'MIE-1.1',durationSeconds,minGapSeconds:0,candidateCount:ordered.length,targetCount:ordered.length,selectedCount:ordered.length,structuralWeight:weights.reduce((a,b)=>a+b,0)};
+ const averageReadWords=ordered.reduce((n,c)=>n+momentWordCount(c),0)/ordered.length;
+ const estimatedReadSeconds=Math.min(22,Math.max(6,averageReadWords/3.6));
+ // Structure is primary: candidates are authored around formal boundaries,
+ // transitions, voice/solo entries, groove changes and thematic returns.
+ // Duration and reading load set a minimum interval between visible moments.
+ const minGapSeconds=Math.min(44,Math.max(18,estimatedReadSeconds+6,durationSeconds*.025));
+ const durationCapacity=Math.max(1,Math.floor(durationSeconds/minGapSeconds));
+ const structuralWeight=weights.reduce((n,w)=>n+w,0);
+ const structuralTarget=Math.max(1,Math.ceil(structuralWeight/.9));
+ const targetCount=Math.min(ordered.length,durationCapacity,structuralTarget);
+ if(targetCount<=1)return {cues:[ordered[0]],version:'MIE-1.1',durationSeconds,minGapSeconds,candidateCount:ordered.length,targetCount,selectedCount:1,averageReadWords:Math.round(averageReadWords),estimatedReadSeconds:Math.round(estimatedReadSeconds),structuralWeight:Number(structuralWeight.toFixed(2))};
+ // Keep the first and final landmarks as the frame. Select middle events by
+ // maximum structural value subject to a non-negotiable reading interval.
+ const first=ordered[0],last=ordered[ordered.length-1];
+ const firstTime=first.at*durationSeconds,lastTime=last.at*durationSeconds;
+ if(lastTime-firstTime<minGapSeconds){
+  const chosen=(first.eventWeight||.5)>=(last.eventWeight||.5)?first:last;
+  return {cues:[chosen],version:'MIE-1.1',durationSeconds,minGapSeconds,candidateCount:ordered.length,targetCount,selectedCount:1,averageReadWords:Math.round(averageReadWords),estimatedReadSeconds:Math.round(estimatedReadSeconds),structuralWeight:Number(structuralWeight.toFixed(2))};
+ }
+ const eligible=ordered.slice(1,-1).map((cue,i)=>({cue,originalIndex:i+1,time:cue.at*durationSeconds,weight:weights[i+1]}))
+  .filter(x=>x.time-firstTime>=minGapSeconds && lastTime-x.time>=minGapSeconds);
+ const maxMiddle=Math.max(0,targetCount-2);
+ // Weighted interval scheduling with a cardinality limit. Unlike greedy
+ // highest-first selection, this finds the strongest compatible event set.
+ const n=eligible.length;
+ const prev=eligible.map((x,i)=>{let j=i-1;while(j>=0 && x.time-eligible[j].time<minGapSeconds)j--;return j+1;});
+ const dp=Array.from({length:maxMiddle+1},()=>Array(n+1).fill(null));
+ for(let i=0;i<=n;i++)dp[0][i]={score:0,indices:[]};
+ for(let k=1;k<=maxMiddle;k++){
+  for(let i=1;i<=n;i++){
+   const skip=dp[k][i-1];
+   const base=dp[k-1][prev[i-1]];
+   const take=base?{score:base.score+eligible[i-1].weight,indices:[...base.indices,i-1]}:null;
+   if(!take)dp[k][i]=skip;
+   else if(!skip || take.score>skip.score+1e-9 || (Math.abs(take.score-skip.score)<=1e-9 && take.indices.length>skip.indices.length))dp[k][i]=take;
+   else dp[k][i]=skip;
+  }
+ }
+ let best={score:0,indices:[]};
+ for(let k=0;k<=maxMiddle;k++){const candidate=dp[k][n];if(candidate && (candidate.indices.length>best.indices.length || (candidate.indices.length===best.indices.length && candidate.score>best.score)))best=candidate;}
+ const selected=[first,...best.indices.map(i=>eligible[i].cue),last].sort((a,b)=>a.at-b.at);
+ return {cues:selected,version:'MIE-1.1',durationSeconds,minGapSeconds,candidateCount:ordered.length,targetCount,selectedCount:selected.length,averageReadWords:Math.round(averageReadWords),estimatedReadSeconds:Math.round(estimatedReadSeconds),structuralWeight:Number(structuralWeight.toFixed(2)),selectedEventTypes:selected.map(c=>c.eventType)};
 }
 function buildMockGuide(body){
  const tr=body?.track||{};
@@ -1478,7 +1557,7 @@ function buildMockGuide(body){
   'dark-side-of-the-moon':{artists:['pink floyd'],albums:['dark side of the moon']},
   'the-epic':{artists:['kamasi washington'],albums:['the epic']},
   'thick-as-a-brick':{artists:['jethro tull'],albums:['thick as a brick']},
-  'clair-de-lune':{artists:['debussy'],albums:['clair de lune','suite bergamasque']}
+  'clair-de-lune':{artists:['debussy','johann debussy'],albums:['clair de lune','suite bergamasque']}
  };
  const albumCandidates=MOCK_ALBUMS.map(profile=>{
   const rule=trustedIdentity[profile.id];if(!rule)return {profile,score:0};
@@ -1521,7 +1600,9 @@ function buildMockGuide(body){
   else overview={en:`This is a live-playback-linked sample for “${title||'the current track'}” by ${artist||'the detected artist'}. No recording-specific research is available for this track in the offline test build. Use the active cue to listen for foreground, pulse, interacting layers and changes in energy; these are listening prompts, not claims that a specific event occurs at this exact moment.`,pt:`Este é um exemplo vinculado à reprodução de “${title||'a faixa atual'}”, de ${artist||'artista detectado'}. A versão de teste offline não tem pesquisa específica desta gravação. Use o momento destacado para ouvir primeiro plano, pulsação, interação entre camadas e mudanças de energia; são sugestões de escuta, não afirmações de que um evento específico ocorre exatamente neste instante.`};
  }
  const rawCues=(trackEntry?.cues||profile.cues||[]);
- const cues=rawCues.map((raw,i)=>mockCue(raw,i,rawCues.length));
+ const durationMs=Number(tr.duration_ms)>0?Number(tr.duration_ms):(Number(trackEntry?.durationMs)>0?Number(trackEntry.durationMs):300000);
+ const momentCalibration=calibrateMomentDensity(rawCues.map((raw,i)=>mockCue(raw,i,rawCues.length)),durationMs);
+ const cues=momentCalibration.cues;
  const name=title||profile.album;
  const guide={
   title:{en:`Mock listening guide: ${name}`,pt:`Guia musical simulado: ${name}`},
@@ -1534,17 +1615,18 @@ function buildMockGuide(body){
   listenerReception:profile.reception,
   balancedNote:profile.balanced,
   cues,
+  momentCalibration,
   trackSpecificGuide:hasTrackSpecificGuide,
   cueTimingBasis:hasTrackSpecificGuide?'approximate-progress-proportions':'none'
  };
- return {guide, trackSpecificGuide:hasTrackSpecificGuide, cueTimingBasis:hasTrackSpecificGuide?'approximate-progress-proportions':'none', sources:profile.sources||[], generatedAt:new Date().toISOString(), researchMode:'mock-no-api-no-live-search', mock:true, mockAlbum:profile.album, mockTrack:name, note:'MOCK FIXTURE ONLY: no OpenAI API call, no web search, and no source verification were performed.'};
+ return {guide, trackSpecificGuide:hasTrackSpecificGuide, cueTimingBasis:hasTrackSpecificGuide?'approximate-progress-proportions':'none', momentCalibration, sources:profile.sources||[], generatedAt:new Date().toISOString(), researchMode:'mock-no-api-no-live-search', mock:true, mockAlbum:profile.album, mockTrack:name, note:'MOCK FIXTURE ONLY: no OpenAI API call, no web search, and no source verification were performed.'};
 }
 
-// Music Immersion cue catalogue overlay (MIE 1.0). This is educational listening guidance,
+// Music Immersion cue catalogue overlay (MIE 1.1 Adaptive Moment Engine). This is educational listening guidance,
 // not audio recognition. Each cue is a track-specific invitation, not a claimed
 // score-verified event timestamp.
 (function(){
- const M=(title,focus,listen,why,at,question)=>({title,focus,listen,why,at,question:question||`What changes in your hearing when you keep “${title}” in focus?`});
+ const M=(title,focus,listen,why,at,question,eventType='relationship-focus',eventWeight=0)=>({title,focus,listen,why,at,question:question||`What changes in your hearing when you keep “${title}” in focus?`,eventType,eventWeight});
  const set=(profileId,key,data)=>{
   const p=MOCK_ALBUMS.find(x=>x.id===profileId);if(!p)throw new Error('Missing immersion profile '+profileId);
   p.tracks ||= {};
@@ -1897,7 +1979,7 @@ function buildMockGuide(body){
  Object.entries(kolnTracks).forEach(([key,d])=>set('koln',key,{overview:overview(d.overview),personnel:personnel(d.personnel),form:form(d.form),emotionalReading:feeling(d.emotion),cues:d.cues}));
 
  // GOLDBERG VARIATIONS — full 1981 Gould digital recording: Aria + Variations 1–30 + Aria da capo.
- // Six focused prompts per short movement; the sequence changes with the movement's actual form.
+ // Movement-specific event candidates; MIE 1.1 selects only those the structure and duration can support.
  const goldberg=[
   ['aria','Aria','an ornamented sarabande with a measured, courtly sway','a singing upper line above a deliberate bass foundation','the small turns and decorations that lengthen each phrase','the contrast between the poised melody and the grounded bass','the return to the same bass-and-harmony design at the end of every variation','aria'],
   ['variation 1','Variation 1','a buoyant, off-beat dance that shifts the Aria into motion','quick exchanges between the hands, with a bright upper voice','the accents that seem to lean into the second beat','the crossing and passing of lines across the keyboard','the same bass structure acquiring a more extroverted character','dance'],
@@ -1946,17 +2028,72 @@ function buildMockGuide(body){
   const atSets={canon:[.025,.20,.39,.59,.78,.94],virtuoso:[.02,.15,.33,.52,.73,.93],dance:[.035,.22,.41,.60,.79,.95],lyrical:[.03,.20,.39,.59,.80,.95],adagio:[.025,.22,.43,.64,.83,.96],overture:[.02,.18,.38,.58,.78,.95],fughetta:[.025,.19,.38,.58,.79,.95],gigue:[.03,.19,.38,.58,.77,.95],'alla breve':[.025,.20,.40,.60,.80,.95],ornament:[.02,.17,.36,.57,.78,.95],quodlibet:[.02,.18,.38,.59,.79,.95],return:[.02,.20,.40,.61,.82,.96],aria:[.02,.19,.38,.58,.79,.95]};
   const at=atSets[kind]||atSets.dance;
   const cues=[
-   M(`${name}: hear its opening character`,`Let the opening gesture establish ${character}.`,`Listen for ${texture}; notice the first phrase before trying to compare it with another variation.`,`This first impression tells you how Bach has transformed the Aria’s shared harmonic foundation.`,at[0]),
-   M(`Follow ${feature}`,`Keep your attention on ${feature}.`,`Listen for the detail as it enters, repeats or changes position; try to follow it through a complete phrase.`,`A single defining feature can make this variation recognisable even before you know its number.`,at[1]),
-   M(`Notice how the texture shifts`,`Listen for ${shift}.`,`Compare the relationship between the hands and voices with the opening of this movement.`,`The Goldberg design creates contrast by changing texture and behaviour, not by abandoning its underlying structure.`,at[2]),
-   M(`The pulse inside ${kind==='canon'?'the canon':character}`,`Feel how the rhythm supports ${character}.`,`Notice the accents, subdivisions or phrase lengths that give this movement its distinctive gait.`,`The rhythmic character is one of the clearest ways Bach distinguishes one variation from the next.`,at[3]),
-   M(`The Aria is still underneath`,`Hear the connection to ${relation}.`,`Listen past the surface activity and remember that the same bass-and-harmony design continues to support the music.`,`The most rewarding comparison is between the unchanged foundation and the radically changed character above it.`,at[4]),
-   M(`What this movement adds to the cycle`,`Let the closing phrase register before moving on.`,`Notice whether the ending feels conclusive, playful, suspended or like a hand-off to the next variation.`,`Each variation changes the listener’s memory of the Aria; the sequence is cumulative, not just a collection of miniatures.`,at[5])
+   M(`${name}: hear its opening character`,`Let the opening gesture establish ${character}.`,`Listen for ${texture}; notice the first phrase before trying to compare it with another variation.`,`This first impression tells you how Bach has transformed the Aria’s shared harmonic foundation.`,at[0],undefined,'formal-boundary'),
+   M(`Follow ${feature}`,`Keep your attention on ${feature}.`,`Listen for the detail as it enters, repeats or changes position; try to follow it through a complete phrase.`,`A single defining feature can make this variation recognisable even before you know its number.`,at[1],undefined,kind==='canon'?'formal-boundary':kind==='dance'||kind==='gigue'?'meter-or-groove-shift':'motif-development'),
+   M(`Notice how the texture shifts`,`Listen for ${shift}.`,`Compare the relationship between the hands and voices with the opening of this movement.`,`The Goldberg design creates contrast by changing texture and behaviour, not by abandoning its underlying structure.`,at[2],undefined,'texture-or-dynamic-shift'),
+   M(`The pulse inside ${kind==='canon'?'the canon':character}`,`Feel how the rhythm supports ${character}.`,`Notice the accents, subdivisions or phrase lengths that give this movement its distinctive gait.`,`The rhythmic character is one of the clearest ways Bach distinguishes one variation from the next.`,at[3],undefined,'meter-or-groove-shift'),
+   M(`The Aria is still underneath`,`Hear the connection to ${relation}.`,`Listen past the surface activity and remember that the same bass-and-harmony design continues to support the music.`,`The most rewarding comparison is between the unchanged foundation and the radically changed character above it.`,at[4],undefined,'motif-development'),
+   M(`What this movement adds to the cycle`,`Let the closing phrase register before moving on.`,`Notice whether the ending feels conclusive, playful, suspended or like a hand-off to the next variation.`,`Each variation changes the listener’s memory of the Aria; the sequence is cumulative, not just a collection of miniatures.`,at[5],undefined,'reprise-or-return')
   ];
   const overviewText=isDaCapo?'The opening Aria returns after thirty variations. Its notes and ornamented sarabande character are familiar, but the listener now carries the whole journey in memory; the same music can sound changed without a single note being different.':`${name} is ${character}. ${texture[0].toUpperCase()+texture.slice(1)}. The movement keeps Bach’s recurring bass-and-harmony design while changing the way the keyboard texture, pulse and contrapuntal behaviour reveal it.`;
   const formText=isDaCapo?'The da capo return closes the circular architecture: Aria, thirty variations, then Aria again. The return is an interpretive event because the listener has heard the foundation transformed many times.':`${name} functions as a ${kind} variation. Its defining feature is ${feature}; its contrast with surrounding movements comes through ${shift}.`;
   const emotionText=isDaCapo?'The return can feel less like a repeat than a homecoming. The Aria has not changed, but the listener’s memory has been altered by thirty different ways of hearing its structure.':`The character is ${character}. Let the specific texture and pulse shape your response rather than expecting every variation to feel like a miniature version of the same piece.`;
-  goldbergProfile.tracks[key]={overview:overview(overviewText),form:form(formText),emotionalReading:feeling(emotionText),personnel:personnel('Solo piano, performed by Glenn Gould in the 1981 recording. Listen for the independence of the hands, Gould’s sharply differentiated articulation and the audible resonance of this particular piano recording.'),cues};
+  const goldbergExtensions={
+   aria:[
+    M('The inner voice changes the colour beneath the melody','Let the upper melody remain in view while you listen into the notes between it and the bass.','Notice how small changes in the inner harmony shade the phrase without disturbing its poised surface.','The Aria’s emotional detail often lives in the inner voices, not only in the tune.',.34,undefined,'harmonic-turn'),
+    M('The ornamented phrase turns back toward its opening','Follow the melodic line as its decoration leads into a new phrase.','Listen for the small turn that reconnects the end of the phrase to its beginning.','This return gives the sarabande its feeling of measured continuity.',.70,undefined,'reprise-or-return')
+   ],
+   canon:[
+    M('The answering voice makes the canon audible','Hear the first line, then wait for the second voice to enter at the stated interval: '+feature+'.','Follow both lines at once; notice where the follower matches the leader and where their motion creates tension.','The canon is not just a label: the delayed imitation is the central event that gives this variation its structure.',.34,undefined,'formal-boundary'),
+    M('The two lines tighten toward their next point of arrival','Keep both contrapuntal voices in focus as their phrases continue over the bass.','Listen for the way the imitation and the harmonic movement meet at a phrase boundary.','The close binds the independent lines into one larger harmonic direction.',.72,undefined,'harmonic-turn')
+   ],
+   virtuoso:[
+    M('The hands exchange registers and direction','Follow the keyboard figure as it leaps between the two hands and across registers.','Notice how the musical line seems to travel through the keyboard rather than stay in one fixed register.','This spatial exchange is part of the variation’s musical drama, not merely a display of speed.',.34,undefined,'motif-development'),
+    M('The running figures gather into a firmer phrase shape','Listen for the way rapid notes begin to point toward a more emphatic arrival.','Notice the contrast between continuous movement and the accents that articulate its larger phrases.','A clear phrase shape keeps the virtuoso surface connected to the underlying design.',.72,undefined,'accent-pattern-change')
+   ],
+   dance:[
+    M('The dance figure repeats with a changed accent','Keep the recurring rhythmic cell in focus as the phrase returns.','Listen for which beat or note receives the emphasis this time; a small accent shift changes the dance’s gait.','The character comes from the placement of weight as much as from the notes themselves.',.34,undefined,'accent-pattern-change'),
+    M('A new phrase answers the opening dance gesture','Hear how the next phrase responds to the opening rhythmic idea.','Notice whether the answer repeats, extends or lightly reshapes the same figure.','The variation feels coherent because contrast grows from recognisable material.',.72,undefined,'formal-boundary')
+   ],
+   gigue:[
+    M('The compound pulse becomes unmistakable','Feel the quick subdivision underneath the lilting dance surface.','Listen for the lift created by the compound grouping and how it changes the shape of each phrase.','The gigue character is carried by subdivision and articulation, not simply by speed.',.34,undefined,'meter-or-groove-shift'),
+    M('The dance phrase releases into its next cycle','Follow the recurring figure as it reaches a phrase boundary and begins again.','Notice the small pause, accent or melodic pickup that resets the forward motion.','The repeated cycle makes the movement feel buoyant rather than mechanically fast.',.72,undefined,'reprise-or-return')
+   ],
+   lyrical:[
+    M('The melodic line takes a longer breath','Follow the principal line beyond its small ornaments and hear how one phrase leans into the next.','Listen for the point where the melody broadens instead of resolving quickly.','Longer phrase spans make this variation feel like a sustained vocal utterance.',.34,undefined,'motif-development'),
+    M('The decoration gathers around a point of repose','Notice how the ornaments become more concentrated as the phrase settles.','Hear the relationship between the singing line and the slower-moving harmonic support.','The movement’s lyricism depends on the balance between melodic freedom and harmonic stability.',.72,undefined,'harmonic-turn')
+   ],
+   adagio:[
+    M('The ornamented line reaches its expressive high point','Stay with the long melodic breath and notice where the decoration intensifies.','Listen for the point of greatest registral or harmonic tension rather than treating each ornament as an isolated flourish.','The slow movement’s expressive arc is shaped by where the line gathers pressure and where it releases.',.34,undefined,'major-transition'),
+    M('The darker harmony begins to release its tension','Keep the bass and inner voices in view as the melody moves toward its next resting point.','Notice how the harmonic colour softens or changes beneath the continuing ornamented surface.','The return of stability is a structural event in this variation’s long, inward arc.',.72,undefined,'harmonic-turn')
+   ],
+   overture:[
+    M('The dotted ceremonial rhythm gives way to motion','Hear the contrast between the stately dotted opening and the quicker continuation.','Notice how the articulation and subdivision change the character of the same movement.','This is a formal hinge: the overture moves from announcement into active contrapuntal writing.',.34,undefined,'meter-or-groove-shift'),
+    M('Imitative writing restores the forward drive','Listen for the subject or related figure moving between voices in the faster span.','Follow the entrances as they overlap and build a more animated texture.','The movement’s second character grows from counterpoint rather than a new unrelated theme.',.72,undefined,'formal-boundary')
+   ],
+   fughetta:[
+    M('The subject returns in another register','Recognize the compact subject as it reappears in a different voice.','Listen for the same contour under a new register and how that entrance changes the balance.','The subject’s return gives the small fughetta its sense of architecture.',.34,undefined,'formal-boundary'),
+    M('The imitation opens into a connecting episode','Notice when the music moves away from a clear subject statement toward more continuous passagework.','Follow the fragments of the subject as they are extended or redistributed.','The episode creates motion between more recognisable contrapuntal statements.',.72,undefined,'motif-development')
+   ],
+   ornament:[
+    M('The trill becomes a source of rhythmic energy','Listen to the repeated note or trill as more than decoration.','Notice how its regular movement adds pulse and propulsion to the phrase.','The ornament becomes part of the movement’s rhythmic identity.',.34,undefined,'accent-pattern-change'),
+    M('The ornamental surface resolves into a phrase arrival','Follow the changing density of the trills and repeated notes toward the close.','Listen for the moment when the flourish gives way to a more stable melodic or harmonic point.','The contrast between ornament and arrival gives the passage shape.',.72,undefined,'harmonic-turn')
+   ],
+   'alla breve':[
+    M('The duple pulse organizes the counterpoint','Feel the strong two-beat grouping while listening to the independent lines.','Notice how the metre gives the contrapuntal writing a direct, compact weight.','The change of rhythmic stance distinguishes this movement from the surrounding variations.',.34,undefined,'meter-or-groove-shift'),
+    M('The voices converge toward a clear phrase close','Listen for the lines moving toward a shared point of arrival.','Notice how the stronger pulse and the contrapuntal motion reinforce one another.','The close makes the variation’s direct rhythmic character feel resolved rather than abrupt.',.72,undefined,'formal-boundary')
+   ],
+   quodlibet:[
+    M('A familiar song fragment comes into focus','Listen for the first recognisable tune fragment within the contrapuntal surface.','Notice how its folk-like character differs from the learned counterpoint surrounding it.','The quotation changes the tone of the cycle, bringing everyday song into the formal design.',.34,undefined,'motif-development'),
+    M('The borrowed melodies begin to coexist','Keep more than one melodic strand in focus as the fragments overlap.','Listen for how the tunes remain recognisable while sharing the same harmonic framework.','The quodlibet turns the cycle’s structural rigor into a playful meeting of musical worlds.',.72,undefined,'ensemble-response')
+   ],
+   return:[
+    M('The opening Aria is heard through the cycle’s memory','Listen to the same melodic profile with the thirty variations still in your ear.','Notice what now feels prominent: the bass, the phrasing, the ornaments or the spaces between phrases.','Nothing needs to change in the notes for the listener’s understanding to change.',.34,undefined,'reprise-or-return'),
+    M('The circular form settles into its final cadence','Follow the last phrase without treating it as an ordinary repeat.','Hear how the unchanged Aria now carries the memory of the complete variation cycle.','The return is the work’s final structural statement: the beginning becomes the ending.',.72,undefined,'formal-boundary')
+   ]
+  };
+  const expandedCues=[...cues,...(goldbergExtensions[kind]||goldbergExtensions.dance)];
+  goldbergProfile.tracks[key]={overview:overview(overviewText),form:form(formText),emotionalReading:feeling(emotionText),personnel:personnel('Solo piano, performed by Glenn Gould in the 1981 recording. Listen for the independence of the hands, Gould’s sharply differentiated articulation and the audible resonance of this particular piano recording.'),cues:expandedCues};
  });
 
  // Additional album mock catalogue — data only. The Spotify controller and UI are unchanged.
@@ -1965,12 +2102,13 @@ function buildMockGuide(body){
   form:form(meta.form),
   emotionalReading:feeling(meta.reading),
   cues:[
-   M(`${meta.open[0].toUpperCase()+meta.open.slice(1)} sets the scene`,`Begin with ${meta.open}.`,`Listen for ${meta.openDetail}.`,`This opening detail gives this track its own identity inside the album sequence.`,.02,`What does this opening establish before the track has fully unfolded?`),
-   M(`${meta.pulse[0].toUpperCase()+meta.pulse.slice(1)} keeps it moving`,`Shift attention to ${meta.pulse}.`,`Follow ${meta.pulseDetail}.`,`The rhythmic foundation shapes how the other layers can move, stretch or sit back.`,.18),
-   M(`${meta.layer[0].toUpperCase()+meta.layer.slice(1)} takes the foreground`,`Bring ${meta.layer} into the foreground.`,`Notice ${meta.layerDetail}.`,`This is a defining colour of this particular track, not simply a general feature of the album.`,.36),
-   M(`${meta.change[0].toUpperCase()+meta.change.slice(1)} reshapes the arrangement`,`Listen for ${meta.change}.`,`Track ${meta.changeDetail}.`,`The change in density, register or ensemble role gives the track a sense of development.`,.56),
-   M(`${meta.relation[0].toUpperCase()+meta.relation.slice(1)} reveals the design`,`Hear the relationship between ${meta.relation}.`,`Compare ${meta.relationDetail}.`,`The composition becomes clearer when the parts are heard as an interaction rather than as isolated sounds.`,.76),
-   M(`${meta.closing[0].toUpperCase()+meta.closing.slice(1)} completes the arc`,`Keep ${meta.closing} in mind as the passage moves toward its close.`,`Listen for ${meta.closingDetail}.`,`The ending either resolves this track’s own argument or hands a musical idea into the next part of the album.`,.94)
+   M(`Opening focus: ${meta.open}`,`Begin with ${meta.open}.`,`Listen for ${meta.openDetail}.`,`This opening detail gives this track its own identity inside the album sequence.`,.02,`What does this opening establish before the track has fully unfolded?`,'formal-boundary'),
+   M(`Pulse focus: ${meta.pulse}`,`Shift attention to ${meta.pulse}.`,`Follow ${meta.pulseDetail}.`,`The rhythmic foundation shapes how the other layers can move, stretch or sit back.`,.18,undefined,'meter-or-groove-shift'),
+   M(`Foreground voice: ${meta.layer}`,`Bring ${meta.layer} into the foreground.`,`Notice ${meta.layerDetail}.`,`This is a defining colour of this particular track, not simply a general feature of the album.`,.36,undefined,'new-instrumental-voice'),
+   M(`Arrangement change: ${meta.change}`,`Listen for the change described here.`,`Track ${meta.changeDetail}.`,`The change in density, register or ensemble role gives the track a sense of development.`,.56,undefined,'major-transition'),
+   M(`Interaction to notice: ${meta.relation}`,`Hear the relationship between ${meta.relation}.`,`Compare ${meta.relationDetail}.`,`The composition becomes clearer when the parts are heard as an interaction rather than as isolated sounds.`,.76,undefined,'relationship-focus'),
+   M(`Closing focus: ${meta.closing}`,`Keep ${meta.closing} in mind as the passage moves toward its close.`,`Listen for ${meta.closingDetail}.`,`The ending either resolves this track’s own argument or hands a musical idea into the next part of the album.`,.94,undefined,'reprise-or-return'),
+   ...(meta.events||[]).map(e=>M(e.title,e.focus,e.listen,e.why,e.at,e.question,e.type,e.weight))
   ]
  });
  const journey=(overviewText,formText,reading,open,openDetail,pulse,pulseDetail,layer,layerDetail,change,changeDetail,relation,relationDetail,closing,closingDetail)=>({overview:overviewText,form:formText,reading,open,openDetail,pulse,pulseDetail,layer,layerDetail,change,changeDetail,relation,relationDetail,closing,closingDetail});
@@ -2017,6 +2155,312 @@ function buildMockGuide(body){
  addJourney('clair-de-lune','clair de lune',journey('Debussy’s piano piece is built from a singing upper melody, fluid broken-chord motion and harmonic colour that avoids a simple, square sense of tonal arrival. This guide follows the composition, while acknowledging that phrasing and timing differ across recordings.','A broad ternary design: a quiet opening establishes the atmosphere, a more animated central span expands the dynamic and registral range, and the opening character returns in altered light.','The music’s intimacy comes from balance and timing rather than from softness alone. The pianist must let the melody sing while keeping the inner voices and harmonic motion alive.','the quiet opening and first melodic phrase','the upper line emerging above gently moving accompaniment','the flowing broken chords','listen to the arpeggiated motion and how it creates continuity without a heavy beat','the inner voices and harmonic colour','notice the notes between melody and bass; they subtly change the emotional shade of each harmony','the central section broadens','the melody becomes fuller and more emphatic, with a wider register and stronger dynamic profile','the melody against the accompaniment','listen for how the pianist balances the singing line with the moving harmonic fabric','the return and resonance','the opening atmosphere returns, and the final decay becomes part of the composition’s sense of release'));
  const clairProfile=MOCK_ALBUMS.find(x=>x.id==='clair-de-lune');clairProfile.tracks['clair de lune'].cues[0].title='Melody above the shimmer';clairProfile.tracks['clair de lune'].cues[1].title='Inner voices and voicing';
 
+ // MIE 1.1 event inventories. These are additional authored candidates, not
+ // a quota: the calibrator keeps only those that fit the composition's event
+ // density and the listener's reading window for the reported Spotify duration.
+ const addEvents=(profileId,key,events,replace=false)=>{
+  const p=MOCK_ALBUMS.find(x=>x.id===profileId);if(!p?.tracks?.[key])throw new Error('Missing track for event inventory: '+profileId+' / '+key);
+  const old=p.tracks[key].cues||[];
+  const extra=events.map(e=>M(e.title,e.focus,e.listen,e.why,e.at,e.question,e.type,e.weight));
+  p.tracks[key].cues=replace?extra:[...old,...extra];
+ };
+ const E=(title,focus,listen,why,at,type='formal-boundary',weight=0,question)=>({title,focus,listen,why,at,type,weight,question});
+ const A=(t,f,l,w,at,type='formal-boundary',q)=>E(t,f,l,w,at,type,0,q);
+ const extra={
+  'rachmaninoff-dg-2023':{
+   'Piano Concerto No. 2 in C Minor, Op. 18: I. Moderato':[
+    A('The bell-like piano figure turns into a full orchestral statement','Follow the repeated piano chords and hear how the orchestra takes up the movement’s first large gesture.','The opening grows from compact, percussive piano sonorities into a broader symphonic declaration.','The change in scale establishes the concerto’s central dialogue between soloist and orchestra.',.16,'major-transition'),
+    A('The first broad theme changes the movement’s emotional temperature','Listen for the move from the opening’s weight into the expansive melodic writing.','Notice the longer phrase lengths and the way the orchestra gives the melody room to unfold.','The shift from bell-like attack to sustained lyricism is the movement’s defining contrast.',.34,'formal-boundary'),
+    A('The piano begins to elaborate the orchestral ideas','Track how the solo line takes fragments of the themes and turns them into passagework.','The piano is not simply decorating the orchestra: it reshapes the melodic material through register, figuration and momentum.','This is the concerto’s conversational principle in action.',.55,'solo-or-voice-entry'),
+    A('The recapitulation gathers the main ideas','Listen for familiar thematic material returning with greater cumulative weight.','Compare the returning themes with their earlier statements; the soloist and orchestra now sound as though they remember the development.','Recognition gives the large form coherence before the coda.',.78,'reprise-or-return'),
+    A('The coda concentrates the movement’s accumulated energy','Stay with the final acceleration and the way the piano and orchestra reinforce each other.','Listen for the increasingly decisive exchanges and the movement’s firm close.','The ending resolves the movement’s long argument rather than merely stopping the virtuoso display.',.93,'major-transition')
+   ],
+   'Piano Concerto No. 2 in C Minor, Op. 18: II. Adagio sostenuto':[
+    A('The piano’s flowing figure creates a nocturnal space','Stay with the gentle repeated movement in the piano before following the melody.','The accompaniment behaves like a continuous, softly undulating surface rather than a separate solo display.','Its continuity lets the melodic voice seem suspended above time.',.15,'formal-boundary'),
+    A('A solo wind voice emerges from the orchestral colour','Follow the principal woodwind melody as it takes the foreground.','Hear how the timbre changes the same lyrical idea without requiring a change in its basic calm character.','The hand-off between instrumental colours is a central structural event in this slow movement.',.34,'new-instrumental-voice'),
+    A('The piano takes the melody into a more intimate register','Notice when the piano moves from accompaniment to the singing foreground line.','Listen for the right hand’s long phrase above the continuing motion in the left hand.','The soloist changes role: the piano becomes a lyrical voice rather than only a harmonic foundation.',.56,'solo-or-voice-entry'),
+    A('The central swell briefly unsettles the stillness','Hear the rise in intensity and harmonic tension before the texture relaxes.','The dynamic expansion is temporary; notice how the movement returns to its spacious, restrained language.','A controlled swell gives the surrounding calm a stronger sense of repose.',.76,'texture-or-dynamic-shift'),
+    A('The opening atmosphere returns for the close','Listen for the familiar flowing accompaniment and the gradual easing of tension.','The movement closes by recalling its opening world rather than by introducing a new dramatic idea.','The return makes the slow movement feel like one continuous breath.',.93,'reprise-or-return')
+   ],
+   'Piano Concerto No. 2 in C Minor, Op. 18: III. Allegro scherzando':[
+    A('The finale’s rhythmic character is stated immediately','Follow the energetic opening gestures and the way the piano sets the movement in motion.','Listen for the quick articulation and the orchestra’s crisp punctuation around the solo line.','Rhythm, rather than a slow lyrical introduction, defines the finale’s character.',.14,'formal-boundary'),
+    A('A broader lyrical idea interrupts the scherzando drive','Notice the change from sharply articulated motion to a more expansive melodic phrase.','The new theme gives the movement a contrasting expressive space without abandoning its underlying momentum.','The finale’s shape depends on alternating brilliance and breadth.',.34,'major-transition'),
+    A('The soloist and orchestra exchange fragments','Listen for short motives passing between piano and ensemble.','Notice how a phrase begun by one side is answered or continued by the other.','The movement becomes a tightly integrated conversation, not a soloist against a block of orchestral sound.',.56,'ensemble-response'),
+    A('Earlier ideas return in a more urgent form','Recognize the main rhythmic and melodic material as it reappears.','The familiar ideas feel more compressed and energized after the contrasting lyrical episode.','The return prepares the listener for the cumulative force of the coda.',.77,'reprise-or-return'),
+    A('The coda turns virtuosity into a collective finish','Follow the accelerating drive toward the final orchestral and piano statements.','Listen for the ensemble’s increasing weight and the way the soloist locks into the closing rhythm.','The finish feels earned because it gathers the movement’s contrasting materials into one decisive gesture.',.94,'major-transition')
+   ],
+   'Piano Concerto No. 1 in F-Sharp Minor, Op. 1 (1917 Final Version): I. Vivace - Moderato':[
+    A('The restless opening establishes the movement’s energy','Hear how the orchestra and piano set up the quick, unsettled character.','Notice the short attacks and the sense of forward motion before the broader melodic writing arrives.','The movement begins with momentum and keeps contrast at its centre.',.14,'formal-boundary'),
+    A('The piano expands the opening material into passagework','Follow the solo line as it moves between compact gestures and longer runs.','Listen for the way virtuosic detail grows out of the opening rhythmic identity.','The piano’s display is part of the thematic argument rather than an inserted flourish.',.35,'solo-or-voice-entry'),
+    A('A broader Moderato span changes the pace','Notice the longer phrases and more reflective character against the opening drive.','The slower, more expansive writing creates a clear contrast in pacing and melodic breath.','This change gives the movement a larger expressive range.',.58,'major-transition'),
+    A('The opening energy returns in transformed form','Listen for the restless rhythmic profile reasserting itself after the lyrical span.','The returning material feels more substantial because the movement has temporarily widened its expressive field.','The return restores direction and sets up the close.',.80,'reprise-or-return'),
+    A('The closing pages sharpen the rhythmic momentum','Follow the final piano-orchestra exchanges and the movement’s concentrated finish.','Notice how the shorter gestures gather into a decisive ending.','The coda turns the opening restlessness into a clear formal resolution.',.94,'major-transition')
+   ],
+   'Piano Concerto No. 1 in F-Sharp Minor, Op. 1 (1917 Final Version): II. Andante':[
+    A('The movement opens into a sustained cantabile line','Listen for the long melodic breath and the gentle support beneath it.','The melody is shaped as a continuous line rather than a sequence of short virtuoso figures.','The Andante establishes a contrasting, more inward space in the concerto.',.16,'formal-boundary'),
+    A('The orchestral colour changes around the melody','Follow the transfer and rebalancing of the melodic line between piano and ensemble.','Notice how a new instrumental colour can make the same phrase feel more distant or intimate.','Timbre and register help shape the movement’s form.',.38,'new-instrumental-voice'),
+    A('The piano’s inner motion becomes more active','Shift attention from the top melody to the accompaniment and middle register.','The piano’s moving figures become more audible while the long line continues above them.','The layered texture prevents the lyrical writing from becoming static.',.59,'texture-or-dynamic-shift'),
+    A('The main lyrical idea returns with greater warmth','Recognize the opening melodic shape as it reappears.','Compare its new context with the first statement and notice how the orchestral support has altered the colour.','The reprise creates continuity across the movement’s changing textures.',.80,'reprise-or-return'),
+    A('The phrase settles into a quiet release','Listen for the gradual easing of motion at the close.','The ending reduces the sense of forward pressure rather than forcing a dramatic climax.','A restrained close preserves the movement’s reflective character.',.94,'formal-boundary')
+   ],
+   'Piano Concerto No. 1 in F-Sharp Minor, Op. 1 (1917 Final Version): III. Allegro vivace':[
+    A('The finale begins with a sharper rhythmic profile','Follow the quick attacks and the way piano and orchestra share the initial momentum.','The movement’s character is more extroverted than the central Andante.','The renewed rhythmic energy completes the concerto’s contrast of movement types.',.14,'formal-boundary'),
+    A('The piano turns the theme into brilliant passagework','Listen for the theme being extended through runs, leaps and register changes.','Notice how the melodic idea remains audible inside the virtuoso surface.','The solo writing develops the theme rather than suspending the form.',.35,'solo-or-voice-entry'),
+    A('A contrasting melodic span broadens the texture','Hear the shift from the quick rhythmic figures to a more expansive phrase.','The longer melodic breath creates a second kind of energy alongside the movement’s drive.','Contrast gives the finale shape beyond continuous brilliance.',.57,'major-transition'),
+    A('The opening material returns with increased urgency','Recognize the rhythmic identity and compare its new weight with the first statement.','The returning idea gathers force because the movement has explored a broader melodic space.','The recapitulation restores the movement’s central identity.',.78,'reprise-or-return'),
+    A('The final coda drives toward a decisive close','Stay with the concentrated piano and orchestral exchanges in the closing stretch.','Listen for how the rhythmic gestures become more emphatic as the movement resolves.','The conclusion gathers the concerto’s energy into a clear final statement.',.94,'major-transition')
+   ],
+   'Piano Concerto No. 4 in G Minor, Op. 40 (1941 3rd Version): I. Allegro vivace':[
+    A('The opening establishes a modern, sharply profiled energy','Listen for the movement’s crisp rhythmic gestures and the piano’s assertive role.','The revised concerto’s language is leaner and more sharply articulated than the lushest Rachmaninoff textures.','The opening signals a more angular and rhythmically alert concerto voice.',.15,'formal-boundary'),
+    A('The piano and orchestra divide the thematic work','Follow the exchange between solo passagework and orchestral statements.','Listen for themes being introduced, answered and reshaped by the two sides.','The movement’s structure is driven by changing roles within the ensemble.',.36,'ensemble-response'),
+    A('A more lyrical span interrupts the propulsion','Notice the lengthening of phrases and the shift in expressive temperature.','The broad line softens the movement’s surface without erasing its pulse.','The contrast gives the movement a wider emotional perspective.',.57,'major-transition'),
+    A('The rhythmic material returns in tighter focus','Recognize the opening gestures as the music moves back toward its initial energy.','The return feels more purposeful after the lyrical detour.','The recapitulation reconnects the movement’s contrasting ideas.',.79,'reprise-or-return'),
+    A('The coda compresses the movement into a final surge','Follow the last exchanges and the increased insistence of the piano writing.','The closing passage intensifies the material rather than simply repeating the opening.','The coda converts the movement’s rhythmic identity into a decisive finish.',.94,'major-transition')
+   ],
+   'Piano Concerto No. 4 in G Minor, Op. 40 (1941 3rd Version): II. Largo':[
+    A('The Largo creates a spacious harmonic atmosphere','Listen for the long phrases and the way the orchestral texture establishes the movement’s scale.','The music allows the harmony to unfold gradually instead of relying on a strong rhythmic pulse.','The slow movement offers repose while keeping the harmonic language active.',.16,'formal-boundary'),
+    A('The piano enters as a singing voice','Follow the piano’s melodic line as it emerges from the orchestral fabric.','Notice the balance between sustained melody and the quieter movement beneath it.','The soloist’s entrance changes the centre of attention without breaking the atmosphere.',.36,'solo-or-voice-entry'),
+    A('The texture grows denser and more unsettled','Hear the middle span become more active before its energy subsides.','Follow the rise in register, dynamics and harmonic tension.','A central intensification prevents the Largo from becoming a static nocturne.',.58,'texture-or-dynamic-shift'),
+    A('The opening spaciousness returns','Listen for the release from the more active central span.','The earlier breadth returns, now coloured by the movement’s central tension.','A large-scale return gives the slow movement coherence.',.80,'reprise-or-return'),
+    A('The final phrase recedes rather than triumphs','Stay with the gradual easing of energy in the closing measures.','Listen for the movement’s quiet resolution and the space left around its last gestures.','The close preserves the Largo’s restrained expressive character.',.94,'formal-boundary')
+   ],
+   'Piano Concerto No. 4 in G Minor, Op. 40 (1941 3rd Version): III. Allegro vivace':[
+    A('The finale’s pulse is direct and driving','Listen for the decisive rhythmic profile and the piano’s crisp articulation.','Notice how the recurring pulse gives the movement its forward pull.','Rhythmic clarity is the foundation for the movement’s contrasting episodes.',.14,'formal-boundary'),
+    A('Piano and orchestra trade compressed motifs','Follow short ideas as they pass between soloist and ensemble.','The phrases are compact and sharply placed, creating a sense of quick dialogue.','The motif exchange is a structural device, not merely accompaniment.',.34,'ensemble-response'),
+    A('The lyrical material opens a contrasting space','Hear the broader melodic line emerge from the driven surface.','Notice the longer phrase lengths and different harmonic colour.','The lyrical episode provides contrast before the rhythmic argument resumes.',.56,'major-transition'),
+    A('The opening drive returns with firmer accents','Recognize the main rhythmic idea and listen for the changed orchestral weight.','The return is more emphatic after the contrasting middle material.','The recapitulation makes the movement’s large-scale design audible.',.78,'reprise-or-return'),
+    A('The final surge gathers the ensemble','Stay with the concentrated piano-orchestra exchanges in the coda.','Listen for the sharper accents and the decisive final resolution.','The ending brings the movement’s rhythmic and thematic strands together.',.94,'major-transition')
+   ],
+   'Piano Concerto No. 3 in D Minor, Op. 30: I. Allegro ma non tanto':[
+    A('The piano introduces a long-breathed principal idea','Follow the opening melodic line and its unusual sense of continuity.','The theme unfolds in a flexible phrase rather than a square, easily segmented tune.','Its shape gives the first movement its searching, expansive identity.',.14,'formal-boundary'),
+    A('The orchestra takes over and broadens the theme','Listen for the transition from the piano’s initial statement to the orchestral expansion.','The theme acquires a larger symphonic scale when the ensemble takes it up.','This hand-off establishes the movement’s central soloist-orchestra relationship.',.33,'ensemble-response'),
+    A('The piano’s virtuosity becomes part of the development','Follow the transformation of thematic fragments through increasingly elaborate passagework.','Listen for the original melodic contour underneath the dense notes and changing registers.','The development tests how much expressive pressure the main theme can absorb.',.55,'motif-development'),
+    A('The return restores the principal theme','Recognize the opening idea and compare its new orchestral and pianistic context.','The return feels changed by the preceding development even when the melody is familiar.','The recapitulation turns memory into large-scale form.',.77,'reprise-or-return'),
+    A('The cadenza-like writing leads into the coda','Stay with the soloist’s concentrated passagework as the movement approaches its close.','Listen for the movement from solo display back into a shared orchestral conclusion.','The close resolves the tension between individual virtuosity and symphonic scale.',.94,'major-transition')
+   ],
+   'Piano Concerto No. 3 in D Minor, Op. 30: II. Intermezzo. Adagio':[
+    A('The orchestral introduction establishes the movement’s reflective pace','Listen to the opening orchestral atmosphere before the piano becomes prominent.','The ensemble sets the expressive space and the piano enters as part of an ongoing line.','The movement feels like a continuous scene rather than a series of solo episodes.',.15,'formal-boundary'),
+    A('The piano takes up the lyrical material','Follow the soloist as it reshapes the melodic line and its accompaniment.','Notice the right-hand melody and the left-hand movement that sustains the phrase.','The piano’s entrance changes the texture while preserving the movement’s meditative character.',.35,'solo-or-voice-entry'),
+    A('A central orchestral exchange changes the colour','Hear the melody move through the ensemble and compare the new timbral balance.','Listen for the way the same melodic material gains a different expressive weight in another instrumental voice.','The changing orchestral colour is a formal event in this long slow movement.',.57,'new-instrumental-voice'),
+    A('The piano and orchestra gather into a broader climax','Follow the increase in intensity and the way the parts become more closely integrated.','The movement expands dynamically before gradually releasing its tension.','The central swell gives the final return an expressive destination.',.78,'major-transition'),
+    A('The opening mood returns for the close','Listen for the familiar atmosphere and the movement’s gradual settling.','The close feels earned because the music has travelled through a larger expressive arc.','A subdued ending completes the Intermezzo’s long breath.',.94,'reprise-or-return')
+   ],
+   'Piano Concerto No. 3 in D Minor, Op. 30: III. Finale. Alla breve':[
+    A('The alla breve pulse drives the opening','Feel the firm duple motion and the way the piano’s rhythmic gestures sit inside it.','The movement’s speed and accent pattern create forward motion from the outset.','The pulse becomes a structural reference point through the finale’s changing episodes.',.14,'formal-boundary'),
+    A('The piano’s main idea becomes a sequence of variations','Listen for the transformation of the opening material through register, figuration and accent.','A recognisable idea is stretched into increasingly demanding passagework.','Variation connects virtuosity to thematic development.',.34,'motif-development'),
+    A('The lyrical episode interrupts the motoric motion','Notice the change to broader melodic phrases and a more sustained orchestral texture.','The music briefly loosens its rhythmic grip before the finale’s drive returns.','Contrast makes the final acceleration feel earned rather than continuous.',.56,'major-transition'),
+    A('The main theme returns with greater weight','Recognize the opening material and listen for its more forceful treatment.','The familiar rhythmic shape carries the memory of the preceding episodes.','The recapitulation restores the central argument before the coda.',.78,'reprise-or-return'),
+    A('The final coda drives toward the decisive resolution','Follow the soloist and orchestra as the closing energy accumulates.','Listen for the final concentration of rhythmic accents and the movement’s firm conclusion.','The coda transforms the finale’s long build into a clear closing statement.',.94,'major-transition')
+   ]
+  },
+  'dark-side-of-the-moon':{
+   'time':[
+    A('The clocks stop being an effect and become an entrance','Hear the alarms as a mass of pitched sound, then follow the drums that cut through them.','The clock collage is not just an introduction: Mason’s tom pattern converts the scattered attacks into a physical, coordinated pulse.','A sound-design montage becomes a rock performance through a clearly audible ensemble entrance.',.12,'major-transition'),
+    A('The first vocal section finds its stride','Follow the shift from the long instrumental opening into the measured vocal phrase.','Notice how the bass settles the pulse while guitar and keyboard leave room around the voice.','The contrast between the crowded opening and the spacious verse gives the song its first large-scale release.',.29,'formal-boundary'),
+    A('The instrumental passage widens the frame','Listen for the movement from the vocal refrain into the extended guitar-led space.','The guitar takes over the long melodic breath; the band supports it without turning the passage into a new song.','This is the structural expansion that makes the song feel larger than its verse-and-refrain frame.',.62,'solo-or-voice-entry'),
+    A('The vocal returns after the solo','Notice how the re-entry of the vocal changes the meaning of the preceding guitar line.','The song comes back to its sung argument after the instrumental release, then moves toward the Breathe reprise.','A return after improvisatory expansion is a formal event, not merely a repeat.',.83,'reprise-or-return')
+   ],
+   'money':[
+    A('The vocal locks into the crooked riff','Keep the seven-beat bass pattern running underneath the verse.','Count the uneven cycle without losing the vocal phrasing; the lyric rides a groove that refuses a conventional four-square feel.','The song’s satirical directness is sharpened by a groove that feels slightly off balance.',.32,'formal-boundary'),
+    A('The band changes its rhythmic footing','Listen for the move from the familiar seven-beat riff into the straighter blues-rock solo section.','The guitar solo section moves into 4/4, changing the listener’s sense of weight and bodily pulse.','This is a real formal and metric contrast: the same band suddenly feels more squarely grounded.',.58,'meter-or-groove-shift'),
+    A('Saxophone opens the solo exchange','Bring Dick Parry’s saxophone into focus before following the guitar responses.','Notice the hand-off from the saxophone’s broad phrase to the sharper electric-guitar lines.','The instrumental feature changes the foreground voice while retaining the song’s blues vocabulary.',.68,'solo-or-voice-entry'),
+    A('The seven-beat identity returns','Listen for the return of the bass riff after the more regular solo passage.','The uneven groove reasserts itself and restores the track’s original gait.','The return makes the metric detour feel like a purposeful middle episode.',.86,'reprise-or-return')
+   ],
+   'us and them':[
+    A('The first verse grows from the piano space','Stay with the slow chordal movement as the vocal enters.','The line is allowed to float over a spacious harmonic bed rather than being pushed by a heavy backbeat.','The arrangement’s restraint is part of its expressive force.',.22,'formal-boundary'),
+    A('The refrain opens into a broader ensemble','Notice how backing voices and sustained instrumental layers widen the sound.','Compare the fuller refrain with the more exposed verse; the difference is one of breadth as much as volume.','The song’s A/B contrast depends on the way each section changes harmonic motion and density.',.39,'major-transition'),
+    A('Dick Parry’s saxophone takes the long breath','Follow the tenor saxophone as it extends the melody beyond the vocal line.','Listen for the sustained, speech-like phrases and the way the rhythm section leaves space underneath.','The saxophone becomes a second melodic narrator, not merely an ornamental solo.',.57,'solo-or-voice-entry'),
+    A('The ensemble swells, then withdraws','Track the rise and release of the backing voices and instrumental support.','The broad texture briefly fills out before the music returns to a more open vocal-and-saxophone balance.','Dynamic shaping makes the long track feel like a sequence of emotional waves.',.76,'texture-or-dynamic-shift')
+   ],
+   'the great gig in the sky':[
+    A('A spoken fragment interrupts the piano calm','Hear the brief spoken sample against the repeating piano harmony.','The voice is presented as a human threshold before the wordless vocal becomes the central expressive voice.','The short interruption prepares a transition from language into sound as expression.',.16,'major-transition'),
+    A('The wordless voice begins to climb','Follow the first shift from breath-like vocal sounds toward a more sustained melodic cry.','Listen to the changing vowel colour, register and breath pressure rather than trying to hear a conventional lyric.','The vocalist supplies the piece’s main formal development through changes in gesture and intensity.',.42,'solo-or-voice-entry'),
+    A('The vocal reaches its most exposed intensity','Stay with the strongest wave of vocal sound, then notice how it begins to recede.','The performance builds in waves; the peak is shaped by register, sustained tone and the contrast with the quieter piano foundation.','The climax is achieved through vocal gesture and dynamic range, not through a change of chord sequence alone.',.69,'major-transition')
+   ],
+   'eclipse':[
+    A('The accumulating phrases become a single arc','Hear each new sung phrase add another item to the growing total.','The text and backing voices accumulate over a repeating harmonic and rhythmic foundation.','The song’s structure is additive: accumulation itself creates the form.',.32,'formal-boundary'),
+    A('The final crescendo gathers the album together','Listen for the widening vocal and instrumental layers as the track presses toward the final chord.','Keep the repeated pulse in mind while the texture grows denser and more emphatic.','The culmination works because previously separate strands of the album are gathered into one final statement.',.68,'major-transition')
+   ],
+   'brain damage':[
+    A('The refrain changes the scale of the song','Notice how the vocal refrain broadens the more intimate verse.','The repeating guitar figure stays recognizable while the backing voices and harmony give the refrain a larger communal weight.','The contrast between verse and refrain turns an inward song into an increasingly public statement.',.55,'formal-boundary')
+   ]
+  },
+  'the-epic':{
+   'change of the guard':[
+    A('The choir changes the scale of the ensemble','Listen for the choral layer joining the large instrumental statement.','The vocal mass adds a spiritual, almost ceremonial dimension to the theme rather than functioning as a small backing decoration.','The transition from instrumental head to choir broadens the piece’s emotional and sonic architecture.',.25,'new-instrumental-voice'),
+    A('Piano takes an extended improvisational turn','Follow the piano as it moves from the written ensemble material into freer phrase development.','Notice how the rhythm section holds the modal centre while the piano changes register and density.','The first solo passage demonstrates how the arrangement creates space for individual voices without losing its large-scale design.',.43,'solo-or-voice-entry'),
+    A('Trumpet and tenor offer contrasting solo colours','Compare the trumpet’s attack with the more continuous tenor-saxophone line.','Listen for how each soloist shapes a different kind of phrase over the same broad ensemble foundation.','The succession of lead voices becomes a structural sequence rather than a generic solo break.',.64,'solo-or-voice-entry'),
+    A('The bass steps into the foreground','Shift attention away from the horns and toward the upright bass.','Hear how the bass solo changes the register and density of the conversation while the time feel remains connected.','A low-register solo gives the long ensemble arc a new perspective before the collective return.',.79,'solo-or-voice-entry')
+   ],
+   'askim':[
+    A('The melody gives way to the bass voice','Listen for the bass becoming more than a time-keeping foundation.','The bass line gains melodic independence; hear its contour as a foreground phrase, not simply a sequence of roots.','The shift in instrumental role is a key part of the track’s intimate character.',.55,'solo-or-voice-entry'),
+    A('The ensemble takes the idea back','Notice how the supporting parts reconnect the bass feature to the broader melodic atmosphere.','The return to the ensemble texture restores a sense of shared breath after the exposed low-register passage.','The solo is framed by the arrangement rather than detached from it.',.79,'reprise-or-return')
+   ],
+   'isabelle':[
+    A('The ballad theme settles into its full shape','Follow the main melodic line as its contour becomes clear.','Listen for how the long phrases are supported by an unhurried pulse and sustained ensemble colour.','The track’s ballad character comes from phrase length and harmonic pacing, not simply from a slow tempo.',.24,'formal-boundary'),
+    A('The piano colours the lyrical centre','Bring the piano into focus as it adds motion inside the broad melodic frame.','Hear the contrast between the piano’s articulated notes and the longer sustained lines around it.','A change of attack and sustain refreshes the texture without breaking the song’s lyrical continuity.',.55,'new-instrumental-voice'),
+    A('The melody rises into a fuller statement','Notice the increase in register and ensemble weight.','The main line gains intensity through its higher reach and fuller support rather than through abrupt rhythmic acceleration.','This is the broad expressive crest of the ballad-like arc.',.77,'major-transition')
+   ],
+   'final thought':[
+    A('The Afro-Latin pulse becomes explicit','Listen to the repeated rhythmic cells and the way the accents sit against the larger beat.','Follow the low-end pattern and percussion accents as they make the groove feel more dance-like and propulsive.','The change in rhythmic character distinguishes this track from the more spacious pieces around it.',.27,'meter-or-groove-shift'),
+    A('The ensemble answers the rhythmic figure','Notice how the arranged parts punctuate the groove rather than simply sustaining chords.','The accents give the short track a sectional shape: statement, response and renewed drive.','The groove becomes a compositional element shared by the ensemble.',.68,'ensemble-response')
+   ],
+   'the next step':[
+    A('The groove turns into a long-distance engine','Follow the bass-and-drum pattern after the opening statement.','Listen for repeated rhythmic cells that keep the extended form moving while the foreground parts change.','A stable groove gives a long track room for contrasting episodes and solo exchanges.',.22,'meter-or-groove-shift'),
+    A('The tenor opens the improvisational space','Keep the saxophone phrase in focus as it stretches beyond the written idea.','Notice how the solo uses longer lines while the rhythm section retains the underlying direction.','The solo expands the theme without dissolving the track’s rhythmic identity.',.45,'solo-or-voice-entry'),
+    A('The ensemble rebuilds around the soloist','Hear the arranged parts become more prominent around the lead line.','Listen for changes in density and the return of emphatic ensemble punctuation.','The movement from individual voice back to collective statement provides a large-scale structural hinge.',.72,'major-transition'),
+    A('The extended closing passage gathers momentum','Stay with the repeated figures as the ending approaches.','The track’s long arc feels purposeful because its recurring rhythmic material is heard in a changed, more expansive context.','The closing stretch acts as a hand-off within the album’s larger three-disc sequence.',.86,'reprise-or-return')
+   ],
+   'the rhythm changes':[
+    A('Patrice Quinn enters as a distinct lead voice','Listen for the vocal line taking its place among the ensemble layers.','Notice how the vocal phrase changes the track’s foreground without abandoning the rhythmic framework.','The voice changes the colour and rhetorical character of the piece.',.32,'solo-or-voice-entry'),
+    A('Choir and strings broaden the refrain','Hear the sustained choral and string colours around the vocal line.','Compare the weight of the ensemble support with the more exposed lead voice.','The arrangement turns a groove-led tune into a fuller, almost hymn-like statement.',.58,'new-instrumental-voice'),
+    A('The ensemble returns to its rhythmic hook','Follow the recurring figure as the vocal and instrumental layers settle back into the groove.','Listen for how the main pattern remains the reference point through the changing foreground.','A recognizable rhythmic hook makes the track’s transformations feel coherent.',.84,'reprise-or-return')
+   ],
+   'miss understanding':[
+    A('Rhodes and choir establish the electric colour','Bring the electric piano and choral layer into focus.','Hear the contrast between the keyboard’s clipped attack and the choir’s sustained, explosive entries.','The blend of electric post-bop rhythm and vocal mass defines this track’s distinctive sound world.',.24,'new-instrumental-voice'),
+    A('Washington’s tenor pushes into the foreground','Follow the tenor solo as it moves from compact motifs into more urgent lines.','Notice the increase in phrase intensity against the continuing electric groove.','The solo becomes the track’s principal tension-building voice.',.48,'solo-or-voice-entry'),
+    A('Trumpet answers with a different edge','Listen for the change of lead voice from tenor saxophone to trumpet.','Compare the trumpet’s attack and register with the preceding saxophone line.','The hand-off refreshes the solo sequence without needing a new underlying groove.',.68,'solo-or-voice-entry'),
+    A('The breaks reassert the written arrangement','Notice the sharply placed ensemble punches between the open solo phrases.','The arrangement interrupts the improvisational flow with emphatic collective accents.','Those punctuations keep the long solo arc tied to the composition’s written design.',.86,'major-transition')
+   ],
+   'leroy and lanisha':[
+    A('The main melody is stated by the full group','Listen for the central tune emerging clearly from the ensemble texture.','Notice which voice carries the contour and how the backing parts frame it.','The full statement gives the listener a reference point before the more open development.',.23,'formal-boundary'),
+    A('The lead voice begins to vary the theme','Follow the solo line as it reshapes the melody’s intervals and rhythmic profile.','Listen for small motifs from the theme reappearing in the improvised phrases.','The solo remains connected to the tune rather than replacing it with unrelated display.',.57,'solo-or-voice-entry'),
+    A('The ensemble restores the melodic frame','Hear how the group’s replies make the original tune recognizable again.','Compare the opening statement with the way the melody returns after the solo development.','The return closes the track’s theme-to-improvisation arc.',.83,'reprise-or-return')
+   ],
+   're run':[
+    A('Strings and choir change the texture','Listen for the sustained string and choral layers around the groove.','The sound is initially buoyant and open; notice how long tones soften the edges of the rhythm section.','The colour change gives the track a spiritual-jazz atmosphere before its rhythmic character shifts.',.23,'new-instrumental-voice'),
+    A('The groove turns toward swing','Feel the shift from the floating opening into a more clearly swinging motion.','The same ensemble begins to lean more strongly on the beat, changing the way the phrases sit.','A groove transformation is a formal event because it changes the listener’s bodily sense of the piece.',.48,'meter-or-groove-shift'),
+    A('Electric bass and keys sharpen the attack','Move attention to the more articulated low-end and keyboard figures.','Listen for popping bass notes and the keyboard’s sharper rhythmic punctuation.','The new articulation gives the track a funkier, more kinetic surface.',.63,'texture-or-dynamic-shift'),
+    A('Trombone takes a featured turn','Follow the trombone solo as it comes forward from the ensemble texture.','Notice its broad, weighty phrasing against the more nimble bass and keys.','The change of instrumental voice alters the register and shape of the improvisational conversation.',.76,'solo-or-voice-entry'),
+    A('Strident breaks interrupt the flow','Hear the ensemble’s sharply placed breaks around the solo passages.','The band briefly shifts from continuous groove to punctuated collective attacks.','The breaks sharpen the arrangement and prepare the return to the main rhythmic current.',.87,'major-transition')
+   ],
+   'seven prayers':[
+    A('The opening leaves room for sustained sound','Start with the spaciousness of the first phrases.','Notice the length of the tones and the gaps between them before the texture becomes more active.','The opening establishes a patient scale against which later intensity can be measured.',.12,'formal-boundary'),
+    A('A gradual rise gathers emotional pressure','Follow the increase in register, density and phrase intensity.','The music builds through accumulation rather than a single abrupt switch.','The long crescendo is the track’s principal structural event.',.48,'major-transition'),
+    A('The ensemble reaches its high point','Listen for the broadest and most urgent statement in the piece.','Hear how the fuller texture changes the weight of the sustained lines and rhythmic support.','The high point gives the opening restraint a meaningful destination.',.72,'texture-or-dynamic-shift'),
+    A('The music releases the accumulated tension','Notice how the line eases back after the high point.','Let the diminuendo and lengthening phrase shapes restore the opening sense of space.','A controlled retreat gives the track a complete arc rather than ending at maximum intensity.',.89,'reprise-or-return')
+   ],
+   'henrietta our hero':[
+    A('The ensemble accents define the track’s character','Listen for the short, sharply placed attacks around the melodic line.','Notice how the accents create a playful edge without requiring a change of tempo.','The arrangement’s personality lives in its articulation as much as in the tune itself.',.43,'texture-or-dynamic-shift'),
+    A('The final statement restores the main idea','Follow the recognizable melodic material as it returns near the close.','Compare the returning phrase with the opening and notice what the intervening ensemble activity has changed.','The return gives the track a concise, legible formal shape.',.82,'reprise-or-return')
+   ],
+   'the magnificent 7':[
+    A('The horn section states the central hook','Hear the collective horn figure as a composed idea rather than a wall of sound.','Notice how the parts line up rhythmically and how the accents shape the contour.','The written ensemble statement provides the frame for the later improvisational space.',.24,'formal-boundary'),
+    A('Individual horn voices step out of the section','Follow the shift from the collective line to the featured solo voice.','Compare the soloist’s flexible phrasing with the ensemble’s tightly coordinated attacks.','The contrast between arranged precision and individual expression drives the track’s long arc.',.57,'solo-or-voice-entry'),
+    A('The collective accents return','Listen for the horns to reclaim the foreground with a shared statement.','The ensemble punches re-establish the main theme after the solo space.','The return makes the solo passage part of a composed trajectory.',.84,'reprise-or-return')
+   ],
+   're run home':[
+    A('The guitar-led groove takes shape','Bring the more articulated guitar colour into focus as the rhythmic pattern settles.','Listen to the relationship between the guitar figure and the active bass-and-drum foundation.','The groove gives the extended form a clear identity before it opens into longer development.',.2,'new-instrumental-voice'),
+    A('The rhythmic pattern expands through repetition','Notice how the repeated figure feels larger as additional layers join.','Keep the bass movement in mind while the upper parts add accents and melodic fragments.','Repetition provides continuity while the arrangement changes around it.',.43,'texture-or-dynamic-shift'),
+    A('The ensemble thickens around the lead line','Hear the moment when the backing parts become more emphatic.','The foreground remains identifiable while the full-band texture adds weight and colour.','A density increase can function as a structural arrival even when the underlying groove remains stable.',.68,'major-transition'),
+    A('The recurring motif brings the track home','Listen for the return of the opening rhythmic idea in its fuller context.','Compare its first appearance with the closing statement; it now carries the memory of the intervening development.','The return turns a long groove journey into a coherent musical arc.',.87,'reprise-or-return')
+   ],
+   'cherokee':[
+    A('The standard theme is made unmistakable','Listen for the recognizable contour of the tune before the soloing takes over.','Notice how the melody is presented at a relaxed, buoyant pace rather than as a breathless bebop sprint.','The arrangement’s character comes partly from reimagining the standard’s traditional speed and energy.',.2,'formal-boundary'),
+    A('The solo stretches the tune’s harmonic route','Follow the lead improvisation through the rapidly moving changes.','Keep the bass and ride-cymbal pulse as your map while the solo line changes direction.','The harmonic motion remains active even when the groove feels relaxed.',.54,'solo-or-voice-entry'),
+    A('The rhythm section tightens the forward motion','Move your attention from the soloist to the bass, piano and drums.','Notice how the accompaniment keeps the form legible beneath the fast-moving melodic line.','The rhythmic foundation makes technical freedom feel connected to a shared pulse.',.74,'ensemble-response'),
+    A('The theme returns as a point of recognition','Hear the composed melody reappear after the solo development.','Compare the relaxed opening statement with its return after the improvisational detour.','The theme gives the performance a clear frame and a satisfying landing.',.88,'reprise-or-return')
+   ],
+   'clair de lune':[
+    A('The Debussy melody emerges from the larger sound','Follow the familiar melodic contour as it becomes clear in the ensemble arrangement.','Listen for the long upper line and how the backing parts frame it without reducing it to a literal piano transcription.','The opening transforms the listener’s memory of Debussy’s piano miniature into a broader ensemble sound.',.16,'formal-boundary'),
+    A('The sustained strings alter the harmonic light','Bring the long string tones into focus around the melody.','Notice the way their sustain changes the colour and scale of the familiar phrase.','The orchestral layer changes the composition’s acoustic space and emotional weight.',.37,'new-instrumental-voice'),
+    A('Washington’s tenor becomes an independent voice','Follow the tenor as it moves beyond simply doubling the main melody.','Listen for the shift from stated theme to improvisational phrasing over the slow-moving harmonic field.','The solo gives the arrangement a jazz trajectory while keeping the Debussy-derived material present.',.58,'solo-or-voice-entry'),
+    A('The ensemble broadens toward the high point','Notice the increase in register and fullness around the melody and solo line.','The arrangement gains scale through layered sustained voices and a more expansive dynamic shape.','The high point is created by orchestral accumulation rather than by a sudden change of tempo.',.77,'major-transition'),
+    A('The familiar theme settles back into view','Listen for the melodic identity to become clear again after the expanded middle.','Compare the returning contour with the opening and notice how the ensemble has changed the way you hear it.','The return reconnects the reimagining to the source composition.',.88,'reprise-or-return')
+   ],
+   'malcolm’s theme':[
+    A('The principal theme establishes its cinematic span','Follow the broad melody as it unfolds over measured accompaniment.','Notice how the phrase length and harmonic pacing create a sense of narrative rather than a compact hook.','The long melodic breath is the track’s organizing principle.',.21,'formal-boundary'),
+    A('The orchestral colour deepens the theme','Listen for new instrumental layers entering around the melody.','The accompaniment changes colour while the melodic line remains recognizable.','Timbre becomes a form of development even when the thematic material stays stable.',.51,'new-instrumental-voice'),
+    A('The melody reaches its broadest statement','Notice the change in register and dynamic weight as the line rises.','Hear how the fuller backing gives the theme a greater sense of arrival.','The expressive crest is created by orchestration and phrase shape, not by virtuosic display.',.75,'major-transition'),
+    A('The closing return lets the idea settle','Follow the principal contour as it reappears in a more settled form.','The closing statement feels different because the listener now remembers the fuller middle section.','A thematic return creates resolution without needing a dramatic coda.',.88,'reprise-or-return')
+   ],
+   'the message':[
+    A('The ensemble makes its central declaration','Listen for the main melodic statement and the way the full group gives it weight.','Notice the balance between the lead line and the rhythm section underneath.','The opening establishes a clear musical proposition before the track starts to vary it.',.19,'formal-boundary'),
+    A('The lead line begins to extend the statement','Follow the featured voice as it moves from the written idea into freer phrasing.','Listen for fragments of the main melodic contour reappearing inside the solo.','Improvisation develops the message rather than abandoning it.',.49,'solo-or-voice-entry'),
+    A('The arrangement adds weight around the solo','Hear the backing ensemble become more emphatic.','Notice the way the accents frame the improvisation and make the texture feel more collective.','The written arrangement gives the open solo a strong structural frame.',.71,'major-transition'),
+    A('The main idea returns with new context','Listen for the central statement reasserting itself near the close.','The return is familiar, but the solo passage has changed what the listener hears inside it.','The ending closes the theme-and-development arc.',.88,'reprise-or-return')
+   ]
+  },
+  'thick-as-a-brick':{
+   'part i':[
+    A('Folk opening: acoustic guitar and flute','Start with the intimate acoustic guitar pattern and Anderson’s flute.','Notice the light, folk-like articulation and the way the voice sits close to the guitar before the full band arrives.','This acoustic identity is the point of departure for the suite’s later stylistic transformations.',.025,'formal-boundary'),
+    A('The first hard-rock change','Hear the abrupt move from acoustic folk to the heavier electric ensemble.','The tempo and weight increase; the drums, bass and electric guitar change the scale of the music.','The stylistic switch is one of the suite’s main organizing devices.',.133,'major-transition'),
+    A('Organ solo over the 5/4 ostinato','Follow the organ while keeping the repeating bass-and-guitar figure in your peripheral hearing.','The asymmetrical 5/4 pattern keeps the solo grounded while the organ explores a more forceful line.','The solo is not free-floating: the ostinato gives it a clear rhythmic frame.',.159,'solo-or-voice-entry'),
+    A('The guitar takes over the instrumental foreground','Notice the shift from organ to electric guitar.','The guitar begins to shape a more melodic, sequential line as the earlier ostinato recedes.','A change of soloist changes the phrase shape and instrumental colour.',.181,'solo-or-voice-entry'),
+    A('A brief 4/4 acoustic interlude resets the pulse','Listen for the short acoustic passage and the return to a more regular four-beat feel.','The contrast is immediate: the interlude softens the texture after the electric solo.','The sudden change of metre and timbre keeps the suite from settling into one rock groove.',.192,'meter-or-groove-shift'),
+    A('Staccato ensemble attacks and another metric turn','Hear the band’s short, coordinated accents.','The passage moves through a return to 5/4 and then a more regular 4/4 feel, changing the weight of the phrase.','The short attacks make the meter changes audible in the body, not only on paper.',.231,'meter-or-groove-shift'),
+    A('The next vocal idea is prepared instrumentally','Listen for the accompaniment that introduces the following sung section.','The band begins to outline the melodic and harmonic material before the voice takes over.','A transition that previews the next vocal section makes the through-composed form feel connected.',.29,'formal-boundary'),
+    A('Flute and guitar share a recurring motive','Listen for the short figure stated by flute and electric guitar.','The two instruments present related material, then the electric guitar extends it into a longer solo passage.','A recognizable motive links contrasting instrumental colours.',.321,'motif-development'),
+    A('The guitar solo opens into a second line','Notice the way the electric-guitar phrases occupy separate stereo spaces.','Listen for the related guitar material entering on the other side of the stereo image.','The two-line effect expands the solo section without losing its shared melodic identity.',.36,'solo-or-voice-entry'),
+    A('The flute-and-guitar motive returns','Hear the shared figure reappear after the extended guitar passage.','The return restores a familiar motif after the solo has stretched its material.','Recognizing the motive helps the listener hear continuity inside the collage of styles.',.401,'reprise-or-return'),
+    A('The vocal codetta begins to descend','Follow the falling sequential phrases at the end of the vocal section.','The line loses some of its forward insistence and begins to prepare a new instrumental transition.','The codetta signals that the previous vocal section is closing rather than continuing unchanged.',.463,'formal-boundary'),
+    A('The instruments trade short motives','Listen as organ, electric guitar, soprano saxophone and flute exchange fragments.','Notice how the foreground passes rapidly from one timbre to another.','This is ensemble counterpoint in miniature: the changing lead voice is the structural motion.',.475,'new-instrumental-voice'),
+    A('A syncopated organ-and-flute figure interrupts the flow','Bring the sharply accented organ and flute phrase into focus.','The short, off-beat attacks contrast with the more flowing passages around them.','The accents make the section boundary audible before the next larger change.',.523,'texture-or-dynamic-shift'),
+    A('The harmony and metre open into a new section','Listen for the changed harmonic centre and the shift toward a lilting 12/8 feel.','The syncopated figure gives way to a broader, compound pulse and new accompaniment material.','Harmony and metre change together, creating a clear formal reset.',.553,'harmonic-turn'),
+    A('The next vocal section is built from its accompaniment','Follow the organ, guitar and bass as they present the backing melody before the flute punctuates it.','Listen for how the accompaniment already contains the shape of the coming vocal statement.','The arrangement previews the vocal section and gives the transition a strong internal logic.',.585,'formal-boundary'),
+    A('Anderson’s flute takes a foreground solo','Stay with the flute’s line as it moves through the instrumental passage.','Notice the contrast between the breath-driven flute phrases and the sustained electric-guitar and organ colours.','The flute changes the register and articulation of the suite’s instrumental conversation.',.628,'solo-or-voice-entry'),
+    A('Guitar and organ reshape the preceding theme','Hear the instrumental material derived from the accompaniment melody.','The theme is transferred away from the voice and redistributed between electric guitar and organ.','The same material acquires a new character when its timbre and role change.',.659,'motif-development'),
+    A('Acoustic guitar returns after the electric passages','Notice the acoustic guitar entering and the change from rock weight toward folk intimacy.','The acoustic sound returns after a long absence and immediately changes the track’s stylistic balance.','The re-entry is a major timbral and formal marker in the suite.',.701,'new-instrumental-voice'),
+    A('A 6/8 vocal passage restores the folk lilt','Feel the compound pulse beneath the sung phrase.','The voice and acoustic guitar reconnect the music to the opening folk identity.','The return of the folk style is meaningful because the listener has travelled through contrasting electric episodes.',.731,'meter-or-groove-shift'),
+    A('The vocal material fragments into short episodes','Listen for the movement between the next vocal phrases and brief instrumental replies.','The music shifts between sung sections and short connecting passages rather than settling into a regular verse-chorus pattern.','The episodic construction is central to the work’s through-composed form.',.777,'formal-boundary'),
+    A('The suite moves back into the electric ensemble','Hear the electric guitar and rhythm section reclaim the foreground.','The texture becomes more forceful and the metre feels more square than the preceding folk section.','Another stylistic switch maintains the long-form narrative momentum.',.822,'major-transition'),
+    A('The vocal narrative returns in altered context','Follow the final vocal episode and compare its shape with the earlier sung sections.','Earlier melodic material is recalled, but the intervening instrumental detours change its meaning.','Repetition in this suite is rarely neutral: each return carries the memory of a different style.',.882,'reprise-or-return'),
+    A('The closing sequence plays with sound and silence','Listen for the staccato chords and the spaces left between them.','The attacks are surrounded by reverb and echo, making the silences as noticeable as the notes.','The contrast of sound and silence creates a threshold before the next side of the continuous work.',.932,'texture-or-dynamic-shift'),
+    A('The side closes as a hand-off, not a final cadence','Hear the free, less metrically settled closing passage.','The music resists a fully self-contained ending because this is one side of a continuous composition.','The open hand-off preserves the long-form connection to Part II.',.973,'reprise-or-return')
+   ],
+   'part ii':[
+    A('The second side resumes the electric energy','Listen for the continuation of the suite’s motion after the side break.','The new side begins as part of the same argument, not as an unrelated song with a fresh verse-chorus form.','The LP-side division is a playback boundary, not the composition’s final structural close.',.025,'formal-boundary'),
+    A('A bustling 6/8 vocal episode','Feel the compound pulse and the way the vocal phrase rides its forward movement.','The lilting 6/8 gives the section a different gait from the heavier rock episodes.','A change of metre shifts the bodily character of the music.',.038,'meter-or-groove-shift'),
+    A('The first instrumental episode fractures into silences','Listen for the burst of chaotic ensemble activity and the silences that separate the gestures.','The pauses are not empty: they make the following attacks feel more abrupt and exposed.','The alternation of sound and silence is a structural contrast, not merely an effect.',.14,'texture-or-dynamic-shift'),
+    A('The earlier suite statement returns with new momentum','Recognize the recurring melodic and rhythmic identity while noticing how the electric ensemble gives it renewed force.','Compare this statement with its earlier appearance: the material is familiar, but the new placement changes its dramatic role.','The return is a structural signpost linking the two LP sides.',.085,'reprise-or-return'),
+    A('The drums take a featured turn','Shift your attention to the drum part as it moves from timekeeping into a more exposed, soloistic role.','Listen for the change in foreground: rhythmic propulsion becomes an event in its own right.','A percussion feature interrupts the vocal-led flow and gives the suite a new kind of energy.',.225,'solo-or-voice-entry'),
+    A('The band opens into a freer instrumental passage','Listen for the loosening of the regular pulse and the more spontaneous ensemble gestures.','Notice how the music briefly moves away from tightly shaped song phrases toward a freer exchange.','This loosening creates a strong contrast with the more composed vocal episodes around it.',.265,'major-transition'),
+    A('The folk melody re-emerges after the freer passage','Hear the more song-like melodic line return after the instrumental turbulence.','Notice how a recognisable folk character restores direction without making the long suite feel like a conventional verse and chorus.','A clear melodic episode reorients the listener after the freer instrumental writing.',.445,'reprise-or-return'),
+    A('A more exposed guitar colour changes the scene','Follow the guitar as the foreground shifts toward a more articulated, almost chamber-like instrumental colour.','Listen for the change in attack and sustain compared with the full electric-band sound.','A shift in instrumental colour is one of the suite’s main ways of marking a new episode.',.595,'new-instrumental-voice'),
+    A('The keyboard riff becomes a structural thread','Listen for the repeated keyboard figure and the way it helps connect the surrounding phrases.','The recurring riff supplies continuity while the melodic and harmonic surface keeps changing.','A repeated instrumental pattern can bind contrasting episodes without requiring a full thematic reprise.',.755,'motif-development'),
+    A('The harmony and melodic line gather into a rising sequence','Follow the increasingly connected phrases and the sense of harmonic movement pulling the music forward.','Notice how the passage builds momentum through continuation and changing harmonic support rather than a simple increase in volume.','This sustained forward motion prepares the final large-scale return.',.815,'harmonic-turn'),
+    A('Organ and strings colour the closing thematic return','Listen for the way the closing theme is reinforced and briefly re-coloured by the ensemble.','Notice the contrast between the familiar thematic shape and the changing instrumental frame around it.','The arrangement makes the final return feel both recognisable and newly weighted.',.93,'reprise-or-return'),
+    A('Acoustic guitar restores the folk identity','Notice the acoustic guitar entering as the next vocal section takes shape.','The guitar grounds the piece in a folk texture after the more dissonant, improvised instrumental passage.','The abrupt style change is one of the suite’s most important continuity devices.',.194,'new-instrumental-voice'),
+    A('The vocal section sustains its acoustic character','Follow the sung line and acoustic accompaniment as the section unfolds.','Listen for the contrast between the close, folk-like vocal sound and the larger electric-band episodes.','The sustained folk episode gives the second side a clear point of repose.',.31,'formal-boundary'),
+    A('The texture turns toward a darker, funereal pace','Notice the shift to a slower, heavier character in the next vocal material.','The weight of the pulse changes the way the words and melodic phrases land.','The sudden change of pace creates a new dramatic room inside the long suite.',.36,'meter-or-groove-shift'),
+    A('Earlier thematic material returns in a new setting','Listen for familiar melodic shapes appearing within the altered texture.','The returning figures are not simple repeats; their new pacing and instrumentation change their expressive effect.','The work’s unity comes from transformed recall across contrasting episodes.',.53,'motif-development'),
+    A('The instrumental writing becomes more dominant','Shift attention from the vocal line to the extended instrumental interplay.','Hear how the foreground passes between the flute, electric guitar and keyboards while the rhythm section supports the changing roles.','The suite returns to instrumental conversation after the slower vocal episode.',.65,'new-instrumental-voice'),
+    A('The closing stretch accelerates into continuous motion','Listen for the increasingly rapid, connected figures.','The fortspinnung-like passage creates forward drive through continuous melodic motion and a more urgent surface.','The acceleration prepares the final return by gathering energy across the ensemble.',.89,'major-transition'),
+    A('The opening vocal identity returns','Recognize the material that recalls the beginning of Part I.','The acoustic character and principal theme reappear after the long sequence of contrasting episodes.','The reprise makes the whole work feel circular and gives the final minutes their sense of homecoming.',.975,'reprise-or-return')
+   ]
+  }
+ };
+ Object.entries(extra).forEach(([profileId,tracks])=>Object.entries(tracks).forEach(([key,events])=>addEvents(profileId,key,events)));
+ // Kamasi's Clair de Lune is a long-form orchestral jazz interpretation of
+ // Debussy's theme. Replace the generic six-point skeleton with a progression
+ // that follows the theme's presentation, ensemble expansion, tenor feature,
+ // instrumental responses, climax and receding return.
+ addEvents('the-epic','clair de lune',[
+  A('Debussy’s melody appears in a spacious orchestral frame','Listen for the recognisable melodic contour before focusing on the accompaniment.','Notice how the theme is presented with more space and a different instrumental balance than the solo-piano original.','The opening establishes the source melody while preparing a new ensemble scale.',.035,'formal-boundary'),
+  A('The arrangement begins to colour the melody','Follow the way the harmonic support thickens around the familiar line.','Listen for the change from the exposed theme to a more layered orchestral sound.','The arrangement transforms the melody through timbre and voicing rather than replacing it.',.16,'texture-or-dynamic-shift'),
+  A('The ensemble states the theme with greater weight','Hear the melodic line as a collective statement rather than a single piano voice.','Notice the way the broader instrumental sound changes the phrase’s sense of scale.','This is the first large expansion of the theme’s identity.',.28,'major-transition'),
+  A('The tenor saxophone takes the melody into improvisation','Bring Kamasi Washington’s tenor into the foreground as the written theme gives way to a more personal line.','Follow how the solo preserves fragments of the melody while stretching its rhythm and contour.','The solo is connected to the composition’s source material, not a detached improvisation.',.40,'solo-or-voice-entry'),
+  A('The solo broadens its register and phrase length','Stay with the tenor as its phrases become more expansive.','Listen for the contrast between short melodic references and longer, sustained gestures.','The development comes through the soloist’s changing phrase scale and expressive intensity.',.52,'motif-development'),
+  A('The double bass takes a solo turn after the tenor','Shift from the tenor to Miles Mosley’s double bass; follow the change in attack as the line moves from plucked to bowed.','The plucked articulation gives way to a more sustained bowed sound, changing the solo’s weight and timbre while preserving its melodic continuity.','This hand-off makes the arrangement a sequence of contrasting foreground voices, not simply one long saxophone feature.',.63,'solo-or-voice-entry'),
+  A('The orchestral texture reaches a broader crest','Hear the arrangement gather more layers and dynamic weight.','Listen for the way the theme’s harmonic environment feels fuller and more emphatic.','The climax is prepared by the earlier expansion and solo development.',.74,'major-transition'),
+  A('The original piano frame returns around the melodic idea','Listen for the piano sound that bookends the larger ensemble and solo passages.','The piano framing makes the familiar Debussy melody feel newly intimate after the saxophone and bass features.','The return of the original piano colour closes the large instrumental detour and reconnects the arrangement to its source.',.85,'reprise-or-return'),
+  A('The ending releases the accumulated intensity','Listen for the way the ensemble settles and the final resonance is allowed to linger.','Notice how the music moves away from the largest sonority rather than trying to exceed it again.','The release gives the long arrangement a clear sense of arrival and afterglow.',.965,'formal-boundary')
+ ],true);
+ // Known Spotify catalogue-duration fallbacks for deterministic offline tests.
+ // Live Spotify duration_ms always takes precedence in buildMockGuide().
+ const durationFallbacks={
+  'dark-side-of-the-moon':{'speak to me':70000,'breathe (in the air)':167000,'on the run':231000,'time':354000,'the great gig in the sky':287000,'money':383000,'us and them':468000,'any colour you like':205000,'brain damage':230000,'eclipse':126000},
+  'the-epic':{'change of the guard':735000,'askim':754000,'isabelle':732000,'final thought':391000,'the next step':888000,'the rhythm changes':463000,'miss understanding':526000,'leroy and lanisha':564000,'re run':499000,'seven prayers':455000,'henrietta our hero':433000,'the magnificent 7':765000,'re run home':845000,'cherokee':494000,'clair de lune':667000,'malcolm’s theme':520000,'the message':668000},
+  'thick-as-a-brick':{'part i':1360000,'part ii':1270000},
+  'clair-de-lune':{'clair de lune':240000}
+ };
+ for(const [profileId,tracks] of Object.entries(durationFallbacks)){
+  const p=MOCK_ALBUMS.find(x=>x.id===profileId);for(const [key,durationMs] of Object.entries(tracks)){if(p?.tracks?.[key])p.tracks[key].durationMs=durationMs;}
+ }
+
+ // The two Thick as a Brick LP sides are continuous, densely sectional compositions.
+ // Their event maps are deliberately much richer than the six base landmarks.
+
  // Public coverage counters for the additional mock-only catalogue entries.
  window.SONIC_CATALOGUE_COUNTS={'dark-side-of-the-moon':Object.keys(MOCK_ALBUMS.find(x=>x.id==='dark-side-of-the-moon').tracks).length,'the-epic':Object.keys(MOCK_ALBUMS.find(x=>x.id==='the-epic').tracks).length,'thick-as-a-brick':Object.keys(MOCK_ALBUMS.find(x=>x.id==='thick-as-a-brick').tracks).length,'clair-de-lune':Object.keys(MOCK_ALBUMS.find(x=>x.id==='clair-de-lune').tracks).length};
  // Make the enrichment overlay available to the same live playback fixture resolver.
@@ -2029,6 +2473,7 @@ function buildMockGuide(body){
  };
 })();
 
+window.SONIC_MIE_MODEL={version:'1.1',eventWeights:MIE_EVENT_WEIGHTS,calibrateMomentDensity};
 window.buildSonicMockGuide = buildMockGuide;
 
 })();
