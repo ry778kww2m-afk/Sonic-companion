@@ -1,32 +1,42 @@
-# Sonic Companion v1.7 — architecture and release guardrails
+# Sonic Companion v1.9 — Spotify metadata matching and track-specific cue architecture
 
-## Catalogue and identity
+## Spotify metadata resolver
 
-- The six original local mock catalogues remain intact: Bach / Glenn Gould Goldberg Variations; Coltrane Plays the Blues; Miles Davis Kind of Blue; Coltrane Giant Steps; Keith Jarrett The Köln Concert; and Debussy Clair de lune.
-- Added the exact Spotify album `0v3T6fPnrptRXOrd854hIl`: Rachmaninoff: The Piano Concertos & Paganini Rhapsody (Deutsche Grammophon, 2023). The Spotify edition has 37 tracks: 12 separately listed concerto movements plus 25 separately listed Rhapsody sections.
-- The new album requires exact Spotify album ID, expected album/performer identity and exact movement title for the concerto mock fixtures. Rhapsody sections resolve through the curated 25-section catalogue using the exact album ID and track-title aliases (`Introduction`, `Tema`/`Theme`, `Var.`).
-- The live guide is always bound to the current Spotify track ID returned by `GET /me/player`. Search selection is only a requested destination. The guide changes only after Spotify confirms the requested ID.
-- Unknown or mismatched tracks show an unavailable state; they never inherit another album's cues.
+- The v1.8 matcher ranked fixture profiles using all credited track artists and the full display title before confirming the album. This caused featured artists (e.g. John Coltrane on Miles Davis's "So What") to influence album selection and remaster/feature suffixes to break exact title matching.
+- v1.9 resolves the profile from the Spotify album name plus its expected primary artist first. Track-level artist credits are used only to confirm the album identity, never to rank competing profiles.
+- Track titles are normalized for common Spotify decorations (`feat.`, `featuring`, `ft.`, remaster/year suffixes) before matching the canonical track entry.
+- Köln Concert titles normalize `The Köln Concert, Pt. I`, `Pt. IIa`, and equivalent `Part I` spellings to the canonical `Part I`, `Part IIa` track keys.
+- Album and artist identity are still required. The normalizer does not permit a title-only match or cross-album fallback; a same-title track on an unrelated album remains unavailable.
+- Regression coverage exercises the same `buildSonicMockGuide` path called by Spotify live auto-follow and controller-level integration tests with Spotify-shaped metadata.
 
-## Playback controller
+## Coltrane catalogue and cue model
 
-- App-originated Spotify Player API mutations are serialized against playback polling and one another. Polls arriving during a mutation are deferred.
-- A switch-level lock remains active from search selection through Spotify read-after-write confirmation. Duplicate taps and other transport controls are blocked while a switch is unresolved.
-- Search-to-play requires an active, non-restricted Spotify device. It first sends `PUT /me/player/play` using the documented album `context_uri` plus exact track `offset` when the result includes a Spotify album URI. If the old track (or no track) remains after four readbacks, it rechecks the same output device and makes one exact-track URI retry. It never sends Pause, Stop or Transfer from the search-selection path.
-- A successful HTTP 204 is treated as command acceptance, not proof that the track is playing. The app does not report success or switch the guide until `GET /me/player` confirms the exact requested track ID. A failed confirmation is surfaced as a failure; it is not represented as successful playback.
-- A selection of the already-current, paused track is treated as a request to resume/start it rather than a no-op.
-- When no active controllable device is reported, no playback mutation is sent. The app asks the user to select an output device in Spotify rather than silently transferring or stopping playback.
-- The visible clock is interpolated between Spotify `progress_ms` snapshots with `performance.now()`, clamped to track duration and frozen while paused. Spotify status polling runs every 2.5 seconds while visible; the UI clock updates every 250 ms.
-- 429 responses trigger backoff. Failed or missing playback reads clear stale track/guide/time state.
+- The former implementation defined a single five-item `profile.cues` array for the whole *Coltrane Plays the Blues* profile. The track entries held only short overviews, so each track inherited the same cue headings, same cue sequence and same approximate spacing. That was the root cause of the user's observation.
+- v1.9 gives each of the six original LP tracks its own `tracks[trackTitle].cues` array, track-specific overview, personnel, form and interpretive summary.
+- Each Coltrane track has 12 separate cue objects. The cues are unique in wording and subject, and use individually chosen progress fractions; no Coltrane track falls back to the profile-wide shared list.
+- The builder now respects all 12 track cues instead of truncating the array at five.
+- Each cue includes an attention prompt, a concrete listening detail, and a short explanation of why that feature matters. Full Guide lists every moment, while Focus mode shows the currently active one.
+- Full Guide renders each cue as an approximate `m:ss` timestamp plus percentage using Spotify's reported duration. Focus mode selects the cue with the interpolated Spotify progress.
+- The six tracks are: Blues to Elvin; Blues to Bechet; Blues to You; Mr. Day; Mr. Syms; Mr. Knight. The original release liner notes describe the recording session as October 24, 1960, list the quartet, and explicitly distinguish soprano/tenor saxophone and the two piano-less tracks.
+- Track-specific roles correct prior inaccuracies: Blues to Bechet = soprano, bass, drums (no piano); Blues to You = tenor, bass, drums (no piano); Mr. Syms = soprano with a central McCoy Tyner piano solo; Mr. Day = tenor quartet with a hypnotic bass/piano backing; Blues to Elvin = tenor with a near-gospel piano opening; Mr. Knight = tenor with a distinctive piano/rhythm figure and sparse theme.
+- Original Joe Goldberg liner notes are exposed as a source link in Full Guide, alongside MusicBrainz release/credits and Qobuz track credits/durations.
 
-## Timing and limitations
+## Cue timing: explicit limitation
 
-- Spotify provides playback progress, not audio-event recognition. The original mock cues are approximate progress phases, not score-verified musical-event timestamps.
-- The Rhapsody's 25 Spotify album segments are separately listed score sections. Each section guide covers the complete current album-segment track; the clock shows Spotify track progress only and does not claim to detect an event inside that track.
-- All content is local mock educational material. No OpenAI, external research, live reviews or paid API is called. This is not a source-verified music-research product.
-- Spotify's current Developer Reference says Player API command execution order is not guaranteed when used with other Player API endpoints. This build serializes its own calls, but cannot guarantee that Spotify's service, device firmware, network or third-party Spotify clients never fail.
-- Spotify's current Developer Reference also states that sound recordings may not be synchronized with visual media. Review the current Spotify Developer Terms and obtain platform guidance before public/commercial distribution of a playback-linked visual guide.
+- Cue order and wording are song-specific; cue time boundaries are still approximate fractions of the current Spotify track duration.
+- The app does not listen to or analyse the recording. Spotify's playback API returns the track ID and playback position, not the current musical event or instrument entrance.
+- Therefore a cue timestamp is a convenient prompt boundary, not a verified score/audio event timestamp. UI labels explicitly say approximate. The build must not imply detection of a specific instrument or event at an exact second.
+- To claim exact musical event timing, each cue boundary must be manually validated against the exact Spotify recording (or produced by a separately validated score/audio alignment workflow). This offline release does not claim that work is complete.
+
+## Existing catalogue and player protections
+
+- All six previous catalogues and the full Rachmaninoff 2023 DG catalogue are retained.
+- The Rachmaninoff album is tied to Spotify album ID `0v3T6fPnrptRXOrd854hIl`: 12 concerto movements and 25 individually listed Rhapsody sections.
+- Live guides are bound to the current Spotify track ID; search selection is only a requested destination.
+- Player mutations are serialized with polling and one another; a switch-level lock is held through confirmation; duplicate search taps are rejected.
+- Search-to-play never issues Pause, Stop or Transfer. An accepted HTTP 204 is not proof of playback; the current track must be read back and match the target ID.
+- Playback clock interpolates from Spotify progress using a monotonic clock. Pause, seek, duration bounds and stale-state clearing remain covered.
 
 ## Tests
 
-Run `npm test`. The suite includes build parsing, 22 original track fixtures, 12 new concerto movements, 25 Rhapsody section mappings, exact album-ID mismatch rejection, clock interpolation/pause/seek bounds, stale-guide invalidation, search-to-play command serialization, album-context plus exact-track-offset request shape, one-time URI fallback, duplicate-tap rejection, paused-same-track resume, deferred polling during player mutations, missing/restricted device safety, 403/429 and sync-loss paths.
+Run `npm test`. Tests parse all inline scripts, check all catalogue fixtures, require 12 unique cues for every Coltrane track, verify that all six have different cue sequences and dense cue coverage, assert track-specific instrument claims, and exercise the actual live auto-follow route and previous playback regression cases.

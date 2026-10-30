@@ -1,35 +1,52 @@
-SONIC COMPANION v1.7 — AUTOMATED QA REPORT
-Build date: 2026-10-29 (America/Sao_Paulo)
+SONIC COMPANION v1.9 — AUTOMATED QA REPORT
+Date: 2026-10-30 (America/Sao_Paulo)
+Scope: clean local package, embedded mock catalogue, and mocked Spotify Web API controller.
+No user credentials, actual Spotify account, live Spotify Web API, or physical playback device used.
 
-BUILD / SOURCE TESTS: PASS
-- All five inline JavaScript scripts parse.
-- Static element IDs are unique; required player, cue, Focus/Full and transport UI is present.
-- Playback clock interpolation, pause freeze, seek re-anchor, zero-valued performance samples and duration clamping pass.
-- Play/Pause label null-reference regression guard passes.
-- The six original local mock catalogues remain present; 22 original Spotify-like track fixtures pass exact live-controller route tests.
-- The added Deutsche Grammophon 2023 Rachmaninoff album is keyed to Spotify album ID 0v3T6fPnrptRXOrd854hIl.
-- All 12 Piano Concerto movements pass the automatic live-playback route tests.
-- All 25 Rhapsody album sections, including the Introduction, Tema and Variations 2–24, pass the curated live-playback route tests.
-- Wrong Spotify album ID, wrong artist, wrong album, same-title collisions and unmatched movements are rejected.
-- Unsupported tracks receive no fabricated cues or progress timeline.
+ROOT CAUSE FIXED
+- The previous fixture resolver ranked album profiles using the full track title and all credited artists before establishing album identity.
+- A featured John Coltrane credit in Miles Davis's "So What" could bias the selection toward a Coltrane profile.
+- Exact-title matching rejected Spotify display variants containing featured-artist suffixes, remaster labels, and Köln Concert part prefixes.
+- v1.9 selects the catalogue profile from the Spotify album name plus expected primary artist first; only then does it normalize and resolve the track title.
+- Featured artist credits are not used to rank albums.
+- Title normalization handles feat./featuring/ft. suffixes, common remaster/year suffixes, and Köln Concert Part/Pt. aliases.
+- Strict album + primary artist identity remains required; wrong-album and unrelated same-title recordings remain unavailable.
 
-CONTROLLER / INTEGRATION TESTS: PASS
-- Search-to-play calls are serialized against background playback polls and other player mutations.
-- Search selection does not send Pause, Stop or Transfer.
-- Album-context + exact-track-offset request shape is asserted when Spotify returns an album URI.
-- A 204 is not treated as proof of playback; current playback must confirm the exact requested track ID.
-- If the first start request is accepted but the old track (or no current item) remains after four readbacks, the code rechecks the same active device and makes one exact-track URI retry. The integration test verifies this fallback and verifies there is no Pause request.
-- Duplicate taps during the switch-confirmation window are rejected.
-- The old guide remains tied to the actual playing track until Spotify confirms the requested track.
-- Selecting the same track while paused issues a play/resume command and waits for confirmation.
-- Missing/restricted devices cause no player mutation or automatic device transfer.
-- No active playback, null current item, 403 errors and failed playback-state reads clear stale guide/clock state.
-- Clock follows the current Spotify progress snapshot, interpolates locally, freezes while paused and re-anchors on the next Spotify snapshot after a seek or track change.
+BUILD / STATIC TESTS: PASS
+- All five inline JavaScript blocks parse.
+- PWA files, unique static HTML IDs, v1.9 build marker, and GitHub Actions workflow present.
+- Playback clock interpolation, pause freeze, seek re-anchor, duration clamp, and Spotify 429 backoff pass.
+- All 36 curated fixture checks across seven catalogue profiles pass.
+- All six Coltrane Plays the Blues tracks retain 12 unique moments each (72 total), with track-specific prompts and no shared fallback cue list.
+- All 25 Rhapsody sections remain routed by the controller integration suite.
+- Fail-closed checks remain active for unknown track, wrong artist, wrong album, title collision, and unmatched movement.
+
+SPOTIFY METADATA REGRESSION TESTS: PASS
+- "So What (feat. John Coltrane, Cannonball Adderley & Bill Evans)" with Miles Davis and Kind of Blue metadata resolves to Kind of Blue.
+- "Giant Steps (2020 Remaster)" with John Coltrane and Giant Steps album metadata resolves to Giant Steps.
+- "The Köln Concert, Pt. I" resolves to Part I.
+- "The Köln Concert, Pt. IIa" resolves to Part IIa.
+- "Part IIb" with The Köln Concert (Live) metadata resolves to Part IIb.
+- A "So What (feat. John Coltrane)" result by P!nk on I'm Not Dead remains unavailable and cannot inherit the Kind of Blue guide.
+
+CONTROLLER INTEGRATION TESTS: PASS
+- External Clair de lune playback loads its track-specific guide.
+- Playback position activates the corresponding listening prompt.
+- Search-to-play remains serialized; duplicate taps are rejected, background polls are deferred during mutation, and guide changes only after exact target track ID confirmation.
+- Search-to-play failure paths, one guarded exact-URI retry, paused-track resume, inactive device, and missing device behavior pass.
+- All 24 fixtures across the original six requested album profiles resolve through the same automatic playback route used by Spotify polling.
+- All 12 concert movement tracks in the 2023 Deutsche Grammophon Rachmaninoff release resolve through automatic playback.
+- All 25 Rhapsody sections resolve through automatic playback, including Tema and variation aliases.
+- Failed sync, no current track, HTTP 200 with item=null, and Spotify 403 invalidate stale guide and playback identity.
 
 NOT CLAIMED / NOT TESTED
-- No live Spotify account, OAuth session, Connect device, speaker or iPhone playback test was available in this environment.
-- No live GitHub Pages deployment was made or verified.
-- No real iOS Safari visual/browser smoke pass is claimed.
-- Spotify's remote service, device firmware, network and third-party Spotify clients cannot be guaranteed by client code. The build serializes its own calls and verifies outcomes instead of assuming success.
-- Most original mock cues are approximate progress phases, not exact score-verified event timestamps or audio recognition. Rhapsody track notes cover each separate album-section track; Spotify progress is displayed within that track only.
-- Spotify's current developer policy states that sound recordings may not be synchronized with visual media. Review the policy and obtain platform guidance before distribution.
+- Live GitHub Pages deployment.
+- Live Spotify API metadata returned for the user's individual account or exact regional release IDs.
+- Live playback on the user's iPhone, speakers, or Spotify Connect device.
+- Exact audio-event or score synchronization. The cue clock follows Spotify-reported playback position; progress-based cue anchors are educational estimates, not acoustic recognition or score-verified event timestamps.
+- The UI remains an offline educational mock; no live research service is integrated.
+
+RELEASE DECISION
+- Automated regression suite: PASS.
+- Release ZIP extracted into a new empty directory; `npm test` passed from that extracted package.
+- Deployment and real-device smoke test: still required before production readiness.

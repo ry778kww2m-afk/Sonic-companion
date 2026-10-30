@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="sonic-companion-build" content="v1.7-full-catalogue-player-lock" />
+<meta charset="utf-8"><meta name="sonic-companion-build" content="v1.9-spotify-metadata-matching" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111318"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Sonic Companion">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Sonic Companion v1.7 — Album catalogue + serialized Spotify player operations</title>
+<title>Sonic Companion v1.9 — Spotify metadata matching</title>
 <style>
 :root{color-scheme:dark;--bg:#111318;--panel:#1a1d24;--panel2:#20242d;--text:#f4f2ec;--muted:#b4bac6;--line:#333946;--accent:#d8c18c;--accent2:#8fbea8;--warn:#dca76f}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#242832 0,#111318 54%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.48}main{max-width:920px;margin:auto;padding:18px 13px 50px}.build-banner{display:block;padding:9px 12px;margin:0 0 12px;border:1px solid #4d806b;border-radius:9px;background:#14231d;color:#c6ead8;font-size:.76rem;font-weight:800;letter-spacing:.035em;text-align:center}.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.13em;font-size:.73rem;font-weight:750}.hero{padding:10px 0 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.hero-copy{min-width:0}.hero h1{font-size:clamp(2rem,7vw,3.2rem);letter-spacing:-.045em;line-height:1.04;margin:.4rem 0 .8rem}.hero p{color:var(--muted);max-width:680px;margin:0;font-size:.95rem}.language{flex:0 0 auto;min-width:126px}.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid #3b574b;background:#1a2a24;color:#bde2ce;border-radius:999px;font-size:.78rem;padding:5px 10px;margin-top:12px}.dot{width:7px;height:7px;background:var(--accent2);border-radius:50%}.card{background:linear-gradient(150deg,rgba(32,36,45,.98),rgba(24,27,34,.98));border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 12px 30px #0002}.card h2{font-size:1.05rem;margin:0 0 10px;letter-spacing:-.01em}.muted{color:var(--muted)}.small{font-size:.84rem}.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.spread{justify-content:space-between}.btn{border:1px solid #515968;color:var(--text);background:#2a303b;border-radius:11px;padding:10px 12px;font:inherit;font-weight:650;cursor:pointer;min-height:44px}.btn.primary{background:var(--accent);border-color:var(--accent);color:#191915}.btn:disabled{opacity:.4;cursor:not-allowed}.btn.secondary{background:transparent}.btn:active{transform:scale(.99)}select,.field{display:block;width:100%;background:#151820;color:var(--text);border:1px solid #515968;border-radius:10px;padding:11px;font:inherit;min-height:44px;max-width:100%}label{font-weight:650;font-size:.9rem;display:block;margin:10px 0 7px}.note{font-size:.82rem;color:var(--muted);margin-top:9px}.error{color:#ffd2bd}.success{color:#bde2ce}.fine{color:var(--muted);font-size:.8rem}.now{padding:16px;border-radius:15px;background:linear-gradient(135deg,#2e302f,#24242b);border:1px solid #514c40}.now .kicker{font-size:.73rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent)}.now h2{font-size:clamp(1.25rem,5vw,1.8rem);line-height:1.18;margin:8px 0 10px}.now p{margin:9px 0;color:#e5e2da}.tag{display:inline-block;border:1px solid #555b65;border-radius:6px;padding:3px 7px;font-size:.75rem;color:#dadde4;margin:3px 5px 3px 0}.track-layout{display:grid;grid-template-columns:74px minmax(0,1fr);gap:12px;align-items:center;margin-top:12px}.track-art{width:74px;height:74px;object-fit:cover;border-radius:10px;background:#292d36;border:1px solid var(--line)}.track-meta{min-width:0}.track-meta h3{font-size:1.03rem;margin:0 0 3px;line-height:1.25;overflow-wrap:anywhere}.track-meta p{margin:0;color:var(--muted);font-size:.84rem;overflow-wrap:anywhere}.controls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:14px}.controls .btn{padding:9px 4px;font-size:.83rem;min-width:0}.playbutton{background:var(--accent)!important;color:#171815!important;border-color:var(--accent)!important}.vol-label{font-size:.8rem;color:var(--muted);align-self:center;margin-left:auto}.guide-selector{margin-top:12px}.guide-intro{color:var(--muted);font-size:.92rem;margin:6px 0 12px}.guide-list{display:grid;gap:7px;margin-top:12px}.cue{display:grid;grid-template-columns:52px minmax(0,1fr);gap:9px;align-items:start;border:1px solid var(--line);background:#191c23;border-radius:11px;padding:10px 11px;color:var(--text);text-align:left;cursor:pointer;font:inherit;width:100%}.cue.active{border-color:var(--accent);background:#2b2923}.cue .num{font-size:.72rem;color:var(--accent);font-weight:750}.cue .cue-title{font-size:.9rem;font-weight:650}.cue small{display:block;font-size:.77rem;color:var(--muted);font-weight:400;margin-top:2px}.source-row{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--line);padding-top:12px;margin-top:16px}.source-row a{color:var(--accent);font-size:.8rem}.callout{border-left:3px solid var(--warn);padding:10px 12px;background:#30271f;border-radius:0 10px 10px 0;color:#edd3b2;font-size:.85rem}.footer{font-size:.8rem;color:var(--muted);padding:10px 2px}.dynamic-guide{display:grid;gap:12px}.dynamic-guide h3{margin:16px 0 4px;font-size:1.02rem}.dynamic-guide h4{margin:0 0 6px}.dynamic-guide p{margin:7px 0;line-height:1.5}.dynamic-guide .dynamic-cue{border:1px solid var(--line);border-radius:12px;padding:13px;background:#191c23}.dynamic-guide .dynamic-cue.active{border-color:var(--accent);background:#2b2923}.dynamic-guide .dynamic-sources{display:grid;gap:8px}.dynamic-guide .dynamic-sources a{color:var(--accent);overflow-wrap:anywhere}.hidden{display:none!important}@media(max-width:500px){.hero{display:block}.language{margin-top:12px;max-width:190px}.controls{grid-template-columns:repeat(5,minmax(0,1fr))}.controls .btn{font-size:.75rem;padding:8px 2px}.card{padding:14px}}
@@ -64,7 +64,7 @@ body.focus-mode #liveCuePanel .guide-view-toggle{position:sticky;top:0;z-index:3
 </style>
 </head>
 <body><main>
-<div class="build-banner" id="buildBanner">SONIC COMPANION v1.7 · ALBUM-CATALOGUE + PLAYER-OPERATION SERIALIZATION · BUILD 2026-10-29</div>
+<div class="build-banner" id="buildBanner">SONIC COMPANION v1.9 · SPOTIFY METADATA MATCHING FIX · BUILD 2026-10-30</div>
 <section class="hero"><div class="hero-copy"><div class="eyebrow" id="eyebrow">Listening companion</div><h1>Sonic Companion</h1><p id="tagline">Your current Spotify track drives the guide, whether started here or directly in Spotify. The highlighted listening phase follows playback progress approximately; the app does not analyze audio or detect musical events.</p><div class="pill"><span class="dot"></span><span id="syncStatus">Not connected to Spotify</span></div></div><div class="language"><label for="languageSelect" id="languageLabel">Feedback language</label><select id="languageSelect"><option value="en">English</option><option value="pt">Português (Brasil)</option></select></div></section>
 <section class="card" id="playerCard">
 <div id="connectionSetup">
@@ -95,7 +95,7 @@ body.focus-mode #liveCuePanel .guide-view-toggle{position:sticky;top:0;z-index:3
     <div id="cueProgressCaption" class="cue-progress-caption"><span id="cueProgressStart">0:00</span><span id="cueProgressEnd">0:00</span></div>
   </article>
 </div>
-<div class="callout" id="scopeNote" style="margin-top:12px" data-en="After installing v1.7, tap Disconnect, then Connect / authorize controls again and approve playback-status + playback-control access. This is required to follow songs started directly in Spotify. Spotify Premium and an active playback device are required to start tracks from this app." data-pt="Depois de instalar a v1.7, toque em Desconectar e depois em Conectar / autorizar controles; aprove o acesso ao status e ao controle da reprodução. Isso é necessário para acompanhar músicas iniciadas diretamente no Spotify. Spotify Premium e um dispositivo de reprodução ativo são necessários para iniciar faixas pelo app.">After installing v1.7, tap Disconnect, then Connect / authorize controls again and approve playback-status + playback-control access. This is required to follow songs started directly in Spotify. Spotify Premium and an active playback device are required to start tracks from this app.</div>
+<div class="callout" id="scopeNote" style="margin-top:12px" data-en="After installing v1.9, tap Disconnect, then Connect / authorize controls again and approve playback-status + playback-control access. This is required to follow songs started directly in Spotify. Spotify Premium and an active playback device are required to start tracks from this app." data-pt="Depois de instalar a v1.9, toque em Desconectar e depois em Conectar / autorizar controles; aprove o acesso ao status e ao controle da reprodução. Isso é necessário para acompanhar músicas iniciadas diretamente no Spotify. Spotify Premium e um dispositivo de reprodução ativo são necessários para iniciar faixas pelo app.">After installing v1.9, tap Disconnect, then Connect / authorize controls again and approve playback-status + playback-control access. This is required to follow songs started directly in Spotify. Spotify Premium and an active playback device are required to start tracks from this app.</div>
 </section>
 <section class="card" id="trackPickerCard">
 <h2 data-en="Select a track and load its guide" data-pt="Selecione uma faixa e carregue o guia">Select a track and load its guide</h2>
@@ -151,7 +151,7 @@ body.focus-mode #liveCuePanel .guide-view-toggle{position:sticky;top:0;z-index:3
 </div>
 </div></section>
 <section class="card" id="exploreCard"><h2 data-en="Explore another album" data-pt="Explore outro álbum">Explore another album</h2><p class="muted small" data-en="Enter the artist and album yourself to search independent metadata and listener discussions. This prototype opens source searches; it does not pretend to generate a verified guide when source retrieval is not configured." data-pt="Digite você mesmo o artista e o álbum para pesquisar metadados independentes e conversas de ouvintes. Este protótipo abre pesquisas nas fontes; não finge gerar um guia verificado sem ter a recuperação de fontes configurada.">Enter the artist and album yourself to search independent metadata and listener discussions. This prototype opens source searches; it does not pretend to generate a verified guide when source retrieval is not configured.</p><label for="albumSearch" data-en="Artist and album / piece" data-pt="Artista e álbum / obra">Artist and album / piece</label><input class="field" id="albumSearch" placeholder="e.g. Bill Evans — Waltz for Debby" autocomplete="off"><div class="research-actions"><a id="mbSearch" href="https://musicbrainz.org/" target="_blank" rel="noopener">MusicBrainz metadata</a><a id="aotySearch" href="https://www.albumoftheyear.org/" target="_blank" rel="noopener">Community ratings</a><a id="redditSearch" href="https://www.reddit.com/" target="_blank" rel="noopener">Listener discussions</a></div><p class="source-disclaimer" data-en="For future dynamic guides, the app should send your typed query—not Spotify's live playback metadata—to a small serverless resolver. See ARCHITECTURE.md in the download for the cache-first design." data-pt="Para futuros guias dinâmicos, o app deve enviar a consulta que você digitou — e não os metadados da reprodução ao vivo do Spotify — a um resolvedor serverless. Veja ARCHITECTURE.md no pacote para o desenho com cache.">For future dynamic guides, the app should send your typed query—not Spotify's live playback metadata—to a small serverless resolver. See ARCHITECTURE.md in the download for the cache-first design.</p></section>
-<div class="footer" id="footerText">Personal prototype · v1.7 local mock build. The guide follows Spotify-reported current playback, whether started here or in Spotify. Cue boundaries are approximate progress-based estimates, not audio recognition or verified event timestamps. Mock content only; no live research or source verification.</div>
+<div class="footer" id="footerText">Personal prototype · v1.9 local mock build. The guide follows Spotify-reported current playback, whether started here or in Spotify. Cue boundaries are approximate progress-based estimates, not audio recognition or verified event timestamps. Mock content only; no live research or source verification.</div>
 </main>
 <script id="sonic-guide-data-inline">
 // Curated musical guide content. English and Brazilian Portuguese are authored as musical adaptations, not literal translations.
@@ -304,11 +304,924 @@ const MOCK_ALBUMS = [
   reception:{en:'MOCK DATA: no live listener reviews or ratings were retrieved. Do not treat this text as a measured consensus.',pt:'DADOS SIMULADOS: nenhuma avaliação ou nota de ouvintes foi consultada ao vivo. Não interprete este texto como consenso medido.'},
   balanced:{en:'This is a fixture, not a fresh source-verified discography entry. Track-level details and reception should be checked against reliable liner notes and sources in live mode.',pt:'Este é um exemplo de teste, não uma ficha discográfica verificada em fontes ao vivo. Detalhes por faixa e recepção devem ser conferidos em encartes confiáveis e fontes no modo real.'},
   form:{en:'A blues framework gives the soloist recognizable harmonic landmarks, but the performance is shaped by phrase length, rhythmic placement and the way the rhythm section answers each idea.',pt:'A estrutura de blues dá ao solista pontos de referência harmônicos reconhecíveis, mas a interpretação é moldada pelo tamanho das frases, pelo posicionamento rítmico e pela maneira como a seção rítmica responde a cada ideia.'},
+  sources:[
+   {label:'Joe Goldberg — original album liner notes (track-by-track descriptions and personnel)',url:'https://albumlinernotes.com/Coltrane_Plays_The_Blues.html'},
+   {label:'MusicBrainz — original release and track credits (1960 session)',url:'https://musicbrainz.org/release/42dde702-f437-3875-bd91-a4884a1bd929'},
+   {label:'Qobuz — track credits and durations',url:'https://www.qobuz.com/us-en/album/coltrane-plays-the-blues-john-coltrane/0603497894291'}
+  ],
   tracks:{
-   'blues to elvin':{overview:{en:'The title dedicates this blues to drummer Elvin Jones; hear the quartet as a conversation rather than a soloist with passive backing. Coltrane varies the length and density of his phrases while the rhythm section nudges the pulse forward.',pt:'O título dedica este blues ao baterista Elvin Jones; ouça o quarteto como uma conversa, não como solista acompanhado passivamente. Coltrane varia o tamanho e a densidade das frases enquanto a seção rítmica impulsiona o pulso.'}},
-   'blues to bechet':{overview:{en:'The title nods toward Sidney Bechet and the New Orleans blues tradition, while Coltrane speaks through his own tenor-saxophone vocabulary. Listen for how a familiar blues frame accommodates sharply shaped lines and modern harmonic color.',pt:'O título faz referência a Sidney Bechet e à tradição do blues de Nova Orleans, enquanto Coltrane fala por meio de seu próprio vocabulário no saxofone tenor. Perceba como uma estrutura familiar de blues comporta linhas incisivas e cores harmônicas modernas.'}},
-   'blues to you':{overview:{en:'This track offers a useful way to hear Coltrane turn small blues motives into longer arguments. Rather than following every note, notice how a phrase begins, repeats with a change and then pushes into new rhythmic territory.',pt:'Esta faixa permite ouvir Coltrane transformar pequenos motivos de blues em argumentos musicais mais longos. Em vez de seguir cada nota, observe como uma frase começa, se repete com uma mudança e depois avança para outro território rítmico.'}},
-   'mr. day':{overview:{en:'“Mr. Day” places a compact theme inside a swinging quartet groove. Listen to the difference between the written head and the more elastic soloing: the rhythm section keeps the blues recognizable while the saxophone stretches its syntax.',pt:'“Mr. Day” coloca um tema compacto dentro de um balanço de quarteto. Compare o tema composto com os solos mais elásticos: a seção rítmica mantém o blues reconhecível enquanto o saxofone estica sua sintaxe.'}}
+  "blues to elvin": {
+    "overview": {
+      "en": "Elvin Jones is the dedicatee, and the arrangement announces itself with a near-gospel piano figure before Coltrane enters on tenor. This is the album’s clearest piano-led opening: follow Tyner’s chordal call, Coltrane’s grounded blues language and the way Jones animates the spaces around the horn. Coltrane occasionally uses harmonics, adding a sharper edge without abandoning the blues.",
+      "pt": "Elvin Jones é o homenageado, e o arranjo se anuncia com uma figura de piano próxima do gospel antes da entrada de Coltrane no saxofone tenor. É a abertura mais claramente conduzida pelo piano no álbum: acompanhe a chamada harmônica de Tyner, a linguagem de blues mais direta de Coltrane e como Jones movimenta os espaços ao redor do sax. Coltrane usa harmônicos ocasionalmente, acrescentando uma aspereza especial sem abandonar o blues."
+    },
+    "personnel": {
+      "en": "John Coltrane — tenor saxophone; McCoy Tyner — piano; Steve Davis — bass; Elvin Jones — drums. The piano is present. The liner notes specifically describe a near-gospel piano opening and occasional saxophone harmonics.",
+      "pt": "John Coltrane — saxofone tenor; McCoy Tyner — piano; Steve Davis — baixo; Elvin Jones — bateria. O piano está presente. As notas originais descrevem especificamente uma abertura de piano próxima do gospel e o uso ocasional de harmônicos no saxofone."
+    },
+    "form": {
+      "en": "The track moves from a recognizable piano-led blues setup into Coltrane’s tenor statement and an increasingly conversational quartet texture. Listen for the balance between familiar blues phrasing and sharper harmonic colour, rather than expecting a sequence of generic saxophone-versus-band turns.",
+      "pt": "A faixa parte de uma introdução de blues conduzida pelo piano, passa à exposição de Coltrane no tenor e ganha uma textura de quarteto cada vez mais conversacional. Ouça o equilíbrio entre o fraseado reconhecível do blues e cores harmônicas mais incisivas, em vez de esperar uma sequência genérica de alternâncias entre sax e banda."
+    },
+    "emotionalReading": {
+      "en": "The dedication feels audible in the way the rhythm section gives Jones room to speak. The mood is earthy and direct, but the ensemble never becomes static: the piano’s gospel inflection and the drummer’s responses keep the blues in motion.",
+      "pt": "A dedicatória parece audível na maneira como a seção rítmica deixa espaço para Jones se expressar. O clima é terreno e direto, mas o conjunto nunca fica estático: a inflexão gospel do piano e as respostas do baterista mantêm o blues em movimento."
+    },
+    "cues": [
+      [
+        "The piano sets the room",
+        "O piano estabelece o ambiente",
+        "Start with McCoy Tyner’s opening figure before following the saxophone. Hear the gospel-tinged chord shape and its pulse.",
+        "Comece pela figura inicial de McCoy Tyner antes de acompanhar o saxofone. Perceba o desenho dos acordes com inflexão gospel e sua pulsação.",
+        "Stay with the piano’s chordal attack and the way the rhythm section frames it.",
+        "Acompanhe o ataque dos acordes do piano e como a seção rítmica os enquadra.",
+        "This opening is a defining fingerprint of this track, not a generic blues introduction.",
+        "Esta abertura é uma impressão digital desta faixa, não uma introdução genérica de blues.",
+        0.015
+      ],
+      [
+        "Tenor enters the blues",
+        "O tenor entra no blues",
+        "Shift your attention to Coltrane’s tenor when the horn takes over. Notice the contrast between the piano’s compact figure and the horn’s longer breath.",
+        "Mude a atenção para o tenor de Coltrane quando o sax assume o primeiro plano. Note o contraste entre a figura compacta do piano e a respiração mais longa do sax.",
+        "Listen for a grounded, direct blues statement rather than the very dense rapid-fire style associated with some later Coltrane performances.",
+        "Ouça uma afirmação de blues direta e enraizada, não o estilo extremamente denso e veloz associado a algumas apresentações posteriores de Coltrane.",
+        "The track’s identity comes from combining a familiar blues voice with Coltrane’s unmistakable intensity.",
+        "A identidade da faixa nasce da combinação entre uma voz familiar do blues e a intensidade inconfundível de Coltrane.",
+        0.085
+      ],
+      [
+        "A phrase with room to breathe",
+        "Uma frase com espaço para respirar",
+        "Follow one complete tenor phrase: where it begins, how it develops, and how Coltrane leaves space before the next thought.",
+        "Acompanhe uma frase completa do tenor: onde começa, como se desenvolve e como Coltrane deixa espaço antes da próxima ideia.",
+        "Notice the shape and release of the line, not just the number of notes.",
+        "Observe o contorno e a resolução da linha, não apenas a quantidade de notas.",
+        "A blues solo can feel conversational because the pauses are part of the sentence.",
+        "Um solo de blues pode soar conversacional porque as pausas fazem parte da frase.",
+        0.16
+      ],
+      [
+        "Tyner answers between lines",
+        "Tyner responde entre as frases",
+        "Listen away from the horn for a moment. Catch the piano’s chordal comments and how they respond to the saxophone rather than simply filling every gap.",
+        "Afaste por um momento a atenção do sax. Perceba os comentários harmônicos do piano e como respondem ao instrumento, em vez de preencher todos os espaços.",
+        "The piano is an active voice in this arrangement; it is not merely a constant harmonic carpet.",
+        "O piano é uma voz ativa neste arranjo; não é apenas um tapete harmônico constante.",
+        "Call-and-response makes the quartet feel like four musicians listening to one another.",
+        "A chamada e resposta fazem o quarteto soar como quatro músicos que realmente se escutam.",
+        0.245
+      ],
+      [
+        "Jones shapes the pulse",
+        "Jones molda a pulsação",
+        "Move to Elvin Jones: listen for how the ride cymbal, snare accents and fills make the beat breathe instead of locking it into a rigid pattern.",
+        "Volte-se para Elvin Jones: ouça como o prato de condução, os acentos de caixa e as viradas fazem o pulso respirar, em vez de prendê-lo a um padrão rígido.",
+        "Try following the drums without losing the underlying blues cycle.",
+        "Tente acompanhar a bateria sem perder o ciclo de blues que sustenta a música.",
+        "Jones’s rhythmic personality is central to why this dedication feels personal.",
+        "A personalidade rítmica de Jones é central para que esta dedicatória soe pessoal.",
+        0.335
+      ],
+      [
+        "The bass keeps the ground",
+        "O baixo mantém o chão",
+        "Follow Steve Davis’s bass line for a few bars. Hear how it marks harmonic direction while the piano and drums colour the surface.",
+        "Acompanhe a linha do baixo de Steve Davis por alguns compassos. Perceba como ela indica a direção harmônica enquanto piano e bateria colorem a superfície.",
+        "Separate the bass’s structural job from the more mobile activity above it.",
+        "Separe a função estrutural do baixo da atividade mais móvel que acontece acima dele.",
+        "The bass lets the other players stretch without losing the blues framework.",
+        "O baixo permite que os outros músicos se expandam sem perder a estrutura do blues.",
+        0.425
+      ],
+      [
+        "Listen for the harmonic edge",
+        "Ouça a aresta harmônica",
+        "Watch for a sharper, unusual saxophone colour. Coltrane occasionally uses harmonics here; listen for a thinner, more overtone-rich sound when it appears.",
+        "Fique atento a uma cor mais áspera e incomum no sax. Coltrane usa harmônicos ocasionalmente nesta faixa; ouça o som mais fino e rico em sobretons quando aparecer.",
+        "Do not mistake this timbral change for a new instrument: it is the tenor saxophone changing its sound.",
+        "Não confunda essa mudança tímbrica com a entrada de outro instrumento: é o sax tenor modificando o próprio som.",
+        "A brief change of tone can refresh a familiar blues phrase without changing the form.",
+        "Uma breve mudança de timbre pode renovar uma frase familiar de blues sem alterar a forma.",
+        0.515
+      ],
+      [
+        "The quartet becomes a conversation",
+        "O quarteto vira uma conversa",
+        "Listen across all four roles: tenor statement, piano punctuation, bass direction and drum response. Notice which voice catches your attention next.",
+        "Ouça as quatro funções juntas: afirmação do tenor, pontuação do piano, direção do baixo e resposta da bateria. Perceba qual voz atrai sua atenção em seguida.",
+        "The focus can shift without the music needing a new theme or a new section.",
+        "O foco pode mudar sem que a música precise de um novo tema ou seção.",
+        "This is the central pleasure of the performance: a stable blues frame with live interaction inside it.",
+        "Este é o prazer central da interpretação: uma estrutura estável de blues com interação viva dentro dela.",
+        0.61
+      ],
+      [
+        "Intensity without losing the blues",
+        "Intensidade sem perder o blues",
+        "As the tenor grows more insistent, keep one ear on the blues landmarks underneath. Does the phrasing become denser while the foundation remains recognizable?",
+        "À medida que o tenor ganha insistência, mantenha um ouvido nos marcos do blues por baixo. O fraseado fica mais denso enquanto a base continua reconhecível?",
+        "Compare the energy of the solo with the steadiness supplied by bass and drums.",
+        "Compare a energia do solo com a estabilidade oferecida pelo baixo e pela bateria.",
+        "The tension works because the listener can still feel the form beneath the freedom.",
+        "A tensão funciona porque o ouvinte ainda sente a forma por baixo da liberdade.",
+        0.705
+      ],
+      [
+        "The drummer nudges the next phrase",
+        "O baterista impulsiona a próxima frase",
+        "Listen for a drum accent or fill that seems to propel Coltrane into another statement. Notice how the saxophone’s response changes the energy again.",
+        "Ouça um acento ou virada que pareça impulsionar Coltrane para outra afirmação. Perceba como a resposta do sax muda novamente a energia.",
+        "Treat the rhythm section as an improvising partner, not background accompaniment.",
+        "Trate a seção rítmica como parceira de improvisação, não como acompanhamento de fundo.",
+        "The dedication to Elvin is most convincing when you hear the drummer actively shaping the soloist’s space.",
+        "A dedicatória a Elvin convence mais quando você percebe o baterista moldando ativamente o espaço do solista.",
+        0.8
+      ],
+      [
+        "Return to the opening fingerprint",
+        "Volte à marca da abertura",
+        "Recall the opening piano figure and compare it with the texture you hear now. What has become fuller, sharper or more animated?",
+        "Lembre-se da figura inicial do piano e compare-a com a textura que ouve agora. O que ficou mais cheio, incisivo ou animado?",
+        "Listen for how the ensemble gathers the performance toward its close without needing a new musical identity.",
+        "Perceba como o conjunto reúne a interpretação em direção ao fim sem precisar de uma nova identidade musical.",
+        "A return to the opening idea makes the track feel like a coherent conversation.",
+        "O retorno à ideia inicial faz a faixa soar como uma conversa coerente.",
+        0.895
+      ],
+      [
+        "Hear the final release",
+        "Ouça a liberação final",
+        "Stay with the last phrase and the decay after it. Let the ensemble’s final gesture finish before moving to the next track.",
+        "Acompanhe a última frase e sua ressonância. Deixe o gesto final do conjunto terminar antes de passar à próxima faixa.",
+        "Notice how the energy is released rather than treating the ending as a simple stop.",
+        "Perceba como a energia é liberada, em vez de tratar o final como uma simples interrupção.",
+        "The ending closes this particular quartet dialogue; it is not interchangeable with the album’s other blues.",
+        "O encerramento fecha este diálogo específico do quarteto; não é intercambiável com os outros blues do álbum.",
+        0.965
+      ]
+    ]
+  },
+  "blues to bechet": {
+    "overview": {
+      "en": "This is the album’s soprano saxophone feature. Coltrane is accompanied only by Steve Davis’s bass and Elvin Jones’s drums; McCoy Tyner’s piano is absent. The title honours Sidney Bechet. Coltrane begins with short, relatively simple phrases that evoke the older soprano tradition, expands into a more exploratory modern passage, then briefly returns toward the traditional style near the close.",
+      "pt": "Esta é a faixa do álbum em que o saxofone soprano ocupa o primeiro plano. Coltrane é acompanhado apenas pelo baixo de Steve Davis e pela bateria de Elvin Jones; o piano de McCoy Tyner está ausente. O título homenageia Sidney Bechet. Coltrane começa com frases curtas e relativamente simples que evocam a tradição antiga do soprano, avança para uma passagem moderna e exploratória e retorna brevemente ao estilo tradicional perto do final."
+    },
+    "personnel": {
+      "en": "John Coltrane — soprano saxophone; Steve Davis — bass; Elvin Jones — drums. McCoy Tyner does not play on this track. This is a trio, not the full piano-bass-drums quartet.",
+      "pt": "John Coltrane — saxofone soprano; Steve Davis — baixo; Elvin Jones — bateria. McCoy Tyner não toca nesta faixa. É um trio, não o quarteto completo com piano, baixo e bateria."
+    },
+    "form": {
+      "en": "The liner notes describe a clear stylistic arc: short phrases that evoke Sidney Bechet, a passage that displays Coltrane’s newer soprano vocabulary, and a brief return to a more traditional manner shortly before the close. The sparse trio texture makes this contrast especially audible.",
+      "pt": "As notas originais descrevem um arco estilístico claro: frases curtas que evocam Sidney Bechet, uma passagem que expõe o vocabulário mais novo de Coltrane no soprano e um breve retorno a uma maneira mais tradicional pouco antes do fim. A textura esparsa do trio torna esse contraste especialmente audível."
+    },
+    "emotionalReading": {
+      "en": "The tribute is not an imitation exercise. Coltrane acknowledges the instrument’s earlier voice, then lets that history become a springboard for his own language. The absence of piano leaves the soprano exposed and makes every breath, pause and turn more revealing.",
+      "pt": "A homenagem não é um exercício de imitação. Coltrane reconhece a voz anterior do instrumento e transforma essa história em ponto de partida para sua própria linguagem. A ausência do piano deixa o soprano exposto e torna cada respiração, pausa e inflexão mais reveladora."
+    },
+    "cues": [
+      [
+        "A different instrument, a different space",
+        "Outro instrumento, outro espaço",
+        "Listen to the soprano saxophone’s brighter, more penetrating register. Notice immediately that the piano is absent: the texture is saxophone, bass and drums.",
+        "Ouça o registro mais brilhante e penetrante do saxofone soprano. Perceba desde já que o piano está ausente: a textura é sax, baixo e bateria.",
+        "The trio leaves more open space around the horn than the piano-led tracks on the album.",
+        "O trio deixa mais espaço aberto ao redor do sax do que as faixas do álbum conduzidas pelo piano.",
+        "The instrumentation changes how you hear every phrase and pause.",
+        "A instrumentação muda a maneira como você ouve cada frase e pausa.",
+        0.012
+      ],
+      [
+        "A nod to Sidney Bechet",
+        "Uma referência a Sidney Bechet",
+        "Focus on the short, clear opening phrases. Hear how Coltrane evokes an earlier soprano-saxophone blues language without simply copying it.",
+        "Concentre-se nas frases iniciais curtas e claras. Perceba como Coltrane evoca uma linguagem mais antiga de blues no soprano sem simplesmente copiá-la.",
+        "Listen for direct melodic statements and space between them.",
+        "Ouça afirmações melódicas diretas e o espaço entre elas.",
+        "The dedication is expressed through style and phrasing, not only through the title.",
+        "A homenagem aparece no estilo e no fraseado, não apenas no título.",
+        0.09
+      ],
+      [
+        "Let the notes breathe",
+        "Deixe as notas respirarem",
+        "Stay with the soprano’s phrase endings. Notice the pauses and the way bass and drums continue to carry the motion while the horn rests.",
+        "Acompanhe os finais das frases do soprano. Note as pausas e como baixo e bateria continuam a conduzir o movimento enquanto o sax descansa.",
+        "Without piano chords, the bass provides the main harmonic signposts.",
+        "Sem os acordes do piano, o baixo fornece os principais marcos harmônicos.",
+        "Silence becomes part of the solo’s shape when the texture is this exposed.",
+        "O silêncio torna-se parte do contorno do solo quando a textura é tão exposta.",
+        0.175
+      ],
+      [
+        "Bass and drums, no piano safety net",
+        "Baixo e bateria, sem a rede de segurança do piano",
+        "Move your attention away from the soprano and follow Steve Davis and Elvin Jones together. Hear how bass motion and drum colour support the harmony without chordal piano.",
+        "Afaste a atenção do soprano e acompanhe Steve Davis e Elvin Jones juntos. Ouça como o movimento do baixo e a cor da bateria sustentam a harmonia sem o piano tocando acordes.",
+        "The bass is especially important for orientation in this piano-less trio.",
+        "O baixo é especialmente importante para a orientação neste trio sem piano.",
+        "The missing piano is a compositional choice that gives the track its own identity.",
+        "A ausência do piano é uma escolha de arranjo que dá identidade própria à faixa.",
+        0.265
+      ],
+      [
+        "The phrase language begins to stretch",
+        "A linguagem das frases começa a se expandir",
+        "Notice when the soprano lines become longer or more intricately connected than the opening statements. Follow the change in phrase length.",
+        "Perceba quando as linhas do soprano ficam mais longas ou mais intrincadas do que as afirmações iniciais. Acompanhe a mudança no tamanho das frases.",
+        "This is a shift in vocabulary, not a change of instrument or ensemble.",
+        "É uma mudança de vocabulário, não de instrumento ou conjunto.",
+        "The contrast makes the tribute feel like a conversation between jazz history and Coltrane’s present tense.",
+        "O contraste faz a homenagem soar como uma conversa entre a história do jazz e o presente de Coltrane.",
+        0.35
+      ],
+      [
+        "Hear the modern soprano edge",
+        "Ouça a aresta moderna do soprano",
+        "Listen for the more exploratory passage described in the original notes. Attend to the sharper turns and more searching line shape rather than looking for a familiar tune.",
+        "Ouça a passagem mais exploratória descrita nas notas originais. Preste atenção às inflexões mais incisivas e ao desenho mais investigativo da linha, em vez de procurar uma melodia familiar.",
+        "Coltrane broadens the instrument’s vocabulary while staying inside the blues setting.",
+        "Coltrane amplia o vocabulário do instrumento sem sair do contexto do blues.",
+        "The track’s central contrast is between an older soprano idiom and Coltrane’s newer approach.",
+        "O contraste central da faixa está entre um idioma antigo do soprano e a abordagem mais nova de Coltrane.",
+        0.445
+      ],
+      [
+        "Follow the contour, not the speed",
+        "Acompanhe o contorno, não a velocidade",
+        "Choose one ascending or descending gesture and follow where it leads. Notice whether the next phrase answers it, extends it or changes direction.",
+        "Escolha um gesto ascendente ou descendente e acompanhe seu destino. Perceba se a frase seguinte responde, amplia ou muda de direção.",
+        "The line’s shape can reveal development even when the harmony remains rooted in blues.",
+        "O contorno da linha pode revelar desenvolvimento mesmo quando a harmonia permanece enraizada no blues.",
+        "Listening for contour keeps the solo intelligible without chasing every note.",
+        "Ouvir o contorno mantém o solo inteligível sem perseguir cada nota.",
+        0.535
+      ],
+      [
+        "The rhythm section keeps the floor moving",
+        "A seção rítmica mantém o chão em movimento",
+        "Listen to Elvin Jones’s changing accents and Steve Davis’s bass movement beneath the soprano. The accompaniment is not just keeping time; it is shaping the space.",
+        "Ouça os acentos variáveis de Elvin Jones e o movimento do baixo de Steve Davis sob o soprano. O acompanhamento não está apenas marcando o tempo; está moldando o espaço.",
+        "With no piano, subtle changes in bass and drums become unusually exposed.",
+        "Sem o piano, pequenas mudanças no baixo e na bateria ficam especialmente expostas.",
+        "The trio’s openness is an active part of the composition’s character.",
+        "A abertura do trio é parte ativa do caráter da composição.",
+        0.625
+      ],
+      [
+        "A change in intensity",
+        "Uma mudança de intensidade",
+        "Compare the current line with the short phrases near the beginning. Is the soprano now more continuous, more searching or more emphatic?",
+        "Compare a linha atual com as frases curtas do início. O soprano está mais contínuo, mais investigativo ou mais enfático agora?",
+        "The music’s arc depends on changing phrase behaviour, not on adding another instrument.",
+        "O arco musical depende da mudança no comportamento das frases, não da entrada de outro instrumento.",
+        "A shift in rhetorical intensity can be as important as a harmonic change.",
+        "Uma mudança na intensidade retórica pode ser tão importante quanto uma mudança harmônica.",
+        0.715
+      ],
+      [
+        "The older voice reappears",
+        "A voz antiga reaparece",
+        "As the performance approaches its final stretch, listen for the brief return toward a more traditional soprano manner noted by the original liner writer.",
+        "À medida que a interpretação se aproxima do trecho final, ouça o breve retorno a uma maneira mais tradicional de tocar soprano, descrito pelo autor das notas originais.",
+        "Compare the phrasing now with the opening tribute-like gestures.",
+        "Compare o fraseado atual com os gestos iniciais de homenagem.",
+        "The return makes the tribute’s musical arc audible: reference, transformation, remembrance.",
+        "O retorno torna audível o arco musical da homenagem: referência, transformação, lembrança.",
+        0.805
+      ],
+      [
+        "Bass and drums close the frame",
+        "Baixo e bateria fecham a moldura",
+        "Listen for how the trio supports the final soprano statement and leaves the ending exposed rather than filling it with piano chords.",
+        "Ouça como o trio sustenta a última afirmação do soprano e deixa o encerramento exposto, sem preenchê-lo com acordes de piano.",
+        "The sparse arrangement is maintained through the end.",
+        "O arranjo esparso é mantido até o fim.",
+        "The ending belongs to the distinctive soprano trio sound of this track.",
+        "O final pertence à sonoridade particular do trio com soprano desta faixa.",
+        0.91
+      ],
+      [
+        "Let the last tone settle",
+        "Deixe a última nota assentar",
+        "Stay with the final note, its decay and the remaining space. Do not rush into the next track.",
+        "Fique com a última nota, sua ressonância e o espaço que resta. Não corra para a próxima faixa.",
+        "Notice how the track’s exposed texture makes the ending feel different from a piano-backed blues.",
+        "Perceba como a textura exposta faz o final soar diferente dos blues acompanhados pelo piano.",
+        "A quiet moment of attention completes the Sidney Bechet tribute.",
+        "Um último momento de atenção completa a homenagem a Sidney Bechet.",
+        0.97
+      ]
+    ]
+  },
+  "blues to you": {
+    "overview": {
+      "en": "A fast, hard-driving tenor-saxophone trio performance. McCoy Tyner does not play: Coltrane is supported by Steve Davis’s bass and Elvin Jones’s drums alone. Joe Goldberg’s original notes describe Coltrane stretching the blues harmonies toward the edge of atonality, with the excitement culminating in exchanges with Jones. That unusual climax—not a piano solo—is the key to following this track.",
+      "pt": "Uma interpretação rápida e vigorosa em trio com saxofone tenor. McCoy Tyner não toca: Coltrane é acompanhado apenas pelo baixo de Steve Davis e pela bateria de Elvin Jones. As notas originais de Joe Goldberg descrevem Coltrane levando as harmonias do blues em direção ao limite da atonalidade, com a excitação culminando em diálogos com Jones. Esse clímax incomum — não um solo de piano — é a chave para acompanhar a faixa."
+    },
+    "personnel": {
+      "en": "John Coltrane — tenor saxophone; Steve Davis — bass; Elvin Jones — drums. McCoy Tyner is absent. The piano-less trio gives Coltrane and Jones unusual room for direct exchange.",
+      "pt": "John Coltrane — saxofone tenor; Steve Davis — baixo; Elvin Jones — bateria. McCoy Tyner está ausente. O trio sem piano dá a Coltrane e Jones espaço incomum para um diálogo direto."
+    },
+    "form": {
+      "en": "The arrangement begins in a fast blues setting, then Coltrane stretches familiar harmonic landmarks toward more ambiguous and near-atonal territory. The original liner notes single out the climactic exchanges between tenor saxophone and Elvin Jones; follow that interaction as the piece’s defining structural event.",
+      "pt": "O arranjo começa em um contexto rápido de blues, depois Coltrane estica marcos harmônicos familiares em direção a um território mais ambíguo e quase atonal. As notas originais destacam os diálogos climáticos entre o sax tenor e Elvin Jones; acompanhe essa interação como o evento estrutural que define a faixa."
+    },
+    "emotionalReading": {
+      "en": "This is the album’s most combative and urgent of the four originally mocked tracks. With no piano to soften the texture, the tenor and drums can confront one another directly. The thrill lies in hearing the blues framework pushed nearly to breaking point, then made physical through rhythmic exchange.",
+      "pt": "Esta é a mais combativa e urgente das quatro faixas originalmente simuladas. Sem piano para suavizar a textura, tenor e bateria podem se confrontar diretamente. A emoção está em ouvir a estrutura do blues ser levada quase ao ponto de ruptura e depois ganhar corpo por meio do diálogo rítmico."
+    },
+    "cues": [
+      [
+        "A trio launches at full speed",
+        "O trio parte em alta velocidade",
+        "Hear the immediate forward drive. Identify the three roles: Coltrane’s tenor, Davis’s bass and Jones’s drums. There is no piano on this track.",
+        "Perceba o impulso imediato para a frente. Identifique as três funções: tenor de Coltrane, baixo de Davis e bateria de Jones. Não há piano nesta faixa.",
+        "The lean trio makes the fast pulse and the saxophone’s articulation especially exposed.",
+        "O trio enxuto deixa especialmente expostos o pulso rápido e a articulação do saxofone.",
+        "Knowing what is absent is part of hearing the arrangement accurately.",
+        "Saber o que está ausente também faz parte de ouvir o arranjo corretamente.",
+        0.012
+      ],
+      [
+        "Tenor lines ride the fast blues",
+        "As linhas do tenor percorrem o blues veloz",
+        "Follow one phrase through its full arc. Notice how quickly Coltrane moves from a compact motive into a longer, more continuous line.",
+        "Acompanhe uma frase por todo seu arco. Perceba como Coltrane passa rapidamente de um motivo compacto para uma linha mais longa e contínua.",
+        "Keep a sense of the blues cycle beneath the density of notes.",
+        "Mantenha a percepção do ciclo de blues por baixo da densidade de notas.",
+        "The speed is exciting, but the blues landmarks keep the improvisation coherent.",
+        "A velocidade empolga, mas os marcos do blues mantêm a improvisação coerente.",
+        0.085
+      ],
+      [
+        "The bass is your harmonic compass",
+        "O baixo é sua bússola harmônica",
+        "Shift focus to Steve Davis. Use the bass line to sense the underlying blues movement while the tenor begins to stretch the surface.",
+        "Mude a atenção para Steve Davis. Use a linha do baixo para sentir o movimento subjacente do blues enquanto o tenor começa a esticar a superfície.",
+        "The bass helps preserve orientation when the saxophone becomes harmonically adventurous.",
+        "O baixo ajuda a preservar a orientação quando o sax se torna harmonicamente aventureiro.",
+        "A stable reference makes the harmonic risk easier to recognize.",
+        "Uma referência estável torna o risco harmônico mais fácil de reconhecer.",
+        0.165
+      ],
+      [
+        "Jones pushes the energy forward",
+        "Jones empurra a energia adiante",
+        "Listen to Elvin Jones’s cymbal and snare activity. Notice how accents and fills intensify the motion without simply doubling the saxophone’s rhythm.",
+        "Ouça a atividade de prato e caixa de Elvin Jones. Perceba como acentos e viradas intensificam o movimento sem simplesmente copiar o ritmo do saxofone.",
+        "The drummer is an independent improvising voice in the trio.",
+        "O baterista é uma voz de improvisação independente no trio.",
+        "The performance feels urgent because the rhythm section adds its own ideas.",
+        "A interpretação soa urgente porque a seção rítmica acrescenta ideias próprias.",
+        0.25
+      ],
+      [
+        "The harmony starts to blur",
+        "A harmonia começa a se desfocar",
+        "Listen for Coltrane leaning away from the most obvious blues resolutions. The line may feel as though it is searching beyond the expected changes.",
+        "Ouça Coltrane se afastando das resoluções mais óbvias do blues. A linha pode parecer procurar caminhos além das mudanças esperadas.",
+        "The original liner notes describe the track as pushing blues harmony toward the limits of atonality.",
+        "As notas originais descrevem a faixa como um blues que leva a harmonia aos limites da atonalidade.",
+        "This is the key difference between a fast conventional blues and this particular performance.",
+        "Essa é a diferença essencial entre um blues rápido convencional e esta interpretação específica.",
+        0.34
+      ],
+      [
+        "Listen for tension without a piano",
+        "Ouça a tensão sem o piano",
+        "Notice how the absence of chordal piano changes the sound of the harmonic space. The bass outlines the ground, while tenor and drums carry much of the surface tension.",
+        "Perceba como a ausência de acordes de piano altera o espaço harmônico. O baixo delineia o chão, enquanto tenor e bateria carregam boa parte da tensão superficial.",
+        "Do not imagine piano chords that are not in the recording; follow the actual trio texture.",
+        "Não imagine acordes de piano que não estão na gravação; acompanhe a textura real do trio.",
+        "Accurate instrument awareness changes what you listen for.",
+        "Reconhecer corretamente os instrumentos muda aquilo que você procura ouvir.",
+        0.435
+      ],
+      [
+        "Coltrane stretches a blues idea",
+        "Coltrane estica uma ideia de blues",
+        "Take a short motive and listen to how Coltrane extends, sequences or reshapes it. Does the phrase keep a blues inflection while becoming less predictable?",
+        "Escolha um motivo curto e ouça como Coltrane o prolonga, encadeia ou remodela. A frase mantém uma inflexão de blues enquanto se torna menos previsível?",
+        "The original notes emphasize the way he stretches the blues harmonies rather than abandoning the blues altogether.",
+        "As notas originais enfatizam como ele estica as harmonias do blues, em vez de abandonar o blues por completo.",
+        "Transformation is more interesting than a simple move from tonal to atonal.",
+        "A transformação é mais interessante do que uma simples passagem do tonal ao atonal.",
+        0.53
+      ],
+      [
+        "The drummer becomes a foil",
+        "O baterista vira contraponto",
+        "Listen for a moment when Jones’s accents seem to challenge, answer or interrupt the tenor’s line. Keep both instruments in focus.",
+        "Ouça um momento em que os acentos de Jones parecem desafiar, responder ou interromper a linha do tenor. Mantenha os dois instrumentos em foco.",
+        "The liner notes specifically identify exchanges with Elvin Jones as the climax of the performance.",
+        "As notas originais identificam especificamente os diálogos com Elvin Jones como o clímax da interpretação.",
+        "This is not merely a solo over a beat; it is a two-way rhythmic argument.",
+        "Não é apenas um solo sobre uma batida; é um argumento rítmico de mão dupla.",
+        0.625
+      ],
+      [
+        "Enter the sax–drums exchange",
+        "Entre no diálogo entre sax e bateria",
+        "Give equal attention to Coltrane and Jones. Hear how a saxophone phrase can provoke a drum response, and how that response changes the next phrase.",
+        "Dê a mesma atenção a Coltrane e Jones. Perceba como uma frase do sax pode provocar uma resposta da bateria e como essa resposta muda a frase seguinte.",
+        "The excitement culminates in this interaction, according to the original liner notes.",
+        "Segundo as notas originais, a excitação culmina nessa interação.",
+        "The track’s climax is defined by the relationship between two improvisers.",
+        "O clímax da faixa é definido pela relação entre dois improvisadores.",
+        0.72
+      ],
+      [
+        "The exchange intensifies",
+        "O diálogo se intensifica",
+        "Listen to the balance of attack and space as the exchange develops. Notice whether the tenor dominates, the drums answer, or the roles momentarily reverse.",
+        "Ouça o equilíbrio entre ataque e espaço enquanto o diálogo se desenvolve. Perceba se o tenor domina, se a bateria responde ou se as funções momentaneamente se invertem.",
+        "The trio format turns rhythmic interaction into the main dramatic event.",
+        "O formato de trio transforma a interação rítmica no principal evento dramático.",
+        "Follow the conversation rather than waiting for a conventional piano or horn solo sequence.",
+        "Acompanhe a conversa, em vez de esperar uma sequência convencional de solos de piano e sax.",
+        0.81
+      ],
+      [
+        "The blues frame comes back into view",
+        "A estrutura do blues volta a aparecer",
+        "After the most searching exchanges, listen for any renewed sense of the underlying blues shape or a clearer point of arrival.",
+        "Depois dos diálogos mais investigativos, ouça se reaparece a sensação da estrutura subjacente do blues ou um ponto de chegada mais claro.",
+        "A return of orientation makes the earlier harmonic stretching easier to appreciate.",
+        "O retorno da orientação torna mais perceptível a exploração harmônica anterior.",
+        "The ending matters because it places the adventurous solo back in a larger form.",
+        "O final importa porque recoloca o solo aventureiro dentro de uma forma maior.",
+        0.9
+      ],
+      [
+        "Let the final energy resolve",
+        "Deixe a energia final se resolver",
+        "Stay with the last exchange and its release. Listen to how the trio finishes without the support of piano chords.",
+        "Acompanhe o último diálogo e sua liberação. Ouça como o trio termina sem o apoio de acordes de piano.",
+        "The stripped-back instrumentation is part of the track’s signature from beginning to end.",
+        "A instrumentação enxuta é parte da assinatura da faixa do início ao fim.",
+        "This closes the track’s distinctive journey from blues pulse to near-atonal tension and rhythmic exchange.",
+        "Isso encerra a jornada particular da faixa, do pulso de blues à tensão quase atonal e ao diálogo rítmico.",
+        0.97
+      ]
+    ]
+  },
+  "mr. day": {
+    "overview": {
+      "en": "The original liner notes describe “Mr. Day” as the album’s clearest example of Coltrane’s hypnotic use of bass and piano beneath his intense soloing. Its character is associated with an Eastern-minor sound world, also heard in “Dahomey Dance.” Unlike the two piano-less trio tracks, this one uses the full quartet: tenor saxophone, piano, bass and drums.",
+      "pt": "As notas originais descrevem “Mr. Day” como o exemplo mais claro do uso hipnótico que Coltrane faz do baixo e do piano sob seu solo intenso. Seu caráter está associado a um universo de sonoridade de menor oriental, também ouvido em “Dahomey Dance”. Diferentemente das duas faixas em trio sem piano, esta utiliza o quarteto completo: sax tenor, piano, baixo e bateria."
+    },
+    "personnel": {
+      "en": "John Coltrane — tenor saxophone; McCoy Tyner — piano; Steve Davis — bass; Elvin Jones — drums. This is the full quartet, with the piano and bass forming an important hypnotic foundation beneath Coltrane.",
+      "pt": "John Coltrane — saxofone tenor; McCoy Tyner — piano; Steve Davis — baixo; Elvin Jones — bateria. Este é o quarteto completo, com piano e baixo formando uma base hipnótica importante sob Coltrane."
+    },
+    "form": {
+      "en": "The track’s distinctive character comes from the repeated piano-and-bass foundation under Coltrane’s more intense tenor improvisation. The minor/Eastern-minor colour separates it from a straightforward major-key blues; follow the hypnotic accompaniment and the contrast between its repetition and the saxophone’s changing intensity.",
+      "pt": "O caráter distintivo da faixa vem da base repetida de piano e baixo sob a improvisação mais intensa de Coltrane no tenor. A cor menor/oriental-mena a distingue de um blues direto em tonalidade maior; acompanhe o acompanhamento hipnótico e o contraste entre sua repetição e a intensidade mutável do saxofone."
+    },
+    "emotionalReading": {
+      "en": "This track’s pull is hypnotic rather than purely explosive. The repeating low foundation gives the ear something stable to hold while Coltrane’s tenor becomes more urgent and searching above it. The tension comes from the contrast between an anchored groove and a restless solo voice.",
+      "pt": "A força desta faixa é hipnótica, não apenas explosiva. A base grave repetitiva oferece ao ouvido algo estável enquanto o tenor de Coltrane se torna mais urgente e investigativo acima dela. A tensão nasce do contraste entre um groove ancorado e uma voz solo inquieta."
+    },
+    "cues": [
+      [
+        "Find the hypnotic foundation",
+        "Encontre a base hipnótica",
+        "Start below the saxophone: hear the relationship between Tyner’s piano figure and Steve Davis’s bass. Let the repeated foundation settle into your ear.",
+        "Comece abaixo do saxofone: ouça a relação entre a figura de piano de Tyner e o baixo de Steve Davis. Deixe a base repetida se estabelecer no ouvido.",
+        "The original notes single out the hypnotic use of bass and piano on this track.",
+        "As notas originais destacam o uso hipnótico do baixo e do piano nesta faixa.",
+        "This recurring foundation is the track’s central fingerprint.",
+        "Essa base recorrente é a impressão digital central da faixa.",
+        0.015
+      ],
+      [
+        "Hear the minor-mode colour",
+        "Ouça a cor do modo menor",
+        "Notice the darker, Eastern-minor flavour of the theme. Avoid hearing this as the same kind of blues vocabulary as “Blues to Elvin.”",
+        "Perceba o sabor mais escuro de menor oriental do tema. Evite ouvi-lo como se fosse o mesmo vocabulário de blues de “Blues to Elvin”.",
+        "The liner notes compare its vein to Coltrane’s “Dahomey Dance.”",
+        "As notas originais comparam seu caráter ao de “Dahomey Dance”, de Coltrane.",
+        "Mode and melodic colour give the track a distinct identity within a blues album.",
+        "Modo e cor melódica dão identidade distinta à faixa dentro de um álbum de blues.",
+        0.09
+      ],
+      [
+        "The tenor enters the repeating frame",
+        "O tenor entra na moldura repetitiva",
+        "Follow Coltrane’s tenor as it moves above the recurring accompaniment. Hear the contrast between a stable low pattern and a more restless upper voice.",
+        "Acompanhe o tenor de Coltrane sobre o acompanhamento recorrente. Perceba o contraste entre um padrão grave estável e uma voz superior mais inquieta.",
+        "The arrangement makes repetition and improvisational freedom coexist.",
+        "O arranjo faz repetição e liberdade improvisada coexistirem.",
+        "The groove does not need to change constantly to keep the solo alive.",
+        "O groove não precisa mudar constantemente para manter o solo vivo.",
+        0.17
+      ],
+      [
+        "Let the bass hypnotize",
+        "Deixe o baixo hipnotizar",
+        "Focus only on Steve Davis for a short stretch. Track the low line’s repeated shape and how it anchors the harmony beneath the piano.",
+        "Concentre-se apenas em Steve Davis por um breve trecho. Acompanhe o desenho repetido da linha grave e como ela ancora a harmonia sob o piano.",
+        "The bass is part of the hypnotic effect, not merely a metronomic pulse.",
+        "O baixo faz parte do efeito hipnótico, não é apenas uma pulsação metronômica.",
+        "A repeating bass figure can make the solo’s smallest variations stand out.",
+        "Uma figura repetida de baixo pode destacar até as menores variações do solo.",
+        0.25
+      ],
+      [
+        "Tyner colours the pattern",
+        "Tyner colore o padrão",
+        "Bring the piano back into focus. Hear how Tyner’s chords and voicings shade the repeated foundation without erasing its hypnotic character.",
+        "Volte a atenção para o piano. Ouça como os acordes e as disposições de Tyner colorem a base repetida sem apagar seu caráter hipnótico.",
+        "Listen to the harmony as colour and weight, not only as chord changes.",
+        "Ouça a harmonia como cor e peso, não apenas como mudanças de acordes.",
+        "The piano and bass form a paired anchor for the tenor’s intensity.",
+        "Piano e baixo formam uma âncora dupla para a intensidade do tenor.",
+        0.335
+      ],
+      [
+        "The solo grows more urgent",
+        "O solo ganha urgência",
+        "Notice whether Coltrane’s phrases become more insistent, longer or denser over the same accompaniment. Compare the solo’s motion with the foundation’s repetition.",
+        "Perceba se as frases de Coltrane ficam mais insistentes, longas ou densas sobre o mesmo acompanhamento. Compare o movimento do solo com a repetição da base.",
+        "The liner notes describe the hypnotic backing behind Coltrane’s “instant frenzy.”",
+        "As notas originais descrevem o acompanhamento hipnótico sob o “frenesi instantâneo” de Coltrane.",
+        "The tension comes from the mismatch between a steady base and an increasingly restless solo.",
+        "A tensão nasce do contraste entre uma base estável e um solo cada vez mais inquieto.",
+        0.42
+      ],
+      [
+        "The drums keep the trance moving",
+        "A bateria mantém o transe em movimento",
+        "Listen for how Elvin Jones changes the surface with cymbal movement, snare punctuation or a fill while the bass-and-piano foundation stays recognizable.",
+        "Ouça como Elvin Jones modifica a superfície com o movimento dos pratos, pontuações de caixa ou viradas enquanto a base de baixo e piano permanece reconhecível.",
+        "The rhythm section can create motion through detail without discarding the underlying pattern.",
+        "A seção rítmica pode criar movimento pelos detalhes sem abandonar o padrão subjacente.",
+        "The arrangement’s hypnotic effect depends on controlled variation, not exact repetition.",
+        "O efeito hipnótico do arranjo depende de variação controlada, não de repetição exata.",
+        0.51
+      ],
+      [
+        "Listen across the four layers",
+        "Ouça as quatro camadas",
+        "Separate the roles for a moment: tenor improvisation, piano colour, bass foundation and drum motion. Then hear how they recombine as one groove.",
+        "Separe as funções por um momento: improvisação do tenor, cor do piano, base do baixo e movimento da bateria. Depois ouça como se recombinam em um único groove.",
+        "This track’s signature is the hypnotic piano-and-bass bed beneath the horn.",
+        "A assinatura desta faixa é a base hipnótica de piano e baixo sob o sax.",
+        "Layer awareness makes the ensemble texture more vivid.",
+        "Perceber as camadas torna a textura do conjunto mais vívida.",
+        0.6
+      ],
+      [
+        "The melody leans into its darker colour",
+        "A melodia acentua sua cor mais escura",
+        "Return to the minor-mode colour. Listen for how Coltrane’s line reinforces, bends or intensifies the Eastern-minor atmosphere above the repeated backing.",
+        "Volte à cor do modo menor. Ouça como a linha de Coltrane reforça, flexiona ou intensifica a atmosfera oriental-menor sobre o acompanhamento repetido.",
+        "The melodic colour is one of the reasons this track differs from the album’s more conventional blues feeling.",
+        "A cor melódica é uma das razões pelas quais esta faixa difere do sentimento de blues mais convencional do álbum.",
+        "A track-specific mode gives the improvisation a recognisable emotional landscape.",
+        "Um modo específico dá à improvisação uma paisagem emocional reconhecível.",
+        0.69
+      ],
+      [
+        "Repetition makes small changes matter",
+        "A repetição dá peso às pequenas mudanças",
+        "Because the accompaniment is hypnotic, listen for small differences: a chord voicing, a bass accent, a drum fill or a change in the tenor’s register.",
+        "Como o acompanhamento é hipnótico, ouça pequenas diferenças: uma disposição de acorde, um acento do baixo, uma virada de bateria ou uma mudança de registro do tenor.",
+        "A repeated pattern acts like a reference line against which changes become easier to hear.",
+        "Um padrão repetido funciona como linha de referência contra a qual as mudanças ficam mais fáceis de perceber.",
+        "The music rewards close attention to detail rather than waiting only for a large climax.",
+        "A música recompensa a atenção aos detalhes, em vez de esperar apenas um grande clímax.",
+        0.78
+      ],
+      [
+        "The ensemble carries the groove forward",
+        "O conjunto mantém o groove adiante",
+        "Listen to how piano, bass and drums continue to hold the frame while Coltrane’s line finds its final direction. Keep the full quartet in view.",
+        "Ouça como piano, baixo e bateria continuam sustentando a moldura enquanto a linha de Coltrane encontra sua direção final. Mantenha o quarteto completo em foco.",
+        "The accompaniment is not background: it is the structure that makes the solo’s intensity legible.",
+        "O acompanhamento não é pano de fundo: é a estrutura que torna legível a intensidade do solo.",
+        "The ending grows from the track’s own repeating foundation.",
+        "O encerramento cresce a partir da própria base recorrente da faixa.",
+        0.875
+      ],
+      [
+        "Feel the last release",
+        "Sinta a última liberação",
+        "Stay with the final phrase and the way the repeating backing releases its hold. Hear the difference between an intense solo voice and the stable frame beneath it.",
+        "Acompanhe a frase final e como o acompanhamento repetitivo libera sua sustentação. Perceba a diferença entre a voz solo intensa e a moldura estável sob ela.",
+        "The contrast between hypnosis and frenzy defines the track from beginning to end.",
+        "O contraste entre hipnose e frenesi define a faixa do início ao fim.",
+        "The final moments complete this particular eastern-minor quartet atmosphere.",
+        "Os momentos finais completam a atmosfera particular deste quarteto em menor oriental.",
+        0.97
+      ]
+    ]
+  },
+  "mr. syms": {
+    "overview": {
+      "en": "This sixth album track is an important omitted fixture. Coltrane plays soprano saxophone, and the arrangement is a minor blues with a bridge. The original liner notes say Coltrane limits himself to opening and closing melodic statements, framing a McCoy Tyner piano solo. That makes the piano solo—not an extended Coltrane improvisation—the central listening event.",
+      "pt": "Esta sexta faixa do álbum é um exemplo importante que faltava no catálogo. Coltrane toca saxofone soprano, e o arranjo é um blues menor com ponte. As notas originais dizem que Coltrane se limita às afirmações melódicas de abertura e encerramento, emoldurando um solo de piano de McCoy Tyner. Portanto, o solo de piano — não uma longa improvisação de Coltrane — é o evento central a acompanhar."
+    },
+    "personnel": {
+      "en": "John Coltrane — soprano saxophone; McCoy Tyner — piano; Steve Davis — bass; Elvin Jones — drums. Unlike “Blues to Bechet,” the piano is present and Tyner receives a featured solo.",
+      "pt": "John Coltrane — saxofone soprano; McCoy Tyner — piano; Steve Davis — baixo; Elvin Jones — bateria. Diferentemente de “Blues to Bechet”, o piano está presente e Tyner recebe um solo de destaque."
+    },
+    "form": {
+      "en": "A minor blues with a bridge. Coltrane’s soprano statements frame the performance, while McCoy Tyner’s piano solo occupies the central spotlight. Listen for the contrast between the horn’s concise thematic framing and the piano’s longer improvisational development.",
+      "pt": "Um blues menor com ponte. As afirmações de Coltrane no soprano emolduram a interpretação, enquanto o solo de piano de McCoy Tyner ocupa o centro. Ouça o contraste entre a moldura temática concisa do sax e o desenvolvimento improvisado mais longo do piano."
+    },
+    "emotionalReading": {
+      "en": "The track’s shape is unusually generous to the pianist: Coltrane sets the scene, steps back and lets Tyner develop the argument, then returns to close the frame. The soprano’s presence gives the piece a distinct colour, but the conversational centre belongs to the piano.",
+      "pt": "A forma da faixa dá espaço incomum ao pianista: Coltrane estabelece a cena, recua e deixa Tyner desenvolver o discurso, depois retorna para fechar a moldura. O soprano dá à peça uma cor distinta, mas o centro conversacional pertence ao piano."
+    },
+    "cues": [
+      [
+        "Soprano states the opening idea",
+        "O soprano apresenta a ideia inicial",
+        "Listen to Coltrane’s soprano saxophone as it introduces the melodic frame. Notice the clear, compact statement before the piano takes more space.",
+        "Ouça o saxofone soprano de Coltrane apresentando a moldura melódica. Perceba a afirmação clara e compacta antes de o piano ocupar mais espaço.",
+        "The liner notes describe Coltrane’s role as opening and closing melodic statements.",
+        "As notas originais descrevem a função de Coltrane como afirmações melódicas de abertura e encerramento.",
+        "The horn frames the track rather than dominating its entire duration.",
+        "O sax emoldura a faixa, em vez de dominar toda a sua duração.",
+        0.015
+      ],
+      [
+        "Hear the minor-blues character",
+        "Ouça o caráter de blues menor",
+        "Notice the darker minor-blues colour. Keep the bridge in mind as a change of route within the blues form.",
+        "Perceba a cor mais escura do blues menor. Tenha a ponte em mente como uma mudança de percurso dentro da forma de blues.",
+        "This is not the same arrangement as the piano-less soprano trio on “Blues to Bechet.”",
+        "Este não é o mesmo arranjo do trio de soprano sem piano em “Blues to Bechet”.",
+        "The formal bridge gives this track its own architecture.",
+        "A ponte formal dá a esta faixa sua própria arquitetura.",
+        0.1
+      ],
+      [
+        "Tyner takes the foreground",
+        "Tyner assume o primeiro plano",
+        "Shift from the soprano to McCoy Tyner. Listen for the transition into the piano feature and let the keyboard line take over your attention.",
+        "Mude do soprano para McCoy Tyner. Ouça a transição para o destaque do piano e deixe a linha do teclado assumir sua atenção.",
+        "The pianist is not merely comping; the piano solo is the central event described in the liner notes.",
+        "O pianista não está apenas acompanhando; o solo de piano é o evento central descrito nas notas originais.",
+        "The track changes its lead voice while retaining the same ensemble.",
+        "A faixa muda sua voz principal sem trocar de conjunto.",
+        0.19
+      ],
+      [
+        "Follow Tyner’s left and right hands",
+        "Acompanhe as duas mãos de Tyner",
+        "Listen to the relationship between the piano’s low-register support and upper-register ideas. Try following one hand at a time.",
+        "Ouça a relação entre o suporte grave do piano e as ideias no registro agudo. Tente acompanhar uma mão de cada vez.",
+        "The piano can carry bass-like weight and melodic freedom at once, even while Steve Davis remains on bass.",
+        "O piano pode carregar peso semelhante ao do baixo e liberdade melódica ao mesmo tempo, mesmo com Steve Davis no baixo.",
+        "Listening to the hands separately reveals how the solo is built.",
+        "Ouvir as mãos separadamente revela como o solo é construído.",
+        0.28
+      ],
+      [
+        "The bridge changes the route",
+        "A ponte muda o percurso",
+        "Listen for the bridge section within the minor blues. Notice how the harmonic direction and melodic feeling contrast with the main blues material.",
+        "Ouça a seção de ponte dentro do blues menor. Perceba como a direção harmônica e o sentimento melódico contrastam com o material principal do blues.",
+        "The original notes compare the bridge with the bridge of “Summertime.”",
+        "As notas originais comparam a ponte à ponte de “Summertime”.",
+        "A bridge creates contrast inside the form rather than simply extending the solo.",
+        "Uma ponte cria contraste dentro da forma, em vez de apenas prolongar o solo.",
+        0.37
+      ],
+      [
+        "The piano solo develops",
+        "O solo de piano se desenvolve",
+        "Follow the way Tyner develops an idea: a phrase, a response, a variation or a register change. Do not expect the soprano to return immediately.",
+        "Acompanhe como Tyner desenvolve uma ideia: uma frase, uma resposta, uma variação ou uma mudança de registro. Não espere que o soprano retorne imediatamente.",
+        "The central stretch belongs to the piano solo.",
+        "O trecho central pertence ao solo de piano.",
+        "The listener’s attention should move with the featured instrument, not stay fixed on Coltrane.",
+        "A atenção do ouvinte deve acompanhar o instrumento em destaque, não permanecer fixa em Coltrane.",
+        0.46
+      ],
+      [
+        "Hear Tyner’s harmonic punctuation",
+        "Ouça a pontuação harmônica de Tyner",
+        "Notice the density and weight of the piano chords around the improvised line. Listen for how voicings colour the minor-blues atmosphere.",
+        "Perceba a densidade e o peso dos acordes do piano ao redor da linha improvisada. Ouça como as disposições das notas colorem a atmosfera do blues menor.",
+        "Tyner’s chordal language is a major part of the track’s identity.",
+        "A linguagem harmônica de Tyner é parte importante da identidade da faixa.",
+        "Chord colour helps define the emotional character of the solo.",
+        "A cor dos acordes ajuda a definir o caráter emocional do solo.",
+        0.55
+      ],
+      [
+        "Bass and drums support the piano feature",
+        "Baixo e bateria sustentam o solo de piano",
+        "Move your attention to Davis and Jones. Hear how the bass supports harmonic direction while the drums shape the energy beneath Tyner.",
+        "Mude a atenção para Davis e Jones. Ouça como o baixo sustenta a direção harmônica enquanto a bateria molda a energia sob Tyner.",
+        "The rhythm section keeps the solo connected to the minor-blues form.",
+        "A seção rítmica mantém o solo conectado à forma de blues menor.",
+        "The piano solo is still a quartet conversation, not a keyboard recital.",
+        "O solo de piano continua sendo uma conversa de quarteto, não um recital de teclado.",
+        0.645
+      ],
+      [
+        "Listen for the solo’s landing points",
+        "Ouça os pontos de chegada do solo",
+        "Notice where Tyner’s lines settle or leave space. Follow the phrasing toward the point where the opening soprano voice can return.",
+        "Perceba onde as linhas de Tyner se assentam ou deixam espaço. Acompanhe o fraseado em direção ao ponto em que a voz inicial do soprano pode retornar.",
+        "The solo is framed by Coltrane’s opening and closing statements.",
+        "O solo é emoldurado pelas afirmações de abertura e encerramento de Coltrane.",
+        "The frame gives the improvisation a clear beginning and destination.",
+        "A moldura dá à improvisação um início e um destino claros.",
+        0.735
+      ],
+      [
+        "Soprano returns to close the frame",
+        "O soprano retorna para fechar a moldura",
+        "Listen for Coltrane’s return on soprano. Compare the closing statement with the opening and hear how the piano feature has changed the context.",
+        "Ouça o retorno de Coltrane no soprano. Compare a afirmação final com a abertura e perceba como o solo de piano mudou o contexto.",
+        "The return is a structural frame, not a new solo section of equal length.",
+        "O retorno é uma moldura estrutural, não uma nova seção de solo de igual duração.",
+        "Recognizing the return lets you hear the composition’s overall design.",
+        "Reconhecer o retorno permite ouvir o desenho geral da composição.",
+        0.825
+      ],
+      [
+        "The ensemble seals the minor-blues form",
+        "O conjunto sela a forma de blues menor",
+        "Stay with the closing exchanges and how piano, bass and drums support the final soprano phrase.",
+        "Acompanhe as trocas finais e como piano, baixo e bateria sustentam a última frase do soprano.",
+        "The ending completes the opening–piano solo–closing statement structure.",
+        "O final completa a estrutura abertura–solo de piano–afirmação de encerramento.",
+        "The track’s form becomes clear when you hear who leads each part.",
+        "A forma da faixa fica clara quando você percebe quem lidera cada parte.",
+        0.925
+      ],
+      [
+        "Let the closing colour linger",
+        "Deixe a cor final permanecer",
+        "Listen to the final decay and the last trace of soprano tone. Notice the difference from the piano-less soprano trio track earlier on the album.",
+        "Ouça a ressonância final e o último vestígio do som do soprano. Perceba a diferença em relação ao trio de soprano sem piano ouvido antes no álbum.",
+        "The same horn can play a very different role depending on the arrangement.",
+        "O mesmo instrumento pode exercer uma função muito diferente dependendo do arranjo.",
+        "This final comparison helps distinguish the album’s different ensemble designs.",
+        "Essa comparação final ajuda a distinguir os diferentes desenhos de conjunto do álbum.",
+        0.975
+      ]
+    ]
+  },
+  "mr. knight": {
+    "overview": {
+      "en": "The closing track is built around a distinctive piano figure and rhythmic basis that Joe Goldberg’s liner notes describe as a synthesis of West Indian and African music. The theme uses very few notes; Coltrane then adds an Indian-influenced melodic approach. Listen for the relationship between the repeating piano/rhythm pattern and the sparse, gradually developed horn idea.",
+      "pt": "A faixa de encerramento é construída em torno de uma figura de piano e de uma base rítmica distintivas, descritas nas notas de Joe Goldberg como uma síntese de música caribenha e africana. O tema utiliza pouquíssimas notas; Coltrane acrescenta então uma abordagem melódica influenciada pela música indiana. Ouça a relação entre o padrão repetido de piano e ritmo e a ideia de sax, esparsa e gradualmente desenvolvida."
+    },
+    "personnel": {
+      "en": "John Coltrane — tenor saxophone; McCoy Tyner — piano; Steve Davis — bass; Elvin Jones — drums. The piano figure and rhythm pattern are central to the arrangement.",
+      "pt": "John Coltrane — saxofone tenor; McCoy Tyner — piano; Steve Davis — baixo; Elvin Jones — bateria. A figura de piano e o padrão rítmico são centrais para o arranjo."
+    },
+    "form": {
+      "en": "A compact theme built from a minimum of notes sits over a distinctive piano figure and rhythmic foundation. The arrangement’s identity lies in rhythmic synthesis and gradual melodic elaboration, rather than a standard twelve-bar blues groove or a conventional chorus-like head.",
+      "pt": "Um tema compacto construído com o mínimo de notas repousa sobre uma figura de piano e uma base rítmica distintivas. A identidade do arranjo está na síntese rítmica e na elaboração melódica gradual, não em um groove convencional de blues de doze compassos ou em um tema semelhante a refrão."
+    },
+    "emotionalReading": {
+      "en": "The closing track invites a different kind of attention: repetition and a small melodic vocabulary make tiny changes feel consequential. The cross-cultural rhythmic character keeps the surface moving, while Coltrane’s line gradually changes the listener’s sense of the theme.",
+      "pt": "A faixa de encerramento convida a outro tipo de atenção: a repetição e o vocabulário melódico reduzido fazem pequenas mudanças parecerem importantes. O caráter rítmico de referências culturais cruzadas mantém a superfície em movimento, enquanto a linha de Coltrane transforma gradualmente a percepção do tema."
+    },
+    "cues": [
+      [
+        "A distinctive piano figure opens the frame",
+        "Uma figura distinta de piano abre a moldura",
+        "Start with McCoy Tyner’s piano figure and the rhythmic pattern around it. Do not assume this is a conventional swing-blues introduction.",
+        "Comece pela figura de piano de McCoy Tyner e pelo padrão rítmico ao redor. Não presuma que esta seja uma introdução convencional de blues em swing.",
+        "The liner notes identify the piano figure and rhythm as a synthesis of West Indian and African influences.",
+        "As notas originais identificam a figura de piano e o ritmo como uma síntese de influências caribenhas e africanas.",
+        "The opening groove is this track’s unmistakable signature.",
+        "O groove de abertura é a assinatura inconfundível desta faixa.",
+        0.015
+      ],
+      [
+        "Notice the sparse theme",
+        "Perceba o tema esparso",
+        "Listen for how few notes Coltrane needs to establish the theme. Hold the motif in your memory rather than expecting a long melody immediately.",
+        "Ouça quantas poucas notas Coltrane precisa para estabelecer o tema. Guarde o motivo na memória, em vez de esperar imediatamente uma melodia longa.",
+        "The original notes emphasize a theme using a bare minimum of notes.",
+        "As notas originais enfatizam um tema que utiliza o mínimo de notas.",
+        "A small motif gives later melodic changes more weight.",
+        "Um motivo pequeno dá mais peso às mudanças melódicas posteriores.",
+        0.1
+      ],
+      [
+        "The tenor begins to elaborate",
+        "O tenor começa a elaborar",
+        "Follow how Coltrane develops the short motif. Listen for added turns, repeated notes or changes in phrase length while the groove continues.",
+        "Acompanhe como Coltrane desenvolve o motivo curto. Ouça novas inflexões, notas repetidas ou mudanças no tamanho das frases enquanto o groove continua.",
+        "The melodic development grows from a deliberately compact starting point.",
+        "O desenvolvimento melódico cresce a partir de um ponto de partida deliberadamente compacto.",
+        "You can hear development without needing a complex theme at the outset.",
+        "É possível ouvir desenvolvimento sem precisar de um tema complexo desde o início.",
+        0.19
+      ],
+      [
+        "Hear the rhythmic synthesis",
+        "Ouça a síntese rítmica",
+        "Listen to the piano pattern and drums together. Notice the layered rhythmic feel described in the original notes as West Indian and African in character.",
+        "Ouça juntos o padrão do piano e a bateria. Perceba a sensação rítmica em camadas que as notas originais descrevem como caribenha e africana.",
+        "The groove is not just a generic jazz swing; its particular pattern is central to the composition.",
+        "O groove não é apenas um swing genérico de jazz; seu padrão particular é central à composição.",
+        "Recognizing the rhythmic foundation makes this closing track stand apart from the other blues pieces.",
+        "Reconhecer a base rítmica faz esta faixa de encerramento se destacar das outras peças de blues.",
+        0.28
+      ],
+      [
+        "The bass anchors the repeating pattern",
+        "O baixo ancora o padrão repetido",
+        "Follow Steve Davis’s low line against Tyner’s piano figure. Hear how the bass supports the rhythm while the piano adds a distinct upper-register pattern.",
+        "Acompanhe a linha grave de Steve Davis contra a figura de piano de Tyner. Ouça como o baixo sustenta o ritmo enquanto o piano acrescenta um padrão distinto no registro superior.",
+        "The piano and bass are doing related but different jobs in the arrangement.",
+        "Piano e baixo cumprem funções relacionadas, mas diferentes, no arranjo.",
+        "Separating the two layers makes the rhythmic design clearer.",
+        "Separar as duas camadas torna o desenho rítmico mais claro.",
+        0.37
+      ],
+      [
+        "Elvin changes the surface",
+        "Elvin muda a superfície",
+        "Listen to the drum accents and subdivisions around the repeating figure. Notice how Jones can make the groove feel more animated without replacing its basic identity.",
+        "Ouça os acentos e subdivisões da bateria ao redor da figura repetida. Perceba como Jones pode tornar o groove mais animado sem substituir sua identidade básica.",
+        "The pattern remains recognisable while the drummer changes its energy.",
+        "O padrão continua reconhecível enquanto o baterista altera sua energia.",
+        "Rhythmic variation can create development without a new chord sequence.",
+        "A variação rítmica pode criar desenvolvimento sem uma nova sequência de acordes.",
+        0.46
+      ],
+      [
+        "An Indian-influenced melodic turn",
+        "Uma inflexão melódica influenciada pela Índia",
+        "Listen for the more searching melodic approach Coltrane adds to the sparse theme. The liner notes specifically describe an Indian-influenced approach.",
+        "Ouça a abordagem melódica mais investigativa que Coltrane acrescenta ao tema esparso. As notas originais descrevem especificamente uma abordagem influenciada pela música indiana.",
+        "The melodic language adds another cultural reference to the rhythmic foundation.",
+        "A linguagem melódica acrescenta outra referência cultural à base rítmica.",
+        "This is why the piece feels like a blend rather than a standard blues head.",
+        "É por isso que a peça soa como uma mistura, e não como um tema padrão de blues.",
+        0.55
+      ],
+      [
+        "Return to the few-note motif",
+        "Volte ao motivo de poucas notas",
+        "Try to recognise the original small motif as Coltrane changes its shape. Listen for the seed of the theme inside the more elaborate line.",
+        "Tente reconhecer o pequeno motivo original enquanto Coltrane muda seu contorno. Procure a semente do tema dentro da linha mais elaborada.",
+        "The composition builds from a minimal melodic idea.",
+        "A composição se desenvolve a partir de uma ideia melódica mínima.",
+        "Remembering the opening lets you hear how far the melodic idea has travelled.",
+        "Lembrar a abertura permite perceber o quanto a ideia melódica percorreu.",
+        0.64
+      ],
+      [
+        "Piano and horn occupy different spaces",
+        "Piano e sax ocupam espaços diferentes",
+        "Listen to how the piano figure continues to define the ground while the tenor moves more freely above it. Keep both layers distinct.",
+        "Ouça como a figura do piano continua definindo o chão enquanto o tenor se movimenta com mais liberdade acima dela. Mantenha as duas camadas distintas.",
+        "The accompaniment is a recurring compositional anchor, not incidental backing.",
+        "O acompanhamento é uma âncora recorrente da composição, não um fundo incidental.",
+        "The contrast between repetition and melodic freedom keeps the texture engaging.",
+        "O contraste entre repetição e liberdade melódica mantém a textura envolvente.",
+        0.73
+      ],
+      [
+        "The rhythm becomes the hook",
+        "O ritmo se torna o gancho",
+        "For a moment, stop following the saxophone and let the piano-bass-drum pattern carry the listening. Notice the groove’s distinctive cyclical pull.",
+        "Por um momento, deixe de acompanhar o sax e permita que o padrão de piano, baixo e bateria conduza a escuta. Perceba a força cíclica característica do groove.",
+        "The track’s rhythmic foundation is as memorable as its melodic idea.",
+        "A base rítmica da faixa é tão marcante quanto sua ideia melódica.",
+        "A shift of listening focus reveals another layer of the composition.",
+        "Uma mudança de foco revela outra camada da composição.",
+        0.82
+      ],
+      [
+        "The theme gathers its final shape",
+        "O tema reúne sua forma final",
+        "Return to the tenor line and listen for how the sparse theme and its later elaborations now feel connected. Hear the opening motif in the context of everything that followed.",
+        "Volte à linha do tenor e ouça como o tema esparso e suas elaborações posteriores agora parecem conectados. Perceba o motivo inicial à luz de tudo o que veio depois.",
+        "The ending draws together the track’s minimal theme, rhythmic basis and melodic exploration.",
+        "O final reúne o tema mínimo, a base rítmica e a exploração melódica da faixa.",
+        "A closing synthesis makes the piece feel complete without needing a conventional blues climax.",
+        "Uma síntese final completa a peça sem exigir um clímax convencional de blues.",
+        0.91
+      ],
+      [
+        "Close the album on its own rhythmic identity",
+        "Encerre o álbum com sua identidade rítmica própria",
+        "Stay with the final piano-and-rhythm gesture and let its pulse settle. Notice how unlike the opening tracks this closing track feels.",
+        "Acompanhe o último gesto de piano e ritmo e deixe sua pulsação assentar. Perceba como esta faixa de encerramento soa diferente das primeiras do álbum.",
+        "The liner notes describe this piece as a unique blend of rhythmic and melodic influences.",
+        "As notas originais descrevem esta peça como uma combinação singular de influências rítmicas e melódicas.",
+        "The album closes by widening the meaning of what a blues-based composition can sound like.",
+        "O álbum termina ampliando o significado do que uma composição baseada no blues pode soar.",
+        0.975
+      ]
+    ]
+  }
   },
   cues:[
    ['Hear the blues frame','A estrutura de blues sustenta a liberdade do solista.','Notice recurring harmonic arrival points even as the saxophone phrases become more adventurous.','Observe os pontos de chegada harmônicos recorrentes mesmo quando as frases do sax ficam mais aventureiras.','A stable frame makes rhythmic risk easier to hear.','Uma estrutura estável torna os riscos rítmicos mais perceptíveis.'],
@@ -468,6 +1381,22 @@ const MOCK_ALBUMS = [
  },
 ];
 
+
+function normalizeFixtureTrackTitle(value,profileId){
+ let n=normalizeMockText(value)
+  .replace(/\b(?:feat|featuring|ft)\b.*$/,'')
+  .replace(/\b\d{4}\s+remaster(?:ed)?\b.*$/,'')
+  .replace(/\b(?:remaster(?:ed)?|mono|stereo|bonus track|radio edit|single version|official audio)\b.*$/,'')
+  .replace(/\s+\d{4}$/,'')
+  .replace(/\bvariatio\b/g,'variation').replace(/\bvariazione\b/g,'variation')
+  .trim();
+ if(profileId==='koln'){
+  n=n.replace(/^(?:the )?(?:koln|cologne) concert\s*/,'');
+  n=n.replace(/^(?:pt|part)\s*([ivxlc]+|\d+)\s*([abc])?$/,(_,part,suffix='')=>'part '+part+(suffix?' '+suffix:''));
+  n=n.replace(/^part\s+ii([abc])$/,'part ii $1');
+ }
+ return n;
+}
 function normalizeMockText(value){
  return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 }
@@ -479,17 +1408,12 @@ function buildMockGuide(body){
  const artist=Array.isArray(tr.artists)?tr.artists.map(String).join(', '):String(tr.artist||'');
  const album=String(tr.album||'');
  const query=String(body?.query||'');
- const titleNorm=normalizeMockText(title).replace(/\bvariatio\b/g,'variation').replace(/\bvariazione\b/g,'variation');
- const albumNorm=normalizeMockText(album);
- const profileSearchNorm=normalizeMockText(album+' '+query);
- const artistNorm=normalizeMockText(artist);
- // Strongly prefer track-title and album evidence. Artist-only matches are deliberately not enough
- // to claim a track-specific fixture (e.g. not every Debussy track is Clair de lune).
- const ranked=MOCK_ALBUMS.map(p=>{let score=0;for(const keyword of p.keywords){const k=normalizeMockText(keyword);if(!k)continue;if(titleNorm.includes(k))score=Math.max(score,100+k.length);if(profileSearchNorm.includes(k))score=Math.max(score,70+k.length);if(artistNorm.includes(k))score=Math.max(score,15+k.length);}return {profile:p,score};}).sort((a,b)=>b.score-a.score);
+ const titleNorm=normalizeFixtureTrackTitle(title,'');
  const normalizedTitle=normalizeMockText(title).replace(/\bvariatio\b/g,'variation').replace(/\bvariazione\b/g,'variation');
- let candidateProfile=ranked[0]?.score>=70?ranked[0].profile:null;
- // A title collision (for example a pop song called “So What”) must not inherit
- // a fixture from a different artist or album. Require independent artist/album evidence.
+ const albumNorm=normalizeMockText(album);
+ const artistNorm=normalizeMockText(artist);
+ // Resolve release identity FIRST. Track artist credits can include featured
+ // performers (e.g. Coltrane on Kind of Blue) and must never select an album.
  const trustedIdentity={
   goldberg:{artists:['glenn gould','johann sebastian bach','bach'],albums:['goldberg','bwv 988']},
   'coltrane-blues':{artists:['john coltrane'],albums:['coltrane plays the blues']},
@@ -499,22 +1423,21 @@ function buildMockGuide(body){
   'clair-de-lune':{artists:['debussy'],albums:['suite bergamasque']},
   'rachmaninoff-dg-2023':{artists:['yuja wang','los angeles philharmonic','gustavo dudamel','sergei rachmaninoff'],albums:['rachmaninoff the piano concertos paganini rhapsody'],spotifyAlbumId:'0v3T6fPnrptRXOrd854hIl'}
  };
- const identityRule=candidateProfile?trustedIdentity[candidateProfile.id]:null;
- // Fail closed: both artist and album/release identity must match. The DG 2023
- // multi-work album additionally requires its exact Spotify album ID.
- const artistConfirmed=Boolean(identityRule&&identityRule.artists.some(a=>artistNorm.includes(normalizeMockText(a))));
- const albumConfirmed=Boolean(identityRule&&identityRule.albums.some(a=>albumNorm.includes(normalizeMockText(a))));
- const albumIdConfirmed=Boolean(identityRule&&(!identityRule.spotifyAlbumId||tr.albumId===identityRule.spotifyAlbumId));
- const identityConfirmed=Boolean(identityRule&&artistConfirmed&&albumConfirmed&&albumIdConfirmed);
- if(!identityConfirmed)candidateProfile=null;
+ const albumCandidates=MOCK_ALBUMS.map(profile=>{
+  const rule=trustedIdentity[profile.id];if(!rule)return {profile,score:0};
+  const albumConfirmed=rule.albums.some(a=>albumNorm.includes(normalizeMockText(a)));
+  const albumIdConfirmed=!rule.spotifyAlbumId||tr.albumId===rule.spotifyAlbumId;
+  const artistConfirmed=rule.artists.some(a=>artistNorm.includes(normalizeMockText(a)));
+  return {profile,score:albumConfirmed&&albumIdConfirmed&&artistConfirmed?10000+Math.max(...rule.albums.map(a=>normalizeMockText(a).length)):0};
+ }).sort((a,b)=>b.score-a.score);
+ let candidateProfile=albumCandidates[0]?.score>0?albumCandidates[0].profile:null;
  let trackEntry=null;
  if(candidateProfile?.tracks){
-  // A matching album/artist is not enough. We require a known track-title entry
-  // before showing work-specific copy or a progress-based cue sequence.
   const entries=Object.entries(candidateProfile.tracks).sort((a,b)=>b[0].length-a[0].length);
+  const titleForLookup=normalizeFixtureTrackTitle(title,candidateProfile.id);
   for(const [key,val] of entries){
-   const keyNorm=normalizeMockText(key).replace(/\bvariatio\b/g,'variation').replace(/\bvariazione\b/g,'variation');
-   const titleForLookup=candidateProfile.id==='koln'?normalizedTitle.replace(/^part ii([abc])$/,'part ii $1'):normalizedTitle;
+   const keyNorm=normalizeFixtureTrackTitle(key,candidateProfile.id)
+    .replace(/\bvariatio\b/g,'variation').replace(/\bvariazione\b/g,'variation');
    const exactTitle=titleForLookup===keyNorm;
    const goldbergVariationSuffix=candidateProfile.id==='goldberg'&&/^variation \d+$/.test(keyNorm)&&titleForLookup.startsWith(keyNorm+' ');
    if(exactTitle||goldbergVariationSuffix){trackEntry=val;break;}
@@ -540,7 +1463,7 @@ function buildMockGuide(body){
   else if(profile.id==='koln') overview={en:`${title||'This section'} is part of Jarrett’s long-form solo piano improvisation. Follow repeating patterns, the separation of roles between the hands, and the changes of register that shape its larger arc.`,pt:`${title||'Esta parte'} integra a improvisação longa para piano solo de Jarrett. Acompanhe padrões repetidos, a divisão de funções entre as mãos e as mudanças de registro que moldam o arco maior.`};
   else overview={en:`This is a live-playback-linked sample for “${title||'the current track'}” by ${artist||'the detected artist'}. No recording-specific research is available for this track in the offline test build. Use the active cue to listen for foreground, pulse, interacting layers and changes in energy; these are listening prompts, not claims that a specific event occurs at this exact moment.`,pt:`Este é um exemplo vinculado à reprodução de “${title||'a faixa atual'}”, de ${artist||'artista detectado'}. A versão de teste offline não tem pesquisa específica desta gravação. Use o momento destacado para ouvir primeiro plano, pulsação, interação entre camadas e mudanças de energia; são sugestões de escuta, não afirmações de que um evento específico ocorre exatamente neste instante.`};
  }
- const rawCues=(trackEntry?.cues||profile.cues||[]).slice(0,5);
+ const rawCues=(trackEntry?.cues||profile.cues||[]).slice(0,16);
  const cues=rawCues.map((raw,i)=>mockCue(raw,i,rawCues.length));
  const name=title||profile.album;
  const guide={
@@ -548,9 +1471,9 @@ function buildMockGuide(body){
   overview,
   sources:profile.sources||[],
   context:profile.context,
-  form:profile.form,
-  emotionalReading:hasTrackSpecificGuide?{en:'Try listening in two passes: first follow the overall gesture and energy, then focus on one musical relationship—melody against accompaniment, soloist against rhythm section, or one hand against the other. This is an interpretive prompt, not a claim about how every listener must feel.',pt:'Experimente ouvir em duas passagens: primeiro acompanhe o gesto e a energia gerais; depois concentre-se numa relação musical — melodia e acompanhamento, solista e seção rítmica, ou uma mão em relação à outra. É uma sugestão interpretativa, não uma afirmação sobre como todo ouvinte deve se sentir.'}:{en:'No track-specific emotional interpretation is shown because a verified musical guide is unavailable for this selection.',pt:'Nenhuma interpretação emocional específica é exibida porque não há um guia musical verificado para esta seleção.'},
-  personnelAndRoles:profile.personnel,
+  form:trackEntry?.form||profile.form,
+  emotionalReading:trackEntry?.emotionalReading||(hasTrackSpecificGuide?{en:'Try listening in two passes: first follow the overall gesture and energy, then focus on one musical relationship—melody against accompaniment, soloist against rhythm section, or one hand against the other. This is an interpretive prompt, not a claim about how every listener must feel.',pt:'Experimente ouvir em duas passagens: primeiro acompanhe o gesto e a energia gerais; depois concentre-se numa relação musical — melodia e acompanhamento, solista e seção rítmica, ou uma mão em relação à outra. É uma sugestão interpretativa, não uma afirmação sobre como todo ouvinte deve se sentir.'}:{en:'No track-specific emotional interpretation is shown because a verified musical guide is unavailable for this selection.',pt:'Nenhuma interpretação emocional específica é exibida porque não há um guia musical verificado para esta seleção.'}),
+  personnelAndRoles:trackEntry?.personnel||profile.personnel,
   listenerReception:profile.reception,
   balancedNote:profile.balanced,
   cues,
@@ -609,7 +1532,7 @@ const SCOPES='user-read-playback-state user-read-currently-playing user-modify-p
 const STORAGE={client:'sc_spotify_client_id',token:'sc_spotify_access_token',refresh:'sc_spotify_refresh_token',expiry:'sc_spotify_token_expiry',verifier:'sc_spotify_code_verifier',state:'sc_spotify_oauth_state',language:'sc_language_v1'};
 let timer=null,cueClockTimer=null,pollInFlight=false,playerOperationInFlight=false,trackSwitchInFlight=false,deferredPollAfterPlayerOperation=false,pollBackoffUntil=0,lastPlaybackSnapshot=null,activePlaybackTrack=null,latestItem=null,latestDevice=null,playing=false,volumePercent=null,playbackProgressMs=null,selectedSearchTrack=null,dynamicGuide=null,dynamicGuideTrackId=null,dynamicCueIndex=-1,guideViewMode=(localStorage.getItem('sc_guide_view_mode')||'focus'),guideFromPlayback=false,pendingPlaybackTrackId=null,pendingPlaybackOriginId=null,pendingPlaybackDeadline=0,lang=localStorage.getItem(STORAGE.language)||'en',currentGuideKey='rhapsody',currentItemIndex=0,lastAutoTrackKey='',lastAutoLandmark=-1;
 let searchDebounceTimer=null,searchAbortController=null,searchSequence=0,lastSearchCount=0,selectedSearchTrackId=null;
-const I18N={en:{eyebrow:'Listening companion',tagline:'Your current Spotify track drives the guide, whether you started it here or directly in Spotify. The highlighted listening phase follows playback progress approximately; the app does not analyze audio or detect musical events.',connectHeading:'1 · Connect Spotify',connectCopy:'Connect Spotify to detect the current track and playback position. The guide follows tracks started here or directly in Spotify; timing is approximate and does not analyze the audio.',clientLabel:'Spotify Client ID',save:'Save Client ID',connect:'Connect / authorize controls',refresh:'Refresh status',disconnect:'Disconnect',openSpotify:'Open Spotify',redirect:'Add this exact Redirect URI to your Spotify Developer app:',nowPlaying:'Spotify now playing',previous:'Previous',play:'Play',pause:'Pause',next:'Next',volumeDown:'Vol −',volumeUp:'Vol +',notDetected:'Active Spotify device: not detected',guideHeading:'2 · Listening guides',guideMode:'Independent guide',guideIntro:'Your current Spotify track drives this guide. It updates when the track changes, including tracks started outside this app.',guideSelect:'Choose a guide',currentTopic:'Selected listening topic',footer:'Early personal prototype. Playback controls use Spotify’s Web API. Supported curated tracks automatically select the corresponding guide and approximate landmark from playback progress. Unknown recordings remain unmatched. Expansion should use independent metadata and properly licensed commentary sources.',notConnected:'Not connected to Spotify',connectPrompt:'Connect using your Spotify Developer Client ID. Playback status and controls require Spotify permissions; reconnect after upgrading the app.',nothingPlaying:'Nothing playing yet',trackPrompt:'Connect Spotify, then start music in Spotify.',waiting:'Waiting for Spotify status.',scope:'After installing v1.7, tap Disconnect, then Connect / authorize controls again and approve playback-status + playback-control access. This is required to follow songs started directly in Spotify. Spotify Premium and an active playback device are required to start tracks from this app.',playing:'Playing',paused:'Paused',volume:'Volume',noDevice:'Spotify returned no current track. If music is playing, tap Disconnect, then Connect / authorize controls and approve playback-status access. Also confirm the output device in Spotify.',statusError:'Spotify status needs attention',controlError:'Spotify control failed',controlsGranted:'Spotify connected. Remote controls are ready.',playbackUpdate:'Spotify status refreshed.',langEnglish:'English',langPortuguese:'Português (Brasil)',selectTopic:'Choose a topic from the list.',section:'SECTION',track:'TRACK'},pt:{eyebrow:'Companheiro de escuta',tagline:'Use este guia musical enquanto escuta. Faixas compatíveis do Spotify avançam o guia automaticamente conforme a reprodução.',connectHeading:'1 · Conectar ao Spotify',connectCopy:'Conecte o Spotify para controlar a reprodução à distância e ler a posição da faixa. Gravações compatíveis selecionam automaticamente o guia e um momento musical aproximado.',clientLabel:'Client ID do Spotify',save:'Salvar Client ID',connect:'Conectar / autorizar controles',refresh:'Atualizar status',disconnect:'Desconectar',openSpotify:'Abrir Spotify',redirect:'Adicione exatamente este URI de redirecionamento ao seu app no Spotify Developer:',nowPlaying:'Tocando no Spotify',previous:'Anterior',play:'Tocar',pause:'Pausar',next:'Próxima',volumeDown:'Vol −',volumeUp:'Vol +',notDetected:'Dispositivo ativo do Spotify: não detectado',guideHeading:'2 · Guias de escuta',guideMode:'Guia independente',guideIntro:'Escolha uma obra ou álbum. Uma faixa correspondente no Spotify seleciona o guia automaticamente; os momentos musicais acompanham a posição da reprodução.',guideSelect:'Escolha um guia',currentTopic:'Tópico de escuta selecionado',footer:'Protótipo pessoal. Faixas selecionadas acompanham automaticamente a posição de reprodução do Spotify e destacam momentos musicais aproximados. A cobertura é limitada aos guias incluídos. Verifique as políticas e permissões do Spotify antes de distribuir o recurso de sincronização.',notConnected:'Não conectado ao Spotify',connectPrompt:'Conecte usando o Client ID do Spotify Developer. Os controles exigem permissão para modificar a reprodução.',nothingPlaying:'Nada tocando no momento',trackPrompt:'Conecte o Spotify e inicie a música no próprio Spotify.',waiting:'Aguardando status do Spotify.',scope:'Depois de instalar a v1.7, toque em Desconectar e depois em Conectar / autorizar controles; aprove o acesso ao status e ao controle da reprodução. Isso é necessário para acompanhar músicas iniciadas diretamente no Spotify. Spotify Premium e um dispositivo ativo são necessários para iniciar faixas pelo app.',playing:'Tocando',paused:'Pausado',volume:'Volume',noDevice:'Nenhum dispositivo ativo do Spotify foi detectado. Inicie uma música no Spotify e atualize o status.',statusError:'O status do Spotify precisa de atenção',controlError:'O controle do Spotify falhou',controlsGranted:'Spotify conectado. Os controles estão prontos.',playbackUpdate:'Status do Spotify atualizado.',langEnglish:'English',langPortuguese:'Português (Brasil)',selectTopic:'Escolha um tópico na lista.',section:'SEÇÃO',track:'FAIXA',guideIntro:'Escolha uma obra ou álbum. Uma faixa correspondente no Spotify seleciona o guia automaticamente; os momentos musicais acompanham a posição da reprodução.'}};
+const I18N={en:{eyebrow:'Listening companion',tagline:'Your current Spotify track drives the guide, whether you started it here or directly in Spotify. The highlighted listening phase follows playback progress approximately; the app does not analyze audio or detect musical events.',connectHeading:'1 · Connect Spotify',connectCopy:'Connect Spotify to detect the current track and playback position. The guide follows tracks started here or directly in Spotify; timing is approximate and does not analyze the audio.',clientLabel:'Spotify Client ID',save:'Save Client ID',connect:'Connect / authorize controls',refresh:'Refresh status',disconnect:'Disconnect',openSpotify:'Open Spotify',redirect:'Add this exact Redirect URI to your Spotify Developer app:',nowPlaying:'Spotify now playing',previous:'Previous',play:'Play',pause:'Pause',next:'Next',volumeDown:'Vol −',volumeUp:'Vol +',notDetected:'Active Spotify device: not detected',guideHeading:'2 · Listening guides',guideMode:'Independent guide',guideIntro:'Your current Spotify track drives this guide. It updates when the track changes, including tracks started outside this app.',guideSelect:'Choose a guide',currentTopic:'Selected listening topic',footer:'Early personal prototype. Playback controls use Spotify’s Web API. Supported curated tracks automatically select the corresponding guide and approximate landmark from playback progress. Unknown recordings remain unmatched. Expansion should use independent metadata and properly licensed commentary sources.',notConnected:'Not connected to Spotify',connectPrompt:'Connect using your Spotify Developer Client ID. Playback status and controls require Spotify permissions; reconnect after upgrading the app.',nothingPlaying:'Nothing playing yet',trackPrompt:'Connect Spotify, then start music in Spotify.',waiting:'Waiting for Spotify status.',scope:'After installing v1.9, tap Disconnect, then Connect / authorize controls again and approve playback-status + playback-control access. This is required to follow songs started directly in Spotify. Spotify Premium and an active playback device are required to start tracks from this app.',playing:'Playing',paused:'Paused',volume:'Volume',noDevice:'Spotify returned no current track. If music is playing, tap Disconnect, then Connect / authorize controls and approve playback-status access. Also confirm the output device in Spotify.',statusError:'Spotify status needs attention',controlError:'Spotify control failed',controlsGranted:'Spotify connected. Remote controls are ready.',playbackUpdate:'Spotify status refreshed.',langEnglish:'English',langPortuguese:'Português (Brasil)',selectTopic:'Choose a topic from the list.',section:'SECTION',track:'TRACK'},pt:{eyebrow:'Companheiro de escuta',tagline:'Use este guia musical enquanto escuta. Faixas compatíveis do Spotify avançam o guia automaticamente conforme a reprodução.',connectHeading:'1 · Conectar ao Spotify',connectCopy:'Conecte o Spotify para controlar a reprodução à distância e ler a posição da faixa. Gravações compatíveis selecionam automaticamente o guia e um momento musical aproximado.',clientLabel:'Client ID do Spotify',save:'Salvar Client ID',connect:'Conectar / autorizar controles',refresh:'Atualizar status',disconnect:'Desconectar',openSpotify:'Abrir Spotify',redirect:'Adicione exatamente este URI de redirecionamento ao seu app no Spotify Developer:',nowPlaying:'Tocando no Spotify',previous:'Anterior',play:'Tocar',pause:'Pausar',next:'Próxima',volumeDown:'Vol −',volumeUp:'Vol +',notDetected:'Dispositivo ativo do Spotify: não detectado',guideHeading:'2 · Guias de escuta',guideMode:'Guia independente',guideIntro:'Escolha uma obra ou álbum. Uma faixa correspondente no Spotify seleciona o guia automaticamente; os momentos musicais acompanham a posição da reprodução.',guideSelect:'Escolha um guia',currentTopic:'Tópico de escuta selecionado',footer:'Protótipo pessoal. Faixas selecionadas acompanham automaticamente a posição de reprodução do Spotify e destacam momentos musicais aproximados. A cobertura é limitada aos guias incluídos. Verifique as políticas e permissões do Spotify antes de distribuir o recurso de sincronização.',notConnected:'Não conectado ao Spotify',connectPrompt:'Conecte usando o Client ID do Spotify Developer. Os controles exigem permissão para modificar a reprodução.',nothingPlaying:'Nada tocando no momento',trackPrompt:'Conecte o Spotify e inicie a música no próprio Spotify.',waiting:'Aguardando status do Spotify.',scope:'Depois de instalar a v1.9, toque em Desconectar e depois em Conectar / autorizar controles; aprove o acesso ao status e ao controle da reprodução. Isso é necessário para acompanhar músicas iniciadas diretamente no Spotify. Spotify Premium e um dispositivo ativo são necessários para iniciar faixas pelo app.',playing:'Tocando',paused:'Pausado',volume:'Volume',noDevice:'Nenhum dispositivo ativo do Spotify foi detectado. Inicie uma música no Spotify e atualize o status.',statusError:'O status do Spotify precisa de atenção',controlError:'O controle do Spotify falhou',controlsGranted:'Spotify conectado. Os controles estão prontos.',playbackUpdate:'Status do Spotify atualizado.',langEnglish:'English',langPortuguese:'Português (Brasil)',selectTopic:'Escolha um tópico na lista.',section:'SEÇÃO',track:'FAIXA',guideIntro:'Escolha uma obra ou álbum. Uma faixa correspondente no Spotify seleciona o guia automaticamente; os momentos musicais acompanham a posição da reprodução.'}};
 function tr(k){return (I18N[lang]||I18N.en)[k]||I18N.en[k]||k}
 function setMessage(text,cls=''){const e=$('connectionMessage');e.className='note '+cls;e.textContent=text;}
 function randomString(bytes=64){const arr=new Uint8Array(bytes);crypto.getRandomValues(arr);return Array.from(arr,b=>b.toString(16).padStart(2,'0')).join('')}
@@ -780,7 +1703,14 @@ async function control(action){
  }catch(e){$('playbackMessage').textContent=e.message||tr('controlError');$('playbackMessage').className='fine error';}
  finally{if(playerOperationInFlight)endPlayerOperation();setTimeout(()=>pollPlayback(),350);}
 }
-function disconnect(){if(timer)clearInterval(timer);if(cueClockTimer)clearInterval(cueClockTimer);timer=null;cueClockTimer=null;lastPlaybackSnapshot=null;activePlaybackTrack=null;guideFromPlayback=false;dynamicGuide=null;dynamicGuideTrackId=null;dynamicCueIndex=-1;document.body.classList.remove('focus-mode');$('dynamicListeningGuide').classList.add('hidden');$('liveCuePanel').classList.add('hidden');$('curatedGuideInterface').classList.remove('hidden');[STORAGE.token,STORAGE.refresh,STORAGE.expiry,STORAGE.verifier,STORAGE.state,'sc_spotify_granted_scopes'].forEach(k=>localStorage.removeItem(k));latestItem=null;latestDevice=null;playing=false;volumePercent=null;enableControls(false);renderPlayback();$('syncStatus').textContent=tr('notConnected');$('disconnectBtn').disabled=true;$('refreshBtn').disabled=true;setMessage(lang==='pt'?'Desconectado. O Client ID continua salvo neste dispositivo.':'Disconnected. The Client ID remains saved on this device.');}
+function disconnect(){
+ // Do not tear down credentials/state halfway through a Player API mutation or
+ // while a start/resume command is awaiting Spotify read-after-write confirmation.
+ if(playerOperationInFlight||trackSwitchInFlight){
+  setMessage(lang==='pt'?'Uma operação de reprodução está em andamento. Aguarde a confirmação antes de desconectar.':'A Spotify playback operation is in progress. Wait for confirmation before disconnecting.','error');
+  return;
+ }
+ if(timer)clearInterval(timer);if(cueClockTimer)clearInterval(cueClockTimer);timer=null;cueClockTimer=null;lastPlaybackSnapshot=null;activePlaybackTrack=null;guideFromPlayback=false;dynamicGuide=null;dynamicGuideTrackId=null;dynamicCueIndex=-1;document.body.classList.remove('focus-mode');$('dynamicListeningGuide').classList.add('hidden');$('liveCuePanel').classList.add('hidden');$('curatedGuideInterface').classList.remove('hidden');[STORAGE.token,STORAGE.refresh,STORAGE.expiry,STORAGE.verifier,STORAGE.state,'sc_spotify_granted_scopes'].forEach(k=>localStorage.removeItem(k));latestItem=null;latestDevice=null;playing=false;volumePercent=null;enableControls(false);renderPlayback();$('syncStatus').textContent=tr('notConnected');$('disconnectBtn').disabled=true;$('refreshBtn').disabled=true;setMessage(lang==='pt'?'Desconectado. O Client ID continua salvo neste dispositivo.':'Disconnected. The Client ID remains saved on this device.');}
 function renderGuide(){const guide=window.SONIC_GUIDES[currentGuideKey];if(!guide)return;$('guideIntroTop').textContent=tr('guideIntro');$('albumIntro').textContent=guide.intro[lang]||guide.intro.en;$('guideSelect').value=currentGuideKey;const entries=guide.sections||guide.tracks||[];const root=$('guideList');root.textContent='';entries.forEach((entry,i)=>{const b=document.createElement('button');b.type='button';b.className='cue'+(i===currentItemIndex?' active':'');b.dataset.i=String(i);const title=(entry.title&&typeof entry.title==='object'?entry.title[lang]:entry.title)||'';const tempo=entry.tempo?(entry.tempo[lang]||entry.tempo.en):'';b.innerHTML='<span class="num">'+String(i+1).padStart(2,'0')+'</span><span><span class="cue-title"></span><small></small></span>';b.querySelector('.cue-title').textContent=title;b.querySelector('small').textContent=tempo||(lang==='pt'?'Tópico de escuta':'Listening topic');b.addEventListener('click',()=>{currentItemIndex=i;renderGuide()});root.appendChild(b)});const item=entries[currentItemIndex]||entries[0];if(item)renderGuideItem(item,currentItemIndex);const src=$('guideSources');src.textContent='';(guide.sources||[]).forEach(s=>{const a=document.createElement('a');a.href=s.url;a.target='_blank';a.rel='noopener';a.textContent=s.label;src.appendChild(a)});}
 function renderGuideItem(s,index){const title=s.title&&typeof s.title==='object'?s.title[lang]:s.title;const roles=s.roles?(s.roles[lang]||s.roles.en):[];$('cueCounter').textContent=(currentGuideKey==='rhapsody'?tr('section'):tr('track'))+' '+String(index+1).padStart(2,'0')+' / '+String((window.SONIC_GUIDES[currentGuideKey].sections||window.SONIC_GUIDES[currentGuideKey].tracks).length);$('currentTopicLabel').textContent=tr('currentTopic');$('guideNoteTitle').textContent=title||tr('selectTopic');$('roleTags').textContent='';(roles||[]).forEach(r=>{const sp=document.createElement('span');sp.className='tag';sp.textContent=r;$('roleTags').appendChild(sp)});$('nowListen').textContent=s.listen?.[lang]||s.listen?.en||'';$('nowWhy').textContent=s.why?.[lang]||s.why?.en||'';$('nowDeep').textContent=s.deep?.[lang]||s.deep?.en||'';}
 function chooseGuide(){currentGuideKey=$('guideSelect').value;currentItemIndex=0;lastAutoTrackKey='';lastAutoLandmark=-1;renderGuide()}
@@ -834,6 +1764,8 @@ async function selectAndPlayTrack(track){
 async function playSelectedTrackInSpotify(){
  const track=selectedSearchTrack;
  if(!track){$('trackSearchStatus').textContent=lang==='pt'?'Selecione uma faixa primeiro.':'Select a track first.';return;}
+ if(!track.id||!/^spotify:track:[A-Za-z0-9]+$/.test(String(track.uri||''))){$('trackSearchStatus').textContent=lang==='pt'?'A faixa selecionada não contém um ID/URI válido do Spotify. Nenhum comando foi enviado.':'The selected result has no valid Spotify track ID/URI. No playback command was sent.';return;}
+ if(track.is_playable===false){$('trackSearchStatus').textContent=lang==='pt'?'Esta faixa não está disponível para reprodução na sua região/conta. A reprodução atual não foi alterada.':'This track is not playable for your account/market. Current playback was left unchanged.';return;}
  if(playerOperationInFlight||trackSwitchInFlight){$('trackSearchStatus').textContent=lang==='pt'?'Uma operação de reprodução já está em andamento. Aguarde.':'A playback operation is already in progress. Please wait.';return;}
  // Hold this lock through Spotify's read-after-write confirmation window. This
  // prevents a second search tap from racing a command that has not resolved yet.
@@ -858,9 +1790,13 @@ async function playSelectedTrackInSpotify(){
   // Exactly one Start/Resume request. No pause, stop, or transfer request is ever
   // emitted by track selection. The current track state is verified separately.
   const albumUri=track.album?.uri;
-  const requestBody=albumUri&&albumUri.startsWith('spotify:album:')
+  // If the result is the track Spotify already reports but it is paused, send
+  // an empty Start/Resume body so Spotify resumes the same context/position.
+  // For a new song, use album context + exact track offset where possible.
+  const samePausedTrack=latestItem?.id===track.id&&!playing;
+  const requestBody=samePausedTrack?{}:(albumUri&&albumUri.startsWith('spotify:album:')
    ?{context_uri:albumUri,offset:{uri:track.uri},position_ms:0}
-   :{uris:[track.uri],position_ms:0};
+   :{uris:[track.uri],position_ms:0});
   const res=await fetch('https://api.spotify.com/v1/me/player/play?device_id='+encodeURIComponent(target.id),{
    method:'PUT',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(requestBody)
   });
@@ -958,7 +1894,7 @@ async function researchSelectedTrack(options={}){
   // Produce the same response contract as the mock Worker, locally. This intentionally cannot call a paid API.
   const body={query:$('albumSearch').value.trim()||[track.artists?.map(a=>a.name).join(', '),track.name,track.album?.name].filter(Boolean).join(' — '),track:{title:track.name,artists:(track.artists||[]).map(a=>a.name),album:track.album?.name,albumId:track.album?.id,spotifyTrackId:track.id,duration_ms:track.duration_ms},language:lang};
   await new Promise(resolve=>setTimeout(resolve,140));
-  if(typeof window.buildSonicMockGuide!=='function')throw new Error('Local mock fixture was not loaded. Please ensure the root index.html was replaced with build v1.7.');
+  if(typeof window.buildSonicMockGuide!=='function')throw new Error('Local mock fixture was not loaded. Please ensure the root index.html was replaced with build v1.9.');
   const data=window.buildSonicMockGuide(body);
   if(requestId!==researchRequestSequence)return;
   if(!data?.guide||!Array.isArray(data.guide.cues)||!data.guide.cues.length)throw new Error('The local mock returned no listening cues.');
@@ -1074,7 +2010,10 @@ function renderDynamicGuide(){
  if(cues.length && dynamicGuide.trackSpecificGuide===true){const cueHeading=document.createElement('h3');cueHeading.textContent=lang==='pt'?'Todos os momentos de escuta':'All listening moments';root.append(cueHeading);const cueRoot=document.createElement('div');cueRoot.id='dynamicCueList';cueRoot.className='dynamic-cue-list';
   cues.forEach((c,i)=>{const box=document.createElement('article');box.className='dynamic-cue'+(i===dynamicCueIndex?' active':'');box.dataset.cueIndex=String(i);box.tabIndex=0;box.setAttribute('role','button');box.setAttribute('aria-pressed',i===dynamicCueIndex?'true':'false');
    const h=document.createElement('h4');h.textContent=(i+1)+'. '+pick(c.title);
-   const range=document.createElement('p');range.className='fine';const fraction=Number.isFinite(Number(c.at))?Number(c.at):i/Math.max(cues.length,1);range.textContent=dynamicGuide.cueTimingBasis==='track-level-section'?(lang==='pt'?'Esta nota cobre toda a seção do álbum atual.':'This note covers the complete current album section.'):(Math.round(fraction*100)+'% '+(lang==='pt'?'da faixa · aproximado':'of track · approximate'));
+   const range=document.createElement('p');range.className='fine';const fraction=Number.isFinite(Number(c.at))?Number(c.at):i/Math.max(cues.length,1);
+   const durationForCue=Number(lastPlaybackSnapshot?.durationMs||track.duration_ms||0);
+   const approxTime=durationForCue>0?'≈ '+prettyMs(durationForCue*fraction)+' · ':'';
+   range.textContent=dynamicGuide.cueTimingBasis==='track-level-section'?(lang==='pt'?'Esta nota cobre toda a seção do álbum atual.':'This note covers the complete current album section.'):(approxTime+Math.round(fraction*100)+'% '+(lang==='pt'?'da faixa · aproximado':'of track · approximate'));
    const focus=document.createElement('p');focus.className='fine';focus.textContent=pick(c.focus);
    const listen=document.createElement('p');listen.textContent=pick(c.listenFor);
    const why=document.createElement('p');why.className='muted';why.textContent=pick(c.whyItMatters);
@@ -1140,7 +2079,7 @@ if(new URLSearchParams(window.location.search).has('sonicTest'))window.__SONIC_T
  followPlayback:(data,sampledAt=performance.now())=>{latestItem=data.item;playing=!!data.is_playing;autoFollowPlayback(data,sampledAt);},
  selectTrack:(track)=>selectAndPlayTrack(track),
  pollPlayback:()=>pollPlayback(),
- getState:()=>({trackId:dynamicGuideTrackId,trackName:selectedSearchTrack?.name||null,latestItemId:latestItem?.id||null,activePlaybackId:activePlaybackTrack?.id||null,guideTitle:dynamicGuide?.title?.en||null,trackSpecificGuide:dynamicGuide?.trackSpecificGuide??null,cueTimingBasis:dynamicGuide?.cueTimingBasis||null,cueIndex:dynamicCueIndex,view:guideViewMode,playing,guideFromPlayback,pendingPlaybackTrackId,pendingPlaybackOriginId,playerOperationInFlight,trackSwitchInFlight}),
+ getState:()=>({trackId:dynamicGuideTrackId,trackName:selectedSearchTrack?.name||null,latestItemId:latestItem?.id||null,activePlaybackId:activePlaybackTrack?.id||null,guideTitle:dynamicGuide?.title?.en||null,trackSpecificGuide:dynamicGuide?.trackSpecificGuide??null,cueTimingBasis:dynamicGuide?.cueTimingBasis||null,cueIndex:dynamicCueIndex,view:guideViewMode,playing,guideFromPlayback,pendingPlaybackTrackId,pendingPlaybackOriginId,playerOperationInFlight,trackSwitchInFlight,cueCount:dynamicGuide?.cues?.length||0,cueTitles:(dynamicGuide?.cues||[]).map(c=>typeof c.title==='object'?(c.title.en||''):String(c.title||'')),cuePositions:(dynamicGuide?.cues||[]).map(c=>Number(c.at))}),
  getCueIndex:()=>dynamicCueIndex,
  getClockPositionAt:(now)=>lastPlaybackSnapshot?window.SonicLiveCore.progressAt(lastPlaybackSnapshot,now):null,
  getSnapshot:()=>lastPlaybackSnapshot,
@@ -1157,7 +2096,7 @@ const params=new URLSearchParams(window.location.search);applyLanguage();if(para
 })();
 </script>
 <script>
-// v1.7 catalogue + serialized-player build: do not register the old shell cache again. Remove previous app workers/caches so stale guide HTML cannot persist.
+// v1.9 track-specific-cue build: do not register the old shell cache again. Remove previous app workers/caches so stale guide HTML cannot persist.
 window.addEventListener('load',()=>{(async()=>{try{if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(r=>r.unregister()));}if('caches' in window){const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('sonic-companion-shell-')).map(k=>caches.delete(k)));}}catch(e){console.warn('Cache cleanup did not complete',e);}})();});
 </script>
 </body></html>

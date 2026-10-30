@@ -1,7 +1,7 @@
 {
-  "name": "Sonic Companion v1.7 — Full catalogue + player safeguards",
+  "name": "Sonic Companion v1.9 — Spotify metadata matching",
   "short_name": "Sonic Companion",
-  "description": "Bilingual Spotify companion with seven album catalogues, exact track identity, serialized play commands, read-back verification and playback-position interpolation.",
+  "description": "Bilingual Spotify playback-linked guide with album-first matching, featured-artist-safe track normalization, and fail-closed unsupported-track state.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
