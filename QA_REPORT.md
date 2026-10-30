@@ -1,34 +1,45 @@
-# Sonic Companion v2.6 — Offline Translation QA
+# Sonic Companion v2.7 — Atomic Offline Translation QA
 
 Build date: 2026-10-30
-Scope: current curated Sonic Companion catalogue and the bundled deterministic `pt-BR` translation memory.
+Scope: dynamic Spotify-linked/mock guide display and the bundled deterministic `pt-BR` translation memory.
+
+## Defects corrected
+
+1. **Partial phrase overlay:** v2.6 applied every dictionary hit and let the renderer fall back to English per field. One guide could therefore show Portuguese overview text alongside English cue titles, focus descriptions, musician notes, or historical notes.
+2. **Repeated translation attempts:** after a translation promise completed, rendering the guide called the translation routine again. A successful or incomplete result could repeatedly trigger another lookup/render cycle.
+3. **Non-atomic error state:** the previous partial status treated untranslated fields as an acceptable presentation state. v2.7 makes incomplete coverage an explicit fail-closed outcome.
+
+## Atomic display policy
+
+- The renderer inventories every editorial field it displays: guide title and overview/context/form/personnel/emotional/listener/balanced sections, plus each cue's title/focus/listen-for/why-it-matters/musician-moment/historical-note/question.
+- A field already carrying an editorial Portuguese override is accepted as covered.
+- Every remaining English source field must resolve to a non-empty approved Portuguese memory entry.
+- The Portuguese overlay is committed only when `missing.length === 0` and `translatedCount === totalCount`.
+- If one or more fields are missing, the translation map is discarded and the *entire editorial guide* is rendered from its English source. It does not mix languages between cards or inside a card.
+- Static interface labels and timing metadata continue to use their existing locale-specific labels. Spotify track/artist/album names and source names remain metadata, not translated editorial prose.
+- A guide's translation result is evaluated once per guide object; a render after completion cannot recursively start another translation attempt.
+- The curated Rhapsody adapter now keeps English canonical and does not fill absent Portuguese overrides with English text.
+- If the memory fails to load or validate, the entire editorial guide remains English.
 
 ## Automated checks — PASS
 
-- 2,162 distinct English source phrases each have one non-empty Brazilian Portuguese entry.
-- The catalogue traversal identified 2,622 user-facing English-only text occurrences across ten catalogue families. Repeated source phrases share the same translation-memory entry.
-- The one additional string in the raw extraction is `approximate-progress-proportions`, a technical timing-mode value, not user-facing prose; it is deliberately not translated.
-- Exact-source SHA-256 lookup resolves all 2,162 phrase entries (128-bit key prefix).
-- Repeated phrase in separate cue fields resolves to the same Portuguese translation.
-- Unknown/new English copy is returned as missing; the UI keeps the English source and does not attempt dictionary substitution.
-- Canonical English source objects remain unchanged after Portuguese overlay.
-- Existing editorial Portuguese overrides are not overwritten.
-- Translation memory is loaded once per page session and can be reused across all tracks.
-- The current app HTML contains no translation Worker URL/token fields or OpenAI API key configuration.
-- The offline translation core contains no OpenAI endpoint or API key reference.
-- All five inline application JavaScript blocks and the offline translation core pass Node syntax checks.
+- Translation core passes Node syntax validation.
+- Atomic completeness rejects any result with missing fields.
+- Atomic completeness rejects count mismatches even if the missing array is incorrectly empty.
+- Atomic completeness validates the actual translation map has one entry per expected field.
+- The localized field picker has no English fallback when Portuguese is selected; a broken invariant cannot reintroduce mixed-language content.
+- Complete result is accepted only when translated and total counts match and missing is empty.
+- Requested Portuguese resolves to Portuguese only for `ready` or `native` states; `loading`, `incomplete`, `error`, and `idle` resolve to English.
+- Language picker uses one effective locale and never falls back per field from Portuguese to English.
+- HTML translation flow discards partial maps and cannot assign `partial` as a display status.
+- One-attempt-per-guide guard prevents render-triggered repeat translation loops.
+- Curated Rhapsody regression test verifies that missing Portuguese values remain missing rather than being mislabeled English copy.
+- Application and translation core JavaScript syntax checks pass.
 
-## Architecture verified
+## Known limitation — deliberate, not hidden
 
-- English stays canonical in the app catalogue.
-- `translation/pt-BR.memory.json` contains one Portuguese adaptation for each distinct English phrase, keyed by a truncated SHA-256 digest. English source prose is not duplicated in that file.
-- `translation/translation-core.js` selects fields, computes content hashes, retrieves exact phrase matches and overlays Portuguese only for display.
-- No AI model, translation API, Cloudflare translation Worker, API secret, database write or per-track translation cache is used.
-- Existing `sonic-companion-research` Worker is not modified by this package.
+This remains an exact-phrase, pre-authored translation memory, not general machine translation. Newly generated or changed prose is not automatically translated. A coverage scan of the 84 available mock track guides across nine album fixtures found 27 fully covered guides (32%); 575 field occurrences were missing approved entries. In that scan, all 10 Dark Side of the Moon guides were incomplete. Therefore v2.7 will show those incomplete guides entirely in English rather than mixing languages. To make them fully available in Portuguese without AI/API cost, their missing strings must be translated and reviewed, then added to the shared memory. No partial Portuguese is presented as a complete translation.
 
-## Not tested / limitations
+## Deployment validation still required
 
-- No live GitHub Pages deployment, Cloudflare account, iPhone Safari session or Spotify account/device was used in this QA run.
-- Portuguese wording has not received independent sign-off from a Brazilian musician/editor. The initial phrase memory was authored for this build and follows the supplied musical terminology policy, but should receive editorial review before public production release.
-- Newly added or edited English wording has no translation until a matching Portuguese memory entry is authored and added. It deliberately remains in English in the meantime.
-- This is an offline translation-memory system, not a general-purpose machine translation engine. It does not invent translations for arbitrary new prose.
+This package has not been deployed to the live GitHub Pages repository or tested in the user's live iPhone/Spotify session. After uploading, verify the v2.7 build identifier and exercise both full-guide and focus modes with a known fully covered guide and a deliberately incomplete guide. The latter must remain entirely English in its editorial content.

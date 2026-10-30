@@ -1,8 +1,8 @@
-# Sonic Companion v2.6 — Offline Musical Translation
+# Sonic Companion v2.7 — Atomic Offline Translation
 
 ## What this package changes
 
-This package replaces the previous AI-backed translation-worker design with a deterministic, zero-AI runtime translation memory for Brazilian Portuguese (`pt-BR`). English remains the only canonical guide content. The module looks up complete source phrases by a content hash and overlays the corresponding Portuguese text only at display time.
+This package replaces the previous AI-backed translation-worker design with a deterministic, zero-AI runtime translation memory for Brazilian Portuguese (`pt-BR`). English remains the only canonical guide content. The module looks up complete source phrases by a content hash and overlays Portuguese only after the entire displayed guide has complete approved coverage. If any editorial field is missing, the entire guide remains in English; fields are never mixed.
 
 ### Runtime properties
 
@@ -11,7 +11,7 @@ This package replaces the previous AI-backed translation-worker design with a de
 - No per-track/per-cue Portuguese copies written back into the guide catalogue.
 - One static Portuguese translation-memory asset is shared across all tracks.
 - Existing hand-authored Portuguese overrides are preserved.
-- Unknown or newly edited English text stays in English. The module does not guess with word-by-word dictionary substitution.
+- Unknown or newly edited English text causes the entire guide to remain in English. The module does not guess with word-by-word dictionary substitution or show a partially translated guide.
 - The memory is downloaded from the same GitHub Pages origin once per page session and is browser-cacheable. This is a normal static asset request, not a translation API request.
 
 ## Install into the existing GitHub repository
@@ -38,9 +38,9 @@ Keep the existing `sonic-companion-research` Worker unchanged. It is a separate 
 
 ## How the memory works
 
-The current curated catalogue contains 2,622 user-facing English-only text occurrences across ten catalogue families. They reduce to 2,162 distinct source phrases. Each distinct phrase has one Brazilian Portuguese adaptation in the memory. The English source itself is not repeated in the memory file: the key is the first 128 bits of SHA-256 of the exact trimmed English string.
+The bundled catalogue phrase memory contains 2,162 distinct English source phrases with Brazilian Portuguese adaptations. Coverage is evaluated against every editorial field rendered for the current guide; a guide is shown in Portuguese only when all required fields are covered. The English source itself is not repeated in the memory file: the key is the first 128 bits of SHA-256 of the exact trimmed English string.
 
-The module collects the English fields for the current guide, hashes each distinct string once, looks up the Portuguese adaptation, and overlays it on a temporary display copy. The original English object and cue timing/order remain unchanged. Identical phrases across albums share one memory entry.
+The module collects all editorial fields rendered for the current guide, hashes each distinct string once, looks up the Portuguese adaptation, validates complete coverage, and only then overlays the translations on a temporary display copy. The original English object and cue timing/order remain unchanged. Identical phrases across albums share one memory entry.
 
 The memory asset is currently about 316 KB uncompressed. There is still one Portuguese string per distinct English phrase; the saving comes from not storing duplicated translated copies throughout every track/guide record. This is a translation-memory solution, not zero-byte storage.
 
@@ -48,12 +48,12 @@ The memory asset is currently about 316 KB uncompressed. There is still one Port
 
 The phrase-level adaptations use Brazilian musician vocabulary for jazz, classical, orchestral and rock contexts. The accompanying glossary is an editorial reference for future additions; the runtime intentionally does not apply blind term replacement to unknown sentences.
 
-A newly added or edited English phrase will remain in English until a corresponding Portuguese entry is authored, checked and added to `pt-BR.memory.json`. This is deliberate: a deterministic module cannot produce natural translations for arbitrary new prose without either a generative model or a pre-authored translation. This package chooses quality-safe fallback over pretending otherwise.
+A newly added or edited English phrase will remain in English until a corresponding Portuguese entry is authored, checked and added to `pt-BR.memory.json`. This is deliberate: a deterministic module cannot produce natural translations for arbitrary new prose without either a generative model or a pre-authored translation. The v2.7 all-or-English gate means one missing editorial field keeps the whole guide in English. A fixture scan found 27 of 84 mock track guides fully covered (32%); all 10 Dark Side of the Moon examples were incomplete at the time of the scan. The package therefore prevents mixed-language output but does not yet provide complete Portuguese coverage for every track.
 
 The memory format is locale-versioned and can be extended later with separate assets (for example, `es.memory.json` or `it.memory.json`) without duplicating the English catalogue. This release supplies Brazilian Portuguese only.
 
 ## QA scope and limits
 
-The included build was tested for complete phrase coverage, one-entry reuse across repeated fields, preservation of canonical English, preservation of existing Portuguese overrides, fail-closed handling of unknown text, and absence of translation API/secret references. All five inline app JavaScript blocks and the offline translation core pass JavaScript syntax checks.
+The included build was tested for atomic all-or-English display, count and missing-field validation, prevention of per-field language fallback, prevention of repeated render-triggered translation attempts, preservation of canonical English, preservation of existing Portuguese overrides, and absence of translation API/secret references. All five inline app JavaScript blocks and the offline translation core pass JavaScript syntax checks.
 
 The 2,162 Portuguese adaptations have not yet received independent sign-off from a Brazilian musician/editor. They are a strong initial editorial memory, not a claim of external linguistic certification. The app's catalogue/timing content retains its existing QA limits.
