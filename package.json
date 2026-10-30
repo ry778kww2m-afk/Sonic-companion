@@ -1,0 +1,12 @@
+{
+  "name": "sonic-companion",
+  "version": "1.6.0",
+  "private": true,
+  "description": "Spotify track-bound listening companion with fail-closed local mock fixtures and realtime playback clock",
+  "scripts": {
+    "test": "node tests/run-build-tests.mjs && node tests/run-integration-tests.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

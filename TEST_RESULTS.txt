@@ -1,38 +1,30 @@
-SONIC COMPANION v1.5 — AUTOMATED QA REPORT
+SONIC COMPANION v1.6 — AUTOMATED QA REPORT
 Date: 2026-10-29
-Scope: local package and mocked Spotify controller; no user credentials used.
+Base: full v1.5 catalogue with track-truth and realtime clock fixes.
 
-BUILD/SOURCE TESTS: PASS
-- All 5 inline JavaScript scripts parse.
-- Static build banner and unique HTML IDs verified.
-- Required player, cue, Focus/Full, and Play controls present.
-- Core cue progression and playback-position interpolation verified.
-- Search-result action contains no direct Pause request.
-- Required Spotify authorization scope and active-device guardrails present.
-- All 7 expected work/track fixtures return the correct track-specific mock content.
-- Unknown track (Pianovus — Interstellar (Piano Version)) returns no verified cue, no event-specific description, and no cue timing basis.
-- An unknown movement from a known album cannot inherit Clair de lune cues.
-- A song-title collision (So What by P!nk) cannot inherit Kind of Blue content.
-- A same-title unrelated recording cannot inherit Debussy content.
+BUILD / SOURCE TESTS: PASS
+- All inline JavaScript scripts parse.
+- Required player, cue, Focus/Full and playback-control elements exist; static element IDs are unique.
+- Spotify polling interval and 250 ms local clock tick are configured.
+- Playback clock interpolation uses a monotonic performance clock, paused freeze, zero-valued sample timestamps, cue threshold transition and end-of-track clamping pass.
+- Regression for the Play/Pause label null-reference failure passes: no direct dereference remains after its parent button rebuilds innerHTML.
+- Seven representative track fixtures plus 15 additional fixture variants pass: 22 matching track fixtures across all six retained mock album/work profiles.
+- Wrong artist, wrong album, same-title recording, unmatched track in a known album and unsupported Interstellar track resolve to the unavailable state with no cue sequence.
+- Search-result selection cannot issue a pause command, and playback authorization/device safeguards remain present.
 
 CONTROLLER INTEGRATION TESTS: PASS
-- External Spotify playback of Clair de lune creates the right guide.
-- Spotify progress advances the visible cue.
-- Goldberg Aria and Variation 1 select distinct musical descriptions.
-- Focus/Full toggle preserves the guide and changes visible content.
-- Unknown external track replaces old guide and hides the fake cue clock/progress bar.
-- Unknown track Full view contains no generic musical filler and no percentage-based cue timeline.
-- Tapping a search result requests playback once, without sending Pause; the old guide remains authoritative until Spotify confirms a switch.
-- Inactive/no available devices do not trigger automatic transfer/pause.
-- The guide switches only after Spotify reports the new current track.
-- Loss of active playback clears stale live guide state.
-- A Spotify 403 playback-scope error gives reauthorization instructions.
+- Current Spotify track selects the corresponding supported fixture.
+- Cue index follows Spotify progress.
+- Clock interpolates while playing, freezes while paused, re-anchors after a seek/new sample and clamps at duration.
+- Track switches replace the old guide only after Spotify confirms the new track.
+- Unknown tracks show only the unavailable message, with no generic musical filler or cue clock.
+- No active playback (HTTP 204) clears previous live guide state.
+- HTTP 200 with item=null clears stale Now Playing identity and live guide.
+- Sync failure / HTTP 403 clears stale guide and timestamp and shows reauthorization guidance.
+- No active device causes no automatic play/pause or output-device transfer.
 
 NOT CLAIMED / NOT TESTED
-- Live GitHub Pages deployment or repository contents.
-- Live playback with the user's Spotify account, output devices, or permissions.
-- Exact musical-event synchronization. Known mock cue boundaries are illustrative percentages of the track duration, not score-verified or audio-detected timestamps. Unsupported tracks intentionally show no timed cue.
-- Live sources, source citations, or OpenAI API research; this package makes no external research or paid API calls.
-- Title collision guard: “So What” by P!nk cannot inherit the Miles Davis guide.
-- Same-title recording guard: “Clair de lune” by Pianovus on an Interstellar album cannot inherit the Debussy fixture.
-- Real-browser mobile viewport smoke test was attempted but the headless Chrome target reported a navigation error; no visual-browser pass is claimed. DOM/controller integration tests remain passing.
+- Live playback using the user's Spotify account, device, audio route or OAuth credentials.
+- Live GitHub Pages deployment or deployed asset/version verification.
+- Real-browser visual smoke test on iOS Safari.
+- Score-verified, recording-specific cue timestamps or audio detection. The mock cue positions are approximate progress proportions, clearly labelled as such.

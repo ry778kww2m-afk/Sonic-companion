@@ -1,7 +1,7 @@
 {
-  "name": "Sonic Companion v1.3 \u2014 Now Playing",
+  "name": "Sonic Companion v1.6 — Track-truth + realtime clock guardrails",
   "short_name": "Sonic Companion",
-  "description": "Bilingual Spotify playback-linked guide with strict track matching, no fabricated cues for unknown tracks, and Focus/Full views.",
+  "description": "Bilingual Spotify playback-linked listening companion with retained album fixtures, strict track matching, fail-closed unavailable state, and interpolated playback clock.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
