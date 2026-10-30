@@ -1,8 +1,8 @@
 {
   "name": "sonic-companion",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "private": true,
-  "description": "Spotify track-bound listening companion with fail-closed local mock fixtures and realtime playback clock",
+  "description": "Spotify track-bound listening companion with seven album catalogues, serialized player operations and confirmed playback switches",
   "scripts": {
     "test": "node tests/run-build-tests.mjs && node tests/run-integration-tests.mjs"
   },

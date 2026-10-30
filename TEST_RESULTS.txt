@@ -1,30 +1,35 @@
-SONIC COMPANION v1.6 — AUTOMATED QA REPORT
-Date: 2026-10-29
-Base: full v1.5 catalogue with track-truth and realtime clock fixes.
+SONIC COMPANION v1.7 — AUTOMATED QA REPORT
+Build date: 2026-10-29 (America/Sao_Paulo)
 
 BUILD / SOURCE TESTS: PASS
-- All inline JavaScript scripts parse.
-- Required player, cue, Focus/Full and playback-control elements exist; static element IDs are unique.
-- Spotify polling interval and 250 ms local clock tick are configured.
-- Playback clock interpolation uses a monotonic performance clock, paused freeze, zero-valued sample timestamps, cue threshold transition and end-of-track clamping pass.
-- Regression for the Play/Pause label null-reference failure passes: no direct dereference remains after its parent button rebuilds innerHTML.
-- Seven representative track fixtures plus 15 additional fixture variants pass: 22 matching track fixtures across all six retained mock album/work profiles.
-- Wrong artist, wrong album, same-title recording, unmatched track in a known album and unsupported Interstellar track resolve to the unavailable state with no cue sequence.
-- Search-result selection cannot issue a pause command, and playback authorization/device safeguards remain present.
+- All five inline JavaScript scripts parse.
+- Static element IDs are unique; required player, cue, Focus/Full and transport UI is present.
+- Playback clock interpolation, pause freeze, seek re-anchor, zero-valued performance samples and duration clamping pass.
+- Play/Pause label null-reference regression guard passes.
+- The six original local mock catalogues remain present; 22 original Spotify-like track fixtures pass exact live-controller route tests.
+- The added Deutsche Grammophon 2023 Rachmaninoff album is keyed to Spotify album ID 0v3T6fPnrptRXOrd854hIl.
+- All 12 Piano Concerto movements pass the automatic live-playback route tests.
+- All 25 Rhapsody album sections, including the Introduction, Tema and Variations 2–24, pass the curated live-playback route tests.
+- Wrong Spotify album ID, wrong artist, wrong album, same-title collisions and unmatched movements are rejected.
+- Unsupported tracks receive no fabricated cues or progress timeline.
 
-CONTROLLER INTEGRATION TESTS: PASS
-- Current Spotify track selects the corresponding supported fixture.
-- Cue index follows Spotify progress.
-- Clock interpolates while playing, freezes while paused, re-anchors after a seek/new sample and clamps at duration.
-- Track switches replace the old guide only after Spotify confirms the new track.
-- Unknown tracks show only the unavailable message, with no generic musical filler or cue clock.
-- No active playback (HTTP 204) clears previous live guide state.
-- HTTP 200 with item=null clears stale Now Playing identity and live guide.
-- Sync failure / HTTP 403 clears stale guide and timestamp and shows reauthorization guidance.
-- No active device causes no automatic play/pause or output-device transfer.
+CONTROLLER / INTEGRATION TESTS: PASS
+- Search-to-play calls are serialized against background playback polls and other player mutations.
+- Search selection does not send Pause, Stop or Transfer.
+- Album-context + exact-track-offset request shape is asserted when Spotify returns an album URI.
+- A 204 is not treated as proof of playback; current playback must confirm the exact requested track ID.
+- If the first start request is accepted but the old track (or no current item) remains after four readbacks, the code rechecks the same active device and makes one exact-track URI retry. The integration test verifies this fallback and verifies there is no Pause request.
+- Duplicate taps during the switch-confirmation window are rejected.
+- The old guide remains tied to the actual playing track until Spotify confirms the requested track.
+- Selecting the same track while paused issues a play/resume command and waits for confirmation.
+- Missing/restricted devices cause no player mutation or automatic device transfer.
+- No active playback, null current item, 403 errors and failed playback-state reads clear stale guide/clock state.
+- Clock follows the current Spotify progress snapshot, interpolates locally, freezes while paused and re-anchors on the next Spotify snapshot after a seek or track change.
 
 NOT CLAIMED / NOT TESTED
-- Live playback using the user's Spotify account, device, audio route or OAuth credentials.
-- Live GitHub Pages deployment or deployed asset/version verification.
-- Real-browser visual smoke test on iOS Safari.
-- Score-verified, recording-specific cue timestamps or audio detection. The mock cue positions are approximate progress proportions, clearly labelled as such.
+- No live Spotify account, OAuth session, Connect device, speaker or iPhone playback test was available in this environment.
+- No live GitHub Pages deployment was made or verified.
+- No real iOS Safari visual/browser smoke pass is claimed.
+- Spotify's remote service, device firmware, network and third-party Spotify clients cannot be guaranteed by client code. The build serializes its own calls and verifies outcomes instead of assuming success.
+- Most original mock cues are approximate progress phases, not exact score-verified event timestamps or audio recognition. Rhapsody track notes cover each separate album-section track; Spotify progress is displayed within that track only.
+- Spotify's current developer policy states that sound recordings may not be synchronized with visual media. Review the policy and obtain platform guidance before distribution.
