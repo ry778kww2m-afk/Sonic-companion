@@ -1,0 +1,28 @@
+SONIC COMPANION — MOTHER-READY PATCH QA
+
+PASS
+- Embedded Client ID matches the user-supplied 32-character ID.
+- Client ID input and Save Client ID button removed from markup.
+- No remaining Client ID DOM access, saveClient function, or STORAGE.client reference.
+- Authorization request, authorization-code exchange, and refresh-token request
+  all use SPOTIFY_CLIENT_ID.
+- Existing Authorization Code with PKCE flow, S256 challenge, random state,
+  verifier persistence, and state comparison retained.
+- Existing stored Spotify tokens are cleared only if they were tied to a different
+  previously saved Client ID.
+- A Spotify API 403 now prompts the user to check Development Mode allowlisting
+  and Premium eligibility rather than diagnosing only a missing Premium scope.
+- All six inline JavaScript blocks pass `node --check`.
+- ZIP archive passes CRC integrity test.
+
+NOT TESTED
+- Browser DOM render: the headless Chromium process hung in this execution
+  environment before producing a DOM dump; no successful render is claimed.
+- Live Spotify OAuth authorization / token exchange.
+- iPhone Safari / Private Browsing behavior.
+- Spotify allowlist, redirect registration, Premium eligibility, or deployed Pages.
+
+CRITICAL OWNER ACTIONS
+- Register exact redirect URI:
+  https://ry778kww2m-afk.github.io/Sonic-companion/
+- Add the mother's Spotify account to Development Mode allowlist if applicable.
