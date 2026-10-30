@@ -6,7 +6,7 @@
 (function (root) {
   'use strict';
 
-  const VERSION = 'SONIC-OFFLINE-PTBR-1.0.0';
+  const VERSION = 'SONIC-OFFLINE-PTBR-1.1.0-ATOMIC';
   const LOCALE = 'pt-BR';
   const TOP_FIELDS = [
     'title', 'overview', 'context', 'form', 'personnelAndRoles',
@@ -172,6 +172,34 @@
     };
   }
 
+  function isComplete(result) {
+    const translations = result && result.translations;
+    const validMap = !!(
+      translations && typeof translations === 'object' && !Array.isArray(translations)
+    );
+    const translatedKeys = validMap ? Object.keys(translations) : [];
+    return !!(
+      result && Array.isArray(result.missing) && result.missing.length === 0 &&
+      Number.isInteger(result.totalCount) && Number.isInteger(result.translatedCount) &&
+      result.translatedCount === result.totalCount && translatedKeys.length === result.totalCount
+    );
+  }
+
+  function displayLocale(requestedLocale, status) {
+    const wantsPortuguese = requestedLocale === 'pt' || requestedLocale === 'pt-BR';
+    return wantsPortuguese && (status === 'ready' || status === 'native') ? 'pt' : 'en';
+  }
+
+  function pick(value, locale) {
+    if (typeof value === 'string') return value;
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      // Strict locale selection: no field-level English fallback while in pt mode.
+      const selected = value[locale];
+      return typeof selected === 'string' ? selected : '';
+    }
+    return '';
+  }
+
   function validate(items, payload, options) {
     const allowPartial = !!(options && options.allowPartial);
     const arr = Array.isArray(payload) ? payload : payload && payload.translations;
@@ -226,6 +254,9 @@
     translate,
     validate,
     apply,
+    isComplete,
+    displayLocale,
+    pick,
     sourceText,
     hasLocale,
     get memoryMetadata() { return memoryMetadata; }
