@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="sonic-companion-build" content="v2.5-mie-performer-narratives-next-cue-timer" />
+<meta charset="utf-8"><meta name="sonic-companion-build" content="v2.6-mie-offline-musical-translation" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111318"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Sonic Companion">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Sonic Companion v2.5 — MIE Performer Notes + Countdown</title>
+<title>Sonic Companion v2.6 — Offline Musical Translation</title>
 <style>
 :root{color-scheme:dark;--bg:#111318;--panel:#1a1d24;--panel2:#20242d;--text:#f4f2ec;--muted:#b4bac6;--line:#333946;--accent:#d8c18c;--accent2:#8fbea8;--warn:#dca76f}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#242832 0,#111318 54%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.48}main{max-width:920px;margin:auto;padding:18px 13px 50px}.build-banner{display:block;padding:9px 12px;margin:0 0 12px;border:1px solid #4d806b;border-radius:9px;background:#14231d;color:#c6ead8;font-size:.76rem;font-weight:800;letter-spacing:.035em;text-align:center}.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.13em;font-size:.73rem;font-weight:750}.hero{padding:10px 0 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.hero-copy{min-width:0}.hero h1{font-size:clamp(2rem,7vw,3.2rem);letter-spacing:-.045em;line-height:1.04;margin:.4rem 0 .8rem}.hero p{color:var(--muted);max-width:680px;margin:0;font-size:.95rem}.language{flex:0 0 auto;min-width:126px}.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid #3b574b;background:#1a2a24;color:#bde2ce;border-radius:999px;font-size:.78rem;padding:5px 10px;margin-top:12px}.dot{width:7px;height:7px;background:var(--accent2);border-radius:50%}.card{background:linear-gradient(150deg,rgba(32,36,45,.98),rgba(24,27,34,.98));border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 12px 30px #0002}.card h2{font-size:1.05rem;margin:0 0 10px;letter-spacing:-.01em}.muted{color:var(--muted)}.small{font-size:.84rem}.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.spread{justify-content:space-between}.btn{border:1px solid #515968;color:var(--text);background:#2a303b;border-radius:11px;padding:10px 12px;font:inherit;font-weight:650;cursor:pointer;min-height:44px}.btn.primary{background:var(--accent);border-color:var(--accent);color:#191915}.btn:disabled{opacity:.4;cursor:not-allowed}.btn.secondary{background:transparent}.btn:active{transform:scale(.99)}select,.field{display:block;width:100%;background:#151820;color:var(--text);border:1px solid #515968;border-radius:10px;padding:11px;font:inherit;min-height:44px;max-width:100%}label{font-weight:650;font-size:.9rem;display:block;margin:10px 0 7px}.note{font-size:.82rem;color:var(--muted);margin-top:9px}.error{color:#ffd2bd}.success{color:#bde2ce}.fine{color:var(--muted);font-size:.8rem}.now{padding:16px;border-radius:15px;background:linear-gradient(135deg,#2e302f,#24242b);border:1px solid #514c40}.now .kicker{font-size:.73rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent)}.now h2{font-size:clamp(1.25rem,5vw,1.8rem);line-height:1.18;margin:8px 0 10px}.now p{margin:9px 0;color:#e5e2da}.tag{display:inline-block;border:1px solid #555b65;border-radius:6px;padding:3px 7px;font-size:.75rem;color:#dadde4;margin:3px 5px 3px 0}.track-layout{display:grid;grid-template-columns:74px minmax(0,1fr);gap:12px;align-items:center;margin-top:12px}.track-art{width:74px;height:74px;object-fit:cover;border-radius:10px;background:#292d36;border:1px solid var(--line)}.track-meta{min-width:0}.track-meta h3{font-size:1.03rem;margin:0 0 3px;line-height:1.25;overflow-wrap:anywhere}.track-meta p{margin:0;color:var(--muted);font-size:.84rem;overflow-wrap:anywhere}.controls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:14px}.controls .btn{padding:9px 4px;font-size:.83rem;min-width:0}.playbutton{background:var(--accent)!important;color:#171815!important;border-color:var(--accent)!important}.vol-label{font-size:.8rem;color:var(--muted);align-self:center;margin-left:auto}.guide-selector{margin-top:12px}.guide-intro{color:var(--muted);font-size:.92rem;margin:6px 0 12px}.guide-list{display:grid;gap:7px;margin-top:12px}.cue{display:grid;grid-template-columns:52px minmax(0,1fr);gap:9px;align-items:start;border:1px solid var(--line);background:#191c23;border-radius:11px;padding:10px 11px;color:var(--text);text-align:left;cursor:pointer;font:inherit;width:100%}.cue.active{border-color:var(--accent);background:#2b2923}.cue .num{font-size:.72rem;color:var(--accent);font-weight:750}.cue .cue-title{font-size:.9rem;font-weight:650}.cue small{display:block;font-size:.77rem;color:var(--muted);font-weight:400;margin-top:2px}.source-row{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--line);padding-top:12px;margin-top:16px}.source-row a{color:var(--accent);font-size:.8rem}.callout{border-left:3px solid var(--warn);padding:10px 12px;background:#30271f;border-radius:0 10px 10px 0;color:#edd3b2;font-size:.85rem}.footer{font-size:.8rem;color:var(--muted);padding:10px 2px}.dynamic-guide{display:grid;gap:12px}.dynamic-guide h3{margin:16px 0 4px;font-size:1.02rem}.dynamic-guide h4{margin:0 0 6px}.dynamic-guide p{margin:7px 0;line-height:1.5}.dynamic-guide .dynamic-cue{border:1px solid var(--line);border-radius:12px;padding:13px;background:#191c23}.dynamic-guide .dynamic-cue.active{border-color:var(--accent);background:#2b2923}.dynamic-guide .dynamic-sources{display:grid;gap:8px}.dynamic-guide .dynamic-sources a{color:var(--accent);overflow-wrap:anywhere}.hidden{display:none!important}@media(max-width:500px){.hero{display:block}.language{margin-top:12px;max-width:190px}.controls{grid-template-columns:repeat(5,minmax(0,1fr))}.controls .btn{font-size:.75rem;padding:8px 2px}.card{padding:14px}}
@@ -87,7 +87,7 @@ body.focus-mode .cue-extra{padding:11px 12px}
 
 </head>
 <body><main>
-<div class="build-banner" id="buildBanner">SONIC COMPANION v2.5 · MIE 1.3 · ZERO-CONFIG SPOTIFY AUTH · BUILD 2026-10-30</div>
+<div class="build-banner" id="buildBanner">SONIC COMPANION v2.6 · MIE 1.3 · OFFLINE MUSICAL TRANSLATION · BUILD 2026-10-30</div>
 <section class="hero"><div class="hero-copy"><div class="eyebrow" id="eyebrow">Listening companion</div><h1>Sonic Companion</h1><p id="tagline">Your current Spotify track drives the guide, whether started here or directly in Spotify. The highlighted listening phase follows playback progress approximately; the app does not analyze audio or detect musical events.</p><div class="pill"><span class="dot"></span><span id="syncStatus">Not connected to Spotify</span></div></div><div class="language"><label for="languageSelect" id="languageLabel">Feedback language</label><select id="languageSelect"><option value="en">English</option><option value="pt">Português (Brasil)</option></select></div></section>
 <section class="card" id="playerCard">
 <div id="connectionSetup">
@@ -136,18 +136,13 @@ body.focus-mode .cue-extra{padding:11px 12px}
 </section>
 <section class="card" id="dynamicResearchCard">
 <h2 data-en="Research a musical guide" data-pt="Pesquisar um guia musical">Research a musical guide</h2>
-<p class="muted small" data-en="Load a curated guide for the confirmed Spotify recording. English is the canonical source; when configured, Portuguese is adapted from it in musical language and cached. Cue positions follow Spotify progress approximately; the app does not detect audio events." data-pt="Carregue um guia selecionado para a gravação confirmada pelo Spotify. O inglês é a fonte canônica; quando configurado, o português é adaptado a partir dele com linguagem musical e armazenado em cache. Os momentos acompanham aproximadamente o progresso do Spotify; o app não detecta eventos de áudio.">On demand, research history, personnel, form and audible musical relationships from web sources. The guide is authored in English and Brazilian Portuguese, with citations. A generated cue sequence follows playback approximately; boundaries are estimates unless a reliable score or recording-specific source supports them.</p>
+<p class="muted small" data-en="Load a curated guide for the confirmed Spotify recording. English is the canonical source; Brazilian Portuguese is resolved from the bundled offline musical translation memory. Unknown text remains in English. Cue positions follow Spotify progress approximately; the app does not detect audio events." data-pt="Carregue um guia selecionado para a gravação confirmada pelo Spotify. O inglês é a fonte canônica; o português brasileiro é obtido da memória musical offline incluída no app. Trechos desconhecidos permanecem em inglês. Os momentos acompanham aproximadamente o progresso do Spotify; o app não detecta eventos de áudio.">On demand, research history, personnel, form and audible musical relationships from web sources. The guide is authored in English and Brazilian Portuguese, with citations. A generated cue sequence follows playback approximately; boundaries are estimates unless a reliable score or recording-specific source supports them.</p>
 <label for="researchEndpoint" data-en="Mock research mode" data-pt="Modo de pesquisa simulada">Mock research mode</label>
 <input id="researchEndpoint" class="field" placeholder="Local mock mode — no server required" autocomplete="off" disabled>
 <p class="note" data-en="Local mock only: album and track guides are stored once in English. No research API is called by this build." data-pt="Somente simulação local: os guias de álbuns e faixas são armazenados uma única vez em inglês. Esta versão não chama uma API de pesquisa.">Local mock only: album and track guides are stored once in English. No research API is called by this build.</p>
 <div class="editorial-block" style="margin-top:12px">
-<h3 data-en="Musical translation service" data-pt="Serviço de tradução musical">Musical translation service</h3>
-<p class="muted small" data-en="Optional. The English guide remains the single source of truth. When you choose Portuguese, the service creates a musician-quality Brazilian Portuguese adaptation and caches it on this device. The OpenAI API key stays on the server; enter only your Worker URL and its separate access token here." data-pt="Opcional. O guia em inglês continua sendo a única fonte oficial. Ao escolher português, o serviço cria uma adaptação em português brasileiro com linguagem musical e a armazena em cache neste dispositivo. A chave da API OpenAI permanece no servidor; informe aqui apenas a URL do Worker e seu token de acesso separado.">Optional. The English guide remains the single source of truth. When you choose Portuguese, the service creates a musician-quality Brazilian Portuguese adaptation and caches it on this device. The OpenAI API key stays on the server; enter only your Worker URL and its separate access token here.</p>
-<label for="translationEndpoint" data-en="Translation Worker URL" data-pt="URL do Worker de tradução">Translation Worker URL</label>
-<input id="translationEndpoint" class="field" type="url" inputmode="url" placeholder="https://your-worker.workers.dev/translate" autocomplete="url">
-<label for="translationAccessToken" data-en="Personal translation access token" data-pt="Token pessoal de acesso à tradução">Personal translation access token</label>
-<input id="translationAccessToken" class="field" type="password" autocomplete="off" placeholder="Set separately as a Worker secret">
-<p class="note" data-en="These settings are saved only in this browser. The access token is not the OpenAI API key. See TRANSLATION_SETUP.md in the patch." data-pt="Estas configurações ficam salvas apenas neste navegador. O token de acesso não é a chave da API OpenAI. Consulte TRANSLATION_SETUP.md no pacote.">These settings are saved only in this browser. The access token is not the OpenAI API key. See TRANSLATION_SETUP.md in the patch.</p>
+<h3 data-en="Offline musical translation" data-pt="Tradução musical offline">Offline musical translation</h3>
+<p class="muted small" data-en="English remains the single canonical source. Brazilian Portuguese is resolved from a curated, deduplicated translation memory stored as a static app asset. No AI model or translation API is called. Text without an approved entry remains in English rather than receiving a literal or unreliable translation." data-pt="O inglês permanece como única fonte canônica. O português brasileiro é obtido de uma memória de tradução revisada e sem duplicações, armazenada como recurso estático do app. Nenhum modelo de IA ou serviço de tradução é chamado. Trechos sem uma tradução aprovada permanecem em inglês, em vez de receberem uma versão literal ou pouco confiável.">English remains the single canonical source. Brazilian Portuguese is resolved from a curated, deduplicated translation memory stored as a static app asset. No AI model or translation API is called. Text without an approved entry remains in English rather than receiving a literal or unreliable translation.</p>
 </div>
 <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn primary" id="playSelectedBtn" type="button" disabled data-en="Play selected track in Spotify" data-pt="Tocar faixa selecionada no Spotify">Play selected track in Spotify</button><button class="btn secondary" id="researchGuideBtn" type="button" disabled data-en="Reload sample guide" data-pt="Recarregar guia simulado">Reload sample guide</button><span id="researchStatus" class="note" aria-live="polite">Choose a track, or start one in Spotify. The guide follows Spotify playback.</span></div>
 <div id="dynamicGuideOutput" class="hidden" aria-live="polite"></div>
@@ -2775,47 +2770,7 @@ window.buildSonicMockGuide = buildMockGuide;
 
 })();
 </script>
-<script id="sonic-translation-core">
-(function(root){'use strict';
- const TOP_FIELDS=['title','overview','context','form','personnelAndRoles','emotionalReading','listenerReception','balancedNote'];
- const CUE_FIELDS=['title','focus','listenFor','whyItMatters','musicianMoment','historicalNote','question'];
- function sourceText(value){if(typeof value==='string')return value.trim();if(value&&typeof value==='object'&&!Array.isArray(value))return String(value.en||'').trim();return '';}
- function hasLocale(value,locale){return !!(value&&typeof value==='object'&&!Array.isArray(value)&&typeof value[locale]==='string'&&value[locale].trim());}
- function collect(guide,track){
-  const items=[];const meta=[track?.name,track?.album?.name,(track?.artists||[]).map(a=>a.name).join(', ')].filter(Boolean).join(' — ');
-  for(const field of TOP_FIELDS){const value=guide?.[field],text=sourceText(value);if(!text||hasLocale(value,'pt'))continue;items.push({id:field,text,context:`Album/track context: ${meta}. Editorial section: ${field}.`});}
-  (guide?.cues||[]).forEach((cue,index)=>{
-   for(const field of CUE_FIELDS){const value=cue?.[field],text=sourceText(value);if(!text||hasLocale(value,'pt'))continue;
-    const cueTitle=sourceText(cue?.title)||`moment ${index+1}`;
-    items.push({id:`cues.${index}.${field}`,text,context:`Album/track context: ${meta}. Listening moment ${index+1}; title: ${cueTitle}; event type: ${cue?.eventType||'unspecified'}; historical weight: ${cue?.historicalWeight||0}. Field: ${field}. Translate technical performer-role and attributed historical wording precisely.`});
-   }
-  });
-  return items;
- }
- function validate(items,payload){
-  const arr=Array.isArray(payload)?payload:payload?.translations;
-  if(!Array.isArray(arr))throw new Error('Translation response did not contain a translations array.');
-  const expected=new Set(items.map(x=>x.id));const map=Object.create(null);
-  for(const item of arr){if(!item||typeof item.id!=='string'||!expected.has(item.id))throw new Error('Translation response contains an unexpected field.');if(Object.prototype.hasOwnProperty.call(map,item.id))throw new Error('Translation response contains a duplicate field.');if(typeof item.text!=='string'||!item.text.trim()||item.text.length>5000)throw new Error('Translation response contains an empty or oversized field.');map[item.id]=item.text.trim();}
-  for(const id of expected)if(!map[id])throw new Error('Translation response is incomplete: '+id);
-  if(Object.keys(map).length!==expected.size)throw new Error('Translation response field count changed.');
-  return map;
- }
- function apply(guide,map){
-  const copy=JSON.parse(JSON.stringify(guide));
-  for(const [id,text] of Object.entries(map||{})){
-   const parts=id.split('.');let target=copy;
-   for(let i=0;i<parts.length-1;i++){const part=parts[i];if(!target||!(part in target))throw new Error('Translation path does not exist: '+id);target=target[part];}
-   const key=parts[parts.length-1];if(!target||!(key in target))throw new Error('Translation path does not exist: '+id);
-   const current=target[key];
-   if(current&&typeof current==='object'&&!Array.isArray(current))target[key]={...current,pt:text};
-   else target[key]={en:String(current??''),pt:text};
-  }
-  return copy;
- }
- root.SonicTranslationCore={version:'MIE-MUSICAL-TRANSLATION-5',collect,validate,apply,sourceText,hasLocale};
-})(window);
-</script>
+<script src="./translation/translation-core.js"></script>
 <script id="sonic-live-core">
 (function(root){'use strict';
  function cueIndex(cues,progressMs,durationMs){
@@ -2872,11 +2827,12 @@ const $=id=>document.getElementById(id);
 const SPOTIFY_CLIENT_ID='1693d995bc7941e38bb7a8fd15475321'; // Public OAuth client ID; PKCE means no client secret is used in the browser.
 const REDIRECT_URI=window.location.origin+window.location.pathname;
 const SCOPES='user-read-playback-state user-read-currently-playing user-modify-playback-state';
-const STORAGE={token:'sc_spotify_access_token',refresh:'sc_spotify_refresh_token',expiry:'sc_spotify_token_expiry',verifier:'sc_spotify_code_verifier',state:'sc_spotify_oauth_state',language:'sc_language_v1',translationEndpoint:'sc_mie_translation_endpoint_v1',translationToken:'sc_mie_translation_access_token_v1',translationCache:'sc_mie_translation_cache_v1'};
+const STORAGE={token:'sc_spotify_access_token',refresh:'sc_spotify_refresh_token',expiry:'sc_spotify_token_expiry',verifier:'sc_spotify_code_verifier',state:'sc_spotify_oauth_state',language:'sc_language_v1'};
+localStorage.removeItem('sc_mie_translation_endpoint_v1');localStorage.removeItem('sc_mie_translation_access_token_v1');localStorage.removeItem('sc_mie_translation_cache_v1');
 const previousSpotifyClientId=localStorage.getItem('sc_spotify_client_id');if(previousSpotifyClientId&&previousSpotifyClientId!==SPOTIFY_CLIENT_ID){[STORAGE.token,STORAGE.refresh,STORAGE.expiry,STORAGE.verifier,STORAGE.state,'sc_spotify_granted_scopes'].forEach(k=>localStorage.removeItem(k));}localStorage.removeItem('sc_spotify_client_id');
 let timer=null,cueClockTimer=null,pollInFlight=false,playerOperationInFlight=false,trackSwitchInFlight=false,deferredPollAfterPlayerOperation=false,pollBackoffUntil=0,lastPlaybackSnapshot=null,activePlaybackTrack=null,latestItem=null,latestDevice=null,playing=false,volumePercent=null,playbackProgressMs=null,selectedSearchTrack=null,dynamicGuide=null,dynamicGuideTrackId=null,dynamicCueIndex=-1,guideViewMode=(localStorage.getItem('sc_guide_view_mode')||'focus'),guideFromPlayback=false,pendingPlaybackTrackId=null,pendingPlaybackOriginId=null,pendingPlaybackDeadline=0,lang=localStorage.getItem(STORAGE.language)||'en',currentGuideKey='rhapsody',currentItemIndex=0,lastAutoTrackKey='',lastAutoLandmark=-1;
 let searchDebounceTimer=null,searchAbortController=null,searchSequence=0,lastSearchCount=0,selectedSearchTrackId=null;
-let dynamicGuideTranslation=null,dynamicGuideTranslationSource=null,translationStatus='idle',translationJobRunning=false,translationJobGuide=null,translationSequence=0;
+let dynamicGuideTranslation=null,dynamicGuideTranslationSource=null,translationStatus='idle',translationJobRunning=false,translationJobGuide=null,translationSequence=0,translationMissingCount=0;
 const I18N={en:{eyebrow:'Listening companion',tagline:'Your current Spotify track drives the guide, whether you started it here or directly in Spotify. The highlighted listening phase follows playback progress approximately; the app does not analyze audio or detect musical events.',connectHeading:'1 · Connect Spotify',connectCopy:'Tap Connect Spotify, sign in to Spotify, and approve access. You will return here automatically. Track timing is approximate and the app does not analyze audio.',connect:'Connect Spotify',refresh:'Refresh status',disconnect:'Disconnect',openSpotify:'Open Spotify',nowPlaying:'Spotify now playing',previous:'Previous',play:'Play',pause:'Pause',next:'Next',volumeDown:'Vol −',volumeUp:'Vol +',notDetected:'Active Spotify device: not detected',guideHeading:'2 · Listening guides',guideMode:'Independent guide',guideIntro:'Your current Spotify track drives this guide. It updates when the track changes, including tracks started outside this app.',guideSelect:'Choose a guide',currentTopic:'Selected listening topic',footer:'Early personal prototype. Playback controls use Spotify’s Web API. Supported curated tracks automatically select the corresponding guide and approximate landmark from playback progress. Unknown recordings remain unmatched. Expansion should use independent metadata and properly licensed commentary sources.',notConnected:'Not connected to Spotify',connectPrompt:'Tap Connect Spotify to authorize this app with your Spotify account. No Client ID or other setup is needed.',nothingPlaying:'Nothing playing yet',trackPrompt:'Connect Spotify, then start music in Spotify.',waiting:'Waiting for Spotify status.',scope:'After installing the latest build, tap Disconnect, then Connect / authorize controls again and approve playback-status + playback-control access. This is required to follow songs started directly in Spotify. Spotify Premium and an active playback device are required to start tracks from this app.',playing:'Playing',paused:'Paused',volume:'Volume',noDevice:'Spotify returned no current track. If music is playing, tap Disconnect, then Connect / authorize controls and approve playback-status access. Also confirm the output device in Spotify.',statusError:'Spotify status needs attention',controlError:'Spotify control failed',controlsGranted:'Spotify connected. Remote controls are ready.',playbackUpdate:'Spotify status refreshed.',langEnglish:'English',langPortuguese:'Português (Brasil)',selectTopic:'Choose a topic from the list.',section:'SECTION',track:'TRACK'},pt:{eyebrow:'Companheiro de escuta',tagline:'Use este guia musical enquanto escuta. Faixas compatíveis do Spotify avançam o guia automaticamente conforme a reprodução.',connectHeading:'1 · Conectar ao Spotify',connectCopy:'Toque em Conectar Spotify, entre na sua conta e autorize o acesso. Você voltará automaticamente para este app. O tempo é aproximado; o app não analisa o áudio.',connect:'Conectar Spotify',refresh:'Atualizar status',disconnect:'Desconectar',openSpotify:'Abrir Spotify',nowPlaying:'Tocando no Spotify',previous:'Anterior',play:'Tocar',pause:'Pausar',next:'Próxima',volumeDown:'Vol −',volumeUp:'Vol +',notDetected:'Dispositivo ativo do Spotify: não detectado',guideHeading:'2 · Guias de escuta',guideMode:'Guia independente',guideIntro:'Escolha uma obra ou álbum. Uma faixa correspondente no Spotify seleciona o guia automaticamente; os momentos musicais acompanham a posição da reprodução.',guideSelect:'Escolha um guia',currentTopic:'Tópico de escuta selecionado',footer:'Protótipo pessoal. Faixas selecionadas acompanham automaticamente a posição de reprodução do Spotify e destacam momentos musicais aproximados. A cobertura é limitada aos guias incluídos. Verifique as políticas e permissões do Spotify antes de distribuir o recurso de sincronização.',notConnected:'Não conectado ao Spotify',connectPrompt:'Toque em Conectar Spotify para autorizar este app com sua conta. Não é necessário configurar Client ID nem qualquer outra opção.',nothingPlaying:'Nada tocando no momento',trackPrompt:'Conecte o Spotify e inicie a música no próprio Spotify.',waiting:'Aguardando status do Spotify.',scope:'Depois de instalar a v2.0, toque em Desconectar e depois em Conectar / autorizar controles; aprove o acesso ao status e ao controle da reprodução. Isso é necessário para acompanhar músicas iniciadas diretamente no Spotify. Spotify Premium e um dispositivo ativo são necessários para iniciar faixas pelo app.',playing:'Tocando',paused:'Pausado',volume:'Volume',noDevice:'Nenhum dispositivo ativo do Spotify foi detectado. Inicie uma música no Spotify e atualize o status.',statusError:'O status do Spotify precisa de atenção',controlError:'O controle do Spotify falhou',controlsGranted:'Spotify conectado. Os controles estão prontos.',playbackUpdate:'Status do Spotify atualizado.',langEnglish:'English',langPortuguese:'Português (Brasil)',selectTopic:'Escolha um tópico na lista.',section:'SEÇÃO',track:'FAIXA',guideIntro:'Escolha uma obra ou álbum. Uma faixa correspondente no Spotify seleciona o guia automaticamente; os momentos musicais acompanham a posição da reprodução.'}};
 function tr(k){return (I18N[lang]||I18N.en)[k]||I18N.en[k]||k}
 function getDisplayedDynamicGuide(){return lang==='pt'&&dynamicGuideTranslation&&dynamicGuideTranslationSource===dynamicGuide?window.SonicTranslationCore.apply(dynamicGuide,dynamicGuideTranslation):dynamicGuide;}
@@ -2884,57 +2840,35 @@ function renderTranslationNotice(){
  const el=$('translationNotice');if(!el)return;
  if(lang!=='pt'||!dynamicGuide){el.textContent='';return;}
  const messages={
-  loading:'Preparando uma adaptação musical em português brasileiro…',
-  ready:'Adaptação musical em português brasileiro gerada a partir do texto-base em inglês e armazenada neste dispositivo.',
-  cached:'Adaptação musical em português brasileiro carregada do cache deste dispositivo.',
-  native:'Este guia já contém uma adaptação editorial em português.',
-  unconfigured:'Este guia tem texto-base em inglês. Para gerar uma adaptação musical em português, configure a URL do Worker e o token de acesso abaixo.',
-  error:'Não foi possível gerar a adaptação. O texto original em inglês está sendo exibido; nenhum conteúdo foi inventado.'
+  loading:'Consultando a memória local de traduções musicais…',
+  ready:'Adaptação musical em português brasileiro carregada da memória offline. Nenhuma chamada a IA ou API de tradução foi realizada.',
+  partial:`Adaptação parcial carregada. ${translationMissingCount} trecho(s) sem tradução aprovada permanecem em inglês. Nenhuma tradução literal será inventada.`,
+  native:'Os campos deste guia já possuem português editorial ou não exigem adaptação.',
+  error:'A memória local de traduções não pôde ser carregada. O texto original em inglês está sendo exibido; nenhuma tradução automática foi inventada.'
  };
  el.textContent=messages[translationStatus]||'';
 }
-function readTranslationCache(){try{return JSON.parse(localStorage.getItem(STORAGE.translationCache)||'{}')||{};}catch{return {};}}
-function writeTranslationCache(cache){
- try{
-  const entries=Object.entries(cache).sort((a,b)=>(b[1]?.savedAt||0)-(a[1]?.savedAt||0));
-  let trimmed=Object.fromEntries(entries.slice(0,60));
-  while(JSON.stringify(trimmed).length>650000&&Object.keys(trimmed).length>1){const keys=Object.keys(trimmed);delete trimmed[keys[keys.length-1]];}
-  localStorage.setItem(STORAGE.translationCache,JSON.stringify(trimmed));
- }catch(e){console.warn('MIE translation cache could not be saved',e);}
-}
-async function translationHash(items,trackId){
- const material=JSON.stringify({version:window.SonicTranslationCore.version,locale:'pt-BR',trackId,items:items.map(x=>({id:x.id,text:x.text,context:x.context}))});
- const bytes=new TextEncoder().encode(material);const digest=await crypto.subtle.digest('SHA-256',bytes);
- return Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
-}
-function validTranslationEndpoint(value){try{const u=new URL(value);return u.protocol==='https:'||(u.protocol==='http:'&&['localhost','127.0.0.1'].includes(u.hostname));}catch{return false;}}
 async function ensureDynamicGuideTranslation(){
  if(lang!=='pt'||!dynamicGuide)return;
  const guideRef=dynamicGuide,trackId=dynamicGuideTrackId,track=activePlaybackTrack||selectedSearchTrack||{};
- const items=window.SonicTranslationCore.collect(guideRef,track);
- if(!items.length){dynamicGuideTranslation=null;dynamicGuideTranslationSource=guideRef;translationStatus='native';renderTranslationNotice();return;}
  if(translationJobRunning&&translationJobGuide===guideRef)return;
+ const items=window.SonicTranslationCore.collect(guideRef,track);
+ if(!items.length){dynamicGuideTranslation=null;dynamicGuideTranslationSource=guideRef;translationMissingCount=0;translationStatus='native';renderTranslationNotice();return;}
  translationJobRunning=true;translationJobGuide=guideRef;const sequence=++translationSequence;
  translationStatus='loading';renderTranslationNotice();
  try{
-  const key=await translationHash(items,trackId||'unidentified');
+  const result=await window.SonicTranslationCore.translate(items,'pt-BR');
   if(dynamicGuide!==guideRef||dynamicGuideTrackId!==trackId||sequence!==translationSequence)return;
-  const cache=readTranslationCache();const cached=cache[key];
-  if(cached?.translations){
-   try{dynamicGuideTranslation=window.SonicTranslationCore.validate(items,cached.translations);dynamicGuideTranslationSource=guideRef;translationStatus='cached';renderTranslationNotice();renderDynamicGuide();return;}catch{delete cache[key];}
-  }
-  const endpoint=$('translationEndpoint').value.trim(),token=$('translationAccessToken').value.trim();
-  if(!endpoint||!token||!validTranslationEndpoint(endpoint)){translationStatus='unconfigured';renderTranslationNotice();renderActiveCue();return;}
-  const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({locale:'pt-BR',track:{id:trackId||'',name:track.name||'',album:track.album?.name||'',artists:(track.artists||[]).map(a=>a.name)},items})});
-  if(!response.ok){let detail='HTTP '+response.status;try{detail=(await response.json()).error||detail}catch{}throw new Error(detail);}
-  const payload=await response.json();const translations=window.SonicTranslationCore.validate(items,payload);
-  if(dynamicGuide!==guideRef||dynamicGuideTrackId!==trackId||sequence!==translationSequence)return;
-  dynamicGuideTranslation=translations;dynamicGuideTranslationSource=guideRef;translationStatus='ready';
-  cache[key]={savedAt:Date.now(),translations};writeTranslationCache(cache);
+  dynamicGuideTranslation=result.translations;
+  dynamicGuideTranslationSource=guideRef;
+  translationMissingCount=result.missing.length;
+  translationStatus=result.missing.length?'partial':'ready';
   renderTranslationNotice();renderDynamicGuide();
  }catch(error){
   if(dynamicGuide!==guideRef||sequence!==translationSequence)return;
-  console.warn('MIE musical translation unavailable',error);dynamicGuideTranslation=null;dynamicGuideTranslationSource=null;translationStatus='error';renderTranslationNotice();renderDynamicGuide();
+  console.warn('Offline musical translation memory unavailable',error);
+  dynamicGuideTranslation=null;dynamicGuideTranslationSource=null;translationMissingCount=0;translationStatus='error';
+  renderTranslationNotice();renderDynamicGuide();
  }finally{
   if(sequence===translationSequence){translationJobRunning=false;translationJobGuide=null;}
  }
@@ -3118,8 +3052,8 @@ function renderGuide(){const guide=window.SONIC_GUIDES[currentGuideKey];if(!guid
 function renderGuideItem(s,index){const title=s.title&&typeof s.title==='object'?s.title[lang]:s.title;const roles=s.roles?(s.roles[lang]||s.roles.en):[];$('cueCounter').textContent=(currentGuideKey==='rhapsody'?tr('section'):tr('track'))+' '+String(index+1).padStart(2,'0')+' / '+String((window.SONIC_GUIDES[currentGuideKey].sections||window.SONIC_GUIDES[currentGuideKey].tracks).length);$('currentTopicLabel').textContent=tr('currentTopic');$('guideNoteTitle').textContent=title||tr('selectTopic');$('roleTags').textContent='';(roles||[]).forEach(r=>{const sp=document.createElement('span');sp.className='tag';sp.textContent=r;$('roleTags').appendChild(sp)});$('nowListen').textContent=s.listen?.[lang]||s.listen?.en||'';$('nowWhy').textContent=s.why?.[lang]||s.why?.en||'';$('nowDeep').textContent=s.deep?.[lang]||s.deep?.en||'';}
 function chooseGuide(){currentGuideKey=$('guideSelect').value;currentItemIndex=0;lastAutoTrackKey='';lastAutoLandmark=-1;renderGuide()}
 function applyLanguage(){document.documentElement.lang=lang==='pt'?'pt-BR':'en';const ids={eyebrow:'eyebrow',tagline:'tagline',connectHeading:'connectHeading',connectCopy:'connectCopy',connectBtn:'connect',refreshBtn:'refresh',disconnectBtn:'disconnect',openSpotify:'openSpotify',nowPlayingLabel:'nowPlaying',previousText:'previous',nextText:'next',volumeDownText:'volumeDown',volumeUpText:'volumeUp',guideHeading:'guideHeading',guideModeTag:'guideMode',guideSelectLabel:'guideSelect',currentTopicLabel:'currentTopic',footerText:'footer'};Object.entries(ids).forEach(([id,k])=>{if($(id))$(id).textContent=tr(k)});$('previousBtn').setAttribute('aria-label',tr('previous'));$('nextBtn').setAttribute('aria-label',tr('next'));if(!latestItem)$('trackArtist').textContent=tr('trackPrompt');if(!localStorage.getItem(STORAGE.token))$('connectionMessage').textContent=tr('connectPrompt');if(!$('playbackMessage').classList.contains('error'))$('playbackMessage').textContent=tr('waiting');renderStatus();renderGuide();if(dynamicGuide)renderDynamicGuide();if(typeof renderEditorial==='function'){renderEditorial();renderLandmarks();document.querySelectorAll('[data-en][data-pt]').forEach(el=>{if(el.closest('#guideList'))return;const v=el.getAttribute(lang==='pt'?'data-pt':'data-en');if(v!==null)el.textContent=v;});}}
-localStorage.removeItem('sc_spotify_client_id');$('languageSelect').value=lang;$('translationEndpoint').value=localStorage.getItem(STORAGE.translationEndpoint)||'';$('translationAccessToken').value=localStorage.getItem(STORAGE.translationToken)||'';
-$('connectBtn').addEventListener('click',connectSpotify);$('refreshBtn').addEventListener('click',()=>pollPlayback());$('disconnectBtn').addEventListener('click',disconnect);$('previousBtn').addEventListener('click',()=>control('previous'));$('playPauseBtn').addEventListener('click',()=>control('toggle'));$('nextBtn').addEventListener('click',()=>control('next'));$('volumeDownBtn').addEventListener('click',()=>control('volDown'));$('volumeUpBtn').addEventListener('click',()=>control('volUp'));$('guideSelect').addEventListener('change',chooseGuide);$('languageSelect').addEventListener('change',()=>{lang=$('languageSelect').value;localStorage.setItem(STORAGE.language,lang);applyLanguage();if(dynamicGuide){if(lang==='pt')ensureDynamicGuideTranslation();else renderTranslationNotice();renderDynamicGuide();}});$('translationEndpoint').addEventListener('change',()=>{const value=$('translationEndpoint').value.trim();if(value&&!validTranslationEndpoint(value)){translationStatus='error';renderTranslationNotice();return;}localStorage.setItem(STORAGE.translationEndpoint,value);if(dynamicGuide&&lang==='pt'){translationStatus='idle';ensureDynamicGuideTranslation();}});$('translationAccessToken').addEventListener('change',()=>{localStorage.setItem(STORAGE.translationToken,$('translationAccessToken').value.trim());if(dynamicGuide&&lang==='pt'){translationStatus='idle';ensureDynamicGuideTranslation();}});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&localStorage.getItem(STORAGE.token))pollPlayback()});
+localStorage.removeItem('sc_spotify_client_id');$('languageSelect').value=lang;
+$('connectBtn').addEventListener('click',connectSpotify);$('refreshBtn').addEventListener('click',()=>pollPlayback());$('disconnectBtn').addEventListener('click',disconnect);$('previousBtn').addEventListener('click',()=>control('previous'));$('playPauseBtn').addEventListener('click',()=>control('toggle'));$('nextBtn').addEventListener('click',()=>control('next'));$('volumeDownBtn').addEventListener('click',()=>control('volDown'));$('volumeUpBtn').addEventListener('click',()=>control('volUp'));$('guideSelect').addEventListener('change',chooseGuide);$('languageSelect').addEventListener('change',()=>{lang=$('languageSelect').value;localStorage.setItem(STORAGE.language,lang);applyLanguage();if(dynamicGuide){if(lang==='pt')ensureDynamicGuideTranslation();else renderTranslationNotice();renderDynamicGuide();}});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&localStorage.getItem(STORAGE.token))pollPlayback()});
 
 const EDITORIAL=window.SONIC_EDITORIAL||{};
 const LANDMARKS=window.SONIC_LANDMARKS||{};
