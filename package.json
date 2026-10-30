@@ -1,8 +1,8 @@
 {
   "name": "sonic-companion",
-  "version": "1.9.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Track-specific listening guides with robust Spotify album and track metadata matching.",
+  "description": "Music Immersion engine preview: track-specific listening journeys, richer prompts and Spotify playback-linked cue progression.",
   "scripts": {
     "test": "node tests/run-build-tests.mjs && node tests/run-integration-tests.mjs"
   },

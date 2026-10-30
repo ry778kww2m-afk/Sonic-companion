@@ -1,7 +1,7 @@
 {
-  "name": "Sonic Companion v1.9 — Spotify metadata matching",
+  "name": "Sonic Companion v2.0 — Music Immersion preview",
   "short_name": "Sonic Companion",
-  "description": "Bilingual Spotify playback-linked guide with album-first matching, featured-artist-safe track normalization, and fail-closed unsupported-track state.",
+  "description": "Track-specific music immersion journeys with reflective prompts following Spotify playback progress.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

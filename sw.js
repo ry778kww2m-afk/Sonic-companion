@@ -1,4 +1,4 @@
-/* Sonic Companion v1.9. The page unregisters legacy workers and clears prior shell caches. Network only; no stale HTML cache. */
+/* Sonic Companion v2.0. The page unregisters legacy workers and clears prior shell caches. Network only; no stale HTML cache. */
 const CACHE_PREFIX = 'sonic-companion-shell-';
 self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate', event => event.waitUntil((async () => {

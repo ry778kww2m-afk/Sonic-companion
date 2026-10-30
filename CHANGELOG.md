@@ -1,20 +1,17 @@
-# Sonic Companion v1.9 — Spotify album/title metadata matching
+# Sonic Companion v2.0 — Music Immersion engine preview
 
-- Fixed live guide lookup for Kind of Blue, Giant Steps and The Köln Concert by resolving the album from its own Spotify album metadata before examining track credits.
-- Featured artists no longer influence album-profile selection; this fixes So What (feat. John Coltrane, Cannonball Adderley & Bill Evans) being misclassified as a Coltrane album track.
-- Normalized common Spotify title decorations including feat./featuring credits, remaster/year suffixes, and Köln Concert part naming (Pt. I / Part I / Part IIa).
-- Added both build-level and live-controller regression tests using realistic Spotify-style metadata, including wrong-album featured-artist collision rejection.
+- Added a richer Music Immersion experience without prematurely renaming the app. The concept “Music Immersion” is documented as a potential future product name.
+- Added 464 track-specific/section-specific listening prompts across Coltrane Plays the Blues, Kind of Blue, Giant Steps, The Köln Concert and the complete 1981 Glenn Gould Goldberg recording.
+- Kind of Blue: each of the five original tracks now has 12 distinct prompts with song-specific modal/blues, soloist, groove and ensemble perspectives.
+- Giant Steps: all seven original LP tracks now have individual sequences; Countdown uses eight moments due to its short duration, the others twelve.
+- Köln Concert: Parts I, IIa, IIb and IIc have different long-form improvisation journeys (22 / 15 / 14 / 9 prompts), following changes in ostinato, register, texture, lyricism, density and release.
+- Goldberg: added full 32-track 1981 Gould sequence (Aria, Variations 1–30, Aria da capo), with six short, movement-specific prompts per movement.
+- Every moment now includes a direct listening focus, specific detail, musical significance and a reflective question. Focus view shows the live question; Full view includes questions throughout the journey.
+- Retained 12 Coltrane prompts per original track, all seven catalogue profiles, Rachmaninoff's 37-track album routes, track metadata matcher and serialized playback controller.
+- Added build-level and live-controller tests for all cue counts, distinct sequences, Spotify title matching, and activation of cue boundaries for all 32 Goldberg movements and all tracks in the three enriched albums.
+- Explicit limitation: progress anchors are approximate, not score-verified timestamps or audio-event detection. New cue prose currently falls back to English in Portuguese mode.
 
-# Sonic Companion v1.9 — song-specific Coltrane moments
+## Future product exploration
 
-- Replaced the shared five-cue Coltrane album template with six individually authored track guides.
-- Added all six original album tracks, including previously missing Mr. Syms and Mr. Knight.
-- Each track now has 12 unique listening prompts (72 total), with track-specific attention instructions, musical detail and explanation; approximate progress anchors are spaced more frequently than the old generic 1–2 minute sequence.
-- Removed the five-cue truncation so all 12 prompts are available in the UI and live cue engine.
-- Added track-specific overview, personnel, form and emotional interpretation fields and made them override generic album profile text.
-- Corrected Blues to Bechet to soprano saxophone with bass and drums and no piano; corrected Blues to You to tenor saxophone with bass and drums and no piano; identified the central piano solo in Mr. Syms; distinguished the hypnotic piano/bass support in Mr. Day; added the near-gospel piano opening and occasional saxophone harmonics to Blues to Elvin; and described the distinct rhythmic/piano setup and sparse theme in Mr. Knight.
-- Added original Joe Goldberg liner notes, MusicBrainz track credits and Qobuz track credits as sources in the Coltrane Full Guide.
-- Full Guide now shows an approximate `m:ss` cue position as well as a progress percentage, calculated from Spotify-reported track duration.
-- Expanded tests to require six distinct ordered cue sequences, 12 unique moments per track, cue spacing no wider than 12% of the track, correct instrument presence/absence, and activation of all 72 cue thresholds through the live controller path.
-- Retained prior album catalogue, Rachmaninoff route and serialized Spotify playback safeguards.
-- Explicit non-claim: approximate progress anchors are not verified event timestamps or audio recognition.
+- Evaluate “Music Immersion” through user testing before any formal brand change.
+- Explore opt-in per-track listener interpretations (“My Interpretation”) as a personal lens for refining future prompts, kept distinct from objective/verified musical facts.

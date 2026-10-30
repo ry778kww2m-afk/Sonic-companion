@@ -1,42 +1,38 @@
-# Sonic Companion v1.9 — Spotify metadata matching and track-specific cue architecture
+# Sonic Companion v2.0 — Music Immersion architecture
 
-## Spotify metadata resolver
+## Cue model
 
-- The v1.8 matcher ranked fixture profiles using all credited track artists and the full display title before confirming the album. This caused featured artists (e.g. John Coltrane on Miles Davis's "So What") to influence album selection and remaster/feature suffixes to break exact title matching.
-- v1.9 resolves the profile from the Spotify album name plus its expected primary artist first. Track-level artist credits are used only to confirm the album identity, never to rank competing profiles.
-- Track titles are normalized for common Spotify decorations (`feat.`, `featuring`, `ft.`, remaster/year suffixes) before matching the canonical track entry.
-- Köln Concert titles normalize `The Köln Concert, Pt. I`, `Pt. IIa`, and equivalent `Part I` spellings to the canonical `Part I`, `Part IIa` track keys.
-- Album and artist identity are still required. The normalizer does not permit a title-only match or cross-album fallback; a same-title track on an unrelated album remains unavailable.
-- Regression coverage exercises the same `buildSonicMockGuide` path called by Spotify live auto-follow and controller-level integration tests with Spotify-shaped metadata.
+A track-specific cue is an object with:
 
-## Coltrane catalogue and cue model
+- `at`: approximate fraction of Spotify-reported track duration.
+- `title`: the moment's short name.
+- `focus`: what to direct attention toward.
+- `listen`: a concrete musical detail to notice.
+- `why`: why that detail matters to the arrangement, form or emotional arc.
+- `question`: a short reflective prompt that encourages active listening.
 
-- The former implementation defined a single five-item `profile.cues` array for the whole *Coltrane Plays the Blues* profile. The track entries held only short overviews, so each track inherited the same cue headings, same cue sequence and same approximate spacing. That was the root cause of the user's observation.
-- v1.9 gives each of the six original LP tracks its own `tracks[trackTitle].cues` array, track-specific overview, personnel, form and interpretive summary.
-- Each Coltrane track has 12 separate cue objects. The cues are unique in wording and subject, and use individually chosen progress fractions; no Coltrane track falls back to the profile-wide shared list.
-- The builder now respects all 12 track cues instead of truncating the array at five.
-- Each cue includes an attention prompt, a concrete listening detail, and a short explanation of why that feature matters. Full Guide lists every moment, while Focus mode shows the currently active one.
-- Full Guide renders each cue as an approximate `m:ss` timestamp plus percentage using Spotify's reported duration. Focus mode selects the cue with the interpolated Spotify progress.
-- The six tracks are: Blues to Elvin; Blues to Bechet; Blues to You; Mr. Day; Mr. Syms; Mr. Knight. The original release liner notes describe the recording session as October 24, 1960, list the quartet, and explicitly distinguish soprano/tenor saxophone and the two piano-less tracks.
-- Track-specific roles correct prior inaccuracies: Blues to Bechet = soprano, bass, drums (no piano); Blues to You = tenor, bass, drums (no piano); Mr. Syms = soprano with a central McCoy Tyner piano solo; Mr. Day = tenor quartet with a hypnotic bass/piano backing; Blues to Elvin = tenor with a near-gospel piano opening; Mr. Knight = tenor with a distinctive piano/rhythm figure and sparse theme.
-- Original Joe Goldberg liner notes are exposed as a source link in Full Guide, alongside MusicBrainz release/credits and Qobuz track credits/durations.
+Focus mode selects the active moment from `progress_ms` interpolated against a monotonic clock sample. Full view renders the complete moment sequence and approximate `m:ss` anchors. The current Spotify track ID remains authoritative; a guide is never attached to a search selection until Spotify confirms the exact track.
 
-## Cue timing: explicit limitation
+## Cue density by recording structure
 
-- Cue order and wording are song-specific; cue time boundaries are still approximate fractions of the current Spotify track duration.
-- The app does not listen to or analyse the recording. Spotify's playback API returns the track ID and playback position, not the current musical event or instrument entrance.
-- Therefore a cue timestamp is a convenient prompt boundary, not a verified score/audio event timestamp. UI labels explicitly say approximate. The build must not imply detection of a specific instrument or event at an exact second.
-- To claim exact musical event timing, each cue boundary must be manually validated against the exact Spotify recording (or produced by a separately validated score/audio alignment workflow). This offline release does not claim that work is complete.
+- Coltrane Plays the Blues: six tracks, twelve individually written moments each.
+- Kind of Blue: five tracks, twelve each. Sequences differ by modal design, shuffle blues, ballad architecture, compound-meter blues and five-mode improvisation.
+- Giant Steps: seven original LP tracks. Twelve moments each except the 2:21 Countdown, which has eight. Track content distinguishes rapid harmonic cycles, blues, short-form reharmonization, recurring cycles, Syeeda's melodic character, Naima's ballad/session personnel, and Mr. P.C.'s minor blues.
+- The Köln Concert: four Spotify sections with 22 / 15 / 14 / 9 moments. Long Part I is denser in moments than shorter Part IIc. Prompts follow changes in repetition, left/right hand roles, groove, blues inflection, register, density, spaciousness and closure.
+- Goldberg (1981 Gould): 32 discrete Spotify tracks, six short prompts per movement. Per-movement metadata distinguishes canons at successive intervals, dance/genre variations, virtuoso/hand-crossing textures, the French Overture, the G-minor Adagio, Quodlibet and Aria da capo.
 
-## Existing catalogue and player protections
+## Important identity and data rules
 
-- All six previous catalogues and the full Rachmaninoff 2023 DG catalogue are retained.
-- The Rachmaninoff album is tied to Spotify album ID `0v3T6fPnrptRXOrd854hIl`: 12 concerto movements and 25 individually listed Rhapsody sections.
-- Live guides are bound to the current Spotify track ID; search selection is only a requested destination.
-- Player mutations are serialized with polling and one another; a switch-level lock is held through confirmation; duplicate search taps are rejected.
-- Search-to-play never issues Pause, Stop or Transfer. An accepted HTTP 204 is not proof of playback; the current track must be read back and match the target ID.
-- Playback clock interpolates from Spotify progress using a monotonic clock. Pause, seek, duration bounds and stale-state clearing remain covered.
+- Album identity is resolved before title matching. Featured artists cannot select a competing album profile.
+- Goldberg title normalization strips Spotify's `Goldberg Variations, BWV 988:` prefix and variation performance-instrument suffixes while preserving the canonical movement number.
+- Giant Steps includes all seven original LP tracks. Köln accepts `Part` and `Pt.` title conventions.
+- Unknown albums/tracks remain fail-closed. No generic fallback content is shown.
+- New cue records are interpreted by `mockCue`; legacy Coltrane array cues remain supported. The five-cue truncation was removed, allowing long journeys such as Köln Part I to render completely.
 
-## Tests
+## Limits
 
-Run `npm test`. Tests parse all inline scripts, check all catalogue fixtures, require 12 unique cues for every Coltrane track, verify that all six have different cue sequences and dense cue coverage, assert track-specific instrument claims, and exercise the actual live auto-follow route and previous playback regression cases.
+Spotify provides playback identity and progress, not signal-level musical-event detection. `at` values are educational progress anchors estimated against the recording arc. They are not verified seconds of instrument entrances, score alignment or acoustic recognition. The content is offline educational mock material; no live research provider is connected.
+
+## Future feature hypothesis
+
+A potential personalisation layer could store opt-in listener notes for each exact Spotify track/recording and use them to shape later questions. Such notes must remain labelled as the listener's interpretation, separate from source-backed musical facts, with local-first storage and clear edit/delete controls. This is a product hypothesis, not included in v2.0.

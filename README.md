@@ -1,51 +1,47 @@
-# Sonic Companion v1.9 — track-specific Coltrane listening moments
+# Sonic Companion v2.0 — Music Immersion engine preview
 
-This release replaces the shared, generic five-cue Coltrane template with six song-specific listening sequences. It also preserves the complete seven-profile catalogue and previous Spotify playback safeguards.
+This release expands the app from a sparse listening guide into a more engaging, track-specific **Music Immersion** experience. The app name remains **Sonic Companion** for now; “Music Immersion” is a product-direction and potential naming candidate, not a final rebrand.
 
-## Spotify album matching fix (v1.9)
+## Immersion journeys in this build
 
-- Album profile selection now happens before track-title matching. Featured artist credits no longer make a Kind of Blue track look like a Coltrane album track.
-- Spotify title decorations such as featured credits and remaster labels are normalized before matching.
-- Köln Concert aliases such as `The Köln Concert, Pt. I` and `The Köln Concert, Pt. IIa` map to their canonical Part I / Part IIa fixtures.
-- Album and primary-artist checks remain mandatory, so normalization does not weaken wrong-album collision protection.
-- Regression tests cover the actual live auto-follow controller route for So What (with featured credits), Giant Steps (remaster label) and Köln Concert (Pt. naming).
+| Catalogue | Coverage | Prompts per track / section | Total prompts |
+|---|---:|---:|---:|
+| Coltrane Plays the Blues | 6 tracks | 12 each | 72 |
+| Kind of Blue | 5 original tracks | 12 each | 60 |
+| Giant Steps | 7 original LP tracks | 12 each; Countdown 8 | 80 |
+| The Köln Concert | Parts I, IIa, IIb, IIc | 22, 15, 14, 9 | 60 |
+| Goldberg Variations (Glenn Gould 1981) | Aria + Variations 1–30 + Aria da capo | 6 each | 192 |
+| **Total** | **54 track/section entries** | — | **464** |
 
-## What changed for Coltrane Plays the Blues
+Existing Rachmaninoff (12 concerto movements + 25 Rhapsody sections), Clair de lune, the six original album profiles and Spotify playback safeguards are retained.
 
-- Covers all six original album tracks: **Blues to Elvin**, **Blues to Bechet**, **Blues to You**, **Mr. Day**, **Mr. Syms** and **Mr. Knight**.
-- Each track has **12 individual listening prompts** (72 total), with unique titles, focus instructions, listening details, and explanations. The six tracks no longer inherit the same album-wide cue list.
-- Prompts are distributed more frequently—roughly every 25–45 seconds depending on track duration—instead of one generic prompt every 1–2 minutes.
-- Track-specific instrumentation is corrected: **Blues to Bechet** is soprano saxophone with bass and drums, no piano; **Blues to You** is tenor saxophone with bass and drums, no piano; **Mr. Syms** features soprano and a central McCoy Tyner piano solo; **Mr. Day** uses the full quartet and a hypnotic piano/bass bed; **Blues to Elvin** opens with a near-gospel piano figure; **Mr. Knight** has a distinctive piano/rhythm pattern and sparse theme.
-- Full Guide now displays an approximate clock time (derived from Spotify's reported track duration) and percentage for each listening prompt. Focus mode switches the active prompt as playback progresses.
-- Coltrane album metadata sources and Joe Goldberg's original liner notes are linked in Full Guide.
+## What changed
 
-## Timing caveat
+- Every Kind of Blue track now has its own sequence: the modal two-chord exchange of “So What,” the Wynton Kelly-led blues feel of “Freddie Freeloader,” the restrained ballad architecture of “Blue in Green,” the rolling 6/8 blues of “All Blues,” and the five-modal-area design of “Flamenco Sketches.”
+- Giant Steps now covers all seven original LP tracks, including the previously missing “Syeeda’s Song Flute,” “Naima” and “Mr. P.C.” The cues reflect each tune’s distinct blues, ballad, harmonic and rhythmic character. “Countdown” has fewer moments because the recording is much shorter.
+- The Köln Concert is treated as a continuous solo-piano improvisational journey. Long Part I gets 22 prompts; the other parts get their own distinct, denser or shorter sequences rather than an identical template.
+- The complete 1981 Gould Goldberg recording is added as 32 Spotify movements. Each movement has six short, character-specific prompts so the short variations are not overloaded with an unrealistic number of moments. The sequence distinguishes canons, fughetta, gigue, French overture, Adagio, Quodlibet and the final Aria return.
+- Every cue has a focus instruction, a concrete listening detail, why it matters, and a reflective question. Focus mode updates the current prompt as Spotify progress advances; Full view exposes the entire journey.
+- The Coltrane Plays the Blues track-specific sequences remain intact at 12 prompts per song (72 total), including the corrected piano-less trios and soprano/tenor distinctions.
 
-The prompt sequence and musical content are track-specific, but the cue boundaries remain **approximate progress anchors**, not verified event timestamps. Spotify provides playback position, not audio recognition. The prompts are based on the original liner notes, credited personnel and track-level musical descriptions; they do not claim that a particular instrument enters at the exact displayed second. Accurate event-level timing requires listening to the exact release recording and manually validating every boundary (or a separate permitted score/audio alignment workflow).
+## Music Immersion naming and personalization — future exploration
 
-## Complete catalogue
+“Music Immersion” is a promising descriptive name for the experience, but should be tested before replacing Sonic Companion. A future **My Interpretation** feature could let a listener save their own observations for a Spotify track or exact recording. Those notes could shape later prompts (for example, follow a listener’s interest in bass movement, melancholy, a particular instrument or a recurring motif). The product must keep the listener’s subjective interpretation separate from source-backed musical facts, be opt-in, allow editing/deletion, and avoid silently treating one user’s interpretation as objective truth. This feature is not implemented in v2.0.
 
-- Bach / Glenn Gould — Goldberg Variations
-- John Coltrane — Coltrane Plays the Blues (now all six original tracks)
-- Miles Davis — Kind of Blue
-- John Coltrane — Giant Steps
-- Keith Jarrett — The Köln Concert
-- Claude Debussy — Clair de lune
-- Rachmaninoff / Yuja Wang / Los Angeles Philharmonic / Gustavo Dudamel — 2023 Deutsche Grammophon Piano Concertos & Paganini Rhapsody album (37 Spotify tracks)
+## Timing and factual limits
 
-## Playback safeguards retained
+Spotify supplies the current track ID and playback position; it does not provide acoustic event detection. Cue positions in this mock are **approximate progress anchors**, arranged to follow the musical arc and prompt attention. They are not manually verified event timestamps, score alignment or claims such as “the piano enters exactly at 1:42.” Exact recording-level synchronization still requires listening to each exact release master and validating cue boundaries against the audio/score.
 
-- Live guide changes only after Spotify confirms the exact current track ID.
-- Search-to-play operations are serialized against status polling and each other.
-- The search path never sends Pause, Stop or Transfer; it confirms the target after an accepted HTTP 204 and has one guarded exact-URI fallback.
-- Playback time interpolates from Spotify position snapshots; pause, seek, track change, end-of-track and API errors are handled.
+New cue prose is authored in English; the app shell remains bilingual, but these new cue fields fall back to English in Portuguese mode until a reviewed translation pass is completed.
 
-## Run tests
+## Validation
+
+Run:
 
 ```bash
 npm test
 ```
 
-The suite validates all six Coltrane tracks through the fixture builder and actual automatic playback route, checks 12 unique cue titles per track, distinct sequences and cue spacing, tests key instrumentation claims, and runs the prior catalogue/playback regression suite.
+The test suite verifies all 32 Goldberg movements, all five Kind of Blue tracks, all seven Giant Steps tracks, all four Köln sections, all six Coltrane tracks, the existing Rachmaninoff and other catalogues, question content, cue uniqueness and activation at every tested playback boundary. The complete ZIP must be extracted into a clean folder and tested before deployment.
 
-This is still an offline mock build: no live research, audio recognition, or live Spotify / iOS browser test is included. See `SOURCES.md`, `ARCHITECTURE.md` and `TEST_RESULTS.txt`.
+This is still an offline educational mock build. No live Spotify account, iPhone playback device, GitHub Pages deployment, audio recognition or score-level cue validation was available for this release test.
