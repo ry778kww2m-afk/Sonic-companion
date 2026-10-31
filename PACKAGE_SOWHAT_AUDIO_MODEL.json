@@ -1,6 +1,6 @@
 {
   "package": "Sonic Companion So What Audio Lab Engine",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "scope": "Miles Davis — So What, original 1959 Kind of Blue studio recording only",
   "model": "gpt-audio-1.5",
   "generation_source": "Direct input_audio to GPT-Audio 1.5; no prewritten event content or DSP-generated musical moments",
@@ -10,31 +10,44 @@
     "stride_seconds": 22,
     "sample_rate_hz": 24000,
     "format": "PCM WAV",
-    "primary_events_per_excerpt_max": 6,
-    "adaptive_detail_pass_when_primary_events_below": 3,
-    "maximum_events_across_40_windows": 320
+    "maximum_events_per_pass_per_excerpt": 6,
+    "passes_per_excerpt": "mandatory primary + mandatory independent detail + adaptive depth",
+    "max_concurrent_windows": 4,
+    "maximum_windows": 40,
+    "maximum_events_across_40_windows": 720
   },
   "publish_quality_gates": {
-    "minimum_events_per_minute": 3,
-    "maximum_silent_gap_seconds": 45,
+    "minimum_events_per_minute": 4,
+    "maximum_silent_gap_seconds": 30,
     "every_overlapping_audio_window_requires_event": true,
     "no_synthetic_or_fallback_moments": true
   },
   "features": [
-    "adaptive primary and complementary detail audio passes",
-    "overlap deduplication with distinct instrument gestures retained",
-    "model-generated bilingual event explanations and listener guidance",
-    "chronological excerpt summaries retained as a listening log",
-    "performer attribution constrained by session personnel and instrument mapping",
-    "per-moment progress bars in Audio Lab, active cue and full cue list",
-    "existing Spotify track progress and cue countdown retained",
-    "direct-audio provenance and strict event validation in Worker and browser bridge",
-    "mandatory ALLOWED_ORIGIN and AUDIO_LAB_TOKEN gate on the audio Worker route"
+    "matched Audio Lab 2.1 producer and bridge consumer schema",
+    "mandatory ensemble detail pass for every window",
+    "adaptive depth pass for low-density or low-diversity windows",
+    "overlap deduplication that preserves distinct same-pass gestures",
+    "model-generated bilingual event explanations and listening-log summaries",
+    "performer attribution constrained by session roster and instrument mapping",
+    "per-moment progress bars in Audio Lab cards, active cue and full main-app cue list",
+    "model guide opens in Full view so card countdowns are visible",
+    "visible build ID, bridge version and actual cue count",
+    "existing Spotify playback, track progress and countdown retained",
+    "direct-audio provenance, exact-track identity/duration and density/continuity guards"
   ],
   "files": [
-    "index.html", "audio-analysis-bridge.js", "audio-lab/index.html", "worker/index.js",
-    "package.json", "tests/", "README_SOWHAT_AUDIO_MODEL.md", "UPLOAD_INSTRUCTIONS.txt",
-    "CHANGELOG.md", "TEST_STATUS.txt", "SHA256SUMS.txt"
+    "index.html",
+    "audio-analysis-bridge.js",
+    "audio-lab/index.html",
+    "worker/index.js",
+    "package.json",
+    "tests/",
+    "README_SOWHAT_AUDIO_MODEL.md",
+    "UPLOAD_INSTRUCTIONS.txt",
+    "CHANGELOG.md",
+    "TEST_STATUS.txt",
+    "PACKAGE_MANIFEST.json",
+    "SHA256SUMS.txt"
   ],
-  "release_status": "All eight included automated Node.js suites pass. Live musical accuracy, iPhone Safari, Spotify streaming and deployment have not been tested in this environment."
+  "release_status": "Nine automated Node.js suites pass, including actual bridge plus actual app renderer DOM-harness test (38 moments / 38 bars). Live music analysis, physical iPhone Safari, Spotify session and deployment are not tested."
 }

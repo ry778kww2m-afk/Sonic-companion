@@ -1,38 +1,48 @@
-SONIC COMPANION v1.0.8 — AUDIO LAB ENGINE 2.0
+SONIC COMPANION v1.0.10 — AUDIO LAB ENGINE 2.1
 
-This is a targeted overlay. Do not replace the whole GitHub repository.
+IMPORTANT: THIS IS A TARGETED OVERLAY, NOT A FULL REPOSITORY REPLACEMENT.
+The main app, Audio Lab page and browser bridge must be updated as one matched release. The Cloudflare Worker must also be deployed separately. Deploying only one component can leave the old four-cue path or reject new records.
 
 A. CLOUDFLARE WORKER (separate deployment)
-1. Back up the currently deployed sonic-companion-research Worker source.
+1. Back up the currently deployed sonic-companion-research Worker source and its configuration.
 2. Replace the Worker entrypoint with worker/index.js from this package.
-3. Keep OPENAI_API_KEY as a Worker secret. Never place it in GitHub Pages or browser code.
+3. Keep OPENAI_API_KEY as a Cloudflare Worker secret. Never put it in GitHub Pages or browser code.
 4. Configure ALLOWED_ORIGIN to the exact static-site origin (scheme + host only, no repository path).
-5. Configure AUDIO_LAB_TOKEN as a random secret of at least 32 characters. It is an internal POC gate, not production user authentication.
-6. Deploy the Worker. Open <worker-base-url>/health and verify that the OpenAI key, allowed origin and Audio Lab token are configured.
+5. Configure AUDIO_LAB_TOKEN as a random secret of at least 32 characters. It is an internal prototype gate, not production user authentication.
+6. Deploy the Worker. Open <worker-base-url>/health and confirm the returned Audio Lab engine version is 2.1.0 and required configuration is present.
 
-B. GITHUB PAGES (preserve existing repository)
+B. GITHUB PAGES (update together; preserve existing repository)
 Replace/add only these paths from this package:
 - /index.html
 - /audio-analysis-bridge.js
 - /audio-lab/index.html
-- /worker/index.js (source for the separate Worker deployment; it is not served as a Pages Worker)
-- /package.json and /tests/ (optional, for local automated QA)
+- /worker/index.js (source for the separate Cloudflare deployment; GitHub Pages does not execute it)
+- /package.json and /tests/ (optional, for automated QA)
+- /README_SOWHAT_AUDIO_MODEL.md, /UPLOAD_INSTRUCTIONS.txt, /CHANGELOG.md, /TEST_STATUS.txt, /PACKAGE_MANIFEST.json, /PACKAGE_SOWHAT_AUDIO_MODEL.json
 
-Preserve unrelated files and folders, especially Spotify OAuth configuration, manifest, service worker, icons, translation assets and the existing Worker deployment configuration. Keep the paths exactly as shown. Do not delete the existing repository's other files.
+Do not upload this ZIP as a nested folder. Merge the files into the existing repository while preserving the repository's existing paths. Preserve Spotify OAuth configuration, service worker, manifest, icons, translation assets and all unrelated files. The app and bridge are one contract: do not deploy one without the other.
 
 C. RUN AUDIO LAB FOR THE TARGET RECORDING
 1. Open the existing site at /Sonic-companion/audio-lab/ in Safari.
 2. Select the authorized local audio file of the original 1959 studio “So What” recording from Kind of Blue.
 3. Enter the deployed Worker base URL and AUDIO_LAB_TOKEN.
-4. Enter the Spotify track URL for the same recording.
-5. Manually confirm recording identity and explicitly consent to sending audio excerpts to OpenAI.
-6. Run “Analyse with GPT-Audio 1.5”. The engine scans overlapping 30-second windows with an 8-second overlap. Each window gets a primary pass; windows with fewer than three primary events get a complementary detail pass. A 9½-minute recording uses 26 primary windows and may require up to 26 additional detail calls.
-7. The result must pass all coverage checks before the Publish or Download controls are enabled. For a 9½-minute recording, the minimum publishable count is 29 events, with no silent gap over 45 seconds and no uncovered analysis window. If the model does not find sufficient defensible content, the record is rejected instead of padded.
-8. Listen through the generated timestamps and descriptions before publishing. The bars show each moment’s own time window; the app’s Spotify countdown and overall progress are retained.
+4. Enter the Spotify track URL for that same recording.
+5. Confirm recording identity and consent to sending audio excerpts to OpenAI.
+6. Run “Analyse with GPT-Audio 1.5”. The engine scans 30-second windows with 8-second overlap (22-second stride), up to four windows concurrently. Every window gets a primary pass and a mandatory independent ensemble pass. Thin/narrow results get an adaptive third depth pass. A 9½-minute recording uses 26 windows and therefore at least 52 model calls; adaptive depth can add more.
+7. The analysis must pass all publication checks: at least four distinct model moments per minute (38 for 9½ minutes), no silent gap longer than 30 seconds, and at least one event in every overlapping window. Four or six moments are rejected. The app does not manufacture filler to meet the gate.
+8. Review moments and timestamps. Tap “Publish to original app”. This stores the record in the same browser origin. Then open/refresh the main app and play the exact Spotify track. Main app should show a badge like “AUDIO LAB · GPT-AUDIO 1.5 · 38 MOMENTS” and metadata containing “BUILD v1.0.10 · BRIDGE 2.1.0”. Model guides automatically open in Full view, where every cue card has its own countdown/progress bar.
 
-D. WHAT IS AND IS NOT PROVEN
-- Automated QA: all eight included Node.js suites must pass (`npm test`).
-- This code release does not include genuine So What model output. No test fixture is used as app content.
-- A successful local test run does not prove live OpenAI output quality, exact local-file/Spotify-master identity, iPhone Safari compatibility or successful deployment. Those require the user's real recording, API secrets, live Worker and physical iPhone session.
-- Model confidence and timestamp confidence are self-ratings, not statistically calibrated probabilities.
-- The tester token is browser-visible and is not a substitute for production authentication. Configure rate limiting before exposing the Worker broadly.
+D. TROUBLESHOOTING USING THE VISIBLE BUILD MARKERS
+- If the main app does not show BUILD v1.0.10, it is not serving the new frontend (or an old cache/service worker is still intercepting it).
+- If the metadata says BRIDGE MISSING or another bridge version, the frontend and bridge deployment are incomplete or mismatched.
+- If it says “no matching record”, the Audio Lab record was not published in the same browser origin/profile, or the Spotify track ID did not match.
+- If it says “duration mismatch”, the local file and Spotify duration differ by more than three seconds; do not override this silently.
+- If Audio Lab reports fewer than 38 moments for a 9½-minute file, or fails coverage, Publish remains disabled. Do not download/import sparse output as a complete guide.
+- The version badge and actual cue count make it possible to distinguish an old build from a successfully loaded Engine 2.1 record.
+
+E. WHAT IS AND IS NOT PROVEN
+- Automated QA: `npm test` runs nine Node.js suites. The final suite runs the real v2.1 bridge and real `renderDynamicGuide()` function using a test-only 9½-minute/38-event fixture; it asserts 38 cue cards and 38 individual progress bars. This fixture is only in tests and is never app content.
+- No genuine So What model output is included in the ZIP. No actual audio file or live API credentials were available to run a real listening analysis here.
+- Automated tests do not prove musical correctness, exact local-file/Spotify-master identity, physical iPhone Safari behavior or successful deployment.
+- Model confidence/timestamp confidence are self-ratings, not statistically calibrated probabilities.
+- AUDIO_LAB_TOKEN is browser-visible and is not production authentication. Apply rate limiting and per-user authorization before exposing this broadly.

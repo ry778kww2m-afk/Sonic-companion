@@ -1,10 +1,20 @@
 {
-  "release": "1.0.8",
-  "name": "Sonic Companion — So What Audio Lab Engine 2.0",
+  "release": "1.0.10",
+  "name": "Sonic Companion \u2014 So What Audio Lab Engine 2.1",
   "contents": [
-    "index.html", "audio-analysis-bridge.js", "audio-lab/index.html", "worker/index.js",
-    "package.json", "tests/", "README_SOWHAT_AUDIO_MODEL.md", "UPLOAD_INSTRUCTIONS.txt",
-    "CHANGELOG.md", "TEST_STATUS.txt", "PACKAGE_SOWHAT_AUDIO_MODEL.json", "SHA256SUMS.txt"
+    "index.html",
+    "audio-analysis-bridge.js",
+    "audio-lab/index.html",
+    "worker/index.js",
+    "package.json",
+    "tests/",
+    "README_SOWHAT_AUDIO_MODEL.md",
+    "UPLOAD_INSTRUCTIONS.txt",
+    "CHANGELOG.md",
+    "TEST_STATUS.txt",
+    "PACKAGE_SOWHAT_AUDIO_MODEL.json",
+    "PACKAGE_MANIFEST.json",
+    "SHA256SUMS.txt"
   ],
-  "important": "Targeted overlay, not a full repository replacement. Direct GPT-Audio 1.5 input is the only source of So What musical moments. No real audio analysis output or data folder is bundled. Preserve unrelated repository assets and deploy the Worker separately."
+  "important": "Targeted overlay, not full-repository replacement. App, Audio Lab page and bridge are a matched Engine 2.1 release; Cloudflare Worker is deployed separately. Direct GPT-Audio 1.5 input is the only source of So What musical moments. No genuine model output or data folder is bundled. Preserve unrelated repository assets."
 }

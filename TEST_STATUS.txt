@@ -1,15 +1,15 @@
-Sonic Companion v1.0.8 — Audio Lab Engine 2.0
+Sonic Companion v1.0.10 — Audio Lab Engine 2.1
 
-Automated suites: 8; run `npm test` from package root.
-1. Main app + Audio Lab source syntax/build integrity and required paths.
-2. Bridge schema, engine provenance, exact recording identity, density/continuity gates and record import guards.
-3. Spotify permission UI regressions and localized status handling.
-4. Guide catalogue identity, resolver and source guards.
-5. Existing Freddie Freeloader guide timing, first-cue countdown and main app per-moment progress UI regressions.
-6. So What direct-audio provenance, event schema, timestamp boundaries, bilingual content, segment summaries, no-DSP fallback and performer/instrument constraints.
-7. Worker request contract: actual input_audio payload to GPT-Audio 1.5, audio request identity, content/event limits, origin/token/API-key controls and fail-closed behavior. Upstream OpenAI response is mocked only inside the test harness.
-8. Audio Lab Engine 2.0 production-function tests: 30s/8s analysis plan, 9.5-minute window count, three-per-minute publication floor, rejection of 4–6 events for a long track, silent-gap rejection, overlap deduplication, timestamp normalization, adaptive detail-pass wiring, active cue and full-list progress bars and accessibility state.
+Automated test result: PASS (9/9 Node.js suites; npm test)
 
-Latest result: PASS — all 8 suites.
+1. Build integrity, HTML inline-script/Worker syntax, versioned bridge reference and retained Spotify/countdown app — PASS
+2. Integration/DSP-only shell, exact Spotify ID/duration validation and invalid-record rejection — PASS
+3. Spotify permission guidance and UI regressions — PASS
+4. Guide catalogue routing and exact-track dispatch — PASS
+5. Existing guide countdown, active cue progress and full-list cue timing regressions — PASS
+6. So What direct-audio record schema, timestamp and performer attribution constraints — PASS
+7. Worker audio request, GPT-Audio 1.5 input_audio, output validation, origin/token/key security — PASS (upstream response mocked in test harness only)
+8. Audio Lab Engine 2.1 production window plan, deduplication, minimum density/continuity gate and cue timer update logic — PASS
+9. Bridge-to-renderer end-to-end test: test-only 9½-minute record maps 38 model events through the real bridge and actual app renderDynamicGuide() into 38 cue cards with 38 per-card progress bars; Full view active — PASS
 
-Not tested: live OpenAI API output, actual musical correctness on the original 1959 recording, acoustic file-to-Spotify master matching, physical iPhone Safari/PWA rendering, live Spotify OAuth/player session, or deployment to GitHub Pages/Cloudflare. Browser navigation to a local test server was blocked by the execution environment. The code and automated contracts can be tested here; actual audio interpretation and the iPhone UI still need live verification against your deployed environment.
+Not tested: genuine musical accuracy on the original So What master, live OpenAI requests, the user's Cloudflare Worker deployment, live Spotify, physical iPhone/Safari rendering or Github Pages deployment. Browser navigation was blocked by this environment. Do not interpret mocked API response or DOM harness as proof of those items.

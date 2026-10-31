@@ -1,4 +1,4 @@
-/* Sonic Companion — Audio Lab bridge v2.0.0
+/* Sonic Companion — Audio Lab bridge v2.1.0
  * Model records contain only content returned by direct GPT-Audio 1.5 input.
  * Legacy DSP records remain supported for non-So-What tracks and are never used
  * as musical explanations for the So What proof-of-concept.
@@ -9,24 +9,24 @@
  const MODEL_STORE_KEY='sonic.audioModelAnalysis.registry.v1';
  const DSP_SCHEMA='sonic-audio-analysis-record';
  const MODEL_SCHEMA='sonic-audio-model-performance-record';
- const MAX_EVENTS=320, DURATION_TOLERANCE_MS=3000;
+ const MAX_EVENTS=720, DURATION_TOLERANCE_MS=3000;
  const ROSTER=['Miles Davis','Julian “Cannonball” Adderley','Cannonball Adderley','John Coltrane','Bill Evans','Paul Chambers','Jimmy Cobb'];
  function readStore(key){try{const p=JSON.parse(root.localStorage.getItem(key)||'{"schemaVersion":1,"records":{}}');if(!p||p.schemaVersion!==1||!p.records||typeof p.records!=='object'||Array.isArray(p.records))return{schemaVersion:1,records:{}};return p}catch(_){return{schemaVersion:1,records:{}}}}
  function bilingual(x){return !!x&&typeof x==='object'&&typeof x.en==='string'&&x.en.trim().length>0&&typeof x.pt==='string'&&x.pt.trim().length>0}
  function richBilingual(x,minWords=9,minChars=65){const words=v=>String(v||'').trim().split(/\s+/).filter(Boolean).length;return bilingual(x)&&x.en.trim().length>=minChars&&x.pt.trim().length>=minChars&&words(x.en)>=minWords&&words(x.pt)>=minWords}
  function validateModelRecord(r){
-  if(!r||r.schema!==MODEL_SCHEMA||r.schemaVersion!==2)return 'Unsupported or obsolete model-analysis format. Re-run Audio Lab Engine 2.0 for this recording.';
+  if(!r||r.schema!==MODEL_SCHEMA||r.schemaVersion!==2)return 'Unsupported or obsolete model-analysis format. Re-run Audio Lab Engine 2.1 for this recording.';
   if(r.model!=='gpt-audio-1.5'||r.audioInputSubmitted!==true||r.audioInputMode!=='direct-audio-input-chunked')return 'The record does not prove direct GPT-Audio 1.5 audio input.';
   if(!/^[A-Za-z0-9]{22}$/.test(String(r.spotifyTrackId||'')))return 'Invalid Spotify track ID.';
   if(String(r.trackTitle||'').toLowerCase()!=='so what'||String(r.album||'').toLowerCase()!=='kind of blue'||String(r.recordingVersion||'')!=='Original 1959 studio recording')return 'This proof-of-concept only accepts the original studio So What recording from Kind of Blue.';
   if(r.recordingMatchConfirmed!==true)return 'The exact-recording confirmation is missing.';
   const duration=Number(r.durationMs);if(!Number.isFinite(duration)||duration<60000||duration>720000)return 'Model-analysis duration is invalid.';
   if(!r.sourceFile||!/^[a-f0-9]{64}$/i.test(String(r.sourceFile.sha256||'')))return 'The source audio file hash is missing or invalid.';
-  if(!r.chunking||r.chunking.chunkSeconds!==30||r.chunking.overlapSeconds!==8||!Number.isInteger(r.chunking.count)||r.chunking.count<1||r.chunking.count>40||!Number.isInteger(r.chunking.detailPassCount)||r.chunking.detailPassCount<0||r.chunking.detailPassCount>r.chunking.count)return 'Audio chunk provenance is invalid.';
+  if(!r.chunking||r.chunking.chunkSeconds!==30||r.chunking.overlapSeconds!==8||!Number.isInteger(r.chunking.count)||r.chunking.count<1||r.chunking.count>40||!Number.isInteger(r.chunking.detailPassCount)||r.chunking.detailPassCount!==r.chunking.count||!Number.isInteger(r.chunking.depthPassCount)||r.chunking.depthPassCount<0||r.chunking.depthPassCount>r.chunking.count)return 'Audio chunk provenance is invalid. Every window requires a detail pass; depth-pass count must be explicit.';
   if(!Array.isArray(r.events)||r.events.length>MAX_EVENTS)return 'Model moment collection is invalid.';
-  if(r.engineVersion!=='2.0'||r.analysisStrategy!=='30s-overlapping-primary-plus-adaptive-detail')return 'Audio Lab Engine 2.0 provenance is missing.';
-  const gate=r.qualityGate,minimumMoments=Math.ceil((duration/1000)/20),observedRate=Number(r.events?.length)/(duration/60000);
-  if(!gate||gate.minimumMoments!==minimumMoments||gate.minimumMomentsPerMinute!==3||gate.maximumSilentGapSeconds!==45||Number(gate.observedMomentsPerMinute)<3||Math.abs(Number(gate.observedMomentsPerMinute)-observedRate)>.15||!Number.isFinite(Number(gate.observedMaxSilentGapSeconds))||Number(gate.observedMaxSilentGapSeconds)>45||gate.uncoveredWindows!==0||r.events.length<minimumMoments)return 'Audio Lab density/continuity quality gate failed.';
+  if(r.engineVersion!=='2.1.0'||r.analysisStrategy!=='30s-overlapping-primary-plus-mandatory-detail-plus-adaptive-depth')return 'Audio Lab Engine 2.1 provenance is missing.';
+  const gate=r.qualityGate,minimumMoments=Math.ceil((duration/1000)*4/60),observedRate=Number(r.events?.length)/(duration/60000);
+  if(!gate||gate.minimumMoments!==minimumMoments||gate.minimumMomentsPerMinute!==4||gate.maximumSilentGapSeconds!==30||Number(gate.observedMomentsPerMinute)<4||Math.abs(Number(gate.observedMomentsPerMinute)-observedRate)>.15||!Number.isFinite(Number(gate.observedMaxSilentGapSeconds))||Number(gate.observedMaxSilentGapSeconds)>30||gate.uncoveredWindows!==0||r.events.length<minimumMoments)return 'Audio Lab density/continuity quality gate failed.';
   if(!Array.isArray(r.segmentSummaries)||r.segmentSummaries.length!==r.chunking.count)return 'Model listening-log summary collection is invalid or incomplete.';
   let summaryEnd=-1;for(const item of r.segmentSummaries){const start=Number(item.startSeconds),end=Number(item.endSeconds);if(!Number.isFinite(start)||!Number.isFinite(end)||start<0||end<=start||end>duration/1000+.5||start<summaryEnd||!richBilingual(item.summary,12,65))return 'Model listening-log summary data is invalid or too terse.';summaryEnd=start;}
   let previous=-1;
@@ -34,7 +34,7 @@
    const start=Number(e.startSeconds),end=Number(e.endSeconds);if(!Number.isFinite(start)||!Number.isFinite(end)||start<0||end<=start||end>duration/1000+.5||start<previous)return 'Model moment timestamps are invalid or unsorted.';previous=start;
    if(!bilingual(e.title)||!richBilingual(e.whatHappens)||!richBilingual(e.listenFor)||!richBilingual(e.whyItMatters)||!richBilingual(e.audibleEvidence)||!richBilingual(e.question,4,18))return 'A model moment is missing substantive bilingual listening content.';
    const conf=Number(e.confidence),pc=Number(e.performerConfidence),tc=Number(e.timestampConfidence);if([conf,pc,tc].some(x=>!Number.isFinite(x)||x<0||x>1))return 'Model moment confidence is invalid.';
-   if(!['primary','detail'].includes(e.analysisPass)||!Number.isInteger(e.chunkIndex)||e.chunkIndex<0||e.chunkIndex>=r.chunking.count)return 'Model moment analysis-pass provenance is invalid.';
+   if(!['primary','detail','depth'].includes(e.analysisPass)||!Number.isInteger(e.chunkIndex)||e.chunkIndex<0||e.chunkIndex>=r.chunking.count)return 'Model moment analysis-pass provenance is invalid.';
    if(e.performerName&&!ROSTER.includes(e.performerName))return 'A model moment attributes a performer outside the verified session roster.';
    if(e.performerName){const allowed={'Miles Davis':['trumpet'],'Julian “Cannonball” Adderley':['alto saxophone'],'Cannonball Adderley':['alto saxophone'],'John Coltrane':['tenor saxophone'],'Bill Evans':['piano'],'Paul Chambers':['bass','double bass'],'Jimmy Cobb':['drum kit','drums']};if(!allowed[e.performerName]?.includes(String(e.instrument||'').toLowerCase()))return 'A performer attribution conflicts with the instrument credited in the recording dossier.';}
   }
@@ -99,6 +99,6 @@
  }
  function initImportControl(){const meta=root.document?.getElementById('dynamicListeningMeta');if(!meta||root.document.getElementById('sonicAudioAnalysisImport'))return;const panel=root.document.createElement('div');panel.id='sonicAudioAnalysisImport';panel.style.cssText='display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0 10px;padding:9px 10px;border:1px solid #454b57;border-radius:10px;background:#171b22';const button=root.document.createElement('button');button.type='button';button.className='btn secondary';button.textContent='Import Audio Lab JSON';const input=root.document.createElement('input');input.type='file';input.accept='application/json,.json';input.hidden=true;const status=root.document.createElement('span');status.className='fine';status.textContent='Import a direct GPT-Audio 1.5 So What record, or a legacy DSP record for other tracks.';button.addEventListener('click',()=>input.click());input.addEventListener('change',async()=>{const file=input.files?.[0];if(!file)return;try{if(file.size>3*1024*1024)throw new Error('Analysis JSON exceeds 3 MB.');const r=JSON.parse(await file.text());storeRecord(r);status.textContent='Imported. Reloading to match the Spotify-confirmed track…';root.setTimeout(()=>root.location.reload(),500)}catch(e){status.textContent='Import failed: '+(e.message||String(e))}finally{input.value=''}});panel.append(button,input,status);meta.insertAdjacentElement('afterend',panel)}
  const original=root.buildSonicMockGuide;if(typeof original==='function')root.buildSonicMockGuide=function(payload){const result=original.apply(this,arguments);if(result?.guide)applyToGuide(result.guide,payload?.track);return result};
- root.SonicAudioAnalysisBridge=Object.freeze({version:'2.0.0',storeKey:MODEL_STORE_KEY,validateRecord,storeRecord,getRecord,applyToGuide});
+ root.SonicAudioAnalysisBridge=Object.freeze({version:'2.1.0',storeKey:MODEL_STORE_KEY,validateRecord,storeRecord,getRecord,applyToGuide});
  if(root.document){if(root.document.readyState==='loading')root.document.addEventListener('DOMContentLoaded',initImportControl,{once:true});else initImportControl()}
 })(window);
