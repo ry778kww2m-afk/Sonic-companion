@@ -54,10 +54,10 @@ const windowMock = {
 };
 vm.runInNewContext(bridgeSource, { window: windowMock, console, setTimeout });
 const bridge = windowMock.SonicAudioAnalysisBridge;
-assert.equal(bridge.version, '1.1.0');
+assert.equal(bridge.version, '2.0.0');
 const id = '1234567890123456789012';
 const testRecord = {
-  schema: 'sonic-audio-model-performance-record', schemaVersion: 1,
+  schema: 'sonic-audio-model-performance-record', schemaVersion: 2,
   recordId: 'unit-test-only', spotifyTrackId: id,
   trackTitle: 'So What', artist: 'Miles Davis', album: 'Kind of Blue',
   recordingVersion: 'Original 1959 studio recording',
@@ -65,19 +65,23 @@ const testRecord = {
   analysedAt: new Date().toISOString(), durationSeconds: 60, durationMs: 60000,
   sourceFile: { name: 'unit-test-audio.wav', sizeBytes: 1, sha256: 'a'.repeat(64) },
   audioInputSubmitted: true, audioInputMode: 'direct-audio-input-chunked', model: 'gpt-audio-1.5',
-  chunking: { chunkSeconds: 45, overlapSeconds: 10, count: 2 },
-  segmentSummaries: [{ startSeconds:0, endSeconds:45, summary:{en:'A test-only segment summary.',pt:'Resumo de segmento apenas para teste.'} },{startSeconds:35,endSeconds:60,summary:{en:'A second test-only segment summary.',pt:'Um segundo resumo de segmento apenas para teste.'}}],
+  engineVersion:'2.0', analysisStrategy:'30s-overlapping-primary-plus-adaptive-detail', qualityGate:{minimumMoments:3,minimumMomentsPerMinute:3,maximumSilentGapSeconds:45,observedMomentsPerMinute:3,observedMaxSilentGapSeconds:15,uncoveredWindows:0},
+  chunking: { chunkSeconds: 30, overlapSeconds: 8, count: 2, detailPassCount:0 },
+  segmentSummaries: [{ startSeconds:0, endSeconds:45, summary:{en:'This test-only summary describes a trumpet phrase and the surrounding ensemble response in this sample passage.',pt:'Este resumo de teste descreve uma frase de trompete e a resposta do conjunto ao redor neste trecho de exemplo.'} },{startSeconds:35,endSeconds:60,summary:{en:'This second test-only summary covers the later piano and drum details in the next sample passage.',pt:'Este segundo resumo de teste cobre os detalhes posteriores de piano e bateria no próximo trecho de exemplo.'}}],
   events: [{
-    startSeconds: 11.2, endSeconds: 17.5, performerName: 'Miles Davis',
+    startSeconds: 11.2, endSeconds: 17.5, chunkIndex:0, analysisPass:'primary', performerName: 'Miles Davis',
     instrument: 'trumpet', role: 'lead', eventKind: 'phrase',
     performerConfidence: .9, confidence: .88, timestampConfidence: .81,
     title: { en: 'Unit test phrase', pt: 'Frase de teste' },
-    whatHappens: { en: 'Model test only.', pt: 'Somente teste do modelo.' },
-    listenFor: { en: 'Test listening detail.', pt: 'Detalhe de escuta de teste.' },
-    whyItMatters: { en: 'Test significance.', pt: 'Significado de teste.' },
-    audibleEvidence: { en: 'Test evidence.', pt: 'Evidência de teste.' },
-    question: { en: 'Test question?', pt: 'Pergunta de teste?' }
-  }]
+    whatHappens: { en: 'The trumpet shapes a short phrase, releases the line, and leaves room for the ensemble to respond.', pt: 'O trompete desenha uma frase curta, encerra a linha e deixa espaço para a resposta do conjunto.' },
+    listenFor: { en: 'Listen for the downward phrase shape and the short space that appears immediately after the final note.', pt: 'Ouça o desenho descendente da frase e o breve espaço que aparece imediatamente após a última nota.' },
+    whyItMatters: { en: 'The pause gives the musical statement a conversational quality and makes the next ensemble answer easier to hear.', pt: 'A pausa dá à declaração musical um caráter conversacional e torna mais fácil perceber a próxima resposta do conjunto.' },
+    audibleEvidence: { en: 'A focused trumpet phrase is audible in the foreground, with a descending ending and a brief reduction in activity.', pt: 'Uma frase de trompete em primeiro plano é audível, com final descendente e uma breve redução de atividade.' },
+    question: { en: 'How does the pause change your perception of the trumpet phrase?', pt: 'Como a pausa muda sua percepção da frase do trompete?' }
+  },
+  {startSeconds:22,endSeconds:28,chunkIndex:0,analysisPass:'primary',performerName:null,instrument:'piano',role:'accompaniment',eventKind:'rhythmic_gesture',performerConfidence:.2,confidence:.8,timestampConfidence:.8,title:{en:'Piano response',pt:'Resposta do piano'},whatHappens:{en:'The piano adds a distinct short response between the ensemble phrases.',pt:'O piano acrescenta uma resposta curta e distinta entre as frases do conjunto.'},listenFor:{en:'Listen for the compact chordal punctuation and the space it leaves afterward.',pt:'Ouça a pontuação compacta dos acordes e o espaço que ela deixa em seguida.'},whyItMatters:{en:'This gives the ensemble phrase a conversational answer rather than a continuous block of sound.',pt:'Isso dá à frase do conjunto uma resposta conversacional, em vez de um bloco contínuo de som.'},audibleEvidence:{en:'A brief piano attack is audible after the preceding ensemble phrase, followed by a short gap.',pt:'Um ataque breve do piano é audível após a frase anterior do conjunto, seguido por uma pequena pausa.'},question:{en:'How does the short piano reply change the feel of the phrase?',pt:'Como a breve resposta do piano muda a sensação da frase?'}},
+  {startSeconds:43,endSeconds:50,chunkIndex:1,analysisPass:'detail',performerName:null,instrument:'drums',role:'pulse',eventKind:'rhythmic_gesture',performerConfidence:.2,confidence:.8,timestampConfidence:.8,title:{en:'Ride cymbal articulation',pt:'Articulação do prato de condução'},whatHappens:{en:'The ride cymbal pattern keeps the pulse moving while the foreground phrase settles.',pt:'O padrão do prato de condução mantém o pulso em movimento enquanto a frase em primeiro plano se acomoda.'},listenFor:{en:'Follow the repeated cymbal strokes and their spacing beneath the other instruments.',pt:'Acompanhe as batidas repetidas do prato e o espaçamento entre elas sob os outros instrumentos.'},whyItMatters:{en:'The steady timekeeping gives the ensemble room to phrase freely without losing the underlying motion.',pt:'A marcação constante do tempo dá espaço para o conjunto frasear livremente sem perder o movimento subjacente.'},audibleEvidence:{en:'Repeated high-frequency cymbal taps continue under the sustained ensemble sound.',pt:'Batidas repetidas e agudas do prato continuam sob o som sustentado do conjunto.'},question:{en:'What do you notice about the cymbal spacing as the phrase changes?',pt:'O que você percebe no espaçamento das batidas do prato quando a frase muda?'}}
+  ]
 };
 assert.equal(bridge.validateRecord(testRecord), null);
 bridge.storeRecord(testRecord);
@@ -85,7 +89,7 @@ const guide = { analysisOnly: true, trackSpecificGuide: false, cues: [], guideKi
 const applied = bridge.applyToGuide(guide, { id, name: 'So What', artist:'Miles Davis', artists:['Miles Davis'], album: 'Kind of Blue', duration_ms: 60000 });
 assert.equal(applied.applied, true);
 assert.equal(guide.guideKind, 'audio-model-performance-guide');
-assert.equal(guide.cues.length, 1);
+assert.equal(guide.cues.length, 3);
 assert.equal(guide.cues[0].timeSeconds, 11.2);
 assert.equal(guide.cues[0].performerName, 'Miles Davis');
 const wrongIdentityGuide={analysisOnly:true,trackSpecificGuide:false,cues:[]};
@@ -93,6 +97,10 @@ const wrongIdentity=bridge.applyToGuide(wrongIdentityGuide,{id,name:'Freddie Fre
 assert.equal(wrongIdentity.applied,false,'a So What model record cannot attach to a different current track even if an ID is reused');
 
 // Invalid provenance and invalid performer attributions are rejected.
+assert.notEqual(bridge.validateRecord({ ...testRecord, schemaVersion:1 }), null, 'old low-density analysis records are rejected');
+assert.notEqual(bridge.validateRecord({ ...testRecord, events:[{...testRecord.events[0],whatHappens:{en:'Nothing happened here.',pt:'Nada aconteceu aqui.'}},...testRecord.events.slice(1)] }), null, 'terse or placeholder-like moment prose is rejected');
+assert.notEqual(bridge.validateRecord({ ...testRecord, events:Array.from({length:321},(_,i)=>({...testRecord.events[0],startSeconds:i/10,endSeconds:i/10+.05})) }), null, 'bridge event ceiling matches 8 possible events per adaptive window across 40 windows and rejects overflow');
+assert.notEqual(bridge.validateRecord({ ...testRecord, qualityGate:{...testRecord.qualityGate,uncoveredWindows:1} }), null, 'uncovered timeline records are rejected');
 assert.notEqual(bridge.validateRecord({ ...testRecord, model: 'gpt-5.5' }), null);
 assert.notEqual(bridge.validateRecord({ ...testRecord, audioInputSubmitted: false }), null);
 assert.notEqual(bridge.validateRecord({ ...testRecord, events: [{ ...testRecord.events[0], performerName: 'Wynton Kelly' }] }), null);

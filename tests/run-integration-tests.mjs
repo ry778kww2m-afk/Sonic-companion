@@ -8,7 +8,7 @@ const source=fs.readFileSync(path.join(root,'audio-analysis-bridge.js'),'utf8');
 const memory=new Map();
 const window={localStorage:{getItem:k=>memory.has(k)?memory.get(k):null,setItem:(k,v)=>memory.set(k,v)},buildSonicMockGuide(){return {guide:{trackSpecificGuide:true,cues:[{at:.2,title:{en:'Demo-only authored cue',pt:'Momento demonstrativo'}}]}}}};
 vm.runInNewContext(source,{window,console,Object,Array,Number,String,Math,JSON,Error});
-const bridge=window.SonicAudioAnalysisBridge;assert.ok(bridge);assert.equal(bridge.version,'1.1.0');
+const bridge=window.SonicAudioAnalysisBridge;assert.ok(bridge);assert.equal(bridge.version,'2.0.0');
 const id='A'.repeat(22);
 const record={schema:'sonic-audio-analysis-record',schemaVersion:1,recordId:'qa-1',spotifyTrackId:id,recordingMatchConfirmed:true,durationMs:240000,analysedAt:'2026-10-31T12:00:00.000Z',method:'qa-dsp',methodVersion:'qa',sourceFile:{sha256:'test-hash'},events:[
 {id:'event-1',timeSeconds:30,evidenceWindow:{start:27,end:33},title:'Timbre change',observation:'Measured timbre bands changed.',strength:72,evidence:{structure:.2,harmonic:.1,timbre:.8,energy:.3,rhythm:.2}},

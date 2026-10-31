@@ -16,10 +16,10 @@ const pkg = JSON.parse(read('package.json'));
 assert.ok(index.length > 500000, 'root index.html is the complete existing app');
 assert.ok(lab.length > 10000 && lab.includes('Analyse with GPT-Audio 1.5'), 'Audio Lab is the complete model-analysis page');
 assert.ok(bridge.length > 10000, 'bridge is complete');
-assert.ok(index.includes('v1.0.7-sowhat-audio-model-1.1.0'));
-assert.ok(index.includes('<title>Sonic Companion v1.0.7 — So What Audio Model POC</title>'));
-assert.equal(pkg.version, '1.0.7');
-assert.ok(index.includes('audio-analysis-bridge.js?v=1.1.0'), 'updated bridge loaded once with cache-busting version');
+assert.ok(index.includes('v1.0.8-sowhat-audio-model-2.0.0'));
+assert.ok(index.includes('<title>Sonic Companion v1.0.8 — So What Audio Model Engine</title>'));
+assert.equal(pkg.version, '1.0.8');
+assert.ok(index.includes('audio-analysis-bridge.js?v=2.0.0'), 'updated bridge loaded once with cache-busting version');
 assert.ok(index.includes('const isSoWhatProofTrack=normTrack(track?.name)===\'so what\''));
 assert.ok(index.includes('const curated=isSoWhatProofTrack?null:'), 'So What suppresses pre-authored guide fixtures');
 assert.ok(index.includes('createUnavailableTrackGuide(track)'), 'missing model results resolve to an empty unavailable state');
@@ -35,7 +35,7 @@ assert.ok(bridge.includes('r.audioInputSubmitted!==true'), 'bridge requires dire
 
 assert.ok(lab.includes("const MODEL='gpt-audio-1.5'"));
 assert.ok(lab.includes("fetch(baseUrl+'/api/audio-analysis/chunk'"));
-assert.ok(lab.includes("CHUNK_SECONDS=45,OVERLAP_SECONDS=10"));
+assert.ok(lab.includes("CHUNK_SECONDS=30,OVERLAP_SECONDS=8"));
 assert.ok(lab.includes("Model's segment-by-segment listening log"), 'model-generated chunk summaries are visible as a listening log');
 assert.ok(lab.includes('audioConsent'), 'user explicitly consents before audio leaves device');
 assert.ok(lab.includes('audioLabToken') && lab.includes("'Authorization':'Bearer '+token"), 'Audio Lab requires a bearer tester token');
@@ -56,7 +56,13 @@ assert.ok(worker.includes('validateAudioSegmentAnalysis'));
 assert.ok(worker.includes('OPENAI_API_KEY'));
 assert.ok(worker.includes('Origin not allowed'));
 assert.ok(worker.includes('AUDIO_LAB_TOKEN'));
-assert.ok(worker.includes('max_completion_tokens:6000'));
+assert.ok(worker.includes('max_completion_tokens:16000'));
+assert.ok(worker.includes('underdeveloped bilingual content'));
+assert.ok(lab.includes('primary.events.length<3'));
+assert.ok(lab.includes('uncoveredWindows>0'));
+assert.ok(index.includes('activeMomentProgress'));
+assert.ok(index.includes('dynamic-cue-moment-progress'));
+assert.ok(index.includes('updateModelMomentBars(cues,progress);'));
 assert.ok(worker.includes('no fallback content was generated'));
 assert.ok(worker.includes('model-generated memory'));
 
@@ -82,4 +88,4 @@ const result=spawnSync(process.execPath,['--check',tempWorker],{encoding:'utf8'}
 fs.rmSync(tempWorker,{force:true});
 assert.equal(result.status,0,`Worker syntax error: ${result.stderr||result.stdout}`);
 
-console.log('PASS: v1.0.7 app, direct-audio GPT-Audio 1.5 Audio Lab, Worker route, bridge provenance, So What fail-closed loader, retained Spotify/countdown app and JavaScript syntax.');
+console.log('PASS: v1.0.8 app, 30s/8s direct-audio engine, adaptive multi-pass Worker route, bridge provenance, So What fail-closed loader, cue progress UI, retained Spotify/countdown app and JavaScript syntax.');
