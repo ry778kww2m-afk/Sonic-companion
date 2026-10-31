@@ -1,65 +1,10 @@
 {
-  "package": "Sonic Companion",
-  "version": "1.0.5",
-  "buildDate": "2026-10-31",
-  "entrypoint": "index.html",
-  "release": "Curated Jazz Guide Resolver",
-  "automatedTestSuites": 4,
-  "files": [
-    {
-      "path": "CHANGELOG.md",
-      "bytes": 1755,
-      "sha256": "d69e4787bfbfc7d13a246b3326172f4d41e2fea5ee5f82f1b866bba53c721c30"
-    },
-    {
-      "path": "TEST_STATUS.txt",
-      "bytes": 1161,
-      "sha256": "eab78417f821a30bb2d2475e2874b976ce9964e1fbf8cfc45afb1de17c4f35ba"
-    },
-    {
-      "path": "UPLOAD_INSTRUCTIONS.txt",
-      "bytes": 1326,
-      "sha256": "98c6a7d797c15df79e0ce8d39f795321c9b14c283a0e6371b57b858ab8918e2f"
-    },
-    {
-      "path": "audio-analysis-bridge.js",
-      "bytes": 12798,
-      "sha256": "a0c8654eca63d0ee7a80b9ef42396a8e8e1b7c853469229cdc9c6b9361870c7c"
-    },
-    {
-      "path": "audio-lab/index.html",
-      "bytes": 547550,
-      "sha256": "3eaf8ce7ba123c34c1352868041655af75ee2cd3bb7c7ff33cbf7fa05f635dbb"
-    },
-    {
-      "path": "index.html",
-      "bytes": 686847,
-      "sha256": "4a8cc70d029e2e381378cc2fad57e0fbdd40229b67f055872f59468108feddee"
-    },
-    {
-      "path": "package.json",
-      "bytes": 462,
-      "sha256": "a394e092a0eec4bcbe0ba5aed326c781c71ce30b4651301ece87ee9ba715b50c"
-    },
-    {
-      "path": "tests/run-build-tests.mjs",
-      "bytes": 6656,
-      "sha256": "cf97feea495ec801994bb2391470db15a30cdc6128786fad59cee4899f3e9719"
-    },
-    {
-      "path": "tests/run-guide-catalogue-tests.mjs",
-      "bytes": 7060,
-      "sha256": "81e12acca7ab770abd355b04ab5101a256358481a2d39acd3d16395a77d6394d"
-    },
-    {
-      "path": "tests/run-integration-tests.mjs",
-      "bytes": 5361,
-      "sha256": "4aa1d922a110746551c6e3134fa13b419672fae5e459e694dd8a6af8b65d189a"
-    },
-    {
-      "path": "tests/run-spotify-ui-tests.mjs",
-      "bytes": 2020,
-      "sha256": "29466bd8906093cd8ab942a58221691ac003f1e2facb2479f03f9a5f3762cfe8"
-    }
-  ]
+  "release": "1.0.7",
+  "name": "Sonic Companion — So What Audio Model POC",
+  "contents": [
+    "index.html", "audio-analysis-bridge.js", "audio-lab/index.html", "worker/index.js",
+    "package.json", "tests/", "README_SOWHAT_AUDIO_MODEL.md", "UPLOAD_INSTRUCTIONS.txt",
+    "CHANGELOG.md", "TEST_STATUS.txt", "PACKAGE_SOWHAT_AUDIO_MODEL.json", "SHA256SUMS.txt"
+  ],
+  "important": "Overlay package, not a full repository replacement. Direct GPT-Audio 1.5 input is the only source of So What musical moments. No real audio analysis output is bundled. Keep unrelated repository files unchanged."
 }

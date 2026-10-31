@@ -1,10 +1,10 @@
 {
   "name": "sonic-companion",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "private": true,
-  "description": "Sonic Companion prototype: strict curated jazz track resolution with manually selectable untimed landmarks and a separate Audio Lab DSP lane.",
+  "description": "Sonic Companion v1.0.7: single-track So What proof of concept using direct GPT-Audio 1.5 input; no preset or DSP-generated musical moments.",
   "scripts": {
-    "test": "node tests/run-build-tests.mjs && node tests/run-integration-tests.mjs && node tests/run-spotify-ui-tests.mjs && node tests/run-guide-catalogue-tests.mjs"
+    "test": "node tests/run-build-tests.mjs && node tests/run-integration-tests.mjs && node tests/run-spotify-ui-tests.mjs && node tests/run-guide-catalogue-tests.mjs && node tests/run-guide-timing-tests.mjs && node tests/run-sowhat-audio-model-tests.mjs && node tests/run-worker-audio-api-tests.mjs"
   },
   "engines": {
     "node": ">=20"

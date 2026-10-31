@@ -1,0 +1,22 @@
+{
+  "package": "Sonic Companion So What Audio Model POC",
+  "version": "1.0.7",
+  "scope": "Miles Davis — So What, original 1959 Kind of Blue studio recording only",
+  "model": "gpt-audio-1.5",
+  "generation_source": "Direct input_audio to GPT-Audio 1.5; no prewritten event content or DSP-generated musical moments",
+  "chunking": { "seconds": 45, "overlap_seconds": 10, "sample_rate_hz": 24000, "format": "PCM WAV" },
+  "features": [
+    "model-generated bilingual event explanations and listening details",
+    "model-generated excerpt summaries retained as a chronological listening log",
+    "performer attribution constrained by verified personnel and instrument credit mapping",
+    "visible model-reported audible evidence and uncalibrated self-ratings",
+    "empty result is valid; no fallback or mock musical moments",
+    "mandatory ALLOWED_ORIGIN and AUDIO_LAB_TOKEN gate on the audio Worker route"
+  ],
+  "files": [
+    "index.html", "audio-analysis-bridge.js", "audio-lab/index.html", "worker/index.js",
+    "package.json", "tests/", "README_SOWHAT_AUDIO_MODEL.md", "UPLOAD_INSTRUCTIONS.txt",
+    "CHANGELOG.md", "TEST_STATUS.txt", "SHA256SUMS.txt"
+  ],
+  "release_status": "Code and automated contract tests complete; live musical validation requires the user's authorized original recording and configured OpenAI Worker secrets."
+}

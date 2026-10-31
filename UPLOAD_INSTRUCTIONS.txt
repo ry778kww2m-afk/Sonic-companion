@@ -1,22 +1,36 @@
-SONIC COMPANION v1.0.5 — UPLOAD INSTRUCTIONS
+SONIC COMPANION v1.0.7 — SO WHAT AUDIO-MODEL POC
 
-This is an overlay update, not a full repository replacement.
+This is an overlay, not a full-repository replacement.
 
-Replace in the existing GitHub repository:
-1. /index.html
-2. /audio-analysis-bridge.js
-3. /package.json
-4. /tests/ (the complete tests directory)
+1) Cloudflare Worker
+- Back up the current sonic-companion-research Worker source.
+- Replace its Worker entrypoint with worker/index.js from this package.
+- Keep the OPENAI_API_KEY as a Worker secret. Do not expose it in GitHub Pages.
+- Set ALLOWED_ORIGIN to your exact GitHub Pages origin (scheme + host only, no repository path).
+- Generate a random token (e.g. `openssl rand -hex 32`) and add it as the Worker secret AUDIO_LAB_TOKEN.
+- Deploy. Open <worker-base-url>/health and verify openaiKeyConfigured:true, audioLabOriginConfigured:true and audioLabTokenConfigured:true.
 
-Keep all unrelated existing files and directories, especially translation/, manifest, service worker, icons, and Audio Lab assets. The Audio Lab page itself is unchanged in this release.
+2) GitHub repository
+Replace only these existing paths:
+- /index.html
+- /audio-analysis-bridge.js
+- /audio-lab/index.html
+- /package.json (optional, for the included local QA command)
+- /tests/ (optional, for the updated automated QA suite)
 
-After the commit, allow GitHub Pages to deploy. Reopen the site in Safari. Do not disconnect or re-authorize Spotify for this guide-resolution fix.
+Preserve all unrelated assets and folders: Spotify OAuth configuration, manifest, service worker, icons, translation assets and existing Worker deployment configuration. Do not replace the whole repository with this package.
 
-Expected result for Spotify track “Freddie Freeloader (feat. John Coltrane, Cannonball Adderley, Wynton Kelly & Paul Chambers)” on “Kind Of Blue (Legacy Edition)”:
-- Track resolves to the curated Kind of Blue guide.
-- Four untimed listening topics appear.
-- No fake percentages or approximate event timestamps are displayed.
-- Full Guide topics are tappable and update Focus.
-- Any Audio Lab measured signal-change candidates remain in a separate, explicitly-labelled section.
+3) Test the one-track proof of concept
+- Open the existing GitHub Pages deployment at /Sonic-companion/audio-lab/.
+- Select an authorized local audio file of the original 1959 studio “So What” recording from Kind of Blue.
+- Enter the Cloudflare Worker base URL, paste the AUDIO_LAB_TOKEN into the tester-token field, and enter the Spotify link for the exact same recording.
+- Confirm the recording identity manually and explicitly consent to sending audio excerpts to OpenAI.
+- Run “Analyse with GPT-Audio 1.5”. Each 45-second excerpt is processed by the audio model; ten seconds overlap between adjacent excerpts. The model may return zero events.
+- Review the model's event boundaries, audible-evidence descriptions and performer attributions against the local audio.
+- Publish only after review. The main app will display the record only when Spotify track ID and duration match.
 
-Strict matching: track title (normalized only for feature-artist/remaster suffixes), expected primary artist, and album family must all match. Live versions, studio sequences, alternate takes and compilations are not mapped to the studio guide.
+Important limitations
+- Manual confirmation plus Spotify track ID/duration is not acoustic fingerprinting. It does not prove that the supplied file and Spotify stream are bit-identical or the same master.
+- Model confidence values are self-assessments, not statistically calibrated probabilities.
+- No real-track model results are bundled or preloaded. The app does not contain sample So What moments or fallback content.
+- Automated QA verifies code contracts and guards, not actual musical accuracy. A real listening pass with the target recording and configured API key is still required. The tester token is visible to an authorized browser user; this is only an internal POC gate, not production user authentication. Add Cloudflare rate limiting before sharing the endpoint more broadly.

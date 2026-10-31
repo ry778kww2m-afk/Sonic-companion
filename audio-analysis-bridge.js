@@ -1,202 +1,95 @@
-/* Sonic Companion — Audio Lab bridge v1.0.3
- * Static/local integration only. Does not access Spotify audio, issue playback commands,
- * call an AI API, or change the OAuth/player implementation.
+/* Sonic Companion — Audio Lab bridge v1.1.0
+ * Model records contain only content returned by direct GPT-Audio 1.5 input.
+ * Legacy DSP records remain supported for non-So-What tracks and are never used
+ * as musical explanations for the So What proof-of-concept.
  */
 (function (root) {
-  'use strict';
-  const STORE_KEY = 'sonic.audioAnalysis.registry.v1';
-  const SCHEMA = 'sonic-audio-analysis-record';
-  const MAX_EVENTS = 18;
-  const DURATION_TOLERANCE_MS = 3000;
-
-  function readRegistry() {
-    try {
-      const parsed = JSON.parse(root.localStorage.getItem(STORE_KEY) || '{"schemaVersion":1,"records":{}}');
-      if (!parsed || parsed.schemaVersion !== 1 || !parsed.records || typeof parsed.records !== 'object' || Array.isArray(parsed.records)) return { schemaVersion: 1, records: {} };
-      return parsed;
-    } catch (_) { return { schemaVersion: 1, records: {} }; }
+ 'use strict';
+ const DSP_STORE_KEY='sonic.audioAnalysis.registry.v1';
+ const MODEL_STORE_KEY='sonic.audioModelAnalysis.registry.v1';
+ const DSP_SCHEMA='sonic-audio-analysis-record';
+ const MODEL_SCHEMA='sonic-audio-model-performance-record';
+ const MAX_EVENTS=160, DURATION_TOLERANCE_MS=3000;
+ const ROSTER=['Miles Davis','Julian “Cannonball” Adderley','Cannonball Adderley','John Coltrane','Bill Evans','Paul Chambers','Jimmy Cobb'];
+ function readStore(key){try{const p=JSON.parse(root.localStorage.getItem(key)||'{"schemaVersion":1,"records":{}}');if(!p||p.schemaVersion!==1||!p.records||typeof p.records!=='object'||Array.isArray(p.records))return{schemaVersion:1,records:{}};return p}catch(_){return{schemaVersion:1,records:{}}}}
+ function bilingual(x){return !!x&&typeof x==='object'&&typeof x.en==='string'&&x.en.trim().length>0&&typeof x.pt==='string'&&x.pt.trim().length>0}
+ function validateModelRecord(r){
+  if(!r||r.schema!==MODEL_SCHEMA||r.schemaVersion!==1)return 'Unsupported model-analysis format.';
+  if(r.model!=='gpt-audio-1.5'||r.audioInputSubmitted!==true||r.audioInputMode!=='direct-audio-input-chunked')return 'The record does not prove direct GPT-Audio 1.5 audio input.';
+  if(!/^[A-Za-z0-9]{22}$/.test(String(r.spotifyTrackId||'')))return 'Invalid Spotify track ID.';
+  if(String(r.trackTitle||'').toLowerCase()!=='so what'||String(r.album||'').toLowerCase()!=='kind of blue'||String(r.recordingVersion||'')!=='Original 1959 studio recording')return 'This proof-of-concept only accepts the original studio So What recording from Kind of Blue.';
+  if(r.recordingMatchConfirmed!==true)return 'The exact-recording confirmation is missing.';
+  const duration=Number(r.durationMs);if(!Number.isFinite(duration)||duration<60000||duration>720000)return 'Model-analysis duration is invalid.';
+  if(!r.sourceFile||!/^[a-f0-9]{64}$/i.test(String(r.sourceFile.sha256||'')))return 'The source audio file hash is missing or invalid.';
+  if(!r.chunking||r.chunking.chunkSeconds!==45||r.chunking.overlapSeconds!==10||!Number.isInteger(r.chunking.count)||r.chunking.count<1||r.chunking.count>40)return 'Audio chunk provenance is invalid.';
+  if(!Array.isArray(r.events)||r.events.length>MAX_EVENTS)return 'Model moment collection is invalid.';
+  if(!Array.isArray(r.segmentSummaries)||r.segmentSummaries.length<1||r.segmentSummaries.length>40)return 'Model listening-log summary collection is invalid.';
+  let summaryEnd=-1;for(const item of r.segmentSummaries){const start=Number(item.startSeconds),end=Number(item.endSeconds);if(!Number.isFinite(start)||!Number.isFinite(end)||start<0||end<=start||end>duration/1000+.5||start<summaryEnd||!bilingual(item.summary))return 'Model listening-log summary data is invalid.';summaryEnd=start;}
+  let previous=-1;
+  for(const e of r.events){
+   const start=Number(e.startSeconds),end=Number(e.endSeconds);if(!Number.isFinite(start)||!Number.isFinite(end)||start<0||end<=start||end>duration/1000+.5||start<previous)return 'Model moment timestamps are invalid or unsorted.';previous=start;
+   for(const f of ['title','whatHappens','listenFor','whyItMatters','audibleEvidence','question'])if(!bilingual(e[f]))return 'A model moment is missing bilingual content: '+f;
+   const conf=Number(e.confidence),pc=Number(e.performerConfidence),tc=Number(e.timestampConfidence);if([conf,pc,tc].some(x=>!Number.isFinite(x)||x<0||x>1))return 'Model moment confidence is invalid.';
+   if(e.performerName&&!ROSTER.includes(e.performerName))return 'A model moment attributes a performer outside the verified session roster.';
+   if(e.performerName){const allowed={'Miles Davis':['trumpet'],'Julian “Cannonball” Adderley':['alto saxophone'],'Cannonball Adderley':['alto saxophone'],'John Coltrane':['tenor saxophone'],'Bill Evans':['piano'],'Paul Chambers':['bass','double bass'],'Jimmy Cobb':['drum kit','drums']};if(!allowed[e.performerName]?.includes(String(e.instrument||'').toLowerCase()))return 'A performer attribution conflicts with the instrument credited in the recording dossier.';}
   }
-
-  function validateRecord(record) {
-    if (!record || record.schema !== SCHEMA || record.schemaVersion !== 1) return 'Unsupported analysis file format.';
-    if (!/^[A-Za-z0-9]{22}$/.test(String(record.spotifyTrackId || ''))) return 'Invalid Spotify track ID.';
-    if (record.recordingMatchConfirmed !== true) return 'The exact-recording confirmation is missing.';
-    const duration = Number(record.durationMs);
-    if (!Number.isFinite(duration) || duration < 10000 || duration > 480000) return 'Analysis duration is invalid or exceeds the prototype limit.';
-    if (!Array.isArray(record.events) || record.events.length < 1 || record.events.length > MAX_EVENTS) return 'The analysis must contain between 1 and 18 candidate events.';
-    let previous = 0;
-    for (const event of record.events) {
-      const time = Number(event && event.timeSeconds);
-      const start = Number(event && event.evidenceWindow && event.evidenceWindow.start);
-      const end = Number(event && event.evidenceWindow && event.evidenceWindow.end);
-      if (!Number.isFinite(time) || time <= previous || time >= duration / 1000) return 'Candidate timestamps are invalid or not strictly increasing.';
-      if (!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || end <= start || start > time || end < time || end > duration / 1000 + 0.01) return 'An event evidence window is invalid.';
-      previous = time;
-    }
-    return null;
-  }
-
-  function storeRecord(record) {
-    const problem = validateRecord(record);
-    if (problem) throw new Error(problem);
-    const registry = readRegistry();
-    registry.records[record.spotifyTrackId] = record;
-    const retained = Object.entries(registry.records)
-      .sort((a, b) => String(b[1] && b[1].analysedAt || '').localeCompare(String(a[1] && a[1].analysedAt || '')))
-      .slice(0, 30);
-    registry.records = Object.fromEntries(retained);
-    root.localStorage.setItem(STORE_KEY, JSON.stringify(registry));
-    return record;
-  }
-
-  function getRecord(trackId) {
-    const id = String(trackId || '');
-    if (!/^[A-Za-z0-9]{22}$/.test(id)) return null;
-    const record = readRegistry().records[id];
-    return validateRecord(record) ? null : record;
-  }
-
-  function bilingual(en, pt) { return { en, pt }; }
-  function mmss(seconds) {
-    const s = Math.max(0, Math.floor(Number(seconds) || 0));
-    return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
-  }
-
-  function appendBalancedNote(guide, count) {
-    const addEn = ` Audio Lab addendum: ${count} local DSP transition candidates are included below. Their timestamps come from measured signal changes on a 0.5-second analysis grid with approximately 3 seconds of evidence on either side. They do not identify instruments, performers, solos or formal sections. The exact Spotify recording match was confirmed manually by the analyst.`;
-    const addPt = ` Complemento do Audio Lab: ${count} candidatos a transições detectados por DSP local foram incluídos abaixo. Os tempos vêm de mudanças mensuradas no sinal, em uma grade de 0,5 segundo e com aproximadamente 3 segundos de evidência de cada lado. Eles não identificam instrumentos, músicos, solos ou seções formais. A correspondência com a gravação exata do Spotify foi confirmada manualmente pelo analista.`;
-    const existing = guide.balancedNote;
-    if (existing && typeof existing === 'object' && !Array.isArray(existing)) {
-      guide.balancedNote = {
-        ...existing,
-        en: String(existing.en || '') + addEn,
-        pt: String(existing.pt || '') + addPt
-      };
-    } else {
-      const source = String(existing || '');
-      guide.balancedNote = bilingual(source + addEn, source + addPt);
-    }
-  }
-
-  function applyToGuide(guide, track) {
-    const trackId = String(track && track.spotifyTrackId || track && track.id || '');
-    const record = getRecord(trackId);
-    if (!record) return { applied: false, reason: 'no-matching-record' };
-    const spotifyDuration = Number(track && (track.duration_ms || track.durationMs));
-    if (!Number.isFinite(spotifyDuration) || spotifyDuration <= 0 || Math.abs(spotifyDuration - Number(record.durationMs)) > DURATION_TOLERANCE_MS) {
-      return { applied: false, reason: 'duration-mismatch' };
-    }
-    if (!guide || !(guide.trackSpecificGuide === true || guide.analysisOnly === true) || !Array.isArray(guide.cues)) return { applied: false, reason: 'guide-not-track-specific-or-analysis-shell' };
-    if (guide.audioAnalysis && guide.audioAnalysis.recordId === record.recordId) return { applied: true, alreadyApplied: true, count: record.events.length };
-
-    const measured = record.events.map((event, index) => {
-      const time = Number(event.timeSeconds);
-      const fraction = Math.max(0, Math.min(1, (time * 1000) / spotifyDuration));
-      const n = index + 1;
-      const timeLabel = mmss(time);
-      const strength = Math.round(Number(event.strength) || 0);
-      const feature = String(event.title || 'Measured signal change');
-      const observation = String(event.observation || 'Measured audio features changed across the comparison windows.');
-      const evidence = event.evidence || {};
-      const featureSummary = `Structure ${Number(evidence.structure || 0).toFixed(2)} · harmonic ${Number(evidence.harmonic || 0).toFixed(2)} · timbre ${Number(evidence.timbre || 0).toFixed(2)} · energy ${Number(evidence.energy || 0).toFixed(2)} · rhythm ${Number(evidence.rhythm || 0).toFixed(2)}`;
-      return {
-        at: fraction,
-        title: bilingual(`Audio analysis candidate ${String(n).padStart(2, '0')} — ${feature}`, `Candidato de análise ${String(n).padStart(2, '0')} — ${feature}`),
-        focus: bilingual(`A local DSP pass found a measurable signal change near ${timeLabel}. This is a candidate boundary, not an identified musical event.`, `Uma análise DSP local encontrou uma mudança mensurável no sinal por volta de ${timeLabel}. Este é um limite candidato, não um evento musical identificado.`),
-        listenFor: bilingual(observation, observation === 'Measured audio features changed across the comparison windows.' ? 'As características mensuradas do áudio mudaram entre as janelas de comparação.' : `Compare a passagem antes e depois de ${timeLabel}; a descrição acima resume a característica que mais mudou, sem atribuir uma causa musical específica.`),
-        whyItMatters: bilingual(`Relative signal score: ${strength}/100. Dominant measured feature: ${feature}. ${featureSummary}. Evidence window: ${mmss(event.evidenceWindow.start)}–${mmss(event.evidenceWindow.end)}.`, `Pontuação relativa do sinal: ${strength}/100. Característica mensurada predominante: ${feature}. ${featureSummary}. Janela de evidência: ${mmss(event.evidenceWindow.start)}–${mmss(event.evidenceWindow.end)}.`),
-        question: bilingual('Can you hear a change in texture, harmony, energy or rhythmic activity around this point?', 'Você percebe uma mudança de textura, harmonia, energia ou atividade rítmica neste ponto?'),
-        audioAnalysisCandidate: true,
-        analysisEventId: String(event.id || `dsp-${n}`),
-        timeSeconds: time,
-        evidenceWindow: { start: Number(event.evidenceWindow.start), end: Number(event.evidenceWindow.end) },
-        strength,
-        evidence: { ...evidence }
-      };
-    });
-
-    // Keep the authored listening moments intact. Add measured, explicitly-labelled
-    // candidate markers alongside them; never remap a musical claim to an unlabelled DSP peak.
-    const analysisOnlyShell = guide.analysisOnly === true && guide.trackSpecificGuide !== true && guide.cues.length === 0;
-    const analysisMetadata = {
-      recordId: record.recordId,
-      spotifyTrackId: record.spotifyTrackId,
-      analysedAt: record.analysedAt,
-      candidateCount: measured.length,
-      method: record.method,
-      methodVersion: record.methodVersion,
-      sourceFileSha256: record.sourceFile && record.sourceFile.sha256 || null,
-      status: 'candidate-only',
-      durationMatchDifferenceMs: Math.round(spotifyDuration - Number(record.durationMs))
-    };
-
-    // Untimed editorial landmarks and measured DSP timestamps are different data
-    // types. Keep them in separate lanes; never sort untimed editorial topics into
-    // the playback timeline or imply that an editorial topic occurs at a DSP peak.
-    if (guide.cueTimingBasis === 'untimed-landmarks') {
-      guide.audioAnalysisCandidates = measured;
-      guide.audioAnalysis = analysisMetadata;
-      guide.sourceStatus = 'curated-plus-local-audio-analysis';
-      appendBalancedNote(guide, measured.length);
-      return { applied: true, count: measured.length, recordId: record.recordId, separateLane: true };
-    }
-
-    guide.cues = guide.cues.concat(measured).sort((a, b) => Number(a && a.at || 0) - Number(b && b.at || 0));
-    guide.trackSpecificGuide = true;
-    guide.guideKind = analysisOnlyShell ? 'audio-analysis-only' : (guide.guideKind || 'editorial-plus-audio-analysis');
-    guide.sourceStatus = analysisOnlyShell ? 'local-audio-analysis' : (guide.sourceStatus || 'curated-plus-local-audio-analysis');
-    guide.cueTimingBasis = analysisOnlyShell ? 'audio-analysis-only' : 'audio-analysis-hybrid';
-    guide.audioAnalysis = analysisMetadata;
-    appendBalancedNote(guide, measured.length);
-    return { applied: true, count: measured.length, recordId: record.recordId };
-  }
-
-  function initImportControl() {
-    const meta = root.document && root.document.getElementById('dynamicListeningMeta');
-    if (!meta || root.document.getElementById('sonicAudioAnalysisImport')) return;
-    const panel = root.document.createElement('div');
-    panel.id = 'sonicAudioAnalysisImport';
-    panel.style.cssText = 'display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0 10px;padding:9px 10px;border:1px solid #454b57;border-radius:10px;background:#171b22';
-    const button = root.document.createElement('button');
-    button.type = 'button'; button.className = 'btn secondary';
-    button.textContent = 'Import Audio Lab JSON';
-    const input = root.document.createElement('input');
-    input.type = 'file'; input.accept = 'application/json,.json'; input.hidden = true;
-    const status = root.document.createElement('span');
-    status.className = 'fine'; status.textContent = 'Local DSP results can be imported here if browser storage is not shared.';
-    button.addEventListener('click', () => input.click());
-    input.addEventListener('change', async () => {
-      const file = input.files && input.files[0]; if (!file) return;
-      try {
-        if (file.size > 1024 * 1024) throw new Error('Analysis JSON is larger than 1 MB.');
-        const record = JSON.parse(await file.text());
-        storeRecord(record);
-        status.textContent = 'Imported. Reloading to bind it to the Spotify-confirmed track…';
-        root.setTimeout(() => root.location.reload(), 500);
-      } catch (error) { status.textContent = 'Import failed: ' + (error.message || String(error)); }
-      finally { input.value = ''; }
-    });
-    panel.append(button, input, status);
-    meta.insertAdjacentElement('afterend', panel);
-  }
-
-  // The normal live guide path calls this public builder. Wrap it so ordinary
-  // catalogues receive analysis markers without changing Spotify/player code.
-  const originalBuilder = root.buildSonicMockGuide;
-  if (typeof originalBuilder === 'function') {
-    root.buildSonicMockGuide = function (payload) {
-      const result = originalBuilder.apply(this, arguments);
-      if (result && result.guide) applyToGuide(result.guide, payload && payload.track);
-      return result;
-    };
-  }
-
-  root.SonicAudioAnalysisBridge = Object.freeze({
-    version: '1.0.3', storeKey: STORE_KEY, validateRecord, storeRecord, getRecord, applyToGuide
+  return null;
+ }
+ function validateDSPRecord(r){
+  if(!r||r.schema!==DSP_SCHEMA||r.schemaVersion!==1)return 'Unsupported legacy analysis format.';
+  if(!/^[A-Za-z0-9]{22}$/.test(String(r.spotifyTrackId||''))||r.recordingMatchConfirmed!==true)return 'Invalid legacy analysis identity.';
+  const d=Number(r.durationMs);if(!Number.isFinite(d)||d<10000||d>720000)return 'Legacy analysis duration invalid.';
+  if(!Array.isArray(r.events)||r.events.length<1||r.events.length>32)return 'Legacy event collection invalid.';
+  let prev=0;for(const e of r.events){const t=Number(e.timeSeconds),s=Number(e.evidenceWindow?.start),n=Number(e.evidenceWindow?.end);if(!Number.isFinite(t)||t<=prev||t>=d/1000||!Number.isFinite(s)||!Number.isFinite(n)||s<0||n<=s||s>t||n<t||n>d/1000+.01)return 'Legacy event timestamp invalid.';prev=t;}return null;
+ }
+ function validateRecord(r){return r?.schema===MODEL_SCHEMA?validateModelRecord(r):validateDSPRecord(r)}
+ function storeRecord(r){const error=validateRecord(r);if(error)throw new Error(error);const key=r.schema===MODEL_SCHEMA?MODEL_STORE_KEY:DSP_STORE_KEY,store=readStore(key);store.records[r.spotifyTrackId]=r;store.records=Object.fromEntries(Object.entries(store.records).sort((a,b)=>String(b[1]?.analysedAt||'').localeCompare(String(a[1]?.analysedAt||''))).slice(0,30));root.localStorage.setItem(key,JSON.stringify(store));return r}
+ function getModelRecord(id){const r=readStore(MODEL_STORE_KEY).records[id];return r&&!validateModelRecord(r)?r:null}
+ function getDSPRecord(id){const r=readStore(DSP_STORE_KEY).records[id];return r&&!validateDSPRecord(r)?r:null}
+ function getRecord(id){if(!/^[A-Za-z0-9]{22}$/.test(String(id||'')))return null;return getModelRecord(id)||getDSPRecord(id)}
+ function pair(en,pt){return{en,pt}}
+ function mmss(s){s=Math.max(0,Math.floor(Number(s)||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+ function applyModelRecord(guide,track,record,spotifyDuration){
+  if(!guide||(!guide.analysisOnly&&guide.trackSpecificGuide!==true)||!Array.isArray(guide.cues))return{applied:false,reason:'guide-not-analysis-shell'};
+  if(guide.audioModelAnalysis?.recordId===record.recordId)return{applied:true,alreadyApplied:true,count:record.events.length};
+  const cues=record.events.map((e,i)=>{
+   const start=Number(e.startSeconds),end=Number(e.endSeconds),at=Math.max(0,Math.min(1,start*1000/spotifyDuration));
+   const performer=e.performerName&&Number(e.performerConfidence)>=.78?e.performerName:null;
+   const who=performer?`${performer} — ${e.instrument}`:e.instrument;
+   const confidence=`${Math.round(Number(e.confidence)*100)}%`;
+   const musician=pair(`${who}. The model self-reports ${Math.round(Number(e.performerConfidence)*100)}% attribution confidence; this estimate is not statistically calibrated.` ,`${who}. O modelo relata ${Math.round(Number(e.performerConfidence)*100)}% de confiança na atribuição; essa estimativa não é estatisticamente calibrada.`);
+   return{at,title:e.title,focus:e.whatHappens,listenFor:e.listenFor,whyItMatters:e.whyItMatters,question:e.question,musicianMoment:musician,timeSeconds:start,endSeconds:end,eventKind:e.eventKind,instrument:e.instrument,performerName:performer,confidence:Number(e.confidence),timestampConfidence:Number(e.timestampConfidence),audibleEvidence:e.audibleEvidence,analysisEventId:`model-${i+1}`};
   });
-
-  if (root.document) {
-    if (root.document.readyState === 'loading') root.document.addEventListener('DOMContentLoaded', initImportControl, { once: true });
-    else initImportControl();
+  guide.cues=cues;guide.trackSpecificGuide=true;guide.analysisOnly=true;guide.guideKind='audio-model-performance-guide';guide.sourceStatus='direct-audio-model-analysis';guide.cueTimingBasis='audio-model-performance-moments';
+  guide.title=pair('Audio analysis — So What','Análise de áudio — So What');
+  guide.audioModelAnalysis={recordId:record.recordId,model:record.model,analysedAt:record.analysedAt,momentCount:cues.length,chunkCount:record.chunking.count,sourceFileSha256:record.sourceFile.sha256,spotifyTrackId:record.spotifyTrackId,durationMatchDifferenceMs:Math.round(spotifyDuration-record.durationMs),identityMatchMethod:'manual confirmation plus Spotify track ID and duration; not audio fingerprint verification'};
+  guide.sources=[{label:'Miles Davis official discography — Kind of Blue session personnel',url:'https://www.milesdavis.com/news/kind-of-blue-by-miles-davis-1959-jazz-standard-celebrates-50-years/'}];
+  return{applied:true,count:cues.length,recordId:record.recordId,model:record.model};
+ }
+ function applyLegacyDSP(guide,track,record,spotifyDuration){
+  if(!guide||!(guide.trackSpecificGuide===true||guide.analysisOnly===true)||!Array.isArray(guide.cues))return{applied:false,reason:'guide-not-track-specific'};
+  if(guide.audioAnalysis?.recordId===record.recordId)return{applied:true,alreadyApplied:true,count:record.events.length};
+  const measured=record.events.map((e,i)=>{const time=Number(e.timeSeconds),n=i+1;return{at:Math.max(0,Math.min(1,time*1000/spotifyDuration)),title:pair(`Audio analysis candidate ${String(n).padStart(2,'0')} — ${e.title||'Measured signal change'}`,`Candidato de análise ${String(n).padStart(2,'0')} — ${e.title||'Mudança mensurada no sinal'}`),focus:pair(`Local DSP found a measurable signal change near ${mmss(time)}. This is not an identified musical event.`,`O DSP local encontrou uma mudança mensurável no sinal perto de ${mmss(time)}. Isso não identifica um evento musical.`),listenFor:pair(String(e.observation||'Compare the audio before and after this point.'),String(e.observation||'Compare o áudio antes e depois deste ponto.')),whyItMatters:pair('This is a signal-change marker only. It does not establish musical meaning.','Este é apenas um marcador de mudança de sinal. Não estabelece significado musical.'),question:pair('What changed in the sound here?','O que mudou no som neste ponto?'),timeSeconds:time,evidenceWindow:e.evidenceWindow,audioAnalysisCandidate:true};});
+  guide.audioAnalysis={recordId:record.recordId,candidateCount:measured.length,status:'candidate-only'};guide.sourceStatus='local-audio-analysis';
+  if(guide.cueTimingBasis==='untimed-landmarks'){
+   guide.audioAnalysisCandidates=measured.map((cue,i)=>({timeSeconds:cue.timeSeconds,title:cue.title,listenFor:cue.listenFor,whyItMatters:cue.whyItMatters,evidenceWindow:cue.evidenceWindow,audioAnalysisCandidate:true,id:`dsp-${i+1}`}));
+   return{applied:true,separateLane:true,count:measured.length};
   }
+  const hadEditorialCues=guide.cues.length>0;
+  guide.cues=guide.cues.concat(measured).sort((a,b)=>Number(a.at)-Number(b.at));guide.trackSpecificGuide=true;guide.guideKind=hadEditorialCues?'audio-analysis-hybrid':'audio-analysis-only';guide.cueTimingBasis=hadEditorialCues?'audio-analysis-hybrid':'audio-analysis-only';return{applied:true,count:measured.length};
+ }
+ function applyToGuide(guide,track){
+  const id=String(track?.spotifyTrackId||track?.id||'');if(!/^[A-Za-z0-9]{22}$/.test(id))return{applied:false,reason:'invalid-track-id'};
+  const modelRecord=getModelRecord(id),dspRecord=getDSPRecord(id),record=modelRecord||dspRecord;if(!record)return{applied:false,reason:'no-matching-record'};
+  const spotifyDuration=Number(track?.duration_ms||track?.durationMs);if(!Number.isFinite(spotifyDuration)||spotifyDuration<=0||Math.abs(spotifyDuration-Number(record.durationMs))>DURATION_TOLERANCE_MS)return{applied:false,reason:'duration-mismatch'};
+  if(modelRecord){const currentTitle=String(track?.title||track?.name||'').toLowerCase(),currentAlbum=String(track?.album||track?.albumName||'').toLowerCase(),currentArtists=Array.isArray(track?.artists)?track.artists.join(', ').toLowerCase():String(track?.artist||'').toLowerCase();if(currentTitle!=='so what'||!currentAlbum.includes('kind of blue')||!currentArtists.includes('miles davis'))return{applied:false,reason:'current-track-identity-mismatch'};return applyModelRecord(guide,track,modelRecord,spotifyDuration);}
+  // The So What experiment deliberately rejects old DSP-only markers as musical content.
+  const isSoWhat=String(track?.title||track?.name||'').toLowerCase()==='so what'&&String(track?.album||track?.albumName||'').toLowerCase().includes('kind of blue');
+  if(isSoWhat)return{applied:false,reason:'model-analysis-required-for-so-what'};
+  return applyLegacyDSP(guide,track,dspRecord,spotifyDuration);
+ }
+ function initImportControl(){const meta=root.document?.getElementById('dynamicListeningMeta');if(!meta||root.document.getElementById('sonicAudioAnalysisImport'))return;const panel=root.document.createElement('div');panel.id='sonicAudioAnalysisImport';panel.style.cssText='display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0 10px;padding:9px 10px;border:1px solid #454b57;border-radius:10px;background:#171b22';const button=root.document.createElement('button');button.type='button';button.className='btn secondary';button.textContent='Import Audio Lab JSON';const input=root.document.createElement('input');input.type='file';input.accept='application/json,.json';input.hidden=true;const status=root.document.createElement('span');status.className='fine';status.textContent='Import a direct GPT-Audio 1.5 So What record, or a legacy DSP record for other tracks.';button.addEventListener('click',()=>input.click());input.addEventListener('change',async()=>{const file=input.files?.[0];if(!file)return;try{if(file.size>3*1024*1024)throw new Error('Analysis JSON exceeds 3 MB.');const r=JSON.parse(await file.text());storeRecord(r);status.textContent='Imported. Reloading to match the Spotify-confirmed track…';root.setTimeout(()=>root.location.reload(),500)}catch(e){status.textContent='Import failed: '+(e.message||String(e))}finally{input.value=''}});panel.append(button,input,status);meta.insertAdjacentElement('afterend',panel)}
+ const original=root.buildSonicMockGuide;if(typeof original==='function')root.buildSonicMockGuide=function(payload){const result=original.apply(this,arguments);if(result?.guide)applyToGuide(result.guide,payload?.track);return result};
+ root.SonicAudioAnalysisBridge=Object.freeze({version:'1.1.0',storeKey:MODEL_STORE_KEY,validateRecord,storeRecord,getRecord,applyToGuide});
+ if(root.document){if(root.document.readyState==='loading')root.document.addEventListener('DOMContentLoaded',initImportControl,{once:true});else initImportControl()}
 })(window);

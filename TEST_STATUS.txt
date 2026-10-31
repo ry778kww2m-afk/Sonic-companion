@@ -1,12 +1,14 @@
-Sonic Companion v1.0.5 — Test status
+Sonic Companion v1.0.7 — So What direct-audio model POC
 
-Automated Node test suite: PASS (4/4 suites)
-- run-build-tests.mjs: PASS — complete root app and Audio Lab page, version/header, inline JavaScript syntax, fail-closed catalogue and Spotify safeguards.
-- run-integration-tests.mjs: PASS — exact Spotify track-ID and duration gates, DSP candidate labelling, invalid-record rejection, authored cue preservation, and separate DSP lane for untimed landmarks.
-- run-spotify-ui-tests.mjs: PASS — permission warning visibility and state transitions, 204/no-track status, and successful playback status.
-- run-guide-catalogue-tests.mjs: PASS — Freddie Freeloader Legacy Edition resolution, every Kind of Blue and Giant Steps catalogue track/index, strict identity rejection, remaster normalization, four untimed Freddie landmarks, and loader/status rendering paths.
+Automated suites: 7 suites; run `npm test` from package root.
+- Main app and Audio Lab script syntax / build integrity
+- Audio Lab bridge schema, identity and exact-track guards
+- Spotify permission UI regressions
+- Catalogue identity and guide resolver regressions
+- Existing Freddie Freeloader 22-moment regression, playback countdown and progress bar
+- So What direct-audio provenance, event schema, timestamps, bilingual content, segment summaries, no-DSP fallback, and performer/instrument consistency
+- Worker audio request: actual `input_audio` bytes routed to GPT-Audio 1.5, strict JSON validation, origin and tester-token checks, missing-key fail-closed behavior, and rejection of non-So-What tracks
 
-Browser / device verification:
-- Not run. Chromium browser navigation is blocked by the build sandbox (ERR_BLOCKED_BY_ADMINISTRATOR). No live Spotify credentials, GitHub Pages deployment, or physical iPhone session were available for end-to-end verification.
+Latest result: PASS — all seven automated suites.
 
-No live deployment or iPhone test is claimed.
+Not tested: a live OpenAI API call, actual musical correctness on the original 1959 audio, audio-to-Spotify master identity, iPhone Safari/PWA behavior, live Spotify OAuth/player, or deployment to GitHub Pages/Cloudflare. The Worker test uses a mocked upstream response only in the test harness.
