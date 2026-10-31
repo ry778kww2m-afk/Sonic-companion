@@ -1,35 +1,22 @@
-SONIC COMPANION v1.0.4 — SPOTIFY PERMISSION UI FIX
-BUILD DATE: 2026-10-31
+SONIC COMPANION v1.0.5 — UPLOAD INSTRUCTIONS
 
-This is an overlay update for the existing GitHub Pages repository, not a full repository replacement.
+This is an overlay update, not a full repository replacement.
 
-REPLACE / ADD THESE PATHS
-  index.html                         REPLACE repository-root app file
-  package.json                       Update version/scripts (merge if repo-specific settings exist)
-  tests/run-build-tests.mjs          REPLACE
-  tests/run-integration-tests.mjs     KEEP/REPLACE with included copy
-  tests/run-spotify-ui-tests.mjs      ADD
-  CHANGELOG.md                       Optional
-  TEST_STATUS.txt                    Optional
-  PACKAGE_MANIFEST.json              Optional
-  SHA256SUMS.txt                     Optional
+Replace in the existing GitHub repository:
+1. /index.html
+2. /audio-analysis-bridge.js
+3. /package.json
+4. /tests/ (the complete tests directory)
 
-The Audio Lab page and bridge are unchanged from v1.0.3 and are included unchanged for a self-contained release package. You do not need to re-upload audio-lab/index.html or audio-analysis-bridge.js if those exact v1.0.3 files are already deployed.
+Keep all unrelated existing files and directories, especially translation/, manifest, service worker, icons, and Audio Lab assets. The Audio Lab page itself is unchanged in this release.
 
-DO NOT DELETE OR REPLACE unrelated assets: translation/, manifest, service worker, icons, and other repository resources remain as they are.
-Do not change the Cloudflare Worker, Spotify OAuth credentials, redirect URI or requested scopes.
+After the commit, allow GitHub Pages to deploy. Reopen the site in Safari. Do not disconnect or re-authorize Spotify for this guide-resolution fix.
 
-EXPECTED RESULT
-- With the currently demonstrated state (track loaded, active iPhone device, working Pause control, HTTP 200 playback-state poll), the amber reconnect/permission warning is hidden.
-- “Connection found. Checking playback status…” is replaced by “Spotify connection verified. Playback-status access is working.” after a successful HTTP 200 poll.
-- A successful HTTP 204 response says Spotify is connected but is not currently reporting a playing track; it does not show a permission warning.
-- A genuine HTTP 403 reveals a reason-specific warning: status-read scopes or playback-control permission/Premium/device requirements.
+Expected result for Spotify track “Freddie Freeloader (feat. John Coltrane, Cannonball Adderley, Wynton Kelly & Paul Chambers)” on “Kind Of Blue (Legacy Edition)”:
+- Track resolves to the curated Kind of Blue guide.
+- Four untimed listening topics appear.
+- No fake percentages or approximate event timestamps are displayed.
+- Full Guide topics are tappable and update Focus.
+- Any Audio Lab measured signal-change candidates remain in a separate, explicitly-labelled section.
 
-TESTS
-Run from repository root using Node.js 20 or newer:
-  npm test
-
-Three suites run: build/source syntax/provenance checks, Audio Lab bridge behaviour, and Spotify permission/status UI regression tests.
-
-LIMITATIONS
-The source is based on the locally available v1.0.3 integrated snapshot. This session could not fetch/compare the live GitHub branch and did not run iPhone Safari or live Spotify end-to-end tests. Reconcile any newer remote commits before replacing the live root index.html.
+Strict matching: track title (normalized only for feature-artist/remaster suffixes), expected primary artist, and album family must all match. Live versions, studio sequences, alternate takes and compilations are not mapped to the studio guide.

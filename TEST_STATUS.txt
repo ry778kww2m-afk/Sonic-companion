@@ -1,17 +1,12 @@
-SONIC COMPANION v1.0.4 — AUTOMATED TEST STATUS
-Build date: 2026-10-31
-Runtime: Node.js v22.16.0
+Sonic Companion v1.0.5 — Test status
 
-Command: npm test
-Result: PASS
+Automated Node test suite: PASS (4/4 suites)
+- run-build-tests.mjs: PASS — complete root app and Audio Lab page, version/header, inline JavaScript syntax, fail-closed catalogue and Spotify safeguards.
+- run-integration-tests.mjs: PASS — exact Spotify track-ID and duration gates, DSP candidate labelling, invalid-record rejection, authored cue preservation, and separate DSP lane for untimed landmarks.
+- run-spotify-ui-tests.mjs: PASS — permission warning visibility and state transitions, 204/no-track status, and successful playback status.
+- run-guide-catalogue-tests.mjs: PASS — Freddie Freeloader Legacy Edition resolution, every Kind of Blue and Giant Steps catalogue track/index, strict identity rejection, remaster normalization, four untimed Freddie landmarks, and loader/status rendering paths.
 
-Suite 1 — build/source regression
-PASS: complete app and Audio Lab files, version consistency, fail-closed guide lookup, required Spotify scopes, warning state conditions, JS syntax and Audio Lab contract.
+Browser / device verification:
+- Not run. Chromium browser navigation is blocked by the build sandbox (ERR_BLOCKED_BY_ADMINISTRATOR). No live Spotify credentials, GitHub Pages deployment, or physical iPhone session were available for end-to-end verification.
 
-Suite 2 — Audio Lab bridge integration
-PASS: exact Spotify track ID/duration gates, DSP-only matching, duplicate prevention, preservation of authored cues, invalid-record rejection.
-
-Suite 3 — Spotify permission/status UI
-PASS: warning hidden by default; reason-specific localized warning only on HTTP 403; warning cleared on success; initial connection message resolves for success/no-track/error.
-
-Not performed: live GitHub deployment, iPhone Safari, live Spotify API/OAuth, or cross-device import test.
+No live deployment or iPhone test is claimed.

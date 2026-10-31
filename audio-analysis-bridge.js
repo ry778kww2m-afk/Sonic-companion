@@ -1,4 +1,4 @@
-/* Sonic Companion — Audio Lab bridge v1.0.2
+/* Sonic Companion — Audio Lab bridge v1.0.3
  * Static/local integration only. Does not access Spotify audio, issue playback commands,
  * call an AI API, or change the OAuth/player implementation.
  */
@@ -118,12 +118,7 @@
     // Keep the authored listening moments intact. Add measured, explicitly-labelled
     // candidate markers alongside them; never remap a musical claim to an unlabelled DSP peak.
     const analysisOnlyShell = guide.analysisOnly === true && guide.trackSpecificGuide !== true && guide.cues.length === 0;
-    guide.cues = guide.cues.concat(measured).sort((a, b) => Number(a && a.at || 0) - Number(b && b.at || 0));
-    guide.trackSpecificGuide = true;
-    guide.guideKind = analysisOnlyShell ? 'audio-analysis-only' : (guide.guideKind || 'editorial-plus-audio-analysis');
-    guide.sourceStatus = analysisOnlyShell ? 'local-audio-analysis' : (guide.sourceStatus || 'curated-plus-local-audio-analysis');
-    guide.cueTimingBasis = analysisOnlyShell ? 'audio-analysis-only' : 'audio-analysis-hybrid';
-    guide.audioAnalysis = {
+    const analysisMetadata = {
       recordId: record.recordId,
       spotifyTrackId: record.spotifyTrackId,
       analysedAt: record.analysedAt,
@@ -134,6 +129,24 @@
       status: 'candidate-only',
       durationMatchDifferenceMs: Math.round(spotifyDuration - Number(record.durationMs))
     };
+
+    // Untimed editorial landmarks and measured DSP timestamps are different data
+    // types. Keep them in separate lanes; never sort untimed editorial topics into
+    // the playback timeline or imply that an editorial topic occurs at a DSP peak.
+    if (guide.cueTimingBasis === 'untimed-landmarks') {
+      guide.audioAnalysisCandidates = measured;
+      guide.audioAnalysis = analysisMetadata;
+      guide.sourceStatus = 'curated-plus-local-audio-analysis';
+      appendBalancedNote(guide, measured.length);
+      return { applied: true, count: measured.length, recordId: record.recordId, separateLane: true };
+    }
+
+    guide.cues = guide.cues.concat(measured).sort((a, b) => Number(a && a.at || 0) - Number(b && b.at || 0));
+    guide.trackSpecificGuide = true;
+    guide.guideKind = analysisOnlyShell ? 'audio-analysis-only' : (guide.guideKind || 'editorial-plus-audio-analysis');
+    guide.sourceStatus = analysisOnlyShell ? 'local-audio-analysis' : (guide.sourceStatus || 'curated-plus-local-audio-analysis');
+    guide.cueTimingBasis = analysisOnlyShell ? 'audio-analysis-only' : 'audio-analysis-hybrid';
+    guide.audioAnalysis = analysisMetadata;
     appendBalancedNote(guide, measured.length);
     return { applied: true, count: measured.length, recordId: record.recordId };
   }
@@ -179,7 +192,7 @@
   }
 
   root.SonicAudioAnalysisBridge = Object.freeze({
-    version: '1.0.2', storeKey: STORE_KEY, validateRecord, storeRecord, getRecord, applyToGuide
+    version: '1.0.3', storeKey: STORE_KEY, validateRecord, storeRecord, getRecord, applyToGuide
   });
 
   if (root.document) {

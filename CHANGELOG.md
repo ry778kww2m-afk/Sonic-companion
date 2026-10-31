@@ -1,19 +1,20 @@
-# Sonic Companion v1.0.4 — 2026-10-31
+# Sonic Companion v1.0.5 — Curated Jazz Guide Resolver
 
-## Spotify permission and connection UI correction
+## Fixed
+- Fixed the resolver/loader handoff that discarded valid Kind of Blue and Giant Steps catalogue matches because the loader only built Rachmaninoff guides.
+- Freddie Freeloader on Kind Of Blue (Legacy Edition) now resolves to its existing curated track guide and four listening landmarks.
+- Tightened jazz matching to require exact normalized track title, expected primary artist and matching album family. Feature-artist credits and remaster suffixes are normalized; live versions, alternate takes, studio sequences and unrelated compilations do not inherit the studio guide.
+- Added an untimed-landmark presentation mode. Curated editorial topics do not receive synthetic percentages or estimated timestamps and can be selected manually in Full Guide.
+- Kept Audio Lab DSP candidates in a separate lane for untimed guides; measured timestamps are never merged into untimed editorial topics.
+- Preserved fail-closed behaviour for recordings without a valid catalogue match.
 
-- Removed the unconditional Spotify permission/reconnect warning that appeared even when playback status and playback controls were working.
-- Permission guidance is now hidden by default and appears only after an actual HTTP 403 from a permission-protected playback-status or playback-control endpoint.
-- Status-permission and control-permission errors now have separate guidance; control guidance also calls out Premium eligibility and active-device requirements rather than implying OAuth reconnection alone will fix them.
-- The temporary “connection found / checking playback status” message now resolves after the first poll: successful access, no active track (HTTP 204), or a concrete error.
-- A successful playback-state response clears any previous permission warning; disconnect and a new OAuth attempt also clear stale guidance.
-- Language changes re-render any active permission warning in the selected language.
-- Product version updated to 1.0.4. MIE remains 1.3 and Audio Lab bridge remains 1.0.2.
+## Versioning
+- App: 1.0.5
+- MIE: 1.3 (unchanged)
+- Audio Lab bridge: 1.0.3
 
-## Scope
-
-This is a focused UI/state correction. It does not change the guide provenance rules, mock-content fail-closed behaviour, Audio Lab DSP matching, Spotify OAuth client ID, redirect URI or requested scopes.
-
-## Verification limits
-
-Automated build, bridge and UI-state regression suites are included. No live GitHub deployment, iPhone Safari session or Spotify account/API request was available in this environment.
+## Verification
+- Automated Node suites: build/syntax, bridge integration, Spotify permission UI, and curated guide resolution.
+- Expanded Node regression coverage across every Kind of Blue and Giant Steps catalogue entry, strict identity negatives, remaster suffix normalization, and both manual lookup and automatic Spotify-follow status branches.
+- Browser and device end-to-end verification was not run: Chromium navigation is blocked in the build sandbox, and no live Spotify or iPhone session is available.
+- Not verified against live Spotify credentials, live GitHub Pages, or an actual iPhone session in this build environment.
