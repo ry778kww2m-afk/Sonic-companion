@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#10141d"><title>Sonic Companion — So What Audio Lab Engine 2.0</title>
+<meta name="theme-color" content="#10141d"><title>Sonic Companion — So What Audio Lab Engine 2.1 · Build 1.0.10</title>
 <style>
 :root{--bg:#0d1119;--panel:#151c28;--panel2:#1b2533;--line:#2a3748;--text:#edf3fb;--muted:#9caec2;--accent:#8db9ff;--good:#80d8b0;--warn:#e8c27a;--bad:#ed9292}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 450px at 15% -10%,#1c2c43 0%,transparent 65%),var(--bg);color:var(--text);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer}a{color:var(--accent)}.shell{max-width:1120px;margin:0 auto;padding:22px 18px 60px}.top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin:8px 0 22px}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:var(--accent);font-size:11px;font-weight:800}.top h1{font-size:clamp(28px,4vw,42px);margin:7px 0;line-height:1.04;letter-spacing:-.04em}.sub{color:var(--muted);max-width:740px}.pills{display:flex;gap:7px;flex-wrap:wrap}.pill{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:11px;color:var(--muted)}.pill.good{border-color:#32674f;color:var(--good)}.layout{display:grid;grid-template-columns:minmax(270px,350px) minmax(0,1fr);gap:16px;align-items:start}.panel{background:linear-gradient(180deg,rgba(27,37,51,.97),rgba(19,26,37,.97));border:1px solid var(--line);border-radius:17px;padding:17px;min-width:0}.panel h2{font-size:18px;margin:0 0 7px}.panel h3{font-size:14px;margin:0 0 8px}.muted{color:var(--muted)}.small{font-size:12px}.field{display:block;width:100%;border:1px solid #526178;border-radius:10px;background:#0b111a;color:var(--text);padding:11px;margin:6px 0 13px;min-height:44px}.label{display:block;font-size:12px;color:#c7d3e1;font-weight:700;margin-top:13px}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 14px;font-weight:700}.btn.primary{background:#24436d;border-color:#4776b8;color:white}.btn:disabled{opacity:.45;cursor:not-allowed}.drop{border:1px dashed #526984;border-radius:13px;padding:22px 14px;text-align:center;background:#101722}.drop strong{display:block}.drop input{max-width:100%;margin:12px auto 0}.status{border:1px solid var(--line);border-radius:11px;background:#101722;padding:10px 12px;color:var(--muted);font-size:12px;overflow-wrap:anywhere}.status.good{border-color:#32674f;color:var(--good)}.status.warn{border-color:#806a3e;color:var(--warn)}.status.bad{border-color:#754343;color:var(--bad)}.notice{font-size:12px;color:#e9d5a8;background:#30281855;border-left:3px solid var(--warn);padding:10px 12px;border-radius:0 9px 9px 0}.rule{height:1px;background:var(--line);margin:16px 0}.confirm{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:#cbd7e4;margin:11px 0;line-height:1.45}.confirm input{width:19px;height:19px;flex:0 0 auto;margin:0}.loader{height:5px;background:#263548;border-radius:9px;overflow:hidden;margin:12px 0 6px}.loader>div{height:100%;width:0;background:var(--accent);transition:width .18s}.maincol{display:grid;gap:15px}.player{width:100%;margin-top:12px}.range-row{display:flex;justify-content:space-between;color:var(--muted);font-variant-numeric:tabular-nums;font-size:11px}.range{width:100%;accent-color:#8db9ff}.timeline{display:flex;gap:6px;overflow-x:auto;padding:8px 0 12px}.event-btn{min-width:142px;max-width:200px;flex:1;text-align:left;color:var(--text);background:#101722;border:1px solid var(--line);border-radius:11px;padding:10px}.event-btn.active{border-color:var(--accent);background:#1a2c43}.event-btn time{display:block;color:var(--accent);font-size:11px;font-weight:800;font-variant-numeric:tabular-nums}.event-btn strong{display:block;font-size:12px;margin-top:4px}.cue{border:1px solid var(--line);border-radius:12px;background:#101722;padding:13px;margin:8px 0}.cue.active{border-color:#5d8ec7}.cue h4{margin:0 0 5px;font-size:15px}.cue p{font-size:13px;margin:7px 0;color:#cbd7e4}.cue .meta{font-size:11px;color:var(--muted)}.tag{font-size:10px;border-radius:6px;padding:3px 6px;background:#28384c;color:#b7d3f4}.footer{color:#77899f;text-align:center;font-size:11px;margin:24px 0}.hidden{display:none!important}.metrics{display:flex;gap:8px;flex-wrap:wrap}.metric{border:1px solid var(--line);background:#101722;border-radius:10px;padding:9px 11px;font-size:11px;color:var(--muted)}.metric b{display:block;color:var(--text);font-size:18px}.source{font-size:11px;color:var(--muted)}
@@ -12,11 +12,11 @@
 </style>
 </head>
 <body><div class="shell">
-<header class="top"><div><div class="eyebrow">Sonic Companion · performance-aware audio engine 2.0</div><h1>Audio Lab — So What</h1><div class="sub">A two-pass, overlapping-window audio analysis of the original 1959 studio recording on <i>Kind of Blue</i>. Every musical moment must be grounded in the supplied audio. No mock moments, preset timestamps or DSP-derived musical descriptions are used.</div></div><div class="pills"><span class="pill good">GPT-Audio 1.5</span><span class="pill">30 s windows · 8 s overlap</span><span class="pill">Adaptive detail pass</span><span class="pill">Audio-grounded only</span></div></header>
+<header class="top"><div><div class="eyebrow">Sonic Companion · performance-aware audio engine 2.1</div><h1>Audio Lab — So What</h1><div class="sub">A multi-pass, overlapping-window audio analysis of the original 1959 studio recording on <i>Kind of Blue</i>. Every musical moment must be grounded in the supplied audio. No mock moments, preset timestamps or DSP-derived musical descriptions are used.</div></div><div class="pills"><span class="pill good">GPT-Audio 1.5</span><span class="pill">30 s windows · 8 s overlap</span><span class="pill">Adaptive detail pass</span><span class="pill">Audio-grounded only</span></div></header>
 <div class="layout">
 <aside class="panel">
  <h2>1 · Recording and model setup</h2>
- <p class="small muted">Select a local audio file you are authorised to process. This prototype accepts only the studio recording identity for “So What” on <i>Kind of Blue</i>. The model receives the actual audio in overlapping excerpts. Short excerpts improve phrase-level timing. Windows with fewer than three defensible moments receive a second, complementary listening pass.</p>
+ <p class="small muted">Select a local audio file you are authorised to process. This prototype accepts only the studio recording identity for “So What” on <i>Kind of Blue</i>. The model receives the actual audio in overlapping excerpts. Short excerpts improve phrase-level timing. Every window receives a complementary ensemble listening pass; narrow or sparse windows receive an additional depth audit.</p>
  <div class="drop" id="dropZone"><strong>Choose the original studio recording</strong><span class="small muted">WAV, MP3, FLAC, M4A or another browser-supported audio format</span><input id="audioFile" type="file" accept="audio/*,.wav,.mp3,.flac,.m4a,.ogg,.aac"></div>
  <div id="fileInfo" class="status" style="margin-top:10px">No recording selected.</div>
  <label class="label" for="workerEndpoint">Cloudflare Worker URL</label><input id="workerEndpoint" class="field" type="url" inputmode="url" placeholder="https://your-worker.workers.dev">
@@ -30,7 +30,7 @@
  <div class="rule"></div>
  <h3>What is sent to the model</h3>
  <div class="metrics"><div class="metric"><b>30 s</b>audio windows</div><div class="metric"><b>8 s</b>overlap</div><div class="metric"><b>24 kHz</b>PCM WAV</div></div>
- <p class="small muted">The overlap protects phrase continuity. Each window gets a primary performance scan; windows with fewer than three defensible moments get an additional detail scan focused on ensemble interaction and rhythm-section events. Sparse output is flagged, never padded with invented events. Timestamps and attributions remain model estimates.</p>
+ <p class="small muted">The overlap protects phrase continuity. Each window gets a foreground scan and an independent ensemble scan focused on piano, bass, drums, inner voices and inter-player responses. Narrow or sparse windows receive a third adaptive depth audit. Sparse output is flagged, never padded with invented events. Timestamps and attributions remain model estimates.</p>
  <div class="rule"></div><p class="source">Recording dossier supplied as context only: Miles Davis — trumpet; Julian “Cannonball” Adderley — alto saxophone; John Coltrane — tenor saxophone; Bill Evans — piano; Paul Chambers — bass; Jimmy Cobb — drums. The official Miles Davis discography distinguishes the March 2, 1959 studio session from the later 1960 live “So What”. <a href="https://www.milesdavis.com/news/kind-of-blue-by-miles-davis-1959-jazz-standard-celebrates-50-years/" target="_blank" rel="noopener">Official session credits</a>.</p>
 </aside>
 <main class="maincol">
@@ -55,11 +55,12 @@
 </main></div>
 <footer class="footer">Sonic Companion · So What validation build · no synthetic audio · no editorial fallback · model-generated content only</footer>
 </div>
+<script src="../audio-analysis-bridge.js?v=1.0.10-bridge-2.1.0"></script>
 <script>
 'use strict';
 const $=id=>document.getElementById(id);
 const state={file:null,audioUrl:null,model:null,record:null,decoded:null,events:[],workerUrl:''};
-const MODEL='gpt-audio-1.5',CHUNK_SECONDS=30,OVERLAP_SECONDS=8,SAMPLE_RATE=24000;
+const MODEL='gpt-audio-1.5',ENGINE_VERSION='2.1.0',CHUNK_SECONDS=30,OVERLAP_SECONDS=8,SAMPLE_RATE=24000,TARGET_MOMENTS_PER_MINUTE=4,MAX_SILENT_GAP_SECONDS=30,WINDOW_CONCURRENCY=4;
 const STORAGE_KEY='sonic.audioModelAnalysis.registry.v1',ENDPOINT_KEY='sonic.audioModelAnalysis.workerEndpoint.v1';
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function fmt(s){s=Math.max(0,Number(s)||0);return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0')}
@@ -117,15 +118,29 @@ function deduplicateEvents(events){
  return out.sort((a,b)=>a.startSeconds-b.startSeconds);
 }
 
+async function verifyWorkerEngine(baseUrl){
+ const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);
+ try{
+  const response=await fetch(baseUrl+'/health',{method:'GET',cache:'no-store',headers:{'Accept':'application/json'},signal:controller.signal});
+  let health;try{health=await response.json()}catch{throw new Error('Cloudflare Worker health check returned invalid JSON. Deploy the Audio Lab 2.1 Worker before analysing.');}
+  if(!response.ok)throw new Error(`Cloudflare Worker health check failed (HTTP ${response.status}).`);
+  if(health.audioLabEngineVersion!==ENGINE_VERSION||health.analysisModel!==MODEL||health.analysisRoute!=='/api/audio-analysis/chunk'||health.mandatoryDetailPass!==true||health.adaptiveDepthPass!==true){
+   throw new Error(`CLOUDFLARE WORKER OUT OF DATE. Audio Lab requires Worker engine ${ENGINE_VERSION} with mandatory primary + detail passes and adaptive depth. The configured Worker reports ${health.audioLabEngineVersion||'an unknown version'}. Replace the deployed Worker entrypoint with worker/index.js from this package, then retry. No audio has been submitted.`);
+  }
+  if(!health.openaiKeyConfigured||!health.audioLabOriginConfigured||!health.audioLabTokenConfigured)throw new Error('Cloudflare Worker is missing one or more required secrets/origin settings. Check OPENAI_API_KEY, ALLOWED_ORIGIN and AUDIO_LAB_TOKEN.');
+  return health;
+ }catch(error){if(error.name==='AbortError')throw new Error('Cloudflare Worker health check timed out. No audio has been submitted.');throw error;}
+ finally{clearTimeout(timeout)}
+}
 async function callModelForChunk(baseUrl,base64,chunk,token){
- const payload={model:MODEL,track:{title:'So What',artist:'Miles Davis',album:'Kind of Blue',recordingVersion:'Original 1959 studio recording'},clip:{startSeconds:chunk.start,durationSeconds:chunk.duration,index:chunk.index,total:chunk.total,analysisPass:chunk.analysisPass||'primary'},audio:{format:'wav',base64},previousSegmentMemory:chunk.memory||''};
+ const payload={model:MODEL,engineVersion:ENGINE_VERSION,track:{title:'So What',artist:'Miles Davis',album:'Kind of Blue',recordingVersion:'Original 1959 studio recording'},clip:{startSeconds:chunk.start,durationSeconds:chunk.duration,index:chunk.index,total:chunk.total,analysisPass:chunk.analysisPass||'primary',analysisEngineVersion:ENGINE_VERSION},audio:{format:'wav',base64},previousSegmentMemory:chunk.memory||''};
  let lastError=null;
  for(let attempt=0;attempt<3;attempt++){
   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),90000);
   try{
    const response=await fetch(baseUrl+'/api/audio-analysis/chunk',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},signal:controller.signal,body:JSON.stringify(payload)});
    let data;try{data=await response.json()}catch{throw new Error('The Audio Lab Worker returned a non-JSON response.')}
-   if(response.ok){if(data.model!==MODEL||data.audioInputReceived!==true||!data.analysis||data.analysisPass!==(chunk.analysisPass||'primary'))throw new Error('Worker provenance check failed: direct GPT-Audio 1.5 input or analysis-pass identity is missing.');return data.analysis;}
+   if(response.ok){if(data.model!==MODEL||data.audioInputReceived!==true||!data.analysis||data.analysisPass!==(chunk.analysisPass||'primary')||data.audioLabEngineVersion!==ENGINE_VERSION)throw new Error('Worker provenance/version check failed. The deployed Worker is not the required Audio Lab 2.1 build.');return data.analysis;}
    const error=new Error(data.error||`Audio model request failed (HTTP ${response.status}).`);error.status=response.status;
    if(response.status<500&&response.status!==429)throw error;lastError=error;
   }catch(error){lastError=error;if(error.status&&error.status<500&&error.status!==429)throw error;}
@@ -137,7 +152,7 @@ async function callModelForChunk(baseUrl,base64,chunk,token){
 function buildAnalysisPlan(durationSeconds){
  const duration=Number(durationSeconds);if(!Number.isFinite(duration)||duration<60||duration>720)throw new Error('Recording duration is outside the supported 1–12 minute range.');
  const step=CHUNK_SECONDS-OVERLAP_SECONDS,total=Math.ceil(Math.max(0,duration-OVERLAP_SECONDS)/step);
- return {step,total,minimumMoments:Math.ceil(duration/20),minimumMomentsPerMinute:3,maximumSilentGapSeconds:45};
+ return {step,total,minimumMoments:Math.ceil(duration*TARGET_MOMENTS_PER_MINUTE/60),minimumMomentsPerMinute:TARGET_MOMENTS_PER_MINUTE,maximumSilentGapSeconds:MAX_SILENT_GAP_SECONDS};
 }
 function evaluateModelCoverage(events,durationSeconds,total,plan=buildAnalysisPlan(durationSeconds)){
  const duration=Number(durationSeconds),ordered=Array.isArray(events)?events:[];
@@ -147,11 +162,18 @@ function evaluateModelCoverage(events,durationSeconds,total,plan=buildAnalysisPl
  const uncoveredWindows=windows.filter(w=>!ordered.some(e=>e.endSeconds>w.start&&e.startSeconds<w.end)).length;
  return {momentsPerMinute,maxSilentGapSeconds,uncoveredWindows,coverageGateFailed:ordered.length<plan.minimumMoments||momentsPerMinute<plan.minimumMomentsPerMinute||maxSilentGapSeconds>plan.maximumSilentGapSeconds||uncoveredWindows>0};
 }
+function shouldRunDepthPass(events){
+ const items=Array.isArray(events)?events:[];
+ const instruments=new Set(items.map(e=>String(e.instrument||'').toLowerCase()).filter(x=>x&&!['uncertain','other'].includes(x)));
+ const kinds=new Set(items.map(e=>String(e.eventKind||'').toLowerCase()).filter(Boolean));
+ return items.length<5 || instruments.size<2 || kinds.size<2;
+}
 function normalizeModelEvents(analysis,chunk,pass){
  const output=[];
  for(const e of (Array.isArray(analysis?.events)?analysis.events:[])){
   const a=Number(e.startSeconds),b=Number(e.endSeconds),confidence=Number(e.confidence),pc=Number(e.performerConfidence),tc=Number(e.timestampConfidence);
   if(!Number.isFinite(a)||!Number.isFinite(b)||a<0||b<=a||b>chunk.duration+.25)throw new Error(`Model returned an invalid timestamp in excerpt ${chunk.index+1} (${pass} pass). No partial result was published.`);
+  if(!['primary','detail','depth'].includes(pass))throw new Error('Unknown analysis pass.');
   if([confidence,pc,tc].some(x=>!Number.isFinite(x)||x<0||x>1))throw new Error(`Model returned invalid confidence metadata in excerpt ${chunk.index+1}.`);
   let performerName=pc>=.78?String(e.performerName||'').trim()||null:null;
   if(performerName&&!['Miles Davis','Julian “Cannonball” Adderley','Cannonball Adderley','John Coltrane','Bill Evans','Paul Chambers','Jimmy Cobb'].includes(performerName))performerName=null;
@@ -163,52 +185,66 @@ async function runAudioModelAnalysis(file){
  if(!file)return;
  const base=normalizeEndpoint($('workerEndpoint').value),token=$('audioLabToken').value.trim();if(!base)throw new Error('Enter the Cloudflare Worker base URL first.');if(!/^https:\/\//i.test(base))throw new Error('Worker URL must use HTTPS.');if(token.length<32)throw new Error('Enter the Audio Lab tester token configured in the Cloudflare Worker (minimum 32 characters).');
  if(!parseSpotifyTrackId($('spotifyTrackUrl').value))throw new Error('Enter the Spotify link for the exact original studio recording first.');if(!$('sameRecordingConfirmed').checked)throw new Error('Confirm the exact studio recording before analysing and publishing.');if(!$('audioConsent').checked)throw new Error('Confirm that the audio excerpts may be sent to the GPT-Audio 1.5 API.');
- $('analyseBtn').disabled=true;$('progressOuter').classList.remove('hidden');$('progressBar').style.width='1%';$('modelResults').classList.add('hidden');$('modelMetrics').classList.add('hidden');$('modelSummary').textContent='The engine is scanning the complete recording in overlapping windows two at a time. Sparse windows receive a complementary detail pass. All moments must come from the audio itself.';$('modelBadge').textContent='Audio Lab Engine 2.0 running';$('modelBadge').className='pill';
+ $('analyseBtn').disabled=true;$('progressOuter').classList.remove('hidden');$('progressBar').style.width='1%';$('modelResults').classList.add('hidden');$('modelMetrics').classList.add('hidden');$('modelSummary').textContent='The engine is scanning the complete recording in overlapping 30-second windows, up to four windows concurrently. Every window receives an independent foreground pass and a mandatory ensemble pass; thin or narrow results receive a third depth audit. All moments must come from the audio itself.';$('modelBadge').textContent='Audio Lab Engine 2.1 running';$('modelBadge').className='pill';
  let context=null;
  try{
+  const workerHealth=await verifyWorkerEngine(base);
+  $('modelSummary').textContent=`Connected to Audio Lab Worker ${workerHealth.audioLabEngineVersion}. Every excerpt receives foreground and ensemble passes; thin or narrow results receive an additional depth pass.`;
   const bytes=await file.arrayBuffer();if(bytes.byteLength>120*1024*1024)throw new Error('File exceeds the 120 MB prototype limit.');
   const AudioCtx=window.AudioContext||window.webkitAudioContext;if(!AudioCtx)throw new Error('Web Audio decoding is unavailable in this browser.');context=new AudioCtx();const decoded=await context.decodeAudioData(bytes.slice(0));state.decoded=decoded;const duration=decoded.duration;if(duration<60||duration>720)throw new Error('For this proof of concept, choose the full studio track between 1 and 12 minutes.');
-  const fileHash=await sha256Hex(bytes),plan=buildAnalysisPlan(duration),step=plan.step,total=plan.total,allEvents=[],segmentSummaries=[];let memory='',detailPassCount=0,completedCalls=0,completedChunks=0;
-  // Process two adjacent windows concurrently to reduce iPhone turnaround while
+  const fileHash=await sha256Hex(bytes),plan=buildAnalysisPlan(duration),step=plan.step,total=plan.total,allEvents=[],segmentSummaries=[];let memory='',detailPassCount=0,depthPassCount=0,completedCalls=0,completedChunks=0;
+  // Process up to four adjacent windows concurrently to reduce iPhone turnaround while
   // preserving chronological continuity memory between small batches.
-  for(let batchStart=0;batchStart<total;batchStart+=2){
-   const indices=Array.from({length:Math.min(2,total-batchStart)},(_,j)=>batchStart+j);
+  for(let batchStart=0;batchStart<total;batchStart+=WINDOW_CONCURRENCY){
+   const indices=Array.from({length:Math.min(WINDOW_CONCURRENCY,total-batchStart)},(_,j)=>batchStart+j);
    const batchResults=await Promise.all(indices.map(async i=>{
     const start=i*step,end=Math.min(duration,start+CHUNK_SECONDS),clipDuration=end-start;if(clipDuration<8)throw new Error(`Excerpt ${i+1} is shorter than the model endpoint minimum.`);
     const chunk={start,duration:clipDuration,index:i,total,memory,analysisPass:'primary'};
     $('progressText').textContent=`Analysing excerpts ${batchStart+1}–${batchStart+indices.length} of ${total} · ${fmt(start)}–${fmt(end)} · ${allEvents.length} moments so far`;
     const wav=await writeWavChunk(decoded,start,end),base64=toBase64(wav);
     const primary=await callModelForChunk(base,base64,chunk,token);completedCalls++;
-    let events=normalizeModelEvents(primary,chunk,'primary'),detailEvents=[],detailMemory='';
-    if(Array.isArray(primary.events)&&primary.events.length<3){
-     detailPassCount++;
-     const primaryNotes=(primary.events||[]).map(e=>String(e.title?.en||'')).filter(Boolean).join(' | ').slice(0,700);
-     detailMemory=[memory,primaryNotes?'Primary-pass moments already covered (do not repeat): '+primaryNotes:'Primary pass returned no event; independently inspect all audible layers.'].filter(Boolean).join('\n');
-     $('progressText').textContent=`Detail listening pass for excerpt ${i+1}/${total} · checking bass, drums, piano and ensemble replies`;
-     const detail=await callModelForChunk(base,base64,{...chunk,memory:detailMemory,analysisPass:'detail'},token);completedCalls++;
-     detailEvents=normalizeModelEvents(detail,{...chunk,memory:detailMemory},'detail');
+    const primaryEvents=normalizeModelEvents(primary,chunk,'primary');
+    // Every audio window gets a genuinely independent second listening pass.
+    // It deliberately audits the rhythm section, accompaniment, inner voices and ensemble dialogue,
+    // even when the foreground pass already found several events.
+    detailPassCount++;
+    const primaryNotes=primaryEvents.map(e=>String(e.title?.en||'')).filter(Boolean).join(' | ').slice(0,900);
+    const detailMemory=[memory,primaryNotes?'PRIMARY PASS — already-covered events (do not restate these): '+primaryNotes:'PRIMARY PASS — no defensible foreground events were returned; independently inspect every audible layer.'].filter(Boolean).join('\n');
+    $('progressText').textContent=`Complementary ensemble listening pass for excerpt ${i+1}/${total} · checking bass, drums, piano and inter-player replies`;
+    const detail=await callModelForChunk(base,base64,{...chunk,memory:detailMemory,analysisPass:'detail'},token);completedCalls++;
+    const detailEvents=normalizeModelEvents(detail,{...chunk,memory:detailMemory},'detail');
+    let windowEvents=[...primaryEvents,...detailEvents],depthEvents=[],depthPassRan=false;
+    if(shouldRunDepthPass(windowEvents)){
+     depthPassRan=true;
+     depthPassCount++;
+     const covered=windowEvents.map(e=>`${e.instrument}: ${e.title?.en||''}`).join(' | ').slice(0,1200);
+     const depthMemory=[detailMemory,'FOREGROUND + ENSEMBLE PASS RESULTS (do not duplicate): '+(covered||'[none]'),'DEPTH PASS: independently re-audit this exact audio for short phrases, motif answers, phrase endings, rhythmic placement, bass/drum interaction, piano punctuation and changes in foreground responsibility. Return only additional audible events.'].join('\n');
+     $('progressText').textContent=`Adaptive depth pass for excerpt ${i+1}/${total} · resolving thin or narrow event coverage`;
+     const depth=await callModelForChunk(base,base64,{...chunk,memory:depthMemory,analysisPass:'depth'},token);completedCalls++;
+     depthEvents=normalizeModelEvents(depth,{...chunk,memory:depthMemory},'depth');
+     windowEvents.push(...depthEvents);
     }
     const summary=primary.segmentSummary&&typeof primary.segmentSummary.en==='string'&&typeof primary.segmentSummary.pt==='string'?primary.segmentSummary:null;
-    return {i,start,end,events:[...events,...detailEvents],summary,segmentMemory:String(primary.segmentMemory||'').slice(0,1200),calls:Array.isArray(primary.events)&&primary.events.length<3?2:1};
+    return {i,start,end,events:windowEvents,summary,segmentMemory:String(primary.segmentMemory||'').slice(0,1200),calls:2+(depthPassRan?1:0)};
    }));
    batchResults.sort((a,b)=>a.i-b.i);
    for(const result of batchResults){allEvents.push(...result.events);if(result.summary)segmentSummaries.push({startSeconds:result.start,endSeconds:result.end,summary:result.summary});}
    const latest=batchResults[batchResults.length-1];if(latest?.segmentMemory)memory=latest.segmentMemory;
    completedChunks+=batchResults.length;
    $('progressBar').style.width=`${Math.round(completedChunks/total*100)}%`;
-   $('progressText').textContent=`Completed ${completedChunks}/${total} excerpts · ${allEvents.length} raw moments · ${detailPassCount} adaptive detail passes · ${completedCalls} model calls`;
+   $('progressText').textContent=`Completed ${completedChunks}/${total} excerpts · ${allEvents.length} raw moments · ${detailPassCount} mandatory ensemble passes · ${completedCalls} model calls`;
   }
   if(segmentSummaries.length!==total)throw new Error(`Coverage validation failed: expected ${total} model listening summaries but received ${segmentSummaries.length}. No incomplete analysis was published.`);
   const events=deduplicateEvents(allEvents);if(events.some((e,i)=>i&&e.startSeconds<events[i-1].startSeconds))throw new Error('Timeline validation failed: events are not chronologically ordered.');
   const coverage=evaluateModelCoverage(events,duration,total,plan),{momentsPerMinute,maxSilentGapSeconds,uncoveredWindows,coverageGateFailed}=coverage,minCoverage=plan.minimumMoments;
-  state.model={model:MODEL,engineVersion:'2.0',durationSeconds:duration,events,segmentSummaries,chunkCount:total,detailPassCount,momentsPerMinute,maxSilentGapSeconds,uncoveredWindows,coverageGateFailed,fileHash,fileName:file.name,fileSizeBytes:file.size,analysedAt:new Date().toISOString()};state.events=events;
+  state.model={model:MODEL,engineVersion:ENGINE_VERSION,durationSeconds:duration,events,segmentSummaries,chunkCount:total,detailPassCount,depthPassCount,momentsPerMinute,maxSilentGapSeconds,uncoveredWindows,coverageGateFailed,fileHash,fileName:file.name,fileSizeBytes:file.size,analysedAt:new Date().toISOString()};state.events=events;
   const spotifyId=parseSpotifyTrackId($('spotifyTrackUrl').value);
-  state.record={schema:'sonic-audio-model-performance-record',schemaVersion:2,recordId:`${spotifyId}-${Date.now()}`,spotifyTrackId:spotifyId,spotifyTrackUrl:`https://open.spotify.com/track/${spotifyId}`,trackTitle:'So What',artist:'Miles Davis',album:'Kind of Blue',recordingVersion:'Original 1959 studio recording',recordingMatchConfirmed:true,recordingMatchMethod:'Manual user confirmation; not an acoustic fingerprint match against Spotify',analysedAt:state.model.analysedAt,durationSeconds:duration,durationMs:Math.round(duration*1000),sourceFile:{name:file.name,sizeBytes:file.size,sha256:fileHash},audioInputSubmitted:true,audioInputMode:'direct-audio-input-chunked',model:MODEL,engineVersion:'2.0',analysisStrategy:'30s-overlapping-primary-plus-adaptive-detail',qualityGate:{minimumMoments:minCoverage,minimumMomentsPerMinute:plan.minimumMomentsPerMinute,maximumSilentGapSeconds:plan.maximumSilentGapSeconds,observedMomentsPerMinute:momentsPerMinute,observedMaxSilentGapSeconds:maxSilentGapSeconds,uncoveredWindows},chunking:{chunkSeconds:CHUNK_SECONDS,overlapSeconds:OVERLAP_SECONDS,count:total,detailPassCount},segmentSummaries,events};
+  state.record={schema:'sonic-audio-model-performance-record',schemaVersion:2,recordId:`${spotifyId}-${Date.now()}`,spotifyTrackId:spotifyId,spotifyTrackUrl:`https://open.spotify.com/track/${spotifyId}`,trackTitle:'So What',artist:'Miles Davis',album:'Kind of Blue',recordingVersion:'Original 1959 studio recording',recordingMatchConfirmed:true,recordingMatchMethod:'Manual user confirmation; not an acoustic fingerprint match against Spotify',analysedAt:state.model.analysedAt,durationSeconds:duration,durationMs:Math.round(duration*1000),sourceFile:{name:file.name,sizeBytes:file.size,sha256:fileHash},audioInputSubmitted:true,audioInputMode:'direct-audio-input-chunked',model:MODEL,engineVersion:ENGINE_VERSION,analysisStrategy:'30s-overlapping-primary-plus-mandatory-detail-plus-adaptive-depth',qualityGate:{minimumMoments:minCoverage,minimumMomentsPerMinute:plan.minimumMomentsPerMinute,maximumSilentGapSeconds:plan.maximumSilentGapSeconds,observedMomentsPerMinute:momentsPerMinute,observedMaxSilentGapSeconds:maxSilentGapSeconds,uncoveredWindows},chunking:{chunkSeconds:CHUNK_SECONDS,overlapSeconds:OVERLAP_SECONDS,count:total,detailPassCount,depthPassCount},segmentSummaries,events};
   renderModel(events,duration);$('modelBadge').textContent='GPT-Audio 1.5 · completed';$('modelBadge').className='pill good';$('modelSummary').className='status '+(coverageGateFailed?'warn':'good');
-  $('modelSummary').textContent=events.length?`The engine generated ${events.length} distinct model moments across ${total} overlapping excerpts (${detailPassCount} adaptive detail passes; ${momentsPerMinute} moments/minute). Every cue came from direct audio input. ${coverageGateFailed?'Coverage validation failed: at least 3 moments/minute, no silent gap over 45 seconds, and at least one moment in every overlapping 30-second window are required.':'Density and time-coverage thresholds passed for this recording.'}`:`The model completed ${total} real audio excerpts and returned no moments it could substantiate. No fallback or invented events were inserted.`;
-  $('modelMetrics').classList.remove('hidden');$('modelMetrics').innerHTML=`<div class="metric"><b>${fmt(duration)}</b>recording duration</div><div class="metric"><b>${total}</b>audio excerpts</div><div class="metric"><b>${events.length}</b>model moments</div><div class="metric"><b>${momentsPerMinute}</b>moments/minute</div><div class="metric"><b>${detailPassCount}</b>detail passes</div>`;
-  if(coverageGateFailed){state.record=null;$('publishBtn').disabled=true;$('downloadBtn').disabled=true;$('publishStatus').className='status warn';$('publishStatus').textContent=`Not publishable yet: ${events.length} moments for ${fmt(duration)} is below the coverage requirements (minimum ${minCoverage}; maximum gap 45s; no empty 30s windows). The engine refuses to pad the guide with invented events.`;setStatus(`Analysis completed but coverage validation failed (${momentsPerMinute} moments/minute; max gap ${fmt(maxSilentGapSeconds)}; ${uncoveredWindows} empty windows). No record was published.`, 'warn');}
-  else{setStatus(`Audio analysis completed and passed density + continuity validation: ${events.length} moments from ${total} audio windows, with ${detailPassCount} adaptive detail passes. Review timestamps and attributions before publishing.`, 'good');updatePublish();}
+  $('modelSummary').textContent=events.length?`The engine generated ${events.length} distinct model moments across ${total} overlapping excerpts (${detailPassCount} mandatory ensemble passes; ${depthPassCount} adaptive depth passes; ${momentsPerMinute} moments/minute). Every cue came from direct audio input. ${coverageGateFailed?`Coverage validation failed: at least ${plan.minimumMomentsPerMinute} moments/minute, no silent gap over ${plan.maximumSilentGapSeconds} seconds, and at least one moment in every overlapping 30-second window are required.`:'Density and time-coverage thresholds passed for this recording.'}`:`The model completed ${total} real audio excerpts and returned no moments it could substantiate. No fallback or invented events were inserted.`;
+  $('modelMetrics').classList.remove('hidden');$('modelMetrics').innerHTML=`<div class="metric"><b>${fmt(duration)}</b>recording duration</div><div class="metric"><b>${total}</b>audio excerpts</div><div class="metric"><b>${events.length}</b>model moments</div><div class="metric"><b>${momentsPerMinute}</b>moments/minute</div><div class="metric"><b>${detailPassCount}</b>ensemble passes</div><div class="metric"><b>${depthPassCount}</b>depth passes</div>`;
+  if(coverageGateFailed){state.record=null;$('publishBtn').disabled=true;$('downloadBtn').disabled=true;$('publishStatus').className='status warn';$('publishStatus').textContent=`Not publishable yet: ${events.length} moments for ${fmt(duration)} is below the coverage requirements (minimum ${minCoverage}; maximum gap 30s; no empty 30s windows). The engine refuses to pad the guide with invented events.`;setStatus(`Analysis completed but coverage validation failed (${momentsPerMinute} moments/minute; max gap ${fmt(maxSilentGapSeconds)}; ${uncoveredWindows} empty windows). No record was published.`, 'warn');}
+  else{setStatus(`Audio analysis completed and passed density + continuity validation: ${events.length} moments from ${total} audio windows, with ${detailPassCount} mandatory ensemble passes. Review timestamps and attributions before publishing.`, 'good');updatePublish();}
  }catch(e){state.model=null;state.record=null;state.events=[];$('modelBadge').textContent='Analysis failed';$('modelBadge').className='pill';$('modelSummary').textContent='No partial or fallback content was retained.';setStatus(`Analysis failed: ${e.message||String(e)}`,'bad');updatePublish();}
  finally{if(context&&context.state!=='closed'){try{await context.close()}catch{}}$('analyseBtn').disabled=false;$('progressText').textContent='';$('progressOuter').classList.add('hidden')}
 }
@@ -221,7 +257,7 @@ function renderModel(events,duration){$('modelResults').classList.remove('hidden
 function activeEventAt(t){let idx=-1;state.events.forEach((e,i)=>{if(e.startSeconds<=t)idx=i});return idx}
 function updateModelPlayer(){const p=$('audioPlayer');if(!p.duration)return;const t=p.currentTime,idx=activeEventAt(t);$('timeCurrent').textContent=fmt(t);$('timeTotal').textContent=fmt(p.duration);$('seekRange').value=t/p.duration*1000;$('modelTimeline').querySelectorAll('[data-index]').forEach((b,i)=>b.classList.toggle('active',i===idx));$('modelCueList').querySelectorAll('[data-cue-index]').forEach((c,i)=>{c.classList.toggle('active',i===idx);const e=state.events[i],bar=c.querySelector('.lab-cue-timing'),fill=c.querySelector('[data-cue-fill]'),clock=c.querySelector('[data-cue-clock]'),track=bar?.querySelector('[role=progressbar]');if(!e||!bar||!fill||!clock)return;const span=Math.max(.1,e.endSeconds-e.startSeconds),ratio=Math.max(0,Math.min(1,(t-e.startSeconds)/span)),status=t<e.startSeconds?`Starts in ${fmt(e.startSeconds-t)}`:t>e.endSeconds?'Completed':`${fmt(t-e.startSeconds)} / ${fmt(span)}`;fill.style.width=(ratio*100).toFixed(1)+'%';clock.textContent=status;if(track)track.setAttribute('aria-valuenow',String(Math.round(ratio*100)));});}
 $('audioPlayer').addEventListener('timeupdate',updateModelPlayer);$('audioPlayer').addEventListener('loadedmetadata',()=>{$('seekRange').disabled=false;updateModelPlayer()});$('audioPlayer').addEventListener('seeking',updateModelPlayer);$('seekRange').oninput=e=>{const p=$('audioPlayer');if(p.duration)p.currentTime=Number(e.target.value)/1000*p.duration};
-function saveModelRecord(record){const key=STORAGE_KEY;let registry;try{registry=JSON.parse(localStorage.getItem(key)||'{"schemaVersion":1,"records":{}}')}catch{throw new Error('Model-analysis storage is invalid. Download a JSON backup before replacing it.')}if(!registry||registry.schemaVersion!==1||!registry.records||typeof registry.records!=='object'||Array.isArray(registry.records))registry={schemaVersion:1,records:{}};registry.records[record.spotifyTrackId]=record;registry.records=Object.fromEntries(Object.entries(registry.records).sort((a,b)=>String(b[1]?.analysedAt||'').localeCompare(String(a[1]?.analysedAt||''))).slice(0,30));localStorage.setItem(key,JSON.stringify(registry));}
+function saveModelRecord(record){const bridge=window.SonicAudioAnalysisBridge;if(!bridge||bridge.version!=='2.1.0'||typeof bridge.storeRecord!=='function')throw new Error('The matching Audio Lab 2.1 bridge is not loaded. Reload the complete deployment; no record was published.');return bridge.storeRecord(record);}
 function downloadModelRecord(){const blob=new Blob([JSON.stringify(state.record,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`sonic-audio-model-${state.record.spotifyTrackId}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
 $('analyseBtn').onclick=()=>runAudioModelAnalysis(state.file);
 $('publishBtn').onclick=()=>{try{if(!state.record)throw new Error('No successful GPT-Audio 1.5 analysis exists.');const id=parseSpotifyTrackId($('spotifyTrackUrl').value);if(id!==state.record.spotifyTrackId)throw new Error('Spotify track ID changed after analysis. Run the analysis again for the selected Spotify track.');if(!$('sameRecordingConfirmed').checked)throw new Error('Confirm the exact recording.');saveModelRecord(state.record);$('publishStatus').className='status good';$('publishStatus').textContent=`Published ${state.record.events.length} model-generated moments for this Spotify track. Refresh the original Sonic Companion app. The bridge will show them only when its track ID and duration match.`;}catch(e){$('publishStatus').className='status bad';$('publishStatus').textContent=e.message||String(e)}};
