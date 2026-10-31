@@ -1,60 +1,35 @@
-SONIC COMPANION v1.0.3 — FAIL-CLOSED GUIDE PROVENANCE
+SONIC COMPANION v1.0.4 — SPOTIFY PERMISSION UI FIX
 BUILD DATE: 2026-10-31
 
-PURPOSE
-This is an overlay update for an existing Sonic Companion GitHub Pages repository. It contains the complete root application index.html, the Audio Lab page, the bridge, tests and deployment instructions. It is not a replacement for the whole repository.
+This is an overlay update for the existing GitHub Pages repository, not a full repository replacement.
 
-WHAT CHANGED
-- Normal Spotify playback and the guide-lookup button no longer call buildMockGuide() as a fallback.
-- The existing So What / Kind of Blue demonstration fixtures remain in the source for demo/QA only; normal production paths do not load them.
-- An unknown recording now displays an explicit unavailable-guide state rather than a plausible-looking mock guide.
-- The one explicitly supported offline curated Rachmaninoff album-section guide remains available and is labelled as curated offline content, not audio recognition.
-- Audio Lab may populate an otherwise-empty guide with DSP signal-change candidates only when the imported record has the exact Spotify track ID and duration within +/-3 seconds.
-- DSP candidates are labelled as measured signal changes. They do not identify instruments, solos, performers, formal sections or musical causes.
-- The recording-match confirmation remains manual. The app does not acoustically fingerprint the Spotify stream.
-- Live web research is not configured in this build. The interface says so rather than pretending to perform research.
+REPLACE / ADD THESE PATHS
+  index.html                         REPLACE repository-root app file
+  package.json                       Update version/scripts (merge if repo-specific settings exist)
+  tests/run-build-tests.mjs          REPLACE
+  tests/run-integration-tests.mjs     KEEP/REPLACE with included copy
+  tests/run-spotify-ui-tests.mjs      ADD
+  CHANGELOG.md                       Optional
+  TEST_STATUS.txt                    Optional
+  PACKAGE_MANIFEST.json              Optional
+  SHA256SUMS.txt                     Optional
 
-UPLOAD THESE COMPLETE FILES TO THE MATCHING PATHS IN THE EXISTING REPOSITORY
-  index.html                         REPLACE the repository-root application file
-  audio-analysis-bridge.js           ADD/REPLACE the bridge file
-  audio-lab/index.html               ADD/REPLACE the Audio Lab page
-  package.json                       REPLACE only if the repo does not have package scripts/configuration that must be preserved
-  tests/run-build-tests.mjs          ADD/REPLACE
-  tests/run-integration-tests.mjs    ADD/REPLACE
-  UPLOAD_INSTRUCTIONS.txt            optional documentation
-  TEST_STATUS.txt                    optional QA record
-  PACKAGE_MANIFEST.json              optional integrity manifest
+The Audio Lab page and bridge are unchanged from v1.0.3 and are included unchanged for a self-contained release package. You do not need to re-upload audio-lab/index.html or audio-analysis-bridge.js if those exact v1.0.3 files are already deployed.
 
-IMPORTANT
-- Keep existing translation/, manifest, service worker, icons, and all other unrelated repository assets. They are not included as replacements here.
-- Do not upload this ZIP as a single file, and do not delete existing repository files or folders.
-- Do not change the Cloudflare Worker, Spotify OAuth credentials, redirect URI or scopes as part of this patch.
-- If GitHub's current root index.html has changed since the source snapshot used for this package, reconcile those newer commits first. This session could not fetch the remote repository; this package is based on the most recent integrated source snapshot available locally, not a verified live branch checkout.
+DO NOT DELETE OR REPLACE unrelated assets: translation/, manifest, service worker, icons, and other repository resources remain as they are.
+Do not change the Cloudflare Worker, Spotify OAuth credentials, redirect URI or requested scopes.
 
-VERSIONING
-- Product/app version: v1.0.3 (patch increment after v1.0.2).
-- Audio Lab bridge component version: 1.0.2 (incremented because bridge behaviour changed).
-- MIE version: 1.3 (unchanged).
-- HTML title, build metadata, visible banner, package metadata and tests agree on these versions.
-
-BEHAVIOUR AFTER DEPLOYMENT
-- Playing So What should no longer display the old hard-coded opening / two-chord editorial cue sequence.
-- Without a matching Audio Lab JSON record, the app should say that no guide is available for that recording.
-- With a valid imported Audio Lab record, the app should display only measured DSP candidates and explicitly label them as such.
-- The Rachmaninoff offline curated section guide is still available when the exact supported album identity matches. It describes the complete album-section track and is not audio event recognition.
+EXPECTED RESULT
+- With the currently demonstrated state (track loaded, active iPhone device, working Pause control, HTTP 200 playback-state poll), the amber reconnect/permission warning is hidden.
+- “Connection found. Checking playback status…” is replaced by “Spotify connection verified. Playback-status access is working.” after a successful HTTP 200 poll.
+- A successful HTTP 204 response says Spotify is connected but is not currently reporting a playing track; it does not show a permission warning.
+- A genuine HTTP 403 reveals a reason-specific warning: status-read scopes or playback-control permission/Premium/device requirements.
 
 TESTS
-Run from the repository root with Node.js 20 or newer:
+Run from repository root using Node.js 20 or newer:
   npm test
 
-The included build test validates complete file presence, v1.0.3 version consistency, inline JavaScript syntax, no mock-builder calls in the normal lookup or playback paths, Spotify auth/playback safeguards and the Audio Lab storage/publisher contract.
-The integration test validates analysis-only shell import, exact Spotify track-ID matching, +/-3 second duration matching, rejection of mismatches, candidate-only labelling, preservation of curated cues, duplicate prevention and invalid-record rejection.
+Three suites run: build/source syntax/provenance checks, Audio Lab bridge behaviour, and Spotify permission/status UI regression tests.
 
-LIMITATIONS / NOT CLAIMED
-- Automated tests passed in Node.js 22.16.0.
-- No live GitHub deployment, iPhone Safari, Spotify playback session or cross-device Audio Lab import was run in this environment.
-- The Audio Lab analysis is local DSP. It detects signal-change candidates; it does not semantically recognize musical events.
-- This release stops false mock claims. It does not yet provide a live researched editorial guide for So What. That requires a separately implemented and tested research-service integration with citations and recording-specific provenance.
-
-ROLLBACK
-Use GitHub's previous commit to restore the prior versions of the changed files if the live app regresses.
+LIMITATIONS
+The source is based on the locally available v1.0.3 integrated snapshot. This session could not fetch/compare the live GitHub branch and did not run iPhone Safari or live Spotify end-to-end tests. Reconcile any newer remote commits before replacing the live root index.html.

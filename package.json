@@ -1,10 +1,10 @@
 {
   "name": "sonic-companion",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
-  "description": "Sonic Companion prototype: fail-closed guide provenance, curated offline content and exact-match Audio Lab signal-change candidates.",
+  "description": "Sonic Companion prototype: fail-closed guide provenance with state-driven Spotify permission and connection status UI.",
   "scripts": {
-    "test": "node tests/run-build-tests.mjs && node tests/run-integration-tests.mjs"
+    "test": "node tests/run-build-tests.mjs && node tests/run-integration-tests.mjs && node tests/run-spotify-ui-tests.mjs"
   },
   "engines": {
     "node": ">=20"

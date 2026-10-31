@@ -1,55 +1,51 @@
 {
-  "package": "Sonic Companion v1.0.3 Fail-Closed Guide Provenance overlay",
-  "buildDate": "2026-10-31",
-  "productVersion": "1.0.3",
-  "audioAnalysisBridgeVersion": "1.0.2",
-  "mieVersion": "1.3",
-  "sourceLimitation": "Built from the latest integrated local snapshot available in this session. Live GitHub remote was not accessible for comparison.",
+  "release": "Sonic Companion v1.0.4",
+  "build_date": "2026-10-31",
+  "app_version": "1.0.4",
+  "mie_version": "1.3",
+  "audio_lab_bridge_version": "1.0.2",
+  "source_basis": "locally available v1.0.3 integrated snapshot; live GitHub branch not fetched",
+  "tests": "PASS",
   "files": [
     {
       "path": "CHANGELOG.md",
-      "bytes": 1071,
-      "sha256": "a31d068c72a4c97a06f4b6c0be44848afda13a859206609a8e1379fceb0b88fe"
-    },
-    {
-      "path": "UPLOAD_INSTRUCTIONS.txt",
-      "bytes": 4959,
-      "sha256": "1a63cba6c5604843d77a8dfe237df2a8237d5be1c1017e3e2adff21ffc2bb05f"
+      "bytes": 1535
     },
     {
       "path": "TEST_STATUS.txt",
-      "bytes": 786,
-      "sha256": "e9cc15a0a2cb55d89b396154a0e603c2a3097b0a80142eb1dd74063b12767564"
+      "bytes": 851
+    },
+    {
+      "path": "UPLOAD_INSTRUCTIONS.txt",
+      "bytes": 2355
     },
     {
       "path": "audio-analysis-bridge.js",
-      "bytes": 12126,
-      "sha256": "8dbbef293146b9b6d4678fd546e9a12a82fd63971a39d49c1a8dbb0a449f28cb"
+      "bytes": 12126
     },
     {
       "path": "audio-lab/index.html",
-      "bytes": 547550,
-      "sha256": "3eaf8ce7ba123c34c1352868041655af75ee2cd3bb7c7ff33cbf7fa05f635dbb"
+      "bytes": 547550
     },
     {
       "path": "index.html",
-      "bytes": 676279,
-      "sha256": "d89c936de2dfc90072a84a7293a74f4808faaa27352f92a7bcf108a209558a09"
+      "bytes": 677440
     },
     {
       "path": "package.json",
-      "bytes": 370,
-      "sha256": "5508a7858306f7894cb49a60362118de750dc2828dd00c81ea057f100d11b50c"
+      "bytes": 395
     },
     {
       "path": "tests/run-build-tests.mjs",
-      "bytes": 5386,
-      "sha256": "cd979a5f8823d7de463aeb0c09112a71eb48570430b8555f9a6989da2a155262"
+      "bytes": 6171
     },
     {
       "path": "tests/run-integration-tests.mjs",
-      "bytes": 4166,
-      "sha256": "874c690fadd61f4c5b1fdb16ee08da861b63882a3c682c7f1f40d00cb6c5e1d2"
+      "bytes": 4166
+    },
+    {
+      "path": "tests/run-spotify-ui-tests.mjs",
+      "bytes": 2020
     }
   ]
 }

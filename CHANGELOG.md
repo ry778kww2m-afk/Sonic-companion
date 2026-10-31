@@ -1,18 +1,19 @@
-# Sonic Companion v1.0.3 — 2026-10-31
+# Sonic Companion v1.0.4 — 2026-10-31
 
-## Fail-closed guide provenance
+## Spotify permission and connection UI correction
 
-- Removed hard-coded demo-guide fallback from normal Spotify auto-follow and manual guide lookup.
-- Unknown recordings now render an unavailable state rather than demo commentary.
-- Preserved the supported offline Rachmaninoff album-section guide with explicit curated-offline provenance.
-- Enabled Audio Lab DSP candidates to populate an empty analysis-only guide shell after exact Spotify track ID and duration validation.
-- Added distinct `audio-analysis-only` guide state and explicit DSP-only labels/timing wording.
-- Kept existing authored editorial cues additive and unchanged when matching DSP candidates are attached.
-- Updated app version to `1.0.3` and bridge version to `1.0.2`.
+- Removed the unconditional Spotify permission/reconnect warning that appeared even when playback status and playback controls were working.
+- Permission guidance is now hidden by default and appears only after an actual HTTP 403 from a permission-protected playback-status or playback-control endpoint.
+- Status-permission and control-permission errors now have separate guidance; control guidance also calls out Premium eligibility and active-device requirements rather than implying OAuth reconnection alone will fix them.
+- The temporary “connection found / checking playback status” message now resolves after the first poll: successful access, no active track (HTTP 204), or a concrete error.
+- A successful playback-state response clears any previous permission warning; disconnect and a new OAuth attempt also clear stale guidance.
+- Language changes re-render any active permission warning in the selected language.
+- Product version updated to 1.0.4. MIE remains 1.3 and Audio Lab bridge remains 1.0.2.
 
-## Known limitations
+## Scope
 
-- No live research service is configured in this build.
-- Audio Lab is signal analysis, not semantic music recognition.
-- Manual recording confirmation is not acoustic fingerprinting.
-- Live GitHub, iPhone Safari and Spotify end-to-end behaviour were not tested in this environment.
+This is a focused UI/state correction. It does not change the guide provenance rules, mock-content fail-closed behaviour, Audio Lab DSP matching, Spotify OAuth client ID, redirect URI or requested scopes.
+
+## Verification limits
+
+Automated build, bridge and UI-state regression suites are included. No live GitHub deployment, iPhone Safari session or Spotify account/API request was available in this environment.
