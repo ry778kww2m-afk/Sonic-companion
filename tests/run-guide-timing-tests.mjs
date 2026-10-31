@@ -55,7 +55,7 @@ const dynamicNodes=Array.from({length:cues.length},()=>({classList:{add(){},remo
 function makeElement(){const classes=new Set();return {textContent:'',style:{width:''},attrs:{},classList:{add(x){classes.add(x)},remove(x){classes.delete(x)},toggle(x,on){if(on)classes.add(x);else classes.delete(x)},contains(x){return classes.has(x)}},setAttribute(k,v){this.attrs[k]=v},querySelectorAll(){return dynamicNodes}};}
 context.$=id=>{if(!elements.has(id))elements.set(id,makeElement());return elements.get(id)};
 context.prettyMs=ms=>Math.floor(ms/60000)+':'+String(Math.floor((ms%60000)/1000)).padStart(2,'0');
-context.dynamicGuide=built.guide;context.lang='en';
+context.dynamicGuide=built.guide;context.lang='en';context.isAudioModelGuide=()=>false;
 context.getDisplayedDynamicGuide=()=>built.guide;
 context.pickGuideText=value=>typeof value==='string'?value:(value?.en||'');
 context.liveCueIndex=(arr,progress,duration)=>context.window.SonicLiveCore.cueIndex(arr,progress,duration);
@@ -85,7 +85,7 @@ assert.ok(html.includes("Track-specific guide loaded: '+data.guide.cues.length+'
 assert.ok(html.includes('nextCueCountdownFill'),'countdown bar remains in DOM/CSS');
 assert.ok(html.includes('STRUCTURE-MAPPED EDITORIAL MOMENTS'),'estimated editorial times are clearly disclosed');
 assert.ok(!/four editorial topics are untimed/i.test(html),'old four-topic status message removed');
-assert.ok(audio.includes("const MODEL='gpt-audio-1.5',CHUNK_SECONDS=30,OVERLAP_SECONDS=8"),'Audio Lab uses direct GPT-Audio 1.5 analysis in short overlapping audio excerpts');
+assert.ok(audio.includes("const MODEL='gpt-audio-1.5',ENGINE_VERSION='2.1.0',CHUNK_SECONDS=30,OVERLAP_SECONDS=8"),'Audio Lab uses direct GPT-Audio 1.5 analysis in short overlapping audio excerpts');
 assert.ok(audio.includes("fetch(baseUrl+'/api/audio-analysis/chunk'"),'Audio Lab sends each real audio excerpt to the model Worker');
 assert.ok(audio.includes('new AudioCtx()'),'Audio Lab decodes the selected recording locally before chunking');
 assert.ok(audio.includes('writeWavChunk(decoded,start,end)'),'Audio Lab sends audio bytes rather than only signal descriptors');
@@ -93,6 +93,6 @@ assert.ok(audio.includes('No mock moments, preset timestamps or DSP-derived musi
 assert.ok(audio.includes('No fallback or invented events were inserted.'),'empty model output remains empty');
 assert.ok(!audio.includes('mockCatalogueData')&&!audio.includes('makeSyntheticWav'),'So What Audio Lab contains no demo or synthetic moment content');
 assert.ok(bridge.includes('const MODEL_STORE_KEY=\'sonic.audioModelAnalysis.registry.v1\''),'model moments use their own provenance store');
-assert.ok(bridge.includes('const MAX_EVENTS=320'),'bridge event capacity fits the denser chunked model analysis');
+assert.ok(bridge.includes('const MAX_EVENTS=720'),'bridge event capacity fits the denser chunked model analysis');
 assert.ok(bridge.includes('model-analysis-required-for-so-what'),'So What cannot fall back to legacy DSP candidates');
 console.log('PASS: Freddie timing regression, first-cue countdown, live and per-card moment bars, plus direct-audio engine integration and So What fail-closed provenance.');

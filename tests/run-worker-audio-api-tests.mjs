@@ -34,9 +34,9 @@ try {
   return new Response(JSON.stringify({choices:[{message:{content:JSON.stringify(modelOutput)}}]}),{status:200,headers:{'Content-Type':'application/json'}});
  };
  const body={
-  model:'gpt-audio-1.5',
+  model:'gpt-audio-1.5',engineVersion:'2.1.0',
   track:{title:'So What',artist:'Miles Davis',album:'Kind of Blue',recordingVersion:'Original 1959 studio recording'},
-  clip:{startSeconds:0,durationSeconds:20,index:0,total:1},
+  clip:{startSeconds:0,durationSeconds:20,index:0,total:1,analysisEngineVersion:'2.1.0'},
   audio:{format:'wav',base64:'A'.repeat(1200)},
   previousSegmentMemory:''
  };
@@ -45,6 +45,7 @@ try {
  assert.equal(ok.status,200);
  const response=await ok.json();
  assert.equal(response.model,'gpt-audio-1.5');
+ assert.equal(response.audioLabEngineVersion,'2.1.0');
  assert.equal(response.audioInputReceived,true);
  assert.equal(response.analysisPass,'primary');
  assert.equal(response.analysis.events.length,1);
@@ -66,6 +67,13 @@ try {
  assert.equal(detailJson.analysisPass,'detail');
  assert.match(capturedRequest.messages[0].content[0].text,/DETAIL PASS:/);
  assert.equal(capturedRequest.max_completion_tokens,16000);
+ const depthBody={...body,clip:{...body.clip,analysisPass:'depth'}};
+ const depthResponse=await worker.fetch(new Request('https://worker.example/api/audio-analysis/chunk',{method:'POST',headers:{Origin:'https://app.example','Content-Type':'application/json','Authorization':'Bearer '+testerToken},body:JSON.stringify(depthBody)}),{OPENAI_API_KEY:'test-secret',ALLOWED_ORIGIN:'https://app.example',AUDIO_LAB_TOKEN:testerToken});
+ assert.equal(depthResponse.status,200);
+ assert.equal((await depthResponse.json()).analysisPass,'depth');
+ assert.match(capturedRequest.messages[0].content[0].text,/DEPTH PASS:/);
+ const health=await worker.fetch(new Request('https://worker.example/health',{headers:{Origin:'https://app.example'}}),{OPENAI_API_KEY:'test-secret',ALLOWED_ORIGIN:'https://app.example',AUDIO_LAB_TOKEN:testerToken});
+ const healthJson=await health.json();assert.equal(healthJson.audioLabEngineVersion,'2.1.0');assert.equal(healthJson.mandatoryDetailPass,true);
  const originalAnalysis=structuredClone(modelOutput.events[0]);
  modelOutput.events[0]={...originalAnalysis,whyItMatters:bilingual('Too short.','Muito curto.')};
  const thinText=await worker.fetch(new Request('https://worker.example/api/audio-analysis/chunk',{method:'POST',headers:{Origin:'https://app.example','Content-Type':'application/json','Authorization':'Bearer '+testerToken},body:JSON.stringify(body)}),{OPENAI_API_KEY:'test-secret',ALLOWED_ORIGIN:'https://app.example',AUDIO_LAB_TOKEN:testerToken});
@@ -79,25 +87,25 @@ try {
  const mismatchJson=await mismatch.json();
  assert.equal(mismatch.status,200);
  assert.equal(mismatchJson.analysis.events[0].performerName,null,'a roster name cannot be attached to an incompatible instrument');
- assert.equal(upstreamCalls,5);
+ assert.equal(upstreamCalls,6);
  modelOutput.events[0]=originalAnalysis;
 
 
  const blocked=await worker.fetch(new Request('https://worker.example/api/audio-analysis/chunk',{method:'POST',headers:{Origin:'https://attacker.example','Content-Type':'application/json','Authorization':'Bearer '+testerToken},body:JSON.stringify(body)}),{OPENAI_API_KEY:'test-secret',ALLOWED_ORIGIN:'https://app.example',AUDIO_LAB_TOKEN:testerToken});
  assert.equal(blocked.status,403,'origin guard runs before model route');
- assert.equal(upstreamCalls,5,'blocked origin cannot incur an OpenAI call');
+ assert.equal(upstreamCalls,6,'blocked origin cannot incur an OpenAI call');
 
  const noKey=await worker.fetch(new Request('https://worker.example/api/audio-analysis/chunk',{method:'POST',headers:{Origin:'https://app.example','Content-Type':'application/json','Authorization':'Bearer '+testerToken},body:JSON.stringify(body)}),{ALLOWED_ORIGIN:'https://app.example',AUDIO_LAB_TOKEN:testerToken});
  assert.equal(noKey.status,503,'missing OpenAI key fails closed after access checks');
 
  const badToken=await worker.fetch(new Request('https://worker.example/api/audio-analysis/chunk',{method:'POST',headers:{Origin:'https://app.example','Content-Type':'application/json','Authorization':'Bearer wrong-token'},body:JSON.stringify(body)}),{OPENAI_API_KEY:'test-secret',ALLOWED_ORIGIN:'https://app.example',AUDIO_LAB_TOKEN:testerToken});
  assert.equal(badToken.status,401,'invalid tester token fails closed');
- assert.equal(upstreamCalls,5,'invalid tester token cannot incur an OpenAI call');
+ assert.equal(upstreamCalls,6,'invalid tester token cannot incur an OpenAI call');
 
  const wrongTrack={...body,track:{...body.track,title:'Freddie Freeloader'}};
  const wrong=await worker.fetch(new Request('https://worker.example/api/audio-analysis/chunk',{method:'POST',headers:{Origin:'https://app.example','Content-Type':'application/json','Authorization':'Bearer '+testerToken},body:JSON.stringify(wrongTrack)}),{OPENAI_API_KEY:'test-secret',ALLOWED_ORIGIN:'https://app.example',AUDIO_LAB_TOKEN:testerToken});
  assert.equal(wrong.status,400,'Worker is restricted to the one-recording proof of concept');
- assert.equal(upstreamCalls,5,'wrong recording cannot incur an OpenAI call');
+ assert.equal(upstreamCalls,6,'wrong recording cannot incur an OpenAI call');
  console.log('PASS: Worker audio endpoint sends actual input_audio to GPT-Audio 1.5, enforces event caps and substantive bilingual content, validates analysis-pass identity, and enforces origin, tester-token, OpenAI-key and recording guards. Mocked response is test-only, never used by the app.');
 } finally {
  globalThis.fetch=originalFetch;

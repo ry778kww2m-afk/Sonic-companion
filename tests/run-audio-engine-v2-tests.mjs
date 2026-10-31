@@ -11,7 +11,7 @@ function scriptSlice(source,start,end){const a=source.indexOf(start),b=source.in
 const bilingual=s=>({en:s,pt:s});
 const event=(start,end,instrument,kind,title,confidence=.8,chunkIndex=0,analysisPass='primary')=>({startSeconds:start,endSeconds:end,instrument,eventKind:kind,confidence,timestampConfidence:.8,performerConfidence:.2,chunkIndex,analysisPass,title:bilingual(title),audibleEvidence:bilingual(title),whatHappens:bilingual(title)});
 // Exercise the production overlap deduplicator, not a reimplementation.
-const dedupeContext={bilingual,CHUNK_SECONDS:30,OVERLAP_SECONDS:8};vm.createContext(dedupeContext);
+const dedupeContext={bilingual,CHUNK_SECONDS:30,OVERLAP_SECONDS:8,TARGET_MOMENTS_PER_MINUTE:4,MAX_SILENT_GAP_SECONDS:30};vm.createContext(dedupeContext);
 vm.runInContext(scriptSlice(lab,'function jaccard(a,b){','\nasync function callModelForChunk'),dedupeContext,{timeout:10000});
 const candidates=[
  event(25,33,'trumpet','phrase','A descending trumpet phrase releases into a pause',.8),
@@ -33,13 +33,15 @@ assert.equal(normalized[0].startSeconds,35,'excerpt-relative timestamp is offset
 assert.equal(normalized[0].endSeconds,39);
 assert.equal(normalized[0].analysisPass,'detail');
 assert.equal(normalized[0].chunkIndex,4);
+const normalizedDepth=dedupeContext.normalizeModelEvents({events:[one]},{start:30,duration:30,index:4},'depth');
+assert.equal(normalizedDepth[0].analysisPass,'depth','adaptive depth-pass provenance survives normalization');
 // Exercise the production 9.5-minute analysis plan and the actual fail-closed coverage evaluator.
 vm.runInContext(scriptSlice(lab,'function buildAnalysisPlan(durationSeconds){','function normalizeModelEvents'),dedupeContext,{timeout:10000});
 const plan=dedupeContext.buildAnalysisPlan(570);
 assert.equal(plan.total,26,'a 9.5-minute recording is scanned in 26 overlapping windows, not four or six');
-assert.equal(plan.minimumMoments,29,'the publish floor scales with duration at three moments per minute');
+assert.equal(plan.minimumMoments,38,'the publish floor scales with duration at four moments per minute');
 assert.equal(plan.step,22,'8-second overlap is included in the real production plan');
-const denseEvents=Array.from({length:29},(_,i)=>({startSeconds:i*19.5,endSeconds:i*19.5+8}));
+const denseEvents=Array.from({length:38},(_,i)=>({startSeconds:i*14.7,endSeconds:i*14.7+8}));
 const goodCoverage=dedupeContext.evaluateModelCoverage(denseEvents,570,plan.total,plan);
 assert.equal(goodCoverage.coverageGateFailed,false,'a sufficiently dense continuous 9.5-minute timeline passes');
 assert.equal(dedupeContext.evaluateModelCoverage(denseEvents.slice(0,6),570,plan.total,plan).coverageGateFailed,true,'four-to-six cue regressions fail closed for a long recording');
@@ -73,16 +75,21 @@ assert.equal(cards[1].clock.textContent,'In 0:15');
 assert.equal(cards[1].fill.style.width,'0.00%');
 // Build-level checks for short windows, adaptive pass, parallelism and quality gates.
 assert.match(lab,/CHUNK_SECONDS=30,OVERLAP_SECONDS=8/);
-assert.match(lab,/batchStart<total;batchStart\+=2/,'two-window concurrency reduces serial API latency');
+assert.match(lab,/WINDOW_CONCURRENCY=4/,'up to four audio windows are processed concurrently');
+assert.match(lab,/batchStart<total;batchStart\+=WINDOW_CONCURRENCY/,'four-window concurrency reduces turnaround without unbounded fan-out');
 assert.match(lab,/Promise\.all\(indices\.map/);
-assert.match(lab,/primary.events.length<3/);
-assert.match(lab,/minimumMoments:Math\.ceil\(duration\/20\)/);
-assert.match(lab,/maximumSilentGapSeconds:45/);
+assert.match(lab,/detailPassCount\+\+/);
+assert.match(lab,/shouldRunDepthPass\(windowEvents\)/);
+assert.match(lab,/minimumMoments:Math\.ceil\(duration\*TARGET_MOMENTS_PER_MINUTE\/60\)/);
+assert.match(lab,/maximumSilentGapSeconds:MAX_SILENT_GAP_SECONDS/);
+assert.match(lab,/MAX_SILENT_GAP_SECONDS=30/);
 assert.match(lab,/maxSilentGapSeconds>plan.maximumSilentGapSeconds/);
 assert.match(lab,/uncoveredWindows>0/);
 assert.match(worker,/maximum six per 30-second excerpt/);
 assert.match(worker,/DETAIL PASS:/);
+assert.match(worker,/DEPTH PASS:/);
+assert.match(worker,/audioLabEngineVersion:SONIC_AUDIO_ENGINE_VERSION/);
 assert.match(worker,/underdeveloped bilingual content/);
 assert.match(app,/id="activeMomentProgress"/);
 assert.match(app,/className='dynamic-cue-moment-progress'/);
-console.log('PASS: Audio Lab Engine 2.0 overlap dedup, timestamp normalization, adaptive two-pass concurrency, density/continuity gates, live moment timer, per-card timers and accessibility state.');
+console.log('PASS: Audio Lab Engine 2.1 overlap dedup, timestamp normalization, mandatory ensemble + adaptive depth passes, density/continuity gates, live moment timer, per-card timers and accessibility state.');

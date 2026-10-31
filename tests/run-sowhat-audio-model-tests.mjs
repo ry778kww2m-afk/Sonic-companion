@@ -54,33 +54,36 @@ const windowMock = {
 };
 vm.runInNewContext(bridgeSource, { window: windowMock, console, setTimeout });
 const bridge = windowMock.SonicAudioAnalysisBridge;
-assert.equal(bridge.version, '2.0.0');
+assert.equal(bridge.version, '2.1.0');
 const id = '1234567890123456789012';
+const makeEvent=(startSeconds,endSeconds,chunkIndex,analysisPass,instrument,titleEn,titlePt,performerName=null)=>({
+  startSeconds,endSeconds,chunkIndex,analysisPass,performerName,instrument,role:instrument==='trumpet'?'lead':'accompaniment',eventKind:'phrase',
+  performerConfidence:performerName?0.9:0.2,confidence:0.86,timestampConfidence:0.82,
+  title:{en:titleEn,pt:titlePt},
+  whatHappens:{en:'The instrument shapes a distinct phrase, releases the line, and leaves room for another musical voice to answer within the ensemble texture.',pt:'O instrumento desenha uma frase distinta, encerra a linha e deixa espaço para outra voz musical responder dentro da textura do conjunto.'},
+  listenFor:{en:'Listen for the contour of the phrase, its articulation, and the brief space that follows before the ensemble movement continues.',pt:'Ouça o contorno da frase, sua articulação e o breve espaço que vem depois, antes de o movimento do conjunto continuar.'},
+  whyItMatters:{en:'This gesture gives the passage a conversational shape and makes the relationship between foreground and accompaniment easier to hear.',pt:'Esse gesto dá ao trecho um formato conversacional e torna mais audível a relação entre primeiro plano e acompanhamento.'},
+  audibleEvidence:{en:'A clearly separated musical gesture is audible, followed by a change in the texture and a short opening for another part.',pt:'Um gesto musical claramente separado é audível, seguido por uma mudança na textura e uma breve abertura para outra parte.'},
+  question:{en:'What does this gesture reveal about the way the ensemble listens and responds?',pt:'O que esse gesto revela sobre a maneira como o conjunto escuta e responde?'}
+});
 const testRecord = {
-  schema: 'sonic-audio-model-performance-record', schemaVersion: 2,
-  recordId: 'unit-test-only', spotifyTrackId: id,
-  trackTitle: 'So What', artist: 'Miles Davis', album: 'Kind of Blue',
-  recordingVersion: 'Original 1959 studio recording',
-  recordingMatchConfirmed: true,
-  analysedAt: new Date().toISOString(), durationSeconds: 60, durationMs: 60000,
-  sourceFile: { name: 'unit-test-audio.wav', sizeBytes: 1, sha256: 'a'.repeat(64) },
-  audioInputSubmitted: true, audioInputMode: 'direct-audio-input-chunked', model: 'gpt-audio-1.5',
-  engineVersion:'2.0', analysisStrategy:'30s-overlapping-primary-plus-adaptive-detail', qualityGate:{minimumMoments:3,minimumMomentsPerMinute:3,maximumSilentGapSeconds:45,observedMomentsPerMinute:3,observedMaxSilentGapSeconds:15,uncoveredWindows:0},
-  chunking: { chunkSeconds: 30, overlapSeconds: 8, count: 2, detailPassCount:0 },
-  segmentSummaries: [{ startSeconds:0, endSeconds:45, summary:{en:'This test-only summary describes a trumpet phrase and the surrounding ensemble response in this sample passage.',pt:'Este resumo de teste descreve uma frase de trompete e a resposta do conjunto ao redor neste trecho de exemplo.'} },{startSeconds:35,endSeconds:60,summary:{en:'This second test-only summary covers the later piano and drum details in the next sample passage.',pt:'Este segundo resumo de teste cobre os detalhes posteriores de piano e bateria no próximo trecho de exemplo.'}}],
-  events: [{
-    startSeconds: 11.2, endSeconds: 17.5, chunkIndex:0, analysisPass:'primary', performerName: 'Miles Davis',
-    instrument: 'trumpet', role: 'lead', eventKind: 'phrase',
-    performerConfidence: .9, confidence: .88, timestampConfidence: .81,
-    title: { en: 'Unit test phrase', pt: 'Frase de teste' },
-    whatHappens: { en: 'The trumpet shapes a short phrase, releases the line, and leaves room for the ensemble to respond.', pt: 'O trompete desenha uma frase curta, encerra a linha e deixa espaço para a resposta do conjunto.' },
-    listenFor: { en: 'Listen for the downward phrase shape and the short space that appears immediately after the final note.', pt: 'Ouça o desenho descendente da frase e o breve espaço que aparece imediatamente após a última nota.' },
-    whyItMatters: { en: 'The pause gives the musical statement a conversational quality and makes the next ensemble answer easier to hear.', pt: 'A pausa dá à declaração musical um caráter conversacional e torna mais fácil perceber a próxima resposta do conjunto.' },
-    audibleEvidence: { en: 'A focused trumpet phrase is audible in the foreground, with a descending ending and a brief reduction in activity.', pt: 'Uma frase de trompete em primeiro plano é audível, com final descendente e uma breve redução de atividade.' },
-    question: { en: 'How does the pause change your perception of the trumpet phrase?', pt: 'Como a pausa muda sua percepção da frase do trompete?' }
-  },
-  {startSeconds:22,endSeconds:28,chunkIndex:0,analysisPass:'primary',performerName:null,instrument:'piano',role:'accompaniment',eventKind:'rhythmic_gesture',performerConfidence:.2,confidence:.8,timestampConfidence:.8,title:{en:'Piano response',pt:'Resposta do piano'},whatHappens:{en:'The piano adds a distinct short response between the ensemble phrases.',pt:'O piano acrescenta uma resposta curta e distinta entre as frases do conjunto.'},listenFor:{en:'Listen for the compact chordal punctuation and the space it leaves afterward.',pt:'Ouça a pontuação compacta dos acordes e o espaço que ela deixa em seguida.'},whyItMatters:{en:'This gives the ensemble phrase a conversational answer rather than a continuous block of sound.',pt:'Isso dá à frase do conjunto uma resposta conversacional, em vez de um bloco contínuo de som.'},audibleEvidence:{en:'A brief piano attack is audible after the preceding ensemble phrase, followed by a short gap.',pt:'Um ataque breve do piano é audível após a frase anterior do conjunto, seguido por uma pequena pausa.'},question:{en:'How does the short piano reply change the feel of the phrase?',pt:'Como a breve resposta do piano muda a sensação da frase?'}},
-  {startSeconds:43,endSeconds:50,chunkIndex:1,analysisPass:'detail',performerName:null,instrument:'drums',role:'pulse',eventKind:'rhythmic_gesture',performerConfidence:.2,confidence:.8,timestampConfidence:.8,title:{en:'Ride cymbal articulation',pt:'Articulação do prato de condução'},whatHappens:{en:'The ride cymbal pattern keeps the pulse moving while the foreground phrase settles.',pt:'O padrão do prato de condução mantém o pulso em movimento enquanto a frase em primeiro plano se acomoda.'},listenFor:{en:'Follow the repeated cymbal strokes and their spacing beneath the other instruments.',pt:'Acompanhe as batidas repetidas do prato e o espaçamento entre elas sob os outros instrumentos.'},whyItMatters:{en:'The steady timekeeping gives the ensemble room to phrase freely without losing the underlying motion.',pt:'A marcação constante do tempo dá espaço para o conjunto frasear livremente sem perder o movimento subjacente.'},audibleEvidence:{en:'Repeated high-frequency cymbal taps continue under the sustained ensemble sound.',pt:'Batidas repetidas e agudas do prato continuam sob o som sustentado do conjunto.'},question:{en:'What do you notice about the cymbal spacing as the phrase changes?',pt:'O que você percebe no espaçamento das batidas do prato quando a frase muda?'}}
+  schema:'sonic-audio-model-performance-record',schemaVersion:2,recordId:'unit-test-only',spotifyTrackId:id,
+  trackTitle:'So What',artist:'Miles Davis',album:'Kind of Blue',recordingVersion:'Original 1959 studio recording',recordingMatchConfirmed:true,
+  analysedAt:new Date().toISOString(),durationSeconds:60,durationMs:60000,
+  sourceFile:{name:'unit-test-audio.wav',sizeBytes:1,sha256:'a'.repeat(64)},audioInputSubmitted:true,audioInputMode:'direct-audio-input-chunked',model:'gpt-audio-1.5',
+  engineVersion:'2.1.0',analysisStrategy:'30s-overlapping-primary-plus-mandatory-detail-plus-adaptive-depth',
+  qualityGate:{minimumMoments:4,minimumMomentsPerMinute:4,maximumSilentGapSeconds:30,observedMomentsPerMinute:4,observedMaxSilentGapSeconds:11,uncoveredWindows:0},
+  chunking:{chunkSeconds:30,overlapSeconds:8,count:3,detailPassCount:3,depthPassCount:1},
+  segmentSummaries:[
+   {startSeconds:0,endSeconds:30,summary:{en:'This test-only listening summary describes the foreground phrase, its rhythmic shape, and the first ensemble response in this audio window.',pt:'Este resumo de escuta de teste descreve a frase em primeiro plano, seu desenho rítmico e a primeira resposta do conjunto nesta janela de áudio.'}},
+   {startSeconds:22,endSeconds:52,summary:{en:'This test-only listening summary describes the piano accompaniment, bass support, and the way the ensemble carries the phrase forward in this overlapping window.',pt:'Este resumo de escuta de teste descreve o acompanhamento do piano, o apoio do baixo e a maneira como o conjunto leva a frase adiante nesta janela sobreposta.'}},
+   {startSeconds:44,endSeconds:60,summary:{en:'This test-only listening summary describes the closing phrase, the final ensemble texture, and the transition toward the end of this sample recording.',pt:'Este resumo de escuta de teste descreve a frase de encerramento, a textura final do conjunto e a transição em direção ao fim desta gravação de amostra.'}}
+  ],
+  events:[
+   makeEvent(4,9,0,'primary','trumpet','Unit-test trumpet phrase','Frase de trompete de teste','Miles Davis'),
+   makeEvent(18,23,0,'detail','piano','Unit-test piano response','Resposta de piano de teste'),
+   makeEvent(34,39,1,'depth','drums','Unit-test rhythmic response','Resposta rítmica de teste'),
+   makeEvent(50,55,2,'primary','bass','Unit-test bass movement','Movimento de baixo de teste')
   ]
 };
 assert.equal(bridge.validateRecord(testRecord), null);
@@ -89,8 +92,8 @@ const guide = { analysisOnly: true, trackSpecificGuide: false, cues: [], guideKi
 const applied = bridge.applyToGuide(guide, { id, name: 'So What', artist:'Miles Davis', artists:['Miles Davis'], album: 'Kind of Blue', duration_ms: 60000 });
 assert.equal(applied.applied, true);
 assert.equal(guide.guideKind, 'audio-model-performance-guide');
-assert.equal(guide.cues.length, 3);
-assert.equal(guide.cues[0].timeSeconds, 11.2);
+assert.equal(guide.cues.length, 4, 'all validated model events become timed moment cards');
+assert.equal(guide.cues[0].timeSeconds, 4);
 assert.equal(guide.cues[0].performerName, 'Miles Davis');
 const wrongIdentityGuide={analysisOnly:true,trackSpecificGuide:false,cues:[]};
 const wrongIdentity=bridge.applyToGuide(wrongIdentityGuide,{id,name:'Freddie Freeloader',artists:['Miles Davis'],album:'Kind of Blue',duration_ms:60000});
@@ -99,7 +102,7 @@ assert.equal(wrongIdentity.applied,false,'a So What model record cannot attach t
 // Invalid provenance and invalid performer attributions are rejected.
 assert.notEqual(bridge.validateRecord({ ...testRecord, schemaVersion:1 }), null, 'old low-density analysis records are rejected');
 assert.notEqual(bridge.validateRecord({ ...testRecord, events:[{...testRecord.events[0],whatHappens:{en:'Nothing happened here.',pt:'Nada aconteceu aqui.'}},...testRecord.events.slice(1)] }), null, 'terse or placeholder-like moment prose is rejected');
-assert.notEqual(bridge.validateRecord({ ...testRecord, events:Array.from({length:321},(_,i)=>({...testRecord.events[0],startSeconds:i/10,endSeconds:i/10+.05})) }), null, 'bridge event ceiling matches 8 possible events per adaptive window across 40 windows and rejects overflow');
+assert.notEqual(bridge.validateRecord({ ...testRecord, events:Array.from({length:721},(_,i)=>({...testRecord.events[0],startSeconds:i/10,endSeconds:i/10+.05})) }), null, 'bridge event ceiling matches 18 possible events per window across 40 windows and rejects overflow');
 assert.notEqual(bridge.validateRecord({ ...testRecord, qualityGate:{...testRecord.qualityGate,uncoveredWindows:1} }), null, 'uncovered timeline records are rejected');
 assert.notEqual(bridge.validateRecord({ ...testRecord, model: 'gpt-5.5' }), null);
 assert.notEqual(bridge.validateRecord({ ...testRecord, audioInputSubmitted: false }), null);
