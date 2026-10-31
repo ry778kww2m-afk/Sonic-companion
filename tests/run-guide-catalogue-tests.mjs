@@ -13,6 +13,7 @@ vm.createContext(context);
 vm.runInContext(dataMatch[1],context,{timeout:10000});
 function extract(startMarker,endMarker){const a=html.indexOf(startMarker);assert.notEqual(a,-1,`missing ${startMarker}`);const b=html.indexOf(endMarker,a);assert.notEqual(b,-1,`missing ${endMarker}`);return html.slice(a,b);}
 vm.runInContext(extract('function normTrack(s){','\nfunction clearLiveGuideState(){'),context,{timeout:10000});
+vm.runInContext(extract('function buildFreddieFreeloaderMoments(){','\nfunction buildCuratedAlbumTrackGuide(item,match){'),context,{timeout:10000});
 vm.runInContext(extract('function buildCuratedAlbumTrackGuide(item,match){','\nfunction delay(ms){'),context,{timeout:10000});
 const track={
  id:'A'.repeat(22),
@@ -35,15 +36,15 @@ context.window.SonicAudioAnalysisBridge={applyToGuide(guide,bodyTrack){
 vm.runInContext(extract('function loadAvailableTrackGuide(track){','\nfunction showDynamicLoading(track){'),context,{timeout:10000});
 const loaded=context.loadAvailableTrackGuide(track);
 assert.equal(loaded.result.guide.guideKind,'curated-offline-track','production loader must return the jazz guide');
-assert.equal(loaded.result.guide.cues.length,4,'production loader preserves all four landmarks');
+assert.equal(loaded.result.guide.cues.length,22,'production loader returns the expanded Freddie moment sequence');
 assert.equal(loaded.analysis.reason,'no-matching-record','guide resolution does not depend on Audio Lab data');
 assert.equal(built.guide.guideKind,'curated-offline-track');
 assert.equal(built.guide.trackSpecificGuide,true);
-assert.equal(built.guide.cueTimingBasis,'untimed-landmarks');
-assert.equal(built.guide.cues.length,4,'all four authored Freddie Freeloader landmarks are present');
-assert.equal(built.guide.cues[0].title.en,'Wynton Kelly sets the pocket');
-assert.equal(built.guide.cues[1].title.en,'Miles’s blues phrases');
-assert.ok(built.guide.cues.every(c=>!Object.hasOwn(c,'at')),'editorial landmarks contain no fabricated time positions');
+assert.equal(built.guide.cueTimingBasis,'approximate-progress-proportions');
+assert.equal(built.guide.cues.length,22,'all twenty-two expanded Freddie moments are present');
+assert.equal(built.guide.cues[0].title.en,'The pocket before the story');
+assert.equal(built.guide.cues[1].title.en,'The head states the blues');
+assert.ok(built.guide.cues.every(c=>Number.isFinite(c.at)),'structure-derived editorial anchors have approximate timeline positions');
 assert.ok(built.guide.sources.some(x=>x.url==='https://www.milesdavis.com/albums/kind-of-blue-legacy-edition/'));
 assert.ok(built.guide.sources.some(x=>x.url==='https://www.milesdavis.com/track/freddie-freeloader-feat-john-coltrane-cannonball-adderley-wynton-kelly-paul-chambers/'));
 assert.equal(built.guide.provenance.spotifyTrackId,track.id);
