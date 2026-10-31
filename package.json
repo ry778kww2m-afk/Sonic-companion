@@ -1,8 +1,8 @@
 {
   "name": "sonic-companion",
-  "version": "2.0.0",
+  "version": "1.0.2",
   "private": true,
-  "description": "Music Immersion engine preview: track-specific listening journeys, richer prompts and Spotify playback-linked cue progression.",
+  "description": "Sonic Companion prototype: Spotify playback-linked listening guides with optional Audio Lab signal-change candidates.",
   "scripts": {
     "test": "node tests/run-build-tests.mjs && node tests/run-integration-tests.mjs"
   },

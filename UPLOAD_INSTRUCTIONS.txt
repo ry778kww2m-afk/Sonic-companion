@@ -1,0 +1,48 @@
+SONIC COMPANION v1.0.2 — AUDIOLAB INTEGRATION UPDATE
+BUILD DATE: 2026-10-31
+
+PURPOSE
+This is an overlay update for an existing Sonic Companion GitHub Pages repository. It includes the complete root application index.html (not a patch), the Audio Lab page, and the bridge/tests. It is not a replacement for the entire repository.
+
+UPLOAD THESE COMPLETE FILES TO THE MATCHING PATHS IN THE EXISTING REPOSITORY:
+  index.html                         REPLACE the root application file
+  audio-analysis-bridge.js           ADD/REPLACE the bridge file
+  audio-lab/index.html               ADD/REPLACE the Audio Lab page
+  package.json                       REPLACE only if the repo does not have a package configuration that must be preserved
+  tests/run-build-tests.mjs          ADD/REPLACE
+  tests/run-integration-tests.mjs    ADD/REPLACE
+
+IMPORTANT
+- Keep the existing translation/, manifest, service worker, icons, and other repository assets. They are not included as replacements here.
+- Do not upload this ZIP as one file, and do not delete files or folders already in the repository.
+- Do not change the Cloudflare Worker, Spotify credentials, or OAuth configuration.
+- If the current GitHub root index.html has changed since the source snapshot used for this package, do not overwrite those newer changes with this copy. Reconcile the changes first.
+
+VERSIONING
+- Product/app version: v1.0.2 (the next patch increment after v1.0.1).
+- Audio Lab bridge component version: 1.0.1 (unchanged; separately versioned).
+- MIE model version: 1.3 (unchanged).
+- The HTML title, build metadata, visible build banner, package metadata, and QA tests now agree on product version v1.0.2.
+
+BRIDGE BEHAVIOUR
+- Audio Lab writes analysis records to sonic.audioAnalysis.registry.v1.
+- Main app accepts a record only for an exact Spotify track ID match and duration within +/-3 seconds.
+- Candidate markers are additive; authored guide cues are preserved.
+- Audio measurements describe signal changes only. They do not identify instruments, solos, performers, or musical events.
+- Recording confirmation is manual; the app does not acoustically fingerprint the Spotify stream.
+- Spotify playback controls and OAuth implementation are not intentionally changed.
+
+TESTS
+Run from the repository root with Node.js 20 or newer:
+  node tests/run-build-tests.mjs
+  node tests/run-integration-tests.mjs
+Or, if package.json is replaced with the included version, run:
+  npm test
+
+Automated tests cover complete file presence, inline-script syntax, embedded catalogue JSON, product-version consistency, Spotify safeguards, bridge hooks, exact track-ID/duration matching, fail-closed validation, additive candidates, authored cue preservation, and duplicate prevention. They do not constitute a live iPhone/Safari/Spotify test or verify the current GitHub deployment.
+
+SOURCE LIMITATION
+This package was prepared from the most recent integrated root file available in the working files for this task. The GitHub remote could not be fetched from this session, so the remote branch was not independently re-read. Before replacing the live root index, compare it with the current repository file and preserve any intervening commits.
+
+ROLLBACK
+Use the previous GitHub commit to restore the previous files if the live app regresses.

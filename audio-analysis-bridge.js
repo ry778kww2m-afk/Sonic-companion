@@ -1,4 +1,4 @@
-/* Sonic Companion — Audio Lab bridge v1.0.0
+/* Sonic Companion — Audio Lab bridge v1.0.1
  * Static/local integration only. Does not access Spotify audio, issue playback commands,
  * call an AI API, or change the OAuth/player implementation.
  */
@@ -175,7 +175,7 @@
   }
 
   root.SonicAudioAnalysisBridge = Object.freeze({
-    version: '1.0.0', storeKey: STORE_KEY, validateRecord, storeRecord, getRecord, applyToGuide
+    version: '1.0.1', storeKey: STORE_KEY, validateRecord, storeRecord, getRecord, applyToGuide
   });
 
   if (root.document) {

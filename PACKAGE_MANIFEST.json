@@ -1,71 +1,43 @@
 {
-  "package": "Sonic Companion Audio Analysis Full Integration",
-  "version": "1.1.0",
+  "package": "Sonic Companion v1.0.2 Audio Lab integration overlay",
+  "buildDate": "2026-10-31",
+  "productVersion": "1.0.2",
+  "audioAnalysisBridgeVersion": "1.0.1",
   "files": [
     {
-      "path": "LICENSES_AND_PROVENANCE.md",
-      "bytes": 953,
-      "sha256": "a1d4e3438307bf9b99f65656b7d24cc723ba83056f97bbfc4d33b2a2ce188927"
-    },
-    {
-      "path": "QA_AUDIO_LAB_BASELINE.md",
-      "bytes": 2887,
-      "sha256": "457488408e3cf49bb596a642f62863e44fd077af3563a15130882c55dfed4988"
-    },
-    {
-      "path": "QA_INTEGRATION.md",
-      "bytes": 2568,
-      "sha256": "235fa60e22aaabb9404f08d5c3acc327cd8d423ad860e2a86330409c83528e3f"
-    },
-    {
-      "path": "README_GITHUB_UPLOAD.md",
-      "bytes": 3767,
-      "sha256": "5aa24951305e0c375a36f4c4e6399bcb1a04cc7aa2ba3724ba82ef3d74840d20"
+      "path": "UPLOAD_INSTRUCTIONS.txt",
+      "bytes": 3301,
+      "sha256": "255f881a506ce8869b49b94c3723f63dcb712690145f442cbad192f6526b5c6e"
     },
     {
       "path": "audio-analysis-bridge.js",
       "bytes": 11619,
-      "sha256": "884c4d34306e7d4017c5d6930fc6f5cae2f24842e503dd790ec799419470268c"
-    },
-    {
-      "path": "audio-lab/data/mock-catalogue.json",
-      "bytes": 506882,
-      "sha256": "915d1fc53c286fcbaf2fdf18ce886be5f096b60a9a51b9b7ae95d459b82aeb72"
+      "sha256": "13a38d12f43f5a5fd756f02a87403e73fb42445974b0c9ee209a040d73c2afb5"
     },
     {
       "path": "audio-lab/index.html",
-      "bytes": 547540,
-      "sha256": "619dc20f4e2f2b0c9c34668ae766c3b0b59e332ffca8cab47887d3534517cc83"
+      "bytes": 547550,
+      "sha256": "3eaf8ce7ba123c34c1352868041655af75ee2cd3bb7c7ff33cbf7fa05f635dbb"
     },
     {
       "path": "index.html",
-      "bytes": 670749,
-      "sha256": "b460e7eeb1bc0f3b9d5f33a3155ab6a2f03fcbd10bfefd4a004e67078baf9af8"
+      "bytes": 671201,
+      "sha256": "1799f84269e4fc3b200f196a2c3e0c90fe4fbe68dcbca51001c41004356baea7"
     },
     {
-      "path": "tests/bridge.test.cjs",
-      "bytes": 5232,
-      "sha256": "ffbb10baca9f24280ed345e086bce4f5d2b9d00d2d552c7e001e5dc31740f59b"
+      "path": "package.json",
+      "bytes": 355,
+      "sha256": "cc737f9bdae2d0b94d2ba35ada9f1d9616dc709f6113f620bb40842a9714e781"
     },
     {
-      "path": "tests/root-integration.test.cjs",
-      "bytes": 1179,
-      "sha256": "4b8dace503ce161cc591914cc5f558a43f84ccbdb617774c51aaba4042d68794"
+      "path": "tests/run-build-tests.mjs",
+      "bytes": 4009,
+      "sha256": "d052cb7ab875ab72ff2fe4f89840e19dd33990ff925ceff53d336c17f5ae7eca"
     },
     {
-      "path": "translation/glossary.pt-BR.json",
-      "bytes": 4000,
-      "sha256": "67208cb76313ff83854b7f531754f30fad362afc0880f5c0a3e57f085da047eb"
-    },
-    {
-      "path": "translation/pt-BR.memory.json",
-      "bytes": 323531,
-      "sha256": "cd3ac2514626174fc8eefe2327d32b174ba18dd88aec07dd84f4758d92224cb4"
-    },
-    {
-      "path": "translation/translation-core.js",
-      "bytes": 10036,
-      "sha256": "a966e1ffe40b23530b6f1cdcc585ee9431e18af0c46e15cc9e1a5c4da98f3367"
+      "path": "tests/run-integration-tests.mjs",
+      "bytes": 3058,
+      "sha256": "63f1b41b3cd6aab9b45575647a66d41f87e6e0bf6a5ad89b1bcf9270ed074553"
     }
   ]
 }
