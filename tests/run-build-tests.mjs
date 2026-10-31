@@ -14,14 +14,17 @@ const pkg = JSON.parse(read('package.json'));
 assert.ok(index.length > 500000, 'root index.html must be the complete app, not a patch');
 assert.ok(lab.length > 500000, 'Audio Lab index.html must be complete');
 assert.ok(bridge.length > 10000, 'bridge must be complete');
-assert.ok(index.includes('SONIC COMPANION v1.0.4 · MIE 1.3 · AUDIO LAB BRIDGE 1.0.2 · BUILD 2026-10-31'));
-assert.ok(index.includes('v1.0.4-mie-1.3-audio-analysis-bridge-1.0.2'));
-assert.ok(index.includes('<title>Sonic Companion v1.0.4 — Spotify Permission UI Fix</title>'));
-assert.equal(pkg.version,'1.0.4','package metadata follows prototype version scheme');
+assert.ok(index.includes('SONIC COMPANION v1.0.5 · MIE 1.3 · AUDIO LAB BRIDGE 1.0.3 · BUILD 2026-10-31'));
+assert.ok(index.includes('v1.0.5-mie-1.3-audio-analysis-bridge-1.0.3'));
+assert.ok(index.includes('<title>Sonic Companion v1.0.5 — Curated Jazz Guide Resolver</title>'));
+assert.equal(pkg.version,'1.0.5','package metadata follows prototype version scheme');
 for (const stale of ['v2.7','v2.3','v2.0','v1.0.2-mie-1.3','v1.0.3-mie-1.3']) assert.equal(index.includes(stale),false,`stale product version ${stale} remains`);
-assert.equal((index.match(/audio-analysis-bridge\.js\?v=1\.0\.2/g)||[]).length,1,'bridge loads once with cache-busting version');
+assert.equal((index.match(/audio-analysis-bridge\.js\?v=1\.0\.3/g)||[]).length,1,'bridge loads once with cache-busting version');
 assert.ok(index.includes('function createUnavailableTrackGuide(track)'),'unknown tracks have an explicit unavailable state');
 assert.ok(index.includes('function loadAvailableTrackGuide(track)'),'track guide data passes through one controlled loader');
+assert.ok(index.includes('function buildCuratedAlbumTrackGuide(item,match)'),'the Kind of Blue / Giant Steps curated album-track builder exists');
+assert.ok(index.includes('buildCuratedRhapsodyTrackGuide(track,match)||buildCuratedAlbumTrackGuide(track,match)'),'resolver dispatches to the correct profile-specific guide builder');
+assert.ok(index.includes("cueTimingBasis:'untimed-landmarks'"),'jazz guide topics are explicitly untimed');
 assert.ok(index.includes("guideKind:'unavailable'"),'unavailable is an explicit provenance state');
 assert.ok(index.includes("guideKind:'unavailable'") && bridge.includes("'audio-analysis-only'"),'DSP-only guides have a distinct type');
 assert.ok(index.includes('window.SonicAudioAnalysisBridge.applyToGuide(result.guide,bodyTrack)'),'Audio Lab candidate bridge is called against the selected Spotify identity');
@@ -45,7 +48,7 @@ assert.ok(index.includes("setSpotifyPermissionIssue('status')"), 'status permiss
 assert.ok(index.includes("setSpotifyPermissionIssue('control')"), 'control permission warning is only activated by an explicit 403 path');
 assert.ok(index.includes("Spotify connection verified. Playback-status access is working."), 'successful polling resolves the temporary connection message');
 assert.ok(index.includes("Spotify connected. Spotify is not reporting a track playing right now."), '204 no-track response resolves connection state without a permission warning');
-assert.equal(pkg.scripts.test,'node tests/run-build-tests.mjs && node tests/run-integration-tests.mjs && node tests/run-spotify-ui-tests.mjs');
+assert.equal(pkg.scripts.test,'node tests/run-build-tests.mjs && node tests/run-integration-tests.mjs && node tests/run-spotify-ui-tests.mjs && node tests/run-guide-catalogue-tests.mjs');
 
 function checkInlineScripts(file, source) {
   const re=/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi;
@@ -67,4 +70,4 @@ const jsonMatch=lab.match(/<script\s+id=["']mockCatalogueData["']\s+type=["']app
 assert.ok(jsonMatch,'embedded mock catalogue exists');
 const catalogue=JSON.parse(jsonMatch[1]);
 assert.ok(Array.isArray(catalogue)&&catalogue.length>=5,'embedded catalogue parses and has expected coverage');
-console.log('PASS: complete app/lab sources, v1.0.4 header, no mock fallback in live paths, fail-closed provenance, Spotify auth/playback safeguards, Audio Lab contract and JavaScript syntax.');
+console.log('PASS: complete app/lab sources, v1.0.5 header, no mock fallback in live paths, fail-closed provenance, Spotify auth/playback safeguards, Audio Lab contract and JavaScript syntax.');
