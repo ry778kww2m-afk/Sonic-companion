@@ -1,8 +1,8 @@
 {
   "name": "sonic-companion",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
-  "description": "Sonic Companion prototype: Spotify playback-linked listening guides with optional Audio Lab signal-change candidates.",
+  "description": "Sonic Companion prototype: fail-closed guide provenance, curated offline content and exact-match Audio Lab signal-change candidates.",
   "scripts": {
     "test": "node tests/run-build-tests.mjs && node tests/run-integration-tests.mjs"
   },

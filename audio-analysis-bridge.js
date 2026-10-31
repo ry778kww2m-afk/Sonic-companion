@@ -1,4 +1,4 @@
-/* Sonic Companion — Audio Lab bridge v1.0.1
+/* Sonic Companion — Audio Lab bridge v1.0.2
  * Static/local integration only. Does not access Spotify audio, issue playback commands,
  * call an AI API, or change the OAuth/player implementation.
  */
@@ -86,7 +86,7 @@
     if (!Number.isFinite(spotifyDuration) || spotifyDuration <= 0 || Math.abs(spotifyDuration - Number(record.durationMs)) > DURATION_TOLERANCE_MS) {
       return { applied: false, reason: 'duration-mismatch' };
     }
-    if (!guide || guide.trackSpecificGuide !== true || !Array.isArray(guide.cues)) return { applied: false, reason: 'guide-not-track-specific' };
+    if (!guide || !(guide.trackSpecificGuide === true || guide.analysisOnly === true) || !Array.isArray(guide.cues)) return { applied: false, reason: 'guide-not-track-specific-or-analysis-shell' };
     if (guide.audioAnalysis && guide.audioAnalysis.recordId === record.recordId) return { applied: true, alreadyApplied: true, count: record.events.length };
 
     const measured = record.events.map((event, index) => {
@@ -117,8 +117,12 @@
 
     // Keep the authored listening moments intact. Add measured, explicitly-labelled
     // candidate markers alongside them; never remap a musical claim to an unlabelled DSP peak.
+    const analysisOnlyShell = guide.analysisOnly === true && guide.trackSpecificGuide !== true && guide.cues.length === 0;
     guide.cues = guide.cues.concat(measured).sort((a, b) => Number(a && a.at || 0) - Number(b && b.at || 0));
-    guide.cueTimingBasis = 'audio-analysis-hybrid';
+    guide.trackSpecificGuide = true;
+    guide.guideKind = analysisOnlyShell ? 'audio-analysis-only' : (guide.guideKind || 'editorial-plus-audio-analysis');
+    guide.sourceStatus = analysisOnlyShell ? 'local-audio-analysis' : (guide.sourceStatus || 'curated-plus-local-audio-analysis');
+    guide.cueTimingBasis = analysisOnlyShell ? 'audio-analysis-only' : 'audio-analysis-hybrid';
     guide.audioAnalysis = {
       recordId: record.recordId,
       spotifyTrackId: record.spotifyTrackId,
@@ -175,7 +179,7 @@
   }
 
   root.SonicAudioAnalysisBridge = Object.freeze({
-    version: '1.0.1', storeKey: STORE_KEY, validateRecord, storeRecord, getRecord, applyToGuide
+    version: '1.0.2', storeKey: STORE_KEY, validateRecord, storeRecord, getRecord, applyToGuide
   });
 
   if (root.document) {

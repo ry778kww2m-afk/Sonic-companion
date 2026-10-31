@@ -1,0 +1,14 @@
+SONIC COMPANION v1.0.3 — AUTOMATED TEST STATUS
+Build date: 2026-10-31
+Runtime: Node.js v22.16.0
+
+Command: npm test
+Result: PASS
+
+Suite 1 — run-build-tests.mjs
+PASS: complete app/lab sources, version identity, no mock fallback in production lookup/playback paths, fail-closed source state, Spotify auth/playback safeguards, Audio Lab storage/publisher contract and inline JavaScript syntax.
+
+Suite 2 — run-integration-tests.mjs
+PASS: Audio Lab DSP-only shell, exact Spotify track ID and duration gates, measured-candidate labelling, authored cue preservation, duplicate prevention and invalid-record rejection.
+
+Not performed: live GitHub deployment, iPhone Safari UI test, actual Spotify playback test, cross-device localStorage/import test, or acoustic fingerprint verification.
