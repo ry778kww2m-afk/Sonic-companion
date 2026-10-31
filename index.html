@@ -2771,6 +2771,7 @@ window.buildSonicMockGuide = buildMockGuide;
 })();
 </script>
 <script src="./translation/translation-core.js?v=1.1.0-atomic"></script>
+<script src="./audio-analysis-bridge.js?v=1.0.0"></script>
 <script id="sonic-live-core">
 (function(root){'use strict';
  function cueIndex(cues,progressMs,durationMs){
@@ -3439,6 +3440,7 @@ function autoFollowPlayback(data,sampledAt=performance.now()){
   const curatedMatch=findCuratedTrack(item);
   const curatedRhapsody=buildCuratedRhapsodyTrackGuide(item,curatedMatch);
   const result=curatedRhapsody||window.buildSonicMockGuide(body);
+  if(result?.guide)window.SonicAudioAnalysisBridge?.applyToGuide(result.guide,body.track);
   dynamicGuide=result.guide;dynamicGuideTrackId=item.id;dynamicCueIndex=0;
   $('albumSearch').value=body.query;configureResearchLinks();
   $('researchStatus').textContent=lang==='pt'?'Guia local associado à faixa confirmada pelo Spotify.':'Local guide attached to the track confirmed by Spotify.';
