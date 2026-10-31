@@ -1,14 +1,15 @@
-Sonic Companion v1.0.7 — So What direct-audio model POC
+Sonic Companion v1.0.8 — Audio Lab Engine 2.0
 
-Automated suites: 7 suites; run `npm test` from package root.
-- Main app and Audio Lab script syntax / build integrity
-- Audio Lab bridge schema, identity and exact-track guards
-- Spotify permission UI regressions
-- Catalogue identity and guide resolver regressions
-- Existing Freddie Freeloader 22-moment regression, playback countdown and progress bar
-- So What direct-audio provenance, event schema, timestamps, bilingual content, segment summaries, no-DSP fallback, and performer/instrument consistency
-- Worker audio request: actual `input_audio` bytes routed to GPT-Audio 1.5, strict JSON validation, origin and tester-token checks, missing-key fail-closed behavior, and rejection of non-So-What tracks
+Automated suites: 8; run `npm test` from package root.
+1. Main app + Audio Lab source syntax/build integrity and required paths.
+2. Bridge schema, engine provenance, exact recording identity, density/continuity gates and record import guards.
+3. Spotify permission UI regressions and localized status handling.
+4. Guide catalogue identity, resolver and source guards.
+5. Existing Freddie Freeloader guide timing, first-cue countdown and main app per-moment progress UI regressions.
+6. So What direct-audio provenance, event schema, timestamp boundaries, bilingual content, segment summaries, no-DSP fallback and performer/instrument constraints.
+7. Worker request contract: actual input_audio payload to GPT-Audio 1.5, audio request identity, content/event limits, origin/token/API-key controls and fail-closed behavior. Upstream OpenAI response is mocked only inside the test harness.
+8. Audio Lab Engine 2.0 production-function tests: 30s/8s analysis plan, 9.5-minute window count, three-per-minute publication floor, rejection of 4–6 events for a long track, silent-gap rejection, overlap deduplication, timestamp normalization, adaptive detail-pass wiring, active cue and full-list progress bars and accessibility state.
 
-Latest result: PASS — all seven automated suites.
+Latest result: PASS — all 8 suites.
 
-Not tested: a live OpenAI API call, actual musical correctness on the original 1959 audio, audio-to-Spotify master identity, iPhone Safari/PWA behavior, live Spotify OAuth/player, or deployment to GitHub Pages/Cloudflare. The Worker test uses a mocked upstream response only in the test harness.
+Not tested: live OpenAI API output, actual musical correctness on the original 1959 recording, acoustic file-to-Spotify master matching, physical iPhone Safari/PWA rendering, live Spotify OAuth/player session, or deployment to GitHub Pages/Cloudflare. Browser navigation to a local test server was blocked by the execution environment. The code and automated contracts can be tested here; actual audio interpretation and the iPhone UI still need live verification against your deployed environment.

@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="sonic-companion-build" content="v1.0.7-sowhat-audio-model-1.1.0" />
+<meta charset="utf-8"><meta name="sonic-companion-build" content="v1.0.8-sowhat-audio-model-2.0.0" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111318"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Sonic Companion">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Sonic Companion v1.0.7 — So What Audio Model POC</title>
+<title>Sonic Companion v1.0.8 — So What Audio Model Engine</title>
 <style>
 :root{color-scheme:dark;--bg:#111318;--panel:#1a1d24;--panel2:#20242d;--text:#f4f2ec;--muted:#b4bac6;--line:#333946;--accent:#d8c18c;--accent2:#8fbea8;--warn:#dca76f}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#242832 0,#111318 54%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.48}main{max-width:920px;margin:auto;padding:18px 13px 50px}.build-banner{display:block;padding:9px 12px;margin:0 0 12px;border:1px solid #4d806b;border-radius:9px;background:#14231d;color:#c6ead8;font-size:.76rem;font-weight:800;letter-spacing:.035em;text-align:center}.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.13em;font-size:.73rem;font-weight:750}.hero{padding:10px 0 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.hero-copy{min-width:0}.hero h1{font-size:clamp(2rem,7vw,3.2rem);letter-spacing:-.045em;line-height:1.04;margin:.4rem 0 .8rem}.hero p{color:var(--muted);max-width:680px;margin:0;font-size:.95rem}.language{flex:0 0 auto;min-width:126px}.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid #3b574b;background:#1a2a24;color:#bde2ce;border-radius:999px;font-size:.78rem;padding:5px 10px;margin-top:12px}.dot{width:7px;height:7px;background:var(--accent2);border-radius:50%}.card{background:linear-gradient(150deg,rgba(32,36,45,.98),rgba(24,27,34,.98));border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 12px 30px #0002}.card h2{font-size:1.05rem;margin:0 0 10px;letter-spacing:-.01em}.muted{color:var(--muted)}.small{font-size:.84rem}.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.spread{justify-content:space-between}.btn{border:1px solid #515968;color:var(--text);background:#2a303b;border-radius:11px;padding:10px 12px;font:inherit;font-weight:650;cursor:pointer;min-height:44px}.btn.primary{background:var(--accent);border-color:var(--accent);color:#191915}.btn:disabled{opacity:.4;cursor:not-allowed}.btn.secondary{background:transparent}.btn:active{transform:scale(.99)}select,.field{display:block;width:100%;background:#151820;color:var(--text);border:1px solid #515968;border-radius:10px;padding:11px;font:inherit;min-height:44px;max-width:100%}label{font-weight:650;font-size:.9rem;display:block;margin:10px 0 7px}.note{font-size:.82rem;color:var(--muted);margin-top:9px}.error{color:#ffd2bd}.success{color:#bde2ce}.fine{color:var(--muted);font-size:.8rem}.now{padding:16px;border-radius:15px;background:linear-gradient(135deg,#2e302f,#24242b);border:1px solid #514c40}.now .kicker{font-size:.73rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent)}.now h2{font-size:clamp(1.25rem,5vw,1.8rem);line-height:1.18;margin:8px 0 10px}.now p{margin:9px 0;color:#e5e2da}.tag{display:inline-block;border:1px solid #555b65;border-radius:6px;padding:3px 7px;font-size:.75rem;color:#dadde4;margin:3px 5px 3px 0}.track-layout{display:grid;grid-template-columns:74px minmax(0,1fr);gap:12px;align-items:center;margin-top:12px}.track-art{width:74px;height:74px;object-fit:cover;border-radius:10px;background:#292d36;border:1px solid var(--line)}.track-meta{min-width:0}.track-meta h3{font-size:1.03rem;margin:0 0 3px;line-height:1.25;overflow-wrap:anywhere}.track-meta p{margin:0;color:var(--muted);font-size:.84rem;overflow-wrap:anywhere}.controls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:14px}.controls .btn{padding:9px 4px;font-size:.83rem;min-width:0}.playbutton{background:var(--accent)!important;color:#171815!important;border-color:var(--accent)!important}.vol-label{font-size:.8rem;color:var(--muted);align-self:center;margin-left:auto}.guide-selector{margin-top:12px}.guide-intro{color:var(--muted);font-size:.92rem;margin:6px 0 12px}.guide-list{display:grid;gap:7px;margin-top:12px}.cue{display:grid;grid-template-columns:52px minmax(0,1fr);gap:9px;align-items:start;border:1px solid var(--line);background:#191c23;border-radius:11px;padding:10px 11px;color:var(--text);text-align:left;cursor:pointer;font:inherit;width:100%}.cue.active{border-color:var(--accent);background:#2b2923}.cue .num{font-size:.72rem;color:var(--accent);font-weight:750}.cue .cue-title{font-size:.9rem;font-weight:650}.cue small{display:block;font-size:.77rem;color:var(--muted);font-weight:400;margin-top:2px}.source-row{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--line);padding-top:12px;margin-top:16px}.source-row a{color:var(--accent);font-size:.8rem}.callout{border-left:3px solid var(--warn);padding:10px 12px;background:#30271f;border-radius:0 10px 10px 0;color:#edd3b2;font-size:.85rem}.footer{font-size:.8rem;color:var(--muted);padding:10px 2px}.dynamic-guide{display:grid;gap:12px}.dynamic-guide h3{margin:16px 0 4px;font-size:1.02rem}.dynamic-guide h4{margin:0 0 6px}.dynamic-guide p{margin:7px 0;line-height:1.5}.dynamic-guide .dynamic-cue{border:1px solid var(--line);border-radius:12px;padding:13px;background:#191c23}.dynamic-guide .dynamic-cue.active{border-color:var(--accent);background:#2b2923}.dynamic-guide .dynamic-sources{display:grid;gap:8px}.dynamic-guide .dynamic-sources a{color:var(--accent);overflow-wrap:anywhere}.hidden{display:none!important}@media(max-width:500px){.hero{display:block}.language{margin-top:12px;max-width:190px}.controls{grid-template-columns:repeat(5,minmax(0,1fr))}.controls .btn{font-size:.75rem;padding:8px 2px}.card{padding:14px}}
@@ -74,6 +74,16 @@ body.focus-mode #liveCuePanel .guide-view-toggle{position:sticky;top:0;z-index:3
 .next-cue-countdown-note{font-size:.74rem;color:var(--muted);margin:0 0 8px;line-height:1.35}.next-cue-countdown-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}
 #nextCueCountdownLabel{font-size:.72rem;letter-spacing:.075em;font-weight:850;color:var(--accent,#b68a44);white-space:nowrap;font-variant-numeric:tabular-nums}
 #nextCueCountdownTitle{font-size:.77rem;color:var(--muted,#adb1bb);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.active-moment-progress{margin:10px 0 12px;padding:10px 11px;border:1px solid var(--line,#464b55);border-radius:10px;background:rgba(9,12,17,.28)}
+.active-moment-progress-head{display:flex;justify-content:space-between;gap:8px;margin-bottom:7px;font-size:.68rem;font-weight:850;letter-spacing:.08em;color:var(--accent,#b68a44)}
+.active-moment-progress-head time{font-size:.72rem;letter-spacing:0;font-variant-numeric:tabular-nums;color:var(--muted,#adb1bb)}
+.active-moment-progress-track{height:7px;border-radius:999px;background:#414650;overflow:hidden}
+.active-moment-progress-fill{height:100%;width:0;border-radius:inherit;background:var(--accent,#b68a44);transition:width .18s linear}
+.dynamic-cue-moment-progress{margin:10px 0 12px;padding:8px 9px;border:1px solid var(--line,#464b55);border-radius:9px;background:rgba(9,12,17,.22)}
+.dynamic-cue-moment-progress-head{display:flex;justify-content:space-between;gap:8px;margin-bottom:6px;font-size:.65rem;font-weight:800;color:var(--muted);letter-spacing:.06em}
+.dynamic-cue-moment-progress-head time{font-variant-numeric:tabular-nums;letter-spacing:0}
+.dynamic-cue-moment-progress-track{height:5px;border-radius:99px;background:#414650;overflow:hidden}
+.dynamic-cue-moment-progress-fill{height:100%;width:0;background:var(--accent,#b68a44);transition:width .18s linear}
 .next-cue-countdown-track{height:7px;border-radius:999px;background:#414650;overflow:hidden}
 .next-cue-countdown-fill{width:100%;height:100%;border-radius:inherit;background:var(--accent,#b68a44);transition:width .22s linear}
 body.focus-mode #nextCueCountdown{margin-top:16px;margin-bottom:9px}
@@ -87,7 +97,7 @@ body.focus-mode .cue-extra{padding:11px 12px}
 
 </head>
 <body><main>
-<div class="build-banner" id="buildBanner">SONIC COMPANION v1.0.7 · GPT-AUDIO 1.5 · AUDIO LAB BRIDGE 1.1.0 · BUILD 2026-10-31</div>
+<div class="build-banner" id="buildBanner">SONIC COMPANION v1.0.8 · GPT-AUDIO 1.5 · AUDIO LAB ENGINE 2.0 · BUILD 2026-10-31</div>
 <section class="hero"><div class="hero-copy"><div class="eyebrow" id="eyebrow">Listening companion</div><h1>Sonic Companion</h1><p id="tagline">Your current Spotify track drives the guide, whether started here or directly in Spotify. The highlighted listening phase follows playback progress approximately; the app does not analyze audio or detect musical events.</p><div class="pill"><span class="dot"></span><span id="syncStatus">Not connected to Spotify</span></div></div><div class="language"><label for="languageSelect" id="languageLabel">Feedback language</label><select id="languageSelect"><option value="en">English</option><option value="pt">Português (Brasil)</option></select></div></section>
 <section class="card" id="playerCard">
 <div id="connectionSetup">
@@ -115,6 +125,10 @@ body.focus-mode .cue-extra{padding:11px 12px}
     <div id="activeCueMusicians" class="cue-extra hidden"><span class="cue-extra-label" id="activeCueMusiciansLabel">MUSICIANS AT WORK</span><p id="activeCueMusicianMoment"></p></div>
     <div id="activeCueHistory" class="cue-extra cue-history hidden"><span class="cue-extra-label" id="activeCueHistoryLabel">WHY THIS PERFORMANCE MATTERS</span><p id="activeCueHistoricalNote"></p></div>
     <p id="activeCueQuestion" class="active-cue-question"></p>
+    <div id="activeMomentProgress" class="active-moment-progress hidden" aria-label="Progress through the current listening moment">
+      <div class="active-moment-progress-head"><span id="activeMomentProgressLabel">THIS MOMENT</span><time id="activeMomentProgressClock">—</time></div>
+      <div id="activeMomentProgressTrack" class="active-moment-progress-track" role="progressbar" aria-label="Progress through this moment" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="activeMomentProgressFill" class="active-moment-progress-fill"></div></div>
+    </div>
     <div id="nextCueCountdown" class="next-cue-countdown hidden" aria-label="Time until the next listening moment">
       <div class="next-cue-countdown-head"><span id="nextCueCountdownLabel">NEXT MOMENT IN 0:00</span><span id="nextCueCountdownTitle"></span></div>
       <p class="next-cue-countdown-note" data-en="Playback time available before the next cue. Pauses and seeks follow Spotify’s clock." data-pt="Tempo de reprodução disponível até a próxima indicação. Pausas e buscas seguem o relógio do Spotify.">Playback time available before the next cue. Pauses and seeks follow Spotify’s clock.</p>
@@ -184,7 +198,7 @@ body.focus-mode .cue-extra{padding:11px 12px}
 </div>
 </div></section>
 <section class="card" id="exploreCard"><h2 data-en="Explore another album" data-pt="Explore outro álbum">Explore another album</h2><p class="muted small" data-en="Enter the artist and album yourself to search independent metadata and listener discussions. This prototype opens source searches; it does not pretend to generate a verified guide when source retrieval is not configured." data-pt="Digite você mesmo o artista e o álbum para pesquisar metadados independentes e conversas de ouvintes. Este protótipo abre pesquisas nas fontes; não finge gerar um guia verificado sem ter a recuperação de fontes configurada.">Enter the artist and album yourself to search independent metadata and listener discussions. This prototype opens source searches; it does not pretend to generate a verified guide when source retrieval is not configured.</p><label for="albumSearch" data-en="Artist and album / piece" data-pt="Artista e álbum / obra">Artist and album / piece</label><input class="field" id="albumSearch" placeholder="e.g. Bill Evans — Waltz for Debby" autocomplete="off"><div class="research-actions"><a id="mbSearch" href="https://musicbrainz.org/" target="_blank" rel="noopener">MusicBrainz metadata</a><a id="aotySearch" href="https://www.albumoftheyear.org/" target="_blank" rel="noopener">Community ratings</a><a id="redditSearch" href="https://www.reddit.com/" target="_blank" rel="noopener">Listener discussions</a></div><p class="source-disclaimer" data-en="For future dynamic guides, the app should send your typed query—not Spotify's live playback metadata—to a small serverless resolver. See ARCHITECTURE.md in the download for the cache-first design." data-pt="Para futuros guias dinâmicos, o app deve enviar a consulta que você digitou — e não os metadados da reprodução ao vivo do Spotify — a um resolvedor serverless. Veja ARCHITECTURE.md no pacote para o desenho com cache.">For future dynamic guides, the app should send your typed query—not Spotify's live playback metadata—to a small serverless resolver. See ARCHITECTURE.md in the download for the cache-first design.</p></section>
-<div class="footer" id="footerText">Personal prototype · v1.0.7 adds a direct-audio GPT-Audio 1.5 proof of concept for the original 1959 studio recording of So What. Model moments are not preloaded or replaced by mock content. Spotify supplies the playback clock; track matching uses ID, duration and manual recording confirmation.</div>
+<div class="footer" id="footerText">Personal prototype · v1.0.8 adds adaptive multi-pass direct-audio analysis with per-moment timing for the original 1959 studio recording of So What. Model moments are not preloaded or replaced by mock content. Spotify supplies the playback clock; track matching uses ID, duration and manual recording confirmation.</div>
 </main>
 <script id="sonic-guide-data-inline">
 // Curated musical guide content. English and Brazilian Portuguese are authored as musical adaptations, not literal translations.
@@ -2772,7 +2786,7 @@ window.buildSonicMockGuide = buildMockGuide;
 })();
 </script>
 <script src="./translation/translation-core.js?v=1.1.0-atomic"></script>
-<script src="./audio-analysis-bridge.js?v=1.1.0"></script>
+<script src="./audio-analysis-bridge.js?v=2.0.0"></script>
 <script id="sonic-live-core">
 (function(root){'use strict';
  function cueIndex(cues,progressMs,durationMs){
@@ -2780,7 +2794,7 @@ window.buildSonicMockGuide = buildMockGuide;
   const duration=finiteNonNegative(durationMs),progress=finiteNonNegative(progressMs);
   if(duration<=0)return -1;
   const ratio=Math.min(1,progress/duration);
-  let active=0,lastAt=-1;
+  let active=-1,lastAt=-1;
   for(let i=0;i<cues.length;i++){
    const raw=Number(cues[i]?.at);
    if(!Number.isFinite(raw))continue;
@@ -2798,17 +2812,18 @@ window.buildSonicMockGuide = buildMockGuide;
   return Number.isFinite(n)?Math.max(0,n):0;
  }
  function nextCueCountdown(cues,progressMs,durationMs,index){
-  if(!Array.isArray(cues)||!Number.isInteger(index)||index<0||index>=cues.length-1)return null;
+  if(!Array.isArray(cues)||!Number.isInteger(index)||index< -1||index>=cues.length-1)return null;
   const duration=finiteNonNegative(durationMs),progress=Math.min(duration,finiteNonNegative(progressMs));
   if(duration<=0)return null;
-  const currentAt=Number(cues[index]?.at),nextAt=Number(cues[index+1]?.at);
-  if(!Number.isFinite(currentAt)||!Number.isFinite(nextAt)||nextAt<=currentAt)return null;
+  const nextIndex=index+1;
+  const currentAt=index<0?0:Number(cues[index]?.at),nextAt=Number(cues[nextIndex]?.at);
+  if(!Number.isFinite(currentAt)||!Number.isFinite(nextAt)||nextAt<currentAt)return null;
   const startMs=Math.max(0,Math.min(1,currentAt))*duration;
   const nextMs=Math.max(0,Math.min(1,nextAt))*duration;
-  const intervalMs=nextMs-startMs;if(intervalMs<=0)return null;
+  const intervalMs=Math.max(1,nextMs-startMs);
   const remainingMs=Math.max(0,nextMs-progress);
   const remainingRatio=Math.max(0,Math.min(1,remainingMs/intervalMs));
-  return {nextIndex:index+1,startMs,nextMs,intervalMs,remainingMs,remainingRatio,elapsedRatio:1-remainingRatio,secondsRemaining:Math.ceil(remainingMs/1000)};
+  return {nextIndex,startMs,nextMs,intervalMs,remainingMs,remainingRatio,elapsedRatio:1-remainingRatio,secondsRemaining:Math.ceil(remainingMs/1000)};
  }
  function trackChanged(previousId,item){return !!item?.id && item.id!==previousId;}
  function progressAt(snapshot,now){
@@ -3462,6 +3477,21 @@ function hideCueExtras(){
  const timer=$('nextCueCountdown');if(timer)timer.classList.add('hidden');
  const title=$('nextCueCountdownTitle');if(title)title.textContent='';
  const fill=$('nextCueCountdownFill');if(fill)fill.style.width='100%';
+ const moment=$('activeMomentProgress');if(moment)moment.classList.add('hidden');
+ const momentFill=$('activeMomentProgressFill');if(momentFill)momentFill.style.width='0%';
+ const momentClock=$('activeMomentProgressClock');if(momentClock)momentClock.textContent='—';
+}
+function renderActiveMomentProgress(cue,progressMs){
+ const wrap=$('activeMomentProgress'),fill=$('activeMomentProgressFill'),clock=$('activeMomentProgressClock'),track=$('activeMomentProgressTrack'),label=$('activeMomentProgressLabel');
+ const start=Number(cue?.timeSeconds),end=Number(cue?.endSeconds);
+ if(!wrap||!Number.isFinite(start)||!Number.isFinite(end)||end<=start){if(wrap)wrap.classList.add('hidden');return;}
+ const now=Math.max(0,Number(progressMs)||0)/1000,span=end-start,ratio=Math.max(0,Math.min(1,(now-start)/span));
+ const status=now<start?((lang==='pt'?'COMEÇA EM ':'STARTS IN ')+prettyMs((start-now)*1000)):now>end?(lang==='pt'?'CONCLUÍDO':'COMPLETED'):(prettyMs((now-start)*1000)+' / '+prettyMs(span*1000));
+ label.textContent=lang==='pt'?'PROGRESSO DESTE MOMENTO':'THIS MOMENT';clock.textContent=status;fill.style.width=(ratio*100).toFixed(2)+'%';track.setAttribute('aria-valuenow',String(Math.round(ratio*100)));wrap.classList.remove('hidden');
+}
+function updateModelMomentBars(cues,progressMs){
+ const root=$('dynamicCueList');if(!root)return;
+ root.querySelectorAll('.dynamic-cue-moment-progress').forEach(bar=>{const i=Number(bar.dataset.cueIndex),cue=cues[i],fill=bar.querySelector('[data-moment-fill]'),clock=bar.querySelector('[data-moment-clock]'),track=bar.querySelector('[role="progressbar"]');if(!cue||!fill||!clock||!track)return;const start=Number(cue.timeSeconds),end=Number(cue.endSeconds),now=Math.max(0,Number(progressMs)||0)/1000,span=Math.max(.1,end-start),ratio=Math.max(0,Math.min(1,(now-start)/span));clock.textContent=now<start?((lang==='pt'?'Em ':'In ')+prettyMs((start-now)*1000)):now>end?(lang==='pt'?'Concluído':'Done'):(prettyMs((now-start)*1000)+' / '+prettyMs(span*1000));fill.style.width=(ratio*100).toFixed(2)+'%';track.setAttribute('aria-valuenow',String(Math.round(ratio*100)));});
 }
 function renderCueExtras(cue,pick){
  const musician=pick(cue?.musicianMoment),history=pick(cue?.historicalNote);
@@ -3538,6 +3568,18 @@ function renderActiveCue(){
  const duration=Math.max(0,Number(lastPlaybackSnapshot?.durationMs||selectedSearchTrack?.duration_ms||0));
  const progress=Math.max(0,Math.min(duration,currentPlaybackPosition()));
  const index=liveCueIndex(cues,progress,duration);dynamicCueIndex=index;
+ const modelAnalysis=displayGuide.guideKind==='audio-model-performance-guide';
+ updateModelMomentBars(cues,progress);
+ if(modelAnalysis&&index<0){
+  $('activeCueKicker').textContent=lang==='pt'?'ANÁLISE DE ÁUDIO · PRIMEIRO MOMENTO A SEGUIR':'AUDIO ANALYSIS · FIRST MOMENT UPCOMING';
+  clock.textContent=prettyMs(progress)+' / '+prettyMs(duration);
+  $('activeCueTitle').textContent=lang==='pt'?'A música está começando':'The performance is unfolding';
+  $('activeCueFocus').textContent=lang==='pt'?'A primeira indicação baseada no áudio ainda não começou. Acompanhe a textura de abertura; a próxima indicação aparece no início do seu intervalo.':'The first audio-derived cue has not started yet. Listen to the opening texture; the first cue will appear when its measured interval begins.';
+  $('activeCueListen').textContent='';$('activeCueWhy').textContent='';$('activeCueQuestion').textContent='';renderCueExtras(null,pick);renderActiveMomentProgress(null,progress);renderNextCueCountdown(cues,progress,duration,-1,pick);
+  $('cueProgressFill').style.width=(duration?Math.min(100,progress/duration*100):0)+'%';$('cueProgressStart').textContent=prettyMs(progress);$('cueProgressEnd').textContent=prettyMs(duration);
+  $('guideSyncLabel').textContent=lang==='pt'?'Aguardando o primeiro momento detectado':'Waiting for the first detected moment';
+  const list=$('dynamicCueList');if(list)list.querySelectorAll('.dynamic-cue').forEach(el=>{el.classList.remove('active');el.removeAttribute('aria-current');});return;
+ }
  const cue=cues[index]||cues[0];
  const trackLevelSection=displayGuide.cueTimingBasis==='track-level-section';
  $('activeCueKicker').textContent=displayGuide.guideKind==='audio-analysis-only'?(lang==='pt'?'AUDIO LAB · MUDANÇA MENSURADA NO SINAL':'AUDIO LAB · MEASURED SIGNAL CHANGE'):trackLevelSection?(lang==='pt'?'SEÇÃO DO ÁLBUM · FAIXA ATUAL DO SPOTIFY':'ALBUM SECTION · CURRENT SPOTIFY TRACK'):(lang==='pt'?'IMERSÃO MUSICAL · ESPECÍFICA DA FAIXA · TEMPO APROXIMADO':'MUSIC IMMERSION · TRACK-SPECIFIC · APPROXIMATE TIMING');
@@ -3546,7 +3588,7 @@ function renderActiveCue(){
  $('activeCueFocus').textContent=pick(cue.focus)||'';
  $('activeCueListen').textContent=pick(cue.listenFor)||'';
  $('activeCueWhy').textContent=pick(cue.whyItMatters)||'';$('activeCueQuestion').textContent=pick(cue.question)||'';
- renderCueExtras(cue,pick);renderNextCueCountdown(cues,progress,duration,index,pick);
+ renderCueExtras(cue,pick);renderActiveMomentProgress(modelAnalysis?cue:null,progress);renderNextCueCountdown(cues,progress,duration,index,pick);
  $('cueProgressFill').style.width=(duration?Math.min(100,progress/duration*100):0)+'%';
  $('cueProgressStart').textContent=prettyMs(progress);$('cueProgressEnd').textContent=prettyMs(duration);
  $('guideSyncLabel').textContent=displayGuide.cueTimingBasis==='track-level-section'?(lastPlaybackSnapshot?.isPlaying?(lang==='pt'?'Seção do álbum confirmada · progresso do Spotify':'Album section confirmed · Spotify progress linked'):(lang==='pt'?'Seção do álbum confirmada · Spotify pausado':'Album section confirmed · Spotify paused')):(lastPlaybackSnapshot?(lastPlaybackSnapshot.isPlaying?(lang==='pt'?'Progresso do Spotify vinculado · momentos estimados':'Spotify progress linked · cue timing estimated'):(lang==='pt'?'Spotify pausado · posição congelada':'Spotify paused · progress held')):(lang==='pt'?'Aguardando posição do Spotify':'Waiting for Spotify position'));
@@ -3603,6 +3645,7 @@ function renderDynamicGuide(){
    const durationForCue=Number(lastPlaybackSnapshot?.durationMs||track.duration_ms||0);
    const approxTime=durationForCue>0?'≈ '+prettyMs(durationForCue*fraction)+' · ':'';
    range.textContent=untimedLandmarks?(lang==='pt'?'Tópico de escuta · sem marcação de tempo':'Listening topic · untimed'):displayGuide.cueTimingBasis==='track-level-section'?(lang==='pt'?'Esta nota cobre toda a seção do álbum atual.':'This note covers the complete current album section.'):modelAnalysis?('≈ '+prettyMs(Number(c.timeSeconds||0)*1000)+'–'+prettyMs(Number(c.endSeconds||c.timeSeconds||0)*1000)+' · '+(lang==='pt'?'momento detectado pelo modelo':'model-detected moment')):analysisOnly?(lang==='pt'?'≈ '+prettyMs(Number(c.timeSeconds||0)*1000)+' · candidato de mudança mensurada no sinal':'≈ '+prettyMs(Number(c.timeSeconds||0)*1000)+' · measured signal-change candidate'):(approxTime+Math.round(fraction*100)+'% '+(lang==='pt'?'da faixa · aproximado':'of track · approximate'));
+   let momentTiming=null;if(modelAnalysis){momentTiming=document.createElement('div');momentTiming.className='dynamic-cue-moment-progress';momentTiming.dataset.cueIndex=String(i);const head=document.createElement('div');head.className='dynamic-cue-moment-progress-head';const headLabel=document.createElement('span');headLabel.textContent=lang==='pt'?'PROGRESSO DO MOMENTO':'MOMENT PROGRESS';const headClock=document.createElement('time');headClock.dataset.momentClock='';headClock.textContent='Waiting';head.append(headLabel,headClock);const track=document.createElement('div');track.className='dynamic-cue-moment-progress-track';track.setAttribute('role','progressbar');track.setAttribute('aria-label','Progress through this moment');track.setAttribute('aria-valuemin','0');track.setAttribute('aria-valuemax','100');track.setAttribute('aria-valuenow','0');const fill=document.createElement('div');fill.className='dynamic-cue-moment-progress-fill';fill.dataset.momentFill='';track.append(fill);momentTiming.append(head,track);}
    const modelDetails=document.createElement('p');modelDetails.className='fine';modelDetails.textContent=[c.performerName,c.instrument,c.role,c.eventKind?.replace(/_/g,' ')].filter(Boolean).join(' · ');
    const focus=document.createElement('p');focus.className='fine';focus.textContent=pick(c.focus);
    const listen=document.createElement('p');listen.textContent=pick(c.listenFor);
@@ -3610,7 +3653,7 @@ function renderDynamicGuide(){
    const selfRating=document.createElement('p');selfRating.className='fine';selfRating.textContent=modelAnalysis?(lang==='pt'?`Autoavaliação do modelo: ${Math.round(Number(c.confidence||0)*100)}% · tempo: ${Math.round(Number(c.timestampConfidence||0)*100)}% (não calibrado estatisticamente).`:`Model self-ratings: ${Math.round(Number(c.confidence||0)*100)}% confidence · ${Math.round(Number(c.timestampConfidence||0)*100)}% timing (not statistically calibrated).`):'';
    const why=document.createElement('p');why.className='muted';why.textContent=pick(c.whyItMatters);
    const question=document.createElement('p');question.className='active-cue-question';question.textContent=pick(c.question);
-   box.append(h,range);if(modelAnalysis&&modelDetails.textContent)box.append(modelDetails);box.append(focus,listen);if(modelAnalysis&&audibleText)box.append(audible);if(modelAnalysis)box.append(selfRating);box.append(why);
+   box.append(h,range);if(momentTiming)box.append(momentTiming);if(modelAnalysis&&modelDetails.textContent)box.append(modelDetails);box.append(focus,listen);if(modelAnalysis&&audibleText)box.append(audible);if(modelAnalysis)box.append(selfRating);box.append(why);
    const musician=pick(c.musicianMoment);if(musician){const detail=document.createElement('div');detail.className='dynamic-cue-musician';const label=document.createElement('span');label.className='dynamic-cue-detail-label';label.textContent=lang==='pt'?'MÚSICOS EM AÇÃO':'MUSICIANS AT WORK';const text=document.createElement('span');text.textContent=musician;detail.append(label,text);box.append(detail);}
    const history=pick(c.historicalNote);if(history){const detail=document.createElement('div');detail.className='dynamic-cue-history';const label=document.createElement('span');label.className='dynamic-cue-detail-label';label.textContent=lang==='pt'?'IMPORTÂNCIA HISTÓRICA':'WHY THIS PERFORMANCE MATTERS';const text=document.createElement('span');text.textContent=history;detail.append(label,text);box.append(detail);}
    box.append(question);cueRoot.append(box);
@@ -3713,7 +3756,7 @@ const params=new URLSearchParams(window.location.search);applyLanguage();if(para
 })();
 </script>
 <script>
-// v1.0.7 cache hygiene: clear prior application workers/caches so the refreshed guide HTML is not masked by stale content.
+// v1.0.8 cache hygiene: clear prior application workers/caches so the refreshed guide HTML is not masked by stale content.
 window.addEventListener('load',()=>{(async()=>{try{if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(r=>r.unregister()));}if('caches' in window){const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('sonic-companion-shell-')).map(k=>caches.delete(k)));}}catch(e){console.warn('Cache cleanup did not complete',e);}})();});
 </script>
 </body></html>
