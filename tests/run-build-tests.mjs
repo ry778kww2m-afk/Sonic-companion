@@ -14,11 +14,11 @@ const pkg = JSON.parse(read('package.json'));
 assert.ok(index.length > 500000, 'root index.html must be the complete app, not a patch');
 assert.ok(lab.length > 500000, 'Audio Lab index.html must be complete');
 assert.ok(bridge.length > 10000, 'bridge must be complete');
-assert.ok(index.includes('SONIC COMPANION v1.0.3 · MIE 1.3 · AUDIO LAB BRIDGE 1.0.2 · BUILD 2026-10-31'));
-assert.ok(index.includes('v1.0.3-mie-1.3-audio-analysis-bridge-1.0.2'));
-assert.ok(index.includes('<title>Sonic Companion v1.0.3 — Fail-Closed Guide Provenance</title>'));
-assert.equal(pkg.version,'1.0.3','package metadata follows prototype version scheme');
-for (const stale of ['v2.7','v2.3','v2.0','v1.0.2-mie-1.3']) assert.equal(index.includes(stale),false,`stale product version ${stale} remains`);
+assert.ok(index.includes('SONIC COMPANION v1.0.4 · MIE 1.3 · AUDIO LAB BRIDGE 1.0.2 · BUILD 2026-10-31'));
+assert.ok(index.includes('v1.0.4-mie-1.3-audio-analysis-bridge-1.0.2'));
+assert.ok(index.includes('<title>Sonic Companion v1.0.4 — Spotify Permission UI Fix</title>'));
+assert.equal(pkg.version,'1.0.4','package metadata follows prototype version scheme');
+for (const stale of ['v2.7','v2.3','v2.0','v1.0.2-mie-1.3','v1.0.3-mie-1.3']) assert.equal(index.includes(stale),false,`stale product version ${stale} remains`);
 assert.equal((index.match(/audio-analysis-bridge\.js\?v=1\.0\.2/g)||[]).length,1,'bridge loads once with cache-busting version');
 assert.ok(index.includes('function createUnavailableTrackGuide(track)'),'unknown tracks have an explicit unavailable state');
 assert.ok(index.includes('function loadAvailableTrackGuide(track)'),'track guide data passes through one controlled loader');
@@ -40,7 +40,12 @@ assert.ok(bridge.includes("const STORE_KEY = 'sonic.audioAnalysis.registry.v1'")
 assert.ok(lab.includes('publishAnalysisBtn'),'Audio Lab publish UI exists');
 assert.ok(lab.includes('recordingMatchConfirmed:true'),'Audio Lab record carries exact-recording confirmation');
 assert.ok(lab.includes('The synthetic test signal cannot be published'),'synthetic signal publication is blocked');
-assert.equal(pkg.scripts.test,'node tests/run-build-tests.mjs && node tests/run-integration-tests.mjs');
+assert.ok(index.includes('<div class="callout hidden" id="scopeNote"'), 'permission guidance is hidden by default');
+assert.ok(index.includes("setSpotifyPermissionIssue('status')"), 'status permission warning is only activated by an explicit 403 path');
+assert.ok(index.includes("setSpotifyPermissionIssue('control')"), 'control permission warning is only activated by an explicit 403 path');
+assert.ok(index.includes("Spotify connection verified. Playback-status access is working."), 'successful polling resolves the temporary connection message');
+assert.ok(index.includes("Spotify connected. Spotify is not reporting a track playing right now."), '204 no-track response resolves connection state without a permission warning');
+assert.equal(pkg.scripts.test,'node tests/run-build-tests.mjs && node tests/run-integration-tests.mjs && node tests/run-spotify-ui-tests.mjs');
 
 function checkInlineScripts(file, source) {
   const re=/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi;
@@ -62,4 +67,4 @@ const jsonMatch=lab.match(/<script\s+id=["']mockCatalogueData["']\s+type=["']app
 assert.ok(jsonMatch,'embedded mock catalogue exists');
 const catalogue=JSON.parse(jsonMatch[1]);
 assert.ok(Array.isArray(catalogue)&&catalogue.length>=5,'embedded catalogue parses and has expected coverage');
-console.log('PASS: complete app/lab sources, v1.0.3 header, no mock fallback in live paths, fail-closed provenance, Spotify auth/playback safeguards, Audio Lab contract and JavaScript syntax.');
+console.log('PASS: complete app/lab sources, v1.0.4 header, no mock fallback in live paths, fail-closed provenance, Spotify auth/playback safeguards, Audio Lab contract and JavaScript syntax.');
