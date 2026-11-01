@@ -1,4 +1,4 @@
-/* Sonic Companion — Audio Lab bridge v2.1.0
+/* Sonic Companion — Audio Lab bridge v2.1.2
  * Model records contain only content returned by direct GPT-Audio 1.5 input.
  * Legacy DSP records remain supported for non-So-What tracks and are never used
  * as musical explanations for the So What proof-of-concept.
@@ -11,6 +11,10 @@
  const MODEL_SCHEMA='sonic-audio-model-performance-record';
  const MAX_EVENTS=720, DURATION_TOLERANCE_MS=3000;
  const ROSTER=['Miles Davis','Julian “Cannonball” Adderley','Cannonball Adderley','John Coltrane','Bill Evans','Paul Chambers','Jimmy Cobb'];
+ function normTitle(value){return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ')}
+ function isCanonicalSoWhatTitle(value){let raw=String(value||'').trim();for(let i=0;i<3;i++){const before=raw;raw=raw.replace(/\s*[-–—]\s*(?:\d{4}\s+)?remaster(?:ed)?(?:\s+\d{4})?\s*$/i,'');raw=raw.replace(/\s*\((?:\d{4}\s+)?(?:remaster(?:ed)?|album version|stereo|mono)(?:\s+\d{4})?\)\s*$/i,'');raw=raw.replace(/\s*\((?:feat(?:uring)?|ft)\.?\s+[^)]*\)\s*$/i,'');raw=raw.replace(/\s+[-–—]?\s*(?:feat(?:uring)?|ft)\.?\s+.*$/i,'');if(raw===before)break;}return normTitle(raw)==='so what'}
+ function isSoWhatIdentity(track){const title=isCanonicalSoWhatTitle(track?.title||track?.name),albumValue=track?.album,album=normTitle((albumValue&&typeof albumValue==='object'?albumValue.name:albumValue)||track?.albumName||''),artists=Array.isArray(track?.artists)?track.artists.map(a=>typeof a==='string'?a:String(a?.name||'')).join(' '):String(track?.artist||'');return title&&album.includes('kind of blue')&&normTitle(artists).includes('miles davis')}
+
  function readStore(key){try{const p=JSON.parse(root.localStorage.getItem(key)||'{"schemaVersion":1,"records":{}}');if(!p||p.schemaVersion!==1||!p.records||typeof p.records!=='object'||Array.isArray(p.records))return{schemaVersion:1,records:{}};return p}catch(_){return{schemaVersion:1,records:{}}}}
  function bilingual(x){return !!x&&typeof x==='object'&&typeof x.en==='string'&&x.en.trim().length>0&&typeof x.pt==='string'&&x.pt.trim().length>0}
  function richBilingual(x,minWords=9,minChars=65){const words=v=>String(v||'').trim().split(/\s+/).filter(Boolean).length;return bilingual(x)&&x.en.trim().length>=minChars&&x.pt.trim().length>=minChars&&words(x.en)>=minWords&&words(x.pt)>=minWords}
@@ -88,17 +92,17 @@
   guide.cues=guide.cues.concat(measured).sort((a,b)=>Number(a.at)-Number(b.at));guide.trackSpecificGuide=true;guide.guideKind=hadEditorialCues?'audio-analysis-hybrid':'audio-analysis-only';guide.cueTimingBasis=hadEditorialCues?'audio-analysis-hybrid':'audio-analysis-only';return{applied:true,count:measured.length};
  }
  function applyToGuide(guide,track){
-  const id=String(track?.spotifyTrackId||track?.id||'');if(!/^[A-Za-z0-9]{22}$/.test(id))return{applied:false,reason:'invalid-track-id'};
-  const modelRecord=getModelRecord(id),dspRecord=getDSPRecord(id),record=modelRecord||dspRecord;if(!record)return{applied:false,reason:'no-matching-record'};
-  const spotifyDuration=Number(track?.duration_ms||track?.durationMs);if(!Number.isFinite(spotifyDuration)||spotifyDuration<=0||Math.abs(spotifyDuration-Number(record.durationMs))>DURATION_TOLERANCE_MS)return{applied:false,reason:'duration-mismatch'};
-  if(modelRecord){const currentTitle=String(track?.title||track?.name||'').toLowerCase(),currentAlbum=String(track?.album||track?.albumName||'').toLowerCase(),currentArtists=Array.isArray(track?.artists)?track.artists.join(', ').toLowerCase():String(track?.artist||'').toLowerCase();if(currentTitle!=='so what'||!currentAlbum.includes('kind of blue')||!currentArtists.includes('miles davis'))return{applied:false,reason:'current-track-identity-mismatch'};return applyModelRecord(guide,track,modelRecord,spotifyDuration);}
-  // The So What experiment deliberately rejects old DSP-only markers as musical content.
-  const isSoWhat=String(track?.title||track?.name||'').toLowerCase()==='so what'&&String(track?.album||track?.albumName||'').toLowerCase().includes('kind of blue');
-  if(isSoWhat)return{applied:false,reason:'model-analysis-required-for-so-what'};
-  return applyLegacyDSP(guide,track,dspRecord,spotifyDuration);
+  const id=String(track?.spotifyTrackId||track?.id||'');
+  if(!/^[A-Za-z0-9]{22}$/.test(id))return{applied:false,reason:'invalid-track-id'};
+  // Spotify Developer Policy disallows synchronizing sound recordings with
+  // visual content and ingesting Spotify Content into AI models. This bridge
+  // therefore never attaches timed audio-analysis or DSP cues to Spotify.
+  // Audio Lab owns both the independently supplied local file and its clock.
+  return{applied:false,reason:'spotify-synchronized-commentary-disabled-local-audio-player-required'};
  }
- function initImportControl(){const meta=root.document?.getElementById('dynamicListeningMeta');if(!meta||root.document.getElementById('sonicAudioAnalysisImport'))return;const panel=root.document.createElement('div');panel.id='sonicAudioAnalysisImport';panel.style.cssText='display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0 10px;padding:9px 10px;border:1px solid #454b57;border-radius:10px;background:#171b22';const button=root.document.createElement('button');button.type='button';button.className='btn secondary';button.textContent='Import Audio Lab JSON';const input=root.document.createElement('input');input.type='file';input.accept='application/json,.json';input.hidden=true;const status=root.document.createElement('span');status.className='fine';status.textContent='Import a direct GPT-Audio 1.5 So What record, or a legacy DSP record for other tracks.';button.addEventListener('click',()=>input.click());input.addEventListener('change',async()=>{const file=input.files?.[0];if(!file)return;try{if(file.size>3*1024*1024)throw new Error('Analysis JSON exceeds 3 MB.');const r=JSON.parse(await file.text());storeRecord(r);status.textContent='Imported. Reloading to match the Spotify-confirmed track…';root.setTimeout(()=>root.location.reload(),500)}catch(e){status.textContent='Import failed: '+(e.message||String(e))}finally{input.value=''}});panel.append(button,input,status);meta.insertAdjacentElement('afterend',panel)}
+
+ function initImportControl(){const meta=root.document?.getElementById('dynamicListeningMeta');if(!meta||root.document.getElementById('sonicAudioAnalysisImport'))return;const panel=root.document.createElement('div');panel.id='sonicAudioAnalysisImport';panel.style.cssText='display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0 10px;padding:9px 10px;border:1px solid #454b57;border-radius:10px;background:#171b22';const button=root.document.createElement('button');button.type='button';button.className='btn secondary';button.textContent='Import Audio Lab JSON';const input=root.document.createElement('input');input.type='file';input.accept='application/json,.json';input.hidden=true;const status=root.document.createElement('span');status.className='fine';status.textContent='Legacy Spotify-linked import is disabled; new So What analyses remain in the Audio Lab local player.';button.addEventListener('click',()=>input.click());input.addEventListener('change',async()=>{const file=input.files?.[0];if(!file)return;try{if(file.size>3*1024*1024)throw new Error('Analysis JSON exceeds 3 MB.');const r=JSON.parse(await file.text());storeRecord(r);status.textContent='Imported. Reloading to match the Spotify-confirmed track…';root.setTimeout(()=>root.location.reload(),500)}catch(e){status.textContent='Import failed: '+(e.message||String(e))}finally{input.value=''}});panel.append(button,input,status);meta.insertAdjacentElement('afterend',panel)}
  const original=root.buildSonicMockGuide;if(typeof original==='function')root.buildSonicMockGuide=function(payload){const result=original.apply(this,arguments);if(result?.guide)applyToGuide(result.guide,payload?.track);return result};
- root.SonicAudioAnalysisBridge=Object.freeze({version:'2.1.0',storeKey:MODEL_STORE_KEY,validateRecord,storeRecord,getRecord,applyToGuide});
- if(root.document){if(root.document.readyState==='loading')root.document.addEventListener('DOMContentLoaded',initImportControl,{once:true});else initImportControl()}
+ root.SonicAudioAnalysisBridge=Object.freeze({version:'2.1.2',storeKey:MODEL_STORE_KEY,validateRecord,storeRecord,getRecord,applyToGuide,isCanonicalSoWhatTitle,isSoWhatIdentity});
+ // No Audio Lab record is imported into the Spotify-synchronised visual guide.
 })(window);
